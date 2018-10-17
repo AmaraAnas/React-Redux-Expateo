@@ -1,0 +1,24 @@
+
+Project:
+  ☐ Trello ( + Git Trigger )
+  ☐ Users Stories
+  ☐ Wireframe and designes
+  ☐ Tests cases
+  ☐ BrowserStack Automation
+App:
+  ☐ Get designs
+  ☐ REAMDE.md
+  ☐ Git WorkFlow
+  Git Workflow:
+    ☐ Git branch, git commit, git push 
+    ☐ Git pre-commit hooks : prettier + npm run test
+    ☐ Triggering a build when merge at branch master and develop
+    ☐ Triggering a test suite when merge at branch master and develop
+    ☐ Triggering a notification of the end of the build with a full new url corresponding of this build
+    ☐ Updating the dns alias using the last build
+  ☐ Test server (Travis ?)
+  ☐ Deployement (Netlifly, Now, AWS, Heroku ??)
+  ☐ Initialisation of the PWA
+  ☐ Env variables
+Ideas:
+  ☐ Offline App ?
