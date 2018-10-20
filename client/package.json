@@ -3,9 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "babel-plugin-add-react-displayname": "0.0.5",
+    "flux-standard-action": "^2.0.3",
+    "logrocket": "^0.6.17",
+    "logrocket-react": "^3.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.5"
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.5",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.1",
+    "redux-form": "^7.4.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.83.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -15,6 +30,11 @@
     "test:watch": "react-scripts test --env=node",
     "test:coverage": "npm run test -- --coverage",
     "bs": "npm run build && cd ./build && python -m SimpleHTTPServer 8000"
+  },
+  "babel": {
+    "plugins": [
+      "add-react-displayname"
+    ]
   },
   "prettier": {
     "trailingComma": "all",
