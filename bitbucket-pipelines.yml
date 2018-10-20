@@ -15,3 +15,11 @@ pipelines:
           - cd ./client
           - npm install
           - npm test
+
+    - step:
+        name: Deploy to Netlifly aka 'https://develop-expateo-pa.netlify.com/'
+        caches:
+          - node
+        deployment: test
+        script:
+          - curl -X POST -d '' https://api.netlify.com/build_hooks/5bcb20cd82d3f109f3ef6e67
