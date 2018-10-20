@@ -10,16 +10,17 @@ App:
   ☐ REAMDE.md
   ☐ Git WorkFlow
   Git Workflow:
-    ☐ Git branch, git commit, git push 
-    ✔ Git pre-commit hooks : prettier + npm run test @done(18-10-20 12:26)
-    ☐ Triggering a build when merge at branch master and develop
+  ✔ Test server : Bitbucket Pipelines @done(18-10-20 14:26)
+  ☐ Triggering a build when merge at develop
+  ✔ Git pre-commit hooks : prettier + npm run test @done(18-10-20 12:26)
+  ☐ Git branch, git commit, git push 
+    ☐ Triggering a build when merge at master
     ☐ Triggering a test suite when merge at branch master and develop
     ☐ Triggering a notification of the end of the build with a full new url corresponding of this build
     ☐ Updating the dns alias using the last build
-  ☐ Test server (Travis ?)
-  ☐ Deployement (Netlifly, Now, AWS, Heroku ??)
+  ✔ Deployement : Netlifly @done(18-10-20 14:26)
+  ✔ Env variables @done(18-10-20 14:26)
   ☐ Initialisation of the PWA
-  ☐ Env variables
 Ideas:
   ☐ Offline App ?
   ☐ Bitbucket CI/CD
