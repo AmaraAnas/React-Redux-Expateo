@@ -16,17 +16,9 @@ pipelines:
           - npm install
           - npm test
     - step:
-        name: Staging - Deploy master branch on Netlifly aka 'https://master-expateo-pa.netlify.com/'
+        name: Develop - Deploy develop branch on Netlifly aka 'https://develop-expateo-pa.netlify.com/'
         caches:
           - node
-        deployment: staging
+        deployment: test
         script:
           - curl -X POST -d '' https://api.netlify.com/build_hooks/5bcb20cd82d3f109f3ef6e67
-    - step:
-        name: Production - Deploy master branch on Netlifly production env aka 'https://production-expateo-pa.netlify.com/'
-        caches:
-          - node
-        deployment: production
-        trigger: manual
-        script:
-          - curl -X POST -d '' https://api.netlify.com/build_hooks/5bcb24cb792f893d2e7c4432
