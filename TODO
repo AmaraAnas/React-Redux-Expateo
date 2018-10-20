@@ -4,14 +4,14 @@ Project:
   ☐ Users Stories
   ☐ Wireframe and designes
   ☐ Tests cases
-  ☐ BrowserStack Automation
+  ☐ BrowserStack Automation or Cypress ?
 App:
   ☐ Get designs
   ☐ REAMDE.md
   ☐ Git WorkFlow
   Git Workflow:
     ☐ Git branch, git commit, git push 
-    ☐ Git pre-commit hooks : prettier + npm run test
+    ✔ Git pre-commit hooks : prettier + npm run test @done(18-10-20 12:26)
     ☐ Triggering a build when merge at branch master and develop
     ☐ Triggering a test suite when merge at branch master and develop
     ☐ Triggering a notification of the end of the build with a full new url corresponding of this build
