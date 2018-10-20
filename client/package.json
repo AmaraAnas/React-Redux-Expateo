@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-plugin-add-react-displayname": "0.0.5",
     "flux-standard-action": "^2.0.3",
+    "logrocket": "^0.6.17",
+    "logrocket-react": "^3.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
@@ -27,6 +30,11 @@
     "test:watch": "react-scripts test --env=node",
     "test:coverage": "npm run test -- --coverage",
     "bs": "npm run build && cd ./build && python -m SimpleHTTPServer 8000"
+  },
+  "babel": {
+    "plugins": [
+      "add-react-displayname"
+    ]
   },
   "prettier": {
     "trailingComma": "all",
