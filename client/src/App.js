@@ -17,7 +17,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            Wow,the CI/CD workflow is good =)
           </a>
         </header>
       </div>
