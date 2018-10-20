@@ -50,3 +50,8 @@ Based on Atomic Design + Duck directory
 # Documentation
 
 ... JSDOC ...
+
+# Classic Issues :
+
+- `ENOSPC` --> `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
+  (src)[https://github.com/facebook/jest/issues/3254#issuecomment-297214395]
