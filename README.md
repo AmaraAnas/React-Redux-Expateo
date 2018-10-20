@@ -31,7 +31,23 @@ Based on Atomic Design + Duck directory
 
 # Workflow
 
+1.  git pull
+1.  git checkout feature*<branch-feature> or fix*<branch-fix>
+1.  git commit
+1.  git commit ...
+1.  git push
+1.  CREATE pull request <branch-> -> develop
+1.  MERGE pull request _into develop_--> trigger test runner --> tests are valid ? --> trigger a deployement
+
 # Deployment
+
+Bituckets pipelines + Bitbuckets deployement -> trigger netlifly build -> deploy
+
+# Environnement
+
+- Production : manual trigger
+- Staging : automatique trigger on develop branch push (NODE_ENV = production)
+- Developement (test) automatique trigger on develop branch push (NODE_ENV = development)
 
 # PWA : Notification + Push Api + Service Worker
 
