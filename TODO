@@ -4,23 +4,23 @@ Project:
   ☐ Users Stories
   ☐ Wireframe and designes
   ☐ Tests cases
-  ☐ BrowserStack Automation or Cypress ?
+  ☐ E2E test : BrowserStack Automation or Cypress ?
 App:
   ☐ Get designs
   ☐ REAMDE.md
-  ☐ Git WorkFlow
+  ✔ Git WorkFlow @done(18-10-20 15:24)
   Git Workflow:
-  ✔ Test server : Bitbucket Pipelines @done(18-10-20 14:26)
-  ☐ Triggering a build when merge at develop
-  ✔ Git pre-commit hooks : prettier + npm run test @done(18-10-20 12:26)
-  ☐ Git branch, git commit, git push 
-    ☐ Triggering a build when merge at master
-    ☐ Triggering a test suite when merge at branch master and develop
-    ☐ Triggering a notification of the end of the build with a full new url corresponding of this build
-    ☐ Updating the dns alias using the last build
-  ✔ Deployement : Netlifly @done(18-10-20 14:26)
-  ✔ Env variables @done(18-10-20 14:26)
+    ✔ Test server : Bitbucket Pipelines @done(18-10-20 14:26)
+    ✔ Git pre-commit hooks : prettier + npm run test @done(18-10-20 12:26)
+    ✔ Git branch, git commit, git push @done(18-10-20 15:24)
+    ✔ Triggering a build when merge at master @done(18-10-20 15:24)
+    ✔ Triggering a build when merge at develop @done(18-10-20 15:24)
+    ✔ Triggering a test suite when merge at branch master and develop @done(18-10-20 15:24)
+    ✔ Triggering a notification of the end of the build with a full new url corresponding of this build @done(18-10-20 15:24)
+    ✔ Updating the dns alias using the last build @done(18-10-20 15:24)
+    ✔ Deployement : Netlifly @done(18-10-20 14:26)
+    ✔ Env variables @done(18-10-20 14:26)
+    ✔ Bitbucket CI/CD @done(18-10-20 15:24)
   ☐ Initialisation of the PWA
 Ideas:
   ☐ Offline App ?
-  ☐ Bitbucket CI/CD
