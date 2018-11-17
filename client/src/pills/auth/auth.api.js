@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export function getSession() {
   try {
     return JSON.parse(localStorage.getItem('session'));

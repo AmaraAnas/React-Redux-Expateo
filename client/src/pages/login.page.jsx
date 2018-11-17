@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Grid, Image, Message, Segment, Responsive } from 'semantic-ui-react';
 
 import logo from '../images/logo-sans-fond_nopadding.png';
@@ -44,7 +44,7 @@ export default class LoginForm extends React.Component {
           </Responsive>
           <AuthForm onLogin={this.handleLoginSubmit} />
           <Message>
-            Nouveau ? <a href="#">Créer un compte</a>
+            Nouveau ? <Link to="/sign-up">Créer un compte</Link>
           </Message>
         </Grid.Column>
       </Grid>

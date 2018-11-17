@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import Layout from '../pages/Main.layout';
-import LoginPage from '../pages/Login.page';
-import NoMatchPage from '../pages/NoMatch.page';
+import Layout from '../pages/main.layout';
+import LoginPage from '../pages/login.page';
+import NoMatchPage from '../pages/noMatch.page';
 
-function PrivateRoute({ isLogged, component: Component, ...rest }) {
+let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -24,7 +24,7 @@ function PrivateRoute({ isLogged, component: Component, ...rest }) {
       }
     />
   );
-}
+};
 
 PrivateRoute = connect(({ Auth }) => ({ isLogged: Auth.user.isLogged }))(
   PrivateRoute,
@@ -36,6 +36,7 @@ const Router = () => (
       <Switch>
         <Redirect exact from="/" to="/login" />
         <Route exact path="/login" component={LoginPage} />
+        <Route path="/sign-up" component={() => <div>Signup Page</div>} />
         <PrivateRoute
           path="/private"
           component={() => <div>HELLO PRIVATE</div>}

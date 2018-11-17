@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Router from './router/Router';
-import './App.css';
 import Modal from './pills/modal/modal.container';
 import { init } from './App.actions';
 import * as AuthApi from './pills/auth/auth.api';

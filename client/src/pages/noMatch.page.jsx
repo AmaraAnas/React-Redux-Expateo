@@ -1,6 +1,6 @@
 import React from 'react';
 import { Browser } from 'react-kawaii';
-import { Container, Header, Grid } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 
 const NotFound = () => (
   <Container
