@@ -11,7 +11,7 @@ export const ACTION_TYPES = addPrefixToActionTypes(
   'auth',
 );
 
-const loginSuccess = createAction(ACTION_TYPES.LOGIN_SUCCESS);
+export const loginSuccess = createAction(ACTION_TYPES.LOGIN_SUCCESS);
 const loginFailure = createAction(ACTION_TYPES.LOGIN_FAILURE);
 
 export function login({
@@ -26,11 +26,11 @@ export function login({
   return async (dispatch) => {
     try {
       const user = await authApi.login(username, password);
-      onSuccess(user);
       dispatch(loginSuccess(user));
+      onSuccess(user);
     } catch (e) {
-      onFailure(e);
       dispatch(loginFailure(e));
+      onFailure(e);
     }
   };
 }
