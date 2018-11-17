@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Router from './router/Router';
 import './App.css';
+import Modal from './pills/modal/modal.container';
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router />
+        <Modal />
       </div>
     );
   }
