@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
@@ -26,15 +27,15 @@ let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
   );
 };
 
-PrivateRoute = connect(({ Auth }) => ({ isLogged: Auth.user.isLogged }))(
-  PrivateRoute,
-);
+PrivateRoute = connect(({ Auth }) => ({
+  isLogged: Auth.user && Auth.user.isLogged,
+}))(PrivateRoute);
 
-const Router = () => (
+const Router = ({ indexRedirect }) => (
   <Layout>
     <BrowserRouter>
       <Switch>
-        <Redirect exact from="/" to="/login" />
+        <Redirect exact from="/" to={indexRedirect} />
         <Route exact path="/login" component={LoginPage} />
         <Route path="/sign-up" component={() => <div>Signup Page</div>} />
         <PrivateRoute
@@ -46,5 +47,13 @@ const Router = () => (
     </BrowserRouter>
   </Layout>
 );
+
+Router.propTypes = {
+  indexRedirect: PropTypes.string,
+};
+
+Router.defaultProps = {
+  indexRedirect: '/login',
+};
 
 export default Router;

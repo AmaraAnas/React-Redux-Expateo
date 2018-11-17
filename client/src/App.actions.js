@@ -16,10 +16,12 @@ const initDone = createAction(ACTION_TYPES.INIT_DONE);
 export const setTitle = createAction(ACTION_TYPES.SET_TITLE);
 export function init() {
   return async (dispatch) => {
-    let user = AuthApi.getSession();
+    let user;
     try {
-      await AuthApi.checkAuth(user.token);
-      dispatch(loginSuccess(user));
+      user = await AuthApi.checkAuth();
+      if (user) {
+        dispatch(loginSuccess(user));
+      }
     } catch (e) {
     } finally {
       dispatch(initDone(user));

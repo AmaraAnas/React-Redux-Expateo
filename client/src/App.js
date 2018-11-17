@@ -23,12 +23,16 @@ class App extends Component {
   }
 
   render() {
-    const { isInitDone } = this.props;
+    const { isInitDone, user } = this.props;
+    let indexRedirect = '/login';
+    if (isInitDone && user && user.isLogged) {
+      indexRedirect = '/dashboard';
+    }
     return (
       <div className="App">
         {isInitDone && (
           <React.Fragment>
-            <Router />
+            <Router indexRedirect={indexRedirect} />
             <Modal />
           </React.Fragment>
         )}
