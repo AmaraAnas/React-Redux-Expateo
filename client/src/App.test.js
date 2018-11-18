@@ -3,17 +3,18 @@ import { shallow } from 'enzyme';
 
 import App from './App';
 import store from './redux-utils/store';
-import appReducer from './App.reducer';
+import AppReducer from './App.reducer';
+import { setTitle, init } from './App.actions';
 
-it('renders without crashing', () => {
-  shallow(<App store={store} />);
+describe('App render', () => {
+  it('Should render', () => {
+    shallow(<App store={store} />);
+  });
 });
 
-it('reducers', () => {
-  let state;
-  state = appReducer(
-    { title: 'Hello' },
-    { type: '@APP/INIT', payload: { title: 'Expateo - pa' } },
-  );
-  expect(state).toEqual({ title: 'Expateo - pa' });
+describe('App action - reducers', () => {
+  it('SET_TITLE: Should set document title', () => {
+    let state = AppReducer({ title: 'Hello' }, setTitle('Expateo'));
+    expect(state).toEqual({ title: 'Expateo' });
+  });
 });
