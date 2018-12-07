@@ -2,9 +2,11 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import { Form, Checkbox, Button, Grid, Select } from 'semantic-ui-react';
-import '../../styles/inscription.page.css';
 import { Input } from '../../redux-form-utils/fieldComponents';
 import { strengthIndicator, strengthColor } from './inscription.actions';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import '../../styles/inscription.page.css';
 
 const familyOptions = [
   { key: 's', text: 'Seule', value: 'FAMILLE_SEUL' },
@@ -40,7 +42,13 @@ const medium = (value) =>
     ? "It's medium"
     : undefined;
 
-function InscriptionView({ handleSubmit, password, handleChanges }) {
+function InscriptionView({
+  handleSubmit,
+  password,
+  date,
+  handleChanges,
+  handleDateChanges,
+}) {
   const strength = strengthIndicator(password);
   const color = strengthColor(strength);
 
@@ -49,13 +57,10 @@ function InscriptionView({ handleSubmit, password, handleChanges }) {
       <div>
         <label style={inputlabel}>Votre date de départ</label>
         <div style={inputdiv}>
-          <Field
-            component={Input}
-            name="date"
-            type="text"
-            placeholder="Votre date de départ"
-            validate={[required]}
-            fluid
+          <DatePicker
+            selected={date}
+            className="datepickerfull"
+            onChange={handleDateChanges}
           />
         </div>
       </div>

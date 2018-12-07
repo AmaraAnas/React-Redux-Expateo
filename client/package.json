@@ -10,6 +10,7 @@
     "logrocket-react": "^3.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
+    "react-datepicker": "^2.0.0",
     "react-dom": "^16.5.2",
     "react-kawaii": "^0.6.0",
     "react-redux": "^5.0.7",
