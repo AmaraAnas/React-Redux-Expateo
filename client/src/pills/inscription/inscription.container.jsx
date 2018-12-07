@@ -7,6 +7,11 @@ import InscriptionViewForm from './inscription.view';
 class InscriptionContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      password: '',
+    };
+
+    this.handlePasswordChanges = this.handlePasswordChanges.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
@@ -14,8 +19,18 @@ class InscriptionContainer extends Component {
     const { dispatch, onLogin } = this.props;
   }
 
+  handlePasswordChanges(event) {
+    this.setState({ password: event.target.value });
+  }
+
   render() {
-    return <InscriptionViewForm onSubmit={this.handleLogin} />;
+    return (
+      <InscriptionViewForm
+        onSubmit={this.handleLogin}
+        password={this.state.password}
+        handleChanges={this.handlePasswordChanges}
+      />
+    );
   }
 }
 

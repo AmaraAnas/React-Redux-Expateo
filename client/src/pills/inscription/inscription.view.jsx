@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Form, Checkbox, Button, Grid, Select } from 'semantic-ui-react';
 import '../../styles/inscription.page.css';
 import { Input } from '../../redux-form-utils/fieldComponents';
+import { strengthIndicator, strengthColor } from './inscription.actions';
 
 const familyOptions = [
   { key: 's', text: 'Seule', value: 'FAMILLE_SEUL' },
@@ -24,15 +25,25 @@ const inputdiv = {
 
 const required = (value) =>
   value || typeof value === 'number' ? undefined : 'Required';
-export const minLength = (min) => (value) =>
-  value && value.length < min ? `Must be ${min} characters or more` : undefined;
-export const minLength12 = minLength(12);
-const alphaNumeric = (value) =>
-  value && /[^a-zA-Z0-9 ]/i.test(value)
-    ? 'Only alphanumeric characters'
+
+const strong = (value) =>
+  value &&
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{12,})/i.test(value)
+    ? "It's strong"
     : undefined;
 
-function InscriptionView({ handleSubmit }) {
+const medium = (value) =>
+  value &&
+  /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/i.test(
+    value,
+  )
+    ? "It's medium"
+    : undefined;
+
+function InscriptionView({ handleSubmit, password, handleChanges }) {
+  const strength = strengthIndicator(password);
+  const color = strengthColor(strength);
+
   return (
     <Form onSubmit={handleSubmit} style={{ textAlign: 'left' }}>
       <div>
@@ -41,6 +52,7 @@ function InscriptionView({ handleSubmit }) {
           <Field
             component={Input}
             name="date"
+            type="text"
             placeholder="Votre date de départ"
             validate={[required]}
             fluid
@@ -54,6 +66,7 @@ function InscriptionView({ handleSubmit }) {
           <Field
             component={Select}
             name="family"
+            type="text"
             options={familyOptions}
             placeholder="Votre situation familiale"
             search
@@ -70,6 +83,7 @@ function InscriptionView({ handleSubmit }) {
           <Field
             component={Input}
             name="conjoint"
+            type="text"
             placeholder="Prénom de votre conjoint"
             validate={[required]}
             fluid
@@ -82,9 +96,13 @@ function InscriptionView({ handleSubmit }) {
         <div style={inputdiv}>
           <Field
             component={Input}
+            value={password}
+            color={color}
             name="password"
+            type="password"
             placeholder="Votre mot de passe"
-            validate={[required, minLength12]}
+            onChange={handleChanges}
+            validate={[required, strong, medium]}
             fluid
           />
         </div>
@@ -96,6 +114,7 @@ function InscriptionView({ handleSubmit }) {
           <Field
             component={Input}
             name="confirmpassword"
+            type="password"
             placeholder="Confirmez votre mot de passe"
             validate={[required]}
             fluid
