@@ -19,7 +19,7 @@ export const maxLength = (len) =>
 
 export const withMinAlpha = (len) =>
   regexTest(
-    new RegExp(`[a-z]{${len},}`, 'i'),
+    new RegExp(`(.*[a-z]){${len},}.*`, 'i'),
     `Must contain at least ${len} alphabetic char`,
   );
 

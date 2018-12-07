@@ -54,6 +54,7 @@ describe('Redux form validators', () => {
     expect(withMinAlpha6('AbE sd')).not.toEqual(undefined);
 
     expect(withMinAlpha6('hellow you')).toEqual(undefined);
+    expect(withMinAlpha6('hell you')).toEqual(undefined);
   });
 
   it('#withMinNumeric', () => {
