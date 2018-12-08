@@ -1,0 +1,10 @@
+.label {
+  composes: label from global;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.label[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
