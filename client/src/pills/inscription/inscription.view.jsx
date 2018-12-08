@@ -1,142 +1,115 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import { Form, Checkbox, Button, Grid, Select } from 'semantic-ui-react';
-import { Input } from '../../redux-form-utils/fieldComponents';
-import { strengthIndicator, strengthColor } from './inscription.actions';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import '../../styles/inscription.page.css';
+import { reduxForm, Field } from 'redux-form';
+import { Form, Button } from 'semantic-ui-react';
 
-const familyOptions = [
-  { key: 's', text: 'Seule', value: 'FAMILLE_SEUL' },
-  { key: 'c', text: 'En concubinage', value: 'FAMILLE_CONCUBINAGE' },
-  { key: 'p', text: 'Pacsé', value: 'FAMILLE_PACSE' },
-  { key: 'm', text: 'Marié', value: 'FAMILLE_MARIE' },
+import {
+  Input,
+  Select,
+  DatePicker,
+  Checkbox,
+} from '../../redux-form-utils/fieldComponents';
+
+import {
+  required,
+  optional,
+  minLength,
+  withMinAlpha,
+  withMinNumeric,
+  withMinSpecial,
+  withMinLower,
+  withMinUpper,
+} from '../../redux-form-utils/fieldValidators';
+
+const passwordValidate = [
+  required,
+  minLength(12),
+  withMinAlpha(6),
+  withMinNumeric(2),
+  withMinSpecial(1),
+  withMinUpper(1),
+  withMinLower(1),
 ];
 
-const inputlabel = {
-  color: '#0071BD',
-  fontWeight: '700',
+const validate = (values) => {
+  const errors = {};
+  const { password, confirmpassword } = values;
+  if (password !== confirmpassword) {
+    errors.confirmpassword = 'Should be the same as password';
+  }
+  return errors;
 };
 
-const inputdiv = {
-  marginTop: '10px',
-  marginBottom: '10px',
-};
+const familyOptions = [
+  { text: 'Seule', value: 'FAMILLE_SEUL' },
+  { text: 'En concubinage', value: 'FAMILLE_CONCUBINAGE' },
+  { text: 'Pacsé', value: 'FAMILLE_PACSE' },
+  { text: 'Marié', value: 'FAMILLE_MARIE' },
+];
 
-const required = (value) =>
-  value || typeof value === 'number' ? undefined : 'Required';
-
-const strong = (value) =>
-  value &&
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{12,})/i.test(value)
-    ? "It's strong"
-    : undefined;
-
-const medium = (value) =>
-  value &&
-  /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/i.test(
-    value,
-  )
-    ? "It's medium"
-    : undefined;
-
-function InscriptionView({
-  handleSubmit,
-  password,
-  date,
-  handleChanges,
-  handleDateChanges,
-}) {
-  const strength = strengthIndicator(password);
-  const color = strengthColor(strength);
-
+// TODO: Display the current status of the password see: (https://trello.com/c/mTNAF7ag/41-first-connect)
+function InscriptionView({ family, handleSubmit, invalid, pristine, error }) {
   return (
-    <Form onSubmit={handleSubmit} style={{ textAlign: 'left' }}>
-      <div>
-        <label style={inputlabel}>Votre date de départ</label>
-        <div style={inputdiv}>
-          <DatePicker
-            selected={date}
-            className="datepickerfull"
-            onChange={handleDateChanges}
-          />
-        </div>
-      </div>
+    <Form onSubmit={handleSubmit}>
+      <Field
+        name="startDate"
+        component={DatePicker}
+        label="Votre date de départ"
+        validate={required}
+      />
+      <Field
+        name="family"
+        component={Select}
+        type="text"
+        options={familyOptions}
+        label="Votre situation familiale"
+        placeholder="Votre situation familiale"
+        validate={required}
+        fluid
+      />
+      <Field
+        name="conjoint"
+        component={Input}
+        type="text"
+        label="Prénom de votre conjoint"
+        placeholder="Prénom de votre conjoint"
+        disabled={family ? family === 'FAMILLE_SEUL' : true}
+        validate={(family && family !== 'FAMILLE_SEUL' && required) || optional}
+        fluid
+      />
+      <Field
+        name="password"
+        component={Input}
+        type="text"
+        label="Votre mot de passe"
+        placeholder="Votre mot de passe"
+        validate={passwordValidate}
+        fluid
+      />
+      <Field
+        name="confirmpassword"
+        component={Input}
+        type="password"
+        label="Confirmez votre mot de passe"
+        placeholder="Confirmez votre mot de passe"
+        validate={required}
+        fluid
+      />
+      <Field
+        name="cgv"
+        component={Checkbox}
+        label="J’accepte les CGV d’Expateo"
+        validate={required}
+      />
+      <Field
+        name="ads"
+        component={Checkbox}
+        label="J’accepte de recevoir des mails d’Expateo et de ses partenaires"
+      />
 
-      <div>
-        <label style={inputlabel}>Votre situation familiale</label>
-        <div style={inputdiv}>
-          <Field
-            component={Select}
-            name="family"
-            type="text"
-            options={familyOptions}
-            placeholder="Votre situation familiale"
-            search
-            fluid
-            validate={[required]}
-            searchInput={{ id: 'form-select-control-family' }}
-          />
-        </div>
-      </div>
-
-      <div>
-        <label style={inputlabel}>Prénom de votre conjoint</label>
-        <div style={inputdiv}>
-          <Field
-            component={Input}
-            name="conjoint"
-            type="text"
-            placeholder="Prénom de votre conjoint"
-            validate={[required]}
-            fluid
-          />
-        </div>
-      </div>
-
-      <div>
-        <label style={inputlabel}>Votre mot de passe</label>
-        <div style={inputdiv}>
-          <Field
-            component={Input}
-            value={password}
-            color={color}
-            name="password"
-            type="password"
-            placeholder="Votre mot de passe"
-            onChange={handleChanges}
-            validate={[required, strong, medium]}
-            fluid
-          />
-        </div>
-      </div>
-
-      <div>
-        <label style={inputlabel}>Confirmez votre mot de passe</label>
-        <div style={inputdiv}>
-          <Field
-            component={Input}
-            name="confirmpassword"
-            type="password"
-            placeholder="Confirmez votre mot de passe"
-            validate={[required]}
-            fluid
-          />
-        </div>
-      </div>
-
-      <Form.Field>
-        <Checkbox label="J’accepte les CGV d’Expateo" />
-        <Checkbox label="J’accepte de recevoir des mails d’Expateo et de ses partenaires" />
-      </Form.Field>
-
-      <Grid textAlign="center">
-        <Grid.Column>
-          <Button type="submit">Accéder à mon espace personnel</Button>
-        </Grid.Column>
-      </Grid>
+      <Button type="submit" disabled={invalid || error || pristine}>
+        Accéder à mon espace personnel
+      </Button>
     </Form>
   );
 }
@@ -147,4 +120,8 @@ InscriptionView.propTypes = {
 
 export default reduxForm({
   form: 'InscriptionForm',
+  validate,
+  initialValues: {
+    startDate: new Date(),
+  },
 })(InscriptionView);
