@@ -5,7 +5,7 @@ const MainLayout = ({ children }) => (
   <Container
     fluid
     style={{
-      backgroundColor: 'lightgray',
+      backgroundColor: 'white',
       height: '100vh',
       //   overflowX: 'hidden',
       //   overflowY: 'auto',
