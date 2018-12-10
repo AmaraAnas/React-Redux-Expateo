@@ -38,7 +38,7 @@ const Router = ({ indexRedirect }) => (
       <Switch>
         <Redirect exact from="/" to={indexRedirect} />
         <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/inscription" component={InscriptionPage} />
+        <Route path="/inscription" component={InscriptionPage} />
         <Route path="/sign-up" component={() => <div>Signup Page</div>} />
         <PrivateRoute
           path="/private"

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
+import PropTypes from 'prop-types';
 import { inscription } from './inscription.actions';
 import InscriptionViewForm from './inscription.view';
 
@@ -13,21 +14,23 @@ class InscriptionContainer extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin({ startDate, family, conjoint, password, confirmpassword, cgv }) {
-    const { dispatch, onInscription } = this.props;
+  handleLogin({ startDate, family, conjoint, password, confirmpassword, ads }) {
+    const { dispatch, onInscription, userIDs } = this.props;
     dispatch(
       inscription({
+        userIDs,
         startDate,
         family,
         conjoint,
         password,
         confirmpassword,
-        cgv,
+        ads,
         onSuccess: (user) => {
           onInscription(user);
+          console.log(user);
         },
         onFailure: (e) => {
-          console.log(e);
+          console.log('Inscription Failed');
         },
       }),
     );
@@ -41,6 +44,10 @@ class InscriptionContainer extends Component {
     );
   }
 }
+
+InscriptionContainer.propTypes = {
+  onInscription: PropTypes.func.isRequired,
+};
 
 const selector = formValueSelector('InscriptionForm');
 export default connect((state) => ({

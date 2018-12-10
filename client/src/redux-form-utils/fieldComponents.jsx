@@ -5,9 +5,11 @@ import {
   Select as SSelect,
   Checkbox as SCheckbox,
 } from 'semantic-ui-react';
-import RDatePicker from 'react-datepicker';
-
+import RDatePicker, { registerLocale } from 'react-datepicker';
+import { fr } from 'date-fns/locale';
 import Label from '../elements/label/label';
+
+registerLocale('fr', fr);
 
 const withLabel = (label, disabled) => (Field) =>
   label ? (
@@ -42,6 +44,8 @@ export function DatePicker({ input: { value, onChange }, label }) {
       control={RDatePicker}
       selected={value ? value : new Date()}
       onChange={onChange}
+      locale="fr"
+      dateFormat="dd/MM/yyyy"
       customInput={<SInput fluid />}
     />,
   );

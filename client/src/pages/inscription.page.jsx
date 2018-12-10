@@ -3,11 +3,13 @@ import { Container } from 'semantic-ui-react';
 
 import styles from './inscription.page.module.css';
 import InscriptForm from '../pills/inscription/inscription.container';
-
+const queryString = require('query-string');
 //TODO: handle the submit form
 export default class InscriptionForm extends React.Component {
   constructor(props) {
     super(props);
+    const parsed = queryString.parse(this.props.location.search);
+    this.queryIDs = parsed;
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
@@ -29,7 +31,10 @@ export default class InscriptionForm extends React.Component {
           Pour y accéder créez votre mot de passe et répondez aux questions
           nécessaires au bon fonctionnement de l’application
         </p>
-        <InscriptForm onLogin={this.handleLoginSubmit} />
+        <InscriptForm
+          onInscription={this.handleLoginSubmit}
+          userIDs={this.queryIDs}
+        />
       </Container>
     );
   }

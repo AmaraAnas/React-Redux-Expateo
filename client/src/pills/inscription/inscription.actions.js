@@ -16,6 +16,7 @@ export const inscriptionSuccess = createAction(
 const inscriptionFailure = createAction(ACTION_TYPES.INSCRIPTION_FAILURE);
 
 export function inscription({
+  userIDs,
   startDate,
   family,
   conjoint,
@@ -29,10 +30,10 @@ export function inscription({
   return async (dispatch) => {
     try {
       const user = await inscriptionApi.inscription({
-        gUsrGuid: 'E81161C70D3DF2ED35A2756D4368E57B',
-        gFamilyGuid: '4E1084EEF26CDE24C8C00166C12DCB61',
+        gUsrGuid: userIDs.guid,
+        gFamilyGuid: userIDs.family,
         gPassword: password,
-        gAllowEmail: ads,
+        gAllowEmail: ads !== undefined ? 1 : 0,
         gDepartureDate: startDate,
         gFamille: family,
         gPrenomConjoint: conjoint,

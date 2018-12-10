@@ -26,9 +26,7 @@ class AuthContainer extends Component {
           hideModal();
           onLogin(user);
         },
-        onFailure: (e) => {
-          console.log('failure');
-        },
+        onFailure: hideModal,
       }),
     );
   }

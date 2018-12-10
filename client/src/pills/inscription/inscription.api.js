@@ -8,6 +8,7 @@ export function setSession(user) {
 }
 
 export async function inscription(userInfo) {
+  console.log(userInfo);
   let data = {
     ajaxAction: 'subscribe_end_b2b',
     gApp: 'PG',
@@ -25,9 +26,11 @@ export async function inscription(userInfo) {
     setTimeout(() => {
       API.post('/ws/ajax/ajax_usr.php', data)
         .then(({ data }) => {
-          let user = { ...data, isLogged: true };
-          setSession(user);
-          resolve(user);
+          console.log(data);
+          if (!data.CHECK_ERROR) {
+            let user = { ...data, isLogged: true };
+            resolve(user);
+          } else resolve(data.CHECK_ERROR);
         })
         .catch(reject);
     }, 1250);
