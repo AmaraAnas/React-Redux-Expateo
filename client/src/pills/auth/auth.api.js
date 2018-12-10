@@ -1,66 +1,12 @@
-import axios from 'axios';
-const API = axios.create({
-  baseURL: 'https://www.expateo.com/dev_v2/',
-});
-/**
- * @returns {string}
- */
-export function getResolution() {
-  return window.screen.width + 'x' + window.screen.height;
-}
+import Api from '../api/base.api';
 
-/**
- * @returns {boolean}
- */
-export function isMobile() {
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-}
-
-/**
- * @returns {boolean}
- */
-export function isIOS() {
-  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-}
-
-/**
- * @returns {string}
- */
-export function getNavigator() {
-  let ua = navigator.userAgent,
-    tem,
-    M =
-      ua.match(
-        /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i,
-      ) || [];
-  if (/trident/i.test(M[1])) {
-    tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-    return 'IE ' + (tem[1] || '');
-  }
-  if (M[1] === 'Chrome') {
-    tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
-    if (tem != null)
-      return tem
-        .slice(1)
-        .join(' ')
-        .replace('OPR', 'Opera');
-  }
-  M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-  if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
-  return M[0];
-}
-
-export function getSession() {
-  try {
-    return JSON.parse(localStorage.getItem('session'));
-  } catch (e) {
-    return {};
-  }
-}
-
-export function setSession(user) {
-  localStorage.setItem('session', JSON.stringify(user));
-}
+import {
+  getNavigator,
+  getResolution,
+  isMobile,
+  setSession,
+  getSession,
+} from '../../utils';
 
 export async function login(username, password) {
   let data = {
@@ -78,7 +24,7 @@ export async function login(username, password) {
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      API.post('/ws/ajax/ajax_usr.php', data)
+      Api.post('/ws/ajax/ajax_usr.php', data)
         .then(({ data }) => {
           let user = { ...data, isLogged: true };
           setSession(user);
@@ -106,7 +52,7 @@ export async function checkAuth(token) {
     USR_REMEMBERME_EMAIL: user.gUsrEmail,
     USR_REMEMBERME_ID: user.gUsrGuid,
   };
-  return API.post('/ws/ajax/ajax_usr.php', data).then(({ data }) => {
+  return Api.post('/ws/ajax/ajax_usr.php', data).then(({ data }) => {
     let user = { ...data, isLogged: true };
     setSession(user);
     return user;

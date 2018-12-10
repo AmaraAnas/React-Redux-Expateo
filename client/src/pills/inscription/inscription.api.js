@@ -1,11 +1,5 @@
-import axios from 'axios';
-const API = axios.create({
-  baseURL: 'https://www.expateo.com/dev_v2/',
-});
-
-export function setSession(user) {
-  localStorage.setItem('session', JSON.stringify(user));
-}
+import Api from '../api/base.api';
+import { setSession } from '../../utils';
 
 export async function inscription(userInfo) {
   console.log(userInfo);
@@ -24,7 +18,7 @@ export async function inscription(userInfo) {
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      API.post('/ws/ajax/ajax_usr.php', data)
+      Api.post('/ws/ajax/ajax_usr.php', data)
         .then(({ data }) => {
           console.log(data);
           if (!data.CHECK_ERROR) {
@@ -42,7 +36,7 @@ export async function checkPassword(password) {
     ajaxAction: 'ctrlpassword',
     USR_PASSWORD: password,
   };
-  return API.post('/ws/ajax/ajax_usr.php', data).then(({ data }) => {
+  return Api.post('/ws/ajax/ajax_usr.php', data).then(({ data }) => {
     return data;
   });
 }
