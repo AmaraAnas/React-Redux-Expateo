@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-
+import { inscription } from './inscription.actions';
 import InscriptionViewForm from './inscription.view';
 
 // TODO: Handle submit request + Redirection
@@ -13,10 +13,25 @@ class InscriptionContainer extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin() {
-    const { dispatch, onLogin } = this.props;
+  handleLogin({ startDate, family, conjoint, password, confirmpassword, cgv }) {
+    const { dispatch, onInscription } = this.props;
+    dispatch(
+      inscription({
+        startDate,
+        family,
+        conjoint,
+        password,
+        confirmpassword,
+        cgv,
+        onSuccess: (user) => {
+          onInscription(user);
+        },
+        onFailure: (e) => {
+          console.log(e);
+        },
+      }),
+    );
   }
-
   render() {
     return (
       <InscriptionViewForm
