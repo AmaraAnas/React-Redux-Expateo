@@ -2,22 +2,33 @@ import React from 'react';
 import { Container } from 'semantic-ui-react';
 
 import styles from './inscription.page.module.css';
+import { Redirect } from 'react-router-dom';
 import InscriptForm from '../pills/inscription/inscription.container';
 const queryString = require('query-string');
 //TODO: handle the submit form
 export default class InscriptionForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { redirectToReferrer: false };
     const parsed = queryString.parse(this.props.location.search);
     this.queryIDs = parsed;
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
   handleLoginSubmit(user) {
-    this.setState();
+    this.setState({
+      redirectToReferrer: user && user.isLogged && user.gSesGuid != 0,
+    });
   }
 
   render() {
+    let { from } = this.props.location.state || {
+      from: { pathname: '/dashboard' },
+    };
+    let { redirectToReferrer } = this.state;
+    if (redirectToReferrer) {
+      return <Redirect to={from} />;
+    }
     return (
       <Container className={styles.container} text fluid>
         <h1 className={styles.title}>

@@ -1,5 +1,4 @@
 import Api from '../api/base.api';
-import { setSession } from '../../utils';
 
 export async function inscription(userInfo) {
   console.log(userInfo);

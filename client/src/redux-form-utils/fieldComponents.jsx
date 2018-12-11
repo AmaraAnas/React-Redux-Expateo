@@ -9,8 +9,6 @@ import RDatePicker, { registerLocale } from 'react-datepicker';
 import { fr } from 'date-fns/locale';
 import Label from '../elements/label/label';
 
-registerLocale('fr', fr);
-
 const withLabel = (label, disabled) => (Field) =>
   label ? (
     <React.Fragment>
@@ -39,6 +37,7 @@ export function Select({ input: { onChange, value }, meta, label, ...rest }) {
 }
 
 export function DatePicker({ input: { value, onChange }, label }) {
+  registerLocale('fr', fr);
   return withLabel(label)(
     <Form.Field
       control={RDatePicker}

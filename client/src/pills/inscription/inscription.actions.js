@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 import * as InscriptionApi from './inscription.api';
 import { addPrefixToActionTypes } from '../../redux-utils/utils';
+import * as AuthApi from '../auth/auth.api';
 
 export const ACTION_TYPES = addPrefixToActionTypes(
   {
@@ -23,13 +24,15 @@ export function inscription({
   password,
   confirmpassword,
   ads,
+  onPending,
   onSuccess,
   onFailure,
   inscriptionApi = InscriptionApi,
 }) {
+  onPending();
   return async (dispatch) => {
     try {
-      const user = await inscriptionApi.inscription({
+      const userID = await inscriptionApi.inscription({
         gUsrGuid: userIDs.guid,
         gFamilyGuid: userIDs.family,
         gPassword: password,
@@ -39,6 +42,10 @@ export function inscription({
         gPrenomConjoint: conjoint,
         gPasswordConfirm: confirmpassword,
       });
+      const user = await AuthApi.loginAfterInscription(
+        userID.gUsrGuid,
+        userIDs.family,
+      );
       dispatch(inscriptionSuccess(user));
       onSuccess(user);
     } catch (e) {

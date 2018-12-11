@@ -31,7 +31,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "set CI=true react-scripts test --env=node",
+    "test": "CI=true react-scripts test --env=node",
+    "windows-test": "set CI=true &&react-scripts test --env=node",
     "eject": "react-scripts eject",
     "test:watch": "react-scripts test --env=node",
     "test:coverage": "npm run test -- --coverage",
@@ -51,7 +52,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test && lint-staged"
+      "pre-commit": "npm run windows-test && lint-staged"
     }
   },
   "lint-staged": {

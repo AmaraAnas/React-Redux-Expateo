@@ -14,7 +14,9 @@ export default class LoginForm extends React.Component {
   }
 
   handleLoginSubmit(user) {
-    this.setState({ redirectToReferrer: user && user.isLogged });
+    this.setState({
+      redirectToReferrer: user && user.isLogged && user.gSesGuid != 0,
+    });
   }
 
   render() {

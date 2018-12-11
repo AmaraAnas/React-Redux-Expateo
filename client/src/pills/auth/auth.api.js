@@ -35,6 +35,32 @@ export async function login(username, password) {
   });
 }
 
+export async function loginAfterInscription(guid, familyid) {
+  let data = {
+    ajaxAction: 'connect',
+    gNavigator: getNavigator(),
+    gResolution: getResolution(),
+    gDevice: isMobile() ? 'M' : 'D',
+    gApp: 'XPTO',
+    USR_LANGUAGE: navigator.language.split('-')[0],
+    USR_APP: 'PG',
+    USR_REMEMBERME_ID: guid,
+    USR_REMEMBERME_FAMILY: familyid,
+  };
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      Api.post('/ws/ajax/ajax_usr.php', data)
+        .then(({ data }) => {
+          let user = { ...data, isLogged: true };
+          setSession(user);
+          resolve(user);
+        })
+        .catch(reject);
+    }, 1250);
+  });
+}
+
 export async function checkAuth(token) {
   let user = getSession();
   if (!user) {

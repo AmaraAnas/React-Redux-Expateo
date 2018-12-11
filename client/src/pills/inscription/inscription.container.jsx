@@ -4,6 +4,8 @@ import { formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { inscription } from './inscription.actions';
 import InscriptionViewForm from './inscription.view';
+import { show, hide } from '../modal/modal.actions';
+import { Loader } from '../modal/modal.container';
 
 // TODO: Handle submit request + Redirection
 // TODO: Write some test (should render)
@@ -16,6 +18,8 @@ class InscriptionContainer extends Component {
 
   handleLogin({ startDate, family, conjoint, password, confirmpassword, ads }) {
     const { dispatch, onInscription, userIDs } = this.props;
+    const showModal = () => dispatch(show(Loader));
+    const hideModal = () => dispatch(hide());
     dispatch(
       inscription({
         userIDs,
@@ -25,7 +29,9 @@ class InscriptionContainer extends Component {
         password,
         confirmpassword,
         ads,
+        onPending: showModal,
         onSuccess: (user) => {
+          hideModal();
           onInscription(user);
           console.log(user);
         },
