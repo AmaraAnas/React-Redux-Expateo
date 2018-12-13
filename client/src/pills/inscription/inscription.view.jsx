@@ -47,7 +47,6 @@ const familyOptions = [
   { text: 'Marié', value: 'FAMILLE_MARIE' },
 ];
 
-// TODO: Display the current status of the password see: (https://trello.com/c/mTNAF7ag/41-first-connect)
 function InscriptionView({ family, handleSubmit, invalid, pristine, error }) {
   return (
     <Form onSubmit={handleSubmit}>

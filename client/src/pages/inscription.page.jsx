@@ -5,7 +5,7 @@ import styles from './inscription.page.module.css';
 import { Redirect } from 'react-router-dom';
 import InscriptForm from '../pills/inscription/inscription.container';
 const queryString = require('query-string');
-//TODO: handle the submit form
+
 export default class InscriptionForm extends React.Component {
   constructor(props) {
     super(props);

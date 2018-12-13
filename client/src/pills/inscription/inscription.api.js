@@ -1,7 +1,6 @@
 import Api from '../api/base.api';
 
 export async function inscription(userInfo) {
-  console.log(userInfo);
   let data = {
     ajaxAction: 'subscribe_end_b2b',
     gApp: 'PG',
@@ -19,7 +18,6 @@ export async function inscription(userInfo) {
     setTimeout(() => {
       Api.post('/ws/ajax/ajax_usr.php', data)
         .then(({ data }) => {
-          console.log(data);
           if (!data.CHECK_ERROR) {
             let user = { ...data, isLogged: true };
             resolve(user);

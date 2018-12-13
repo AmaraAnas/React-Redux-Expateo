@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 import { inscription } from './inscription.actions';
 import InscriptionViewForm from './inscription.view';
 import { show, hide } from '../modal/modal.actions';
-import { Loader } from '../modal/modal.container';
+import { Loader, ErrorModal } from '../modal/modal.container';
 
-// TODO: Handle submit request + Redirection
-// TODO: Write some test (should render)
 class InscriptionContainer extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +17,7 @@ class InscriptionContainer extends Component {
   handleLogin({ startDate, family, conjoint, password, confirmpassword, ads }) {
     const { dispatch, onInscription, userIDs } = this.props;
     const showModal = () => dispatch(show(Loader));
+    const showErrorModal = () => dispatch(show(ErrorModal));
     const hideModal = () => dispatch(hide());
     dispatch(
       inscription({
@@ -32,12 +31,12 @@ class InscriptionContainer extends Component {
         onPending: showModal,
         onSuccess: (user) => {
           hideModal();
+          if (!user || !user.isLogged || user.gSesGuid == 0) {
+            showErrorModal();
+          }
           onInscription(user);
-          console.log(user);
         },
-        onFailure: (e) => {
-          console.log('Inscription Failed');
-        },
+        onFailure: (e) => {},
       }),
     );
   }
