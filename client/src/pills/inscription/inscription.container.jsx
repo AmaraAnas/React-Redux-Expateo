@@ -17,7 +17,7 @@ class InscriptionContainer extends Component {
   handleLogin({ startDate, family, conjoint, password, confirmpassword, ads }) {
     const { dispatch, onInscription, userIDs } = this.props;
     const showModal = () => dispatch(show(Loader));
-    const showErrorModal = () => dispatch(show(ErrorModal));
+    const showErrorModal = () => dispatch(show(ErrorModal(dispatch)));
     const hideModal = () => dispatch(hide());
     dispatch(
       inscription({
@@ -40,11 +40,13 @@ class InscriptionContainer extends Component {
       }),
     );
   }
+
   render() {
     return (
       <InscriptionViewForm
         onSubmit={this.handleLogin}
         family={this.props.family}
+        password={this.props.password}
       />
     );
   }
@@ -57,4 +59,5 @@ InscriptionContainer.propTypes = {
 const selector = formValueSelector('InscriptionForm');
 export default connect((state) => ({
   family: selector(state, 'family'),
+  password: selector(state, 'password'),
 }))(InscriptionContainer);

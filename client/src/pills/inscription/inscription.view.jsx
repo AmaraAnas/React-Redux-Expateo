@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
-import { Form, Button } from 'semantic-ui-react';
+import { Grid, Col, Form, Button } from 'semantic-ui-react';
+import { PasswordCriterias } from '../../redux-form-utils/PasswordCriterias';
 
 import {
   Input,
@@ -47,7 +48,14 @@ const familyOptions = [
   { text: 'Marié', value: 'FAMILLE_MARIE' },
 ];
 
-function InscriptionView({ family, handleSubmit, invalid, pristine, error }) {
+function InscriptionView({
+  family,
+  password,
+  handleSubmit,
+  invalid,
+  pristine,
+  error,
+}) {
   return (
     <Form onSubmit={handleSubmit}>
       <Field
@@ -76,15 +84,35 @@ function InscriptionView({ family, handleSubmit, invalid, pristine, error }) {
         validate={(family && family !== 'FAMILLE_SEUL' && required) || optional}
         fluid
       />
-      <Field
-        name="password"
-        component={Input}
-        type="password"
-        label="Votre mot de passe"
-        placeholder="Votre mot de passe"
-        validate={passwordValidate}
-        fluid
-      />
+      <Grid style={{ height: '200px' }}>
+        <Grid.Column
+          style={{
+            maxWidth: '50%',
+            width: '50%',
+          }}
+        >
+          <Field
+            name="password"
+            component={Input}
+            type="text"
+            label="Votre mot de passe"
+            placeholder="Votre mot de passe"
+            validate={passwordValidate}
+            fluid
+          />
+        </Grid.Column>
+        <Grid.Column
+          style={{
+            maxWidth: '50%',
+            width: '50%',
+          }}
+        >
+          <PasswordCriterias
+            password={password}
+            validators={passwordValidate}
+          />
+        </Grid.Column>
+      </Grid>
       <Field
         name="confirmpassword"
         component={Input}

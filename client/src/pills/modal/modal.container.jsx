@@ -13,22 +13,14 @@ function mapStateToProps({ Modal }) {
   return Modal;
 }
 
-export const ErrorModal = {
+export const ErrorModal = (dispatch) => ({
   header: <span>Erreur d'inscription</span>,
   content: <p>Le compte existe déja</p>,
-  actions: (
-    <Button
-      onClick={() => {
-        hide();
-      }}
-    >
-      OK
-    </Button>
-  ),
+  actions: <Button onClick={() => dispatch(hide())}>OK</Button>,
   isBasic: false,
   size: 'mini',
   onClose: () => {},
-};
+});
 
 export const Loader = {
   content: (
