@@ -15,7 +15,9 @@ function mapStateToProps({ Modal }) {
 
 export const ErrorModal = (dispatch) => ({
   header: <span>Erreur d'inscription</span>,
-  content: <p>Le compte existe déja</p>,
+  content: (
+    <p>Vérifiez que vous avez bien respecté les conditions d'inscription</p>
+  ),
   actions: <Button onClick={() => dispatch(hide())}>OK</Button>,
   isBasic: false,
   size: 'mini',

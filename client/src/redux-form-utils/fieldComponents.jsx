@@ -41,7 +41,7 @@ export function DatePicker({ input: { value, onChange }, label }) {
   return withLabel(label)(
     <Form.Field
       control={RDatePicker}
-      selected={value ? value : new Date()}
+      selected={value}
       onChange={onChange}
       locale="fr"
       dateFormat="dd/MM/yyyy"

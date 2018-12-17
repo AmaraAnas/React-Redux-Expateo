@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
-import { Grid, Col, Form, Button } from 'semantic-ui-react';
+import { Grid, Form, Button } from 'semantic-ui-react';
 import { PasswordCriterias } from '../../redux-form-utils/PasswordCriterias';
 
 import {
@@ -69,6 +69,7 @@ function InscriptionView({
         component={Select}
         type="text"
         options={familyOptions}
+        defaultValue={familyOptions[0].value}
         label="Votre situation familiale"
         placeholder="Votre situation familiale"
         validate={required}
@@ -149,6 +150,7 @@ export default reduxForm({
   form: 'InscriptionForm',
   validate,
   initialValues: {
-    startDate: new Date(),
+    startDate: '',
+    family: familyOptions[0].value,
   },
 })(InscriptionView);
