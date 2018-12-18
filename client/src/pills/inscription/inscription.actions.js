@@ -42,9 +42,14 @@ export function inscription({
         gPrenomConjoint: conjoint,
         gPasswordConfirm: confirmpassword,
       });
-      const user = await AuthApi.loginAfterInscription(
+      /*const user = await AuthApi.loginAfterInscription(
         userID.gUsrGuid,
         userIDs.family,
+      );*/
+      const user = await AuthApi.genericLogin(
+        { guid: userID.gUsrGuid, family: userIDs.family },
+        false,
+        true,
       );
       dispatch(inscriptionSuccess(user));
       onSuccess(user);

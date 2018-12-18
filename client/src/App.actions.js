@@ -18,7 +18,8 @@ export function init() {
   return async (dispatch) => {
     let user;
     try {
-      user = await AuthApi.checkAuth();
+      // user = await AuthApi.checkAuth();
+      user = await AuthApi.genericLogin({}, true, false);
       if (user) {
         dispatch(loginSuccess(user));
       }

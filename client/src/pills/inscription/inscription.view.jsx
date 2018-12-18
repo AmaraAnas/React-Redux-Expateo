@@ -69,7 +69,6 @@ function InscriptionView({
         component={Select}
         type="text"
         options={familyOptions}
-        defaultValue={familyOptions[0].value}
         label="Votre situation familiale"
         placeholder="Votre situation familiale"
         validate={required}
@@ -150,7 +149,7 @@ export default reduxForm({
   form: 'InscriptionForm',
   validate,
   initialValues: {
-    startDate: '',
+    startDate: new Date(),
     family: familyOptions[0].value,
   },
 })(InscriptionView);
