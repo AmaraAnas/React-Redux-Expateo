@@ -84,13 +84,8 @@ function InscriptionView({
         validate={(family && family !== 'FAMILLE_SEUL' && required) || optional}
         fluid
       />
-      <Grid style={{ height: '200px' }}>
-        <Grid.Column
-          style={{
-            maxWidth: '50%',
-            width: '50%',
-          }}
-        >
+      <Grid columns={2} divided stackable>
+        <Grid.Column>
           <Field
             name="password"
             component={Input}
@@ -101,12 +96,7 @@ function InscriptionView({
             fluid
           />
         </Grid.Column>
-        <Grid.Column
-          style={{
-            maxWidth: '50%',
-            width: '50%',
-          }}
-        >
+        <Grid.Column>
           <PasswordCriterias
             password={password}
             validators={passwordValidate}
