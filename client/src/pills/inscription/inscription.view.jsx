@@ -122,7 +122,7 @@ function InscriptionView({
             <Field
               name="password"
               component={Input}
-              type="text"
+              type="password"
               label="Votre mot de passe"
               placeholder="Votre mot de passe"
               validate={passwordValidate}
