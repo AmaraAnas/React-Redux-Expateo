@@ -129,7 +129,7 @@ function InscriptionView({
               fluid
             />
           </Grid.Column>
-          <Grid.Column style={{ height: '210px' }} mobile={0}>
+          <Grid.Column style={{ height: '210px' }}>
             {passwordError ? (
               <PasswordCriterias
                 password={password}
