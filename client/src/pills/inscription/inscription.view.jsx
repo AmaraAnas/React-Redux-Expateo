@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
-import { Grid, Form, Button } from 'semantic-ui-react';
-import { PasswordCriterias } from '../../redux-form-utils/PasswordCriterias';
+import { Grid, Form, Button, Icon } from 'semantic-ui-react';
 
 import {
   Input,
@@ -22,15 +21,33 @@ import {
   withMinUpper,
 } from '../../redux-form-utils/fieldValidators';
 
-const passwordValidate = [
-  required,
-  minLength(12),
-  withMinAlpha(6),
-  withMinNumeric(2),
-  withMinSpecial(1),
-  withMinUpper(1),
-  withMinLower(1),
+import Animate from '../../elements/animate/animate';
+
+import PasswordCriterias from './inscription.passwordCriterias.view';
+
+const minLength12 = minLength(12);
+const withMinAlpha6 = withMinAlpha(6);
+const withMinNumeric2 = withMinNumeric(2);
+const withMinSpecial1 = withMinSpecial(1);
+const withMinUpper1 = withMinUpper(1);
+const withMinLower1 = withMinLower(1);
+
+function makeCriteria(validator, label) {
+  return { label, validator };
+}
+
+const passwordCriterias = [
+  makeCriteria(minLength12, '12 caractères minimum'),
+  makeCriteria(withMinAlpha6, '6 caractères alphabétiques'),
+  makeCriteria(withMinNumeric2, '2 caractères numériques'),
+  makeCriteria(withMinSpecial1, '1 caractère spécial'),
+  makeCriteria(withMinUpper1, '1 caractère majuscule'),
+  makeCriteria(withMinLower1, '1 caractère minuscule'),
 ];
+
+const passwordValidate = [required].concat(
+  passwordCriterias.map((criteria) => criteria.validator),
+);
 
 const validate = (values) => {
   const errors = {};
@@ -55,78 +72,125 @@ function InscriptionView({
   invalid,
   pristine,
   error,
+  passwordError,
 }) {
   return (
     <Form onSubmit={handleSubmit}>
-      <Field
-        name="startDate"
-        component={DatePicker}
-        label="Votre date de départ"
-        validate={required}
-      />
-      <Field
-        name="family"
-        component={Select}
-        type="text"
-        options={familyOptions}
-        label="Votre situation familiale"
-        placeholder="Votre situation familiale"
-        validate={required}
-        fluid
-      />
-      <Field
-        name="conjoint"
-        component={Input}
-        type="text"
-        label="Prénom de votre conjoint"
-        placeholder="Prénom de votre conjoint"
-        disabled={family ? family === 'FAMILLE_SEUL' : true}
-        validate={(family && family !== 'FAMILLE_SEUL' && required) || optional}
-        fluid
-      />
-      <Grid columns={2} divided stackable>
-        <Grid.Column>
-          <Field
-            name="password"
-            component={Input}
-            type="text"
-            label="Votre mot de passe"
-            placeholder="Votre mot de passe"
-            validate={passwordValidate}
-            fluid
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <PasswordCriterias
-            password={password}
-            validators={passwordValidate}
-          />
-        </Grid.Column>
+      <Grid stackable>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Field
+              name="startDate"
+              component={DatePicker}
+              label="Votre date de départ"
+              validate={required}
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Field
+              name="family"
+              component={Select}
+              type="text"
+              options={familyOptions}
+              label="Votre situation familiale"
+              placeholder="Votre situation familiale"
+              validate={required}
+              fluid
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Field
+              name="conjoint"
+              component={Input}
+              type="text"
+              label="Prénom de votre conjoint"
+              placeholder="Prénom de votre conjoint"
+              disabled={family ? family === 'FAMILLE_SEUL' : true}
+              validate={
+                (family && family !== 'FAMILLE_SEUL' && required) || optional
+              }
+              fluid
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={2}>
+          <Grid.Column>
+            <Field
+              name="password"
+              component={Input}
+              type="text"
+              label="Votre mot de passe"
+              placeholder="Votre mot de passe"
+              validate={passwordValidate}
+              fluid
+            />
+          </Grid.Column>
+          <Grid.Column style={{ height: '210px' }} mobile={0}>
+            {passwordError ? (
+              <PasswordCriterias
+                password={password}
+                criterias={passwordCriterias}
+              />
+            ) : (
+              <div
+                style={{
+                  height: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Animate animation="fadeInRight">
+                  <Icon size="huge" color="green" name="check circle" />
+                </Animate>
+              </div>
+            )}
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Field
+              name="confirmpassword"
+              component={Input}
+              type="password"
+              label="Confirmez votre mot de passe"
+              placeholder="Confirmez votre mot de passe"
+              validate={required}
+              fluid
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Field
+              name="cgv"
+              component={Checkbox}
+              label="J’accepte les CGV d’Expateo"
+              validate={required}
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Field
+              name="ads"
+              component={Checkbox}
+              label="J’accepte de recevoir des mails d’Expateo et de ses partenaires"
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Button type="submit" disabled={invalid || error || pristine}>
+              Accéder à mon espace personnel
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
-      <Field
-        name="confirmpassword"
-        component={Input}
-        type="password"
-        label="Confirmez votre mot de passe"
-        placeholder="Confirmez votre mot de passe"
-        validate={required}
-        fluid
-      />
-      <Field
-        name="cgv"
-        component={Checkbox}
-        label="J’accepte les CGV d’Expateo"
-        validate={required}
-      />
-      <Field
-        name="ads"
-        component={Checkbox}
-        label="J’accepte de recevoir des mails d’Expateo et de ses partenaires"
-      />
-
-      <Button type="submit" disabled={invalid || error || pristine}>
-        Accéder à mon espace personnel
-      </Button>
     </Form>
   );
 }

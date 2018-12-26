@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
+import { formValueSelector, getFormSyncErrors } from 'redux-form';
 import PropTypes from 'prop-types';
 import { inscription } from './inscription.actions';
 import InscriptionViewForm from './inscription.view';
@@ -42,11 +42,13 @@ class InscriptionContainer extends Component {
   }
 
   render() {
+    const { family, password, syncErrors } = this.props;
     return (
       <InscriptionViewForm
         onSubmit={this.handleLogin}
-        family={this.props.family}
-        password={this.props.password}
+        family={family}
+        password={password}
+        passwordError={syncErrors.password}
       />
     );
   }
@@ -57,7 +59,10 @@ InscriptionContainer.propTypes = {
 };
 
 const selector = formValueSelector('InscriptionForm');
+const syncErrorsSelector = getFormSyncErrors('InscriptionForm');
+
 export default connect((state) => ({
   family: selector(state, 'family'),
   password: selector(state, 'password'),
+  syncErrors: syncErrorsSelector(state),
 }))(InscriptionContainer);
