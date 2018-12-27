@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import Layout from '../pages/main.layout';
 import LoginPage from '../pages/login.page';
+import InscriptionPage from '../pages/inscription.page';
 import NoMatchPage from '../pages/noMatch.page';
 
 let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
@@ -37,6 +38,7 @@ const Router = ({ indexRedirect }) => (
       <Switch>
         <Redirect exact from="/" to={indexRedirect} />
         <Route exact path="/login" component={LoginPage} />
+        <Route path="/inscription" component={InscriptionPage} />
         <Route path="/sign-up" component={() => <div>Signup Page</div>} />
         <PrivateRoute
           path="/private"

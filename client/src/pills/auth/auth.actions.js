@@ -25,7 +25,12 @@ export function login({
   onPending();
   return async (dispatch) => {
     try {
-      const user = await authApi.login(username, password);
+      //const user = await authApi.login(username, password);
+      const user = await authApi.genericLogin(
+        { username, password },
+        false,
+        false,
+      );
       dispatch(loginSuccess(user));
       onSuccess(user);
     } catch (e) {

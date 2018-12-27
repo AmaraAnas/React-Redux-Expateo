@@ -15,7 +15,7 @@
 // import store from './redux-utils/store';
 // import appReducer from './App.reducer';
 
-it('do nothing as the pills is not implented', () => {});
+it.skip('do nothing as the pills is not implented', () => {});
 
 // it('reducers', () => {
 //   let state;

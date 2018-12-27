@@ -12,3 +12,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.react-datepicker-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.react-datepicker-wrapper > div {
+  width: 100%;
+}
+
+/* ------------------------------------ */
+/*  TODO:Start to think about themes    */
+/* ------------------------------------ */
+
+.label {
+  color: #0071bd;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+.title {
+  color: #0071bd;
+  font-size: 2rem;
+}
+
+.text {
+  color: #707070;
+  font-size: 1.1rem;
+}
+/* ----------------------------------- */

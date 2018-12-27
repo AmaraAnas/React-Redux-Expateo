@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Router from './router/Router';
 import Modal from './pills/modal/modal.container';
 import { init } from './App.actions';
-import * as AuthApi from './pills/auth/auth.api';
+import { setSession } from './utils';
 
 class App extends Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    AuthApi.setSession(this.props.user);
+    setSession(this.props.user);
   }
 
   render() {

@@ -1,0 +1,12 @@
+.container {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.title {
+  composes: title from global;
+}
+
+.text {
+  composes: text from global;
+}

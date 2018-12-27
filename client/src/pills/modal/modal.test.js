@@ -8,7 +8,7 @@ import ModalReducer from './modal.reducer';
 
 describe('Modal render', () => {
   it('Should render', () => {
-    shallow(<Modal store={store} />);
+    expect(shallow(<Modal store={store} />)).toBeDefined();
   });
 });
 
