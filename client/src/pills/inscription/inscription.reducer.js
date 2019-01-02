@@ -10,7 +10,7 @@ const initialState = {
 export default function InscriptionReducer(state = initialState, action) {
   const { type } = action;
   switch (type) {
-    case InscriptionActionType.LOGIN_SUCCESS:
+    case InscriptionActionType.INSCRIPTION_SUCCESS:
       return {
         ...state,
         user: action.payload,
@@ -18,7 +18,7 @@ export default function InscriptionReducer(state = initialState, action) {
           message: '',
         },
       };
-    case InscriptionActionType.LOGIN_FAILURE:
+    case InscriptionActionType.INSCRIPTION_FAILURE:
       return {
         ...state,
         user: {},

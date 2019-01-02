@@ -27,13 +27,3 @@ export async function inscription(userInfo) {
     }, 1250);
   });
 }
-
-export async function checkPassword(password) {
-  let data = {
-    ajaxAction: 'ctrlpassword',
-    USR_PASSWORD: password,
-  };
-  return Api.post('/ws/ajax/ajax_usr.php', data).then(({ data }) => {
-    return data;
-  });
-}

@@ -118,7 +118,7 @@ export async function genericLogin(credentials, RememberMe, afterInscription) {
     setTimeout(() => {
       Api.post('/ws/ajax/ajax_usr.php', data)
         .then(({ data }) => {
-          let user = { ...data, isLogged: true };
+          let user = { ...data, isLogged: data.gSesGuid != 0 };
           setSession(user);
           resolve(user);
         })

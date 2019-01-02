@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     const { isInitDone, user } = this.props;
     let indexRedirect = '/login';
-    if (isInitDone && user && user.isLogged) {
+    if (isInitDone && user && user.isLogged && user.gSesGuid != 0) {
       indexRedirect = '/dashboard';
     }
     return (
