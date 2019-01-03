@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import store from '../../redux-utils/store';
 import Modal from './modal.container';
-import { show, hide, flush } from './modal.actions';
+import { show, hide, destroy } from './modal.actions';
 import ModalReducer from './modal.reducer';
 
 describe('Modal render', () => {
@@ -41,11 +41,11 @@ describe('Modal action - reducers', () => {
     });
   });
 
-  it('FLUSH: Should reset the modal state', () => {
+  it('DESTROY: Should reset the modal state', () => {
     let state;
     state = ModalReducer(
-      { isOpen: true, header: 'a', content: 'b', actions: 'c' },
-      flush(),
+      { isOpen: true, header: 'a', content: 'b', actions: 'c', other: 'd' },
+      destroy(),
     );
     expect(state).toEqual({
       isOpen: false,
