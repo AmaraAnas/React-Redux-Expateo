@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Grid, Form, Button, Icon } from 'semantic-ui-react';
+import cs from 'classnames';
 
 import {
   Input,
@@ -24,6 +25,7 @@ import {
 import Animate from '../../elements/animate/animate';
 
 import PasswordCriterias from './inscription.passwordCriterias.view';
+import styles from './inscription.module.css';
 
 const minLength12 = minLength(12);
 const withMinAlpha6 = withMinAlpha(6);
@@ -95,7 +97,6 @@ function InscriptionView({
               type="text"
               options={familyOptions}
               label="Votre situation familiale"
-              placeholder="Votre situation familiale"
               validate={required}
               fluid
             />
@@ -108,7 +109,6 @@ function InscriptionView({
               component={Input}
               type="text"
               label="Prénom de votre conjoint"
-              placeholder="Prénom de votre conjoint"
               disabled={family ? family === 'FAMILLE_SEUL' : true}
               validate={
                 (family && family !== 'FAMILLE_SEUL' && required) || optional
@@ -118,47 +118,48 @@ function InscriptionView({
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>
-          <Grid.Column>
+          <Grid.Column
+            width={passwordError ? 12 : 16}
+            className={cs({ [styles.slow]: !passwordError })}
+          >
             <Field
               name="password"
               component={Input}
               type="password"
               label="Votre mot de passe"
-              placeholder="Votre mot de passe"
               validate={passwordValidate}
+              icon={
+                !passwordError && (
+                  <Animate animation="fadeInRight">
+                    <Icon color="green" name="check circle" />
+                  </Animate>
+                )
+              }
               fluid
             />
           </Grid.Column>
-          <Grid.Column style={{ height: '210px' }}>
-            {passwordError ? (
+          {passwordError && (
+            <Grid.Column width={4}>
               <PasswordCriterias
                 password={password}
                 criterias={passwordCriterias}
               />
-            ) : (
-              <div
-                style={{
-                  height: '100%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Animate animation="fadeInRight">
-                  <Icon size="huge" color="green" name="check circle" />
-                </Animate>
-              </div>
-            )}
-          </Grid.Column>
+            </Grid.Column>
+          )}
         </Grid.Row>
-        <Grid.Row columns={1}>
-          <Grid.Column>
+        <Grid.Row columns={2}>
+          <Grid.Column
+            width={passwordError ? 12 : 16}
+            className={cs({
+              [styles.slow]: !passwordError,
+              [styles.mTop]: passwordError,
+            })}
+          >
             <Field
               name="confirmpassword"
               component={Input}
               type="password"
               label="Confirmez votre mot de passe"
-              placeholder="Confirmez votre mot de passe"
               validate={required}
               fluid
             />
@@ -169,7 +170,19 @@ function InscriptionView({
             <Field
               name="cgv"
               component={Checkbox}
-              label="J’accepte les CGV d’Expateo"
+              label={
+                <label>
+                  J’accepte les{' '}
+                  <a
+                    rel="noopener noreferrer"
+                    href="https://expateo.com/cgv"
+                    target="_blank"
+                  >
+                    C.G.V.
+                  </a>{' '}
+                  d’Expateo
+                </label>
+              }
               validate={required}
             />
           </Grid.Column>

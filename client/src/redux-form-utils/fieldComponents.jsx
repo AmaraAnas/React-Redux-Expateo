@@ -9,19 +9,36 @@ import RDatePicker, { registerLocale } from 'react-datepicker';
 import { fr } from 'date-fns/locale';
 import Label from '../elements/label/label';
 
-const withLabel = (label, disabled) => (Field) =>
-  label ? (
+const withLabel = (label, disabled) => (Field) => {
+  let id = Math.trunc(Math.random() * 10000); // WARN: maybe bugish
+  return label ? (
     <React.Fragment>
-      <Label disabled={disabled}>{label}</Label>
-      {Field}
+      <Label htmlFor={id} disabled={disabled}>
+        {label}
+      </Label>
+      {React.cloneElement(Field, { id })}
     </React.Fragment>
   ) : (
     Field
   );
+};
 
-export function Input({ input, meta, label, disabled, ...rest }) {
+export function Input({
+  input,
+  meta,
+  label,
+  disabled,
+  placeholder = 'Ecrire ici',
+  ...rest
+}) {
   return withLabel(label, disabled)(
-    <Form.Field control={SInput} {...input} {...rest} disabled={disabled} />,
+    <Form.Field
+      control={SInput}
+      {...input}
+      {...rest}
+      disabled={disabled}
+      placeholder={placeholder}
+    />,
   );
 }
 

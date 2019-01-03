@@ -6,6 +6,7 @@
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "babel-plugin-add-react-displayname": "0.0.5",
+    "classnames": "^2.2.6",
     "date-fns": "^2.0.0-alpha.25",
     "flux-standard-action": "^2.0.3",
     "logrocket": "^0.6.17",
