@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Grid, Form, Button, Icon } from 'semantic-ui-react';
+import cs from 'classnames';
 
 import {
   Input,
@@ -24,6 +25,7 @@ import {
 import Animate from '../../elements/animate/animate';
 
 import PasswordCriterias from './inscription.passwordCriterias.view';
+import styles from './inscription.module.css';
 
 const minLength12 = minLength(12);
 const withMinAlpha6 = withMinAlpha(6);
@@ -118,7 +120,10 @@ function InscriptionView({
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>
-          <Grid.Column>
+          <Grid.Column
+            width={passwordError ? 12 : 16}
+            className={cs({ [styles.slow]: !passwordError })}
+          >
             <Field
               name="password"
               component={Input}
@@ -126,33 +131,33 @@ function InscriptionView({
               label="Votre mot de passe"
               placeholder="Votre mot de passe"
               validate={passwordValidate}
+              icon={
+                !passwordError && (
+                  <Animate animation="fadeInRight">
+                    <Icon color="green" name="check circle" />
+                  </Animate>
+                )
+              }
               fluid
             />
           </Grid.Column>
-          <Grid.Column style={{ height: '210px' }}>
-            {passwordError ? (
+          {passwordError && (
+            <Grid.Column width={4}>
               <PasswordCriterias
                 password={password}
                 criterias={passwordCriterias}
               />
-            ) : (
-              <div
-                style={{
-                  height: '100%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Animate animation="fadeInRight">
-                  <Icon size="huge" color="green" name="check circle" />
-                </Animate>
-              </div>
-            )}
-          </Grid.Column>
+            </Grid.Column>
+          )}
         </Grid.Row>
-        <Grid.Row columns={1}>
-          <Grid.Column>
+        <Grid.Row columns={2}>
+          <Grid.Column
+            width={passwordError ? 12 : 16}
+            className={cs({
+              [styles.slow]: !passwordError,
+              [styles.mTop]: passwordError,
+            })}
+          >
             <Field
               name="confirmpassword"
               component={Input}
