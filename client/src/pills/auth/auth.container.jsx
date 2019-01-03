@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { show, destroy } from '../modal/modal.actions';
+import { BigLoaderModal } from '../modal/modal.loaders';
+
 import AuthViewForm from './auth.view';
 import { login } from './auth.actions';
-import { show, hide } from '../modal/modal.actions';
-import { Loader } from '../modal/modal.container';
+
+const showLoaderModal = () =>
+  show(
+    BigLoaderModal({
+      content: 'Connexion en cours...',
+    }),
+  );
 
 class AuthContainer extends Component {
   constructor(props) {
@@ -15,18 +23,17 @@ class AuthContainer extends Component {
 
   handleLogin({ username, password }) {
     const { dispatch, onLogin } = this.props;
-    const showModal = () => dispatch(show(Loader));
-    const hideModal = () => dispatch(hide());
+    const destroyModal = () => dispatch(destroy());
     dispatch(
       login({
         username,
         password,
-        onPending: showModal,
+        onPending: () => dispatch(showLoaderModal()),
         onSuccess: (user) => {
-          hideModal();
+          destroyModal();
           onLogin(user);
         },
-        onFailure: hideModal,
+        onFailure: destroyModal,
       }),
     );
   }
