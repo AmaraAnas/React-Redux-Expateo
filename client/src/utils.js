@@ -59,3 +59,7 @@ export function getSession() {
 export function setSession(user) {
   localStorage.setItem('session', JSON.stringify(user));
 }
+
+export function CloseSession() {
+  localStorage.setItem('session', {});
+}

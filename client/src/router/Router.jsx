@@ -7,6 +7,7 @@ import Layout from '../pages/main.layout';
 import LoginPage from '../pages/login.page';
 import InscriptionPage from '../pages/inscription.page';
 import NoMatchPage from '../pages/noMatch.page';
+import Home from '../pages/home.page';
 
 let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
   return (
@@ -44,7 +45,7 @@ const Router = ({ indexRedirect }) => (
           path="/private"
           component={() => <div>HELLO PRIVATE</div>}
         />
-        <PrivateRoute component={NoMatchPage} />
+        <PrivateRoute component={Home} />
       </Switch>
     </BrowserRouter>
   </Layout>
