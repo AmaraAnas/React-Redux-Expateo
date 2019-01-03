@@ -32,7 +32,7 @@ export default class InscriptionForm extends React.Component {
     return (
       <Container className={styles.container} text fluid>
         <h1 className={styles.title}>
-          Bienvenu sur votre espace personnel Expateo
+          Bienvenue sur votre espace personnel Expateo
         </h1>
         <p className={styles.text}>
           Grâce à votre entreprise vous allez bénéficier d’un accompagnement
