@@ -169,7 +169,19 @@ function InscriptionView({
             <Field
               name="cgv"
               component={Checkbox}
-              label="J’accepte les CGV d’Expateo"
+              label={
+                <label>
+                  J’accepte les{' '}
+                  <a
+                    rel="noopener noreferrer"
+                    href="https://expateo.com/cgv"
+                    target="_blank"
+                  >
+                    C.G.V.
+                  </a>{' '}
+                  d’Expateo
+                </label>
+              }
               validate={required}
             />
           </Grid.Column>
