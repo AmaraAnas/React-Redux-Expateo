@@ -109,7 +109,6 @@ function InscriptionView({
               component={Input}
               type="text"
               label="Prénom de votre conjoint"
-              placeholder="Prénom de votre conjoint"
               disabled={family ? family === 'FAMILLE_SEUL' : true}
               validate={
                 (family && family !== 'FAMILLE_SEUL' && required) || optional
@@ -128,7 +127,6 @@ function InscriptionView({
               component={Input}
               type="password"
               label="Votre mot de passe"
-              placeholder="Votre mot de passe"
               validate={passwordValidate}
               icon={
                 !passwordError && (
@@ -162,7 +160,6 @@ function InscriptionView({
               component={Input}
               type="password"
               label="Confirmez votre mot de passe"
-              placeholder="Confirmez votre mot de passe"
               validate={required}
               fluid
             />
