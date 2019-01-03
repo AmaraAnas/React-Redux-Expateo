@@ -97,7 +97,6 @@ function InscriptionView({
               type="text"
               options={familyOptions}
               label="Votre situation familiale"
-              placeholder="Votre situation familiale"
               validate={required}
               fluid
             />
