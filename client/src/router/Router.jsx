@@ -4,9 +4,23 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import Layout from '../pages/main.layout';
-import LoginPage from '../pages/login.page';
-import InscriptionPage from '../pages/inscription.page';
-import NoMatchPage from '../pages/noMatch.page';
+
+import ErrorBound from './ErrorBound';
+
+const LoginPage = React.lazy(() =>
+  import(/* webpackChunkName: "login.page" */
+  '../pages/login.page'),
+);
+const InscriptionPage = React.lazy(() =>
+  import(/* webpackChunkName: "inscription.page" */
+  '../pages/inscription.page'),
+);
+const NoMatchPage = React.lazy(() =>
+  import(/* webpackChunkName: "noMatch.page" */
+  '../pages/noMatch.page'),
+);
+
+const ErrorPage = () => <h1>:( Something went wrong. </h1>;
 
 let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
   return (
@@ -33,21 +47,25 @@ PrivateRoute = connect(({ Auth }) => ({
 }))(PrivateRoute);
 
 const Router = ({ indexRedirect }) => (
-  <Layout>
-    <BrowserRouter>
-      <Switch>
-        <Redirect exact from="/" to={indexRedirect} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route path="/inscription" component={InscriptionPage} />
-        <Route path="/sign-up" component={() => <div>Signup Page</div>} />
-        <PrivateRoute
-          path="/private"
-          component={() => <div>HELLO PRIVATE</div>}
-        />
-        <PrivateRoute component={NoMatchPage} />
-      </Switch>
-    </BrowserRouter>
-  </Layout>
+  <ErrorBound renderError={() => <ErrorPage />}>
+    <React.Suspense fallback={<div> Loading ... </div>}>
+      <Layout>
+        <BrowserRouter>
+          <Switch>
+            <Redirect exact from="/" to={indexRedirect} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route path="/inscription" component={InscriptionPage} />
+            <Route path="/sign-up" component={() => <div>Signup Page</div>} />
+            <PrivateRoute
+              path="/private"
+              component={() => <div>HELLO PRIVATE</div>}
+            />
+            <PrivateRoute component={NoMatchPage} />
+          </Switch>
+        </BrowserRouter>
+      </Layout>
+    </React.Suspense>
+  </ErrorBound>
 );
 
 Router.propTypes = {
