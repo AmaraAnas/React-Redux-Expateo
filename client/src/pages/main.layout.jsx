@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react';
+
+import { Container } from '../ui-kit';
 
 const MainLayout = ({ children }) => (
   <Container

@@ -8,7 +8,7 @@ import { setTitle, init } from './App.actions';
 
 describe('App render', () => {
   it('Should render', () => {
-    shallow(<App store={store} />);
+    expect(shallow(<App store={store} />)).toBeDefined();
   });
 });
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'semantic-ui-react';
+
+import { Modal } from '../../ui-kit';
 
 function CustomModal({
-  isOpen,
   onClose,
-  header,
+  isOpen,
   isBasic,
+  header,
   size,
   content,
   actions,
@@ -23,6 +24,8 @@ function CustomModal({
 CustomModal.propTypes = {
   onClose: PropTypes.func,
   isOpen: PropTypes.bool,
+  isBasic: PropTypes.bool,
+  size: PropTypes.string,
   header: PropTypes.any,
   content: PropTypes.any,
   actions: PropTypes.any,

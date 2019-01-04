@@ -2,13 +2,17 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import store from '../../redux-utils/store';
+
 import InscriptionForm from './inscription.container';
 import { inscription } from './inscription.actions';
 import InscriptionReducer from './inscription.reducer';
 
 describe('Inscription render', () => {
   it('Should render', () => {
-    shallow(<InscriptionForm store={store} />);
+    const noop = () => {};
+    expect(
+      shallow(<InscriptionForm store={store} onInscription={noop} />),
+    ).toBeDefined();
   });
 });
 
@@ -31,19 +35,16 @@ it('INSCRIPTION:SUCCESS Should set the user', () => {
     onFailure: noop,
     inscriptionApi: {
       inscription: () =>
-        new Promise((resolve) =>
-          setTimeout(
-            () => resolve({ gUsrGuid: '0871303E98DE4C75F959A07807A8051B' }),
-            50,
-          ),
-        ).finally(() => {
-          expect(state).toEqual({
-            user: { gUsrGuid: '0871303E98DE4C75F959A07807A8051B' },
-            error: {
-              message: '',
-            },
-          });
-        }),
+        Promise.resolve({ gUsrGuid: '0871303E98DE4C75F959A07807A8051B' }).then(
+          () => {
+            expect(state).toEqual({
+              user: { gUsrGuid: '0871303E98DE4C75F959A07807A8051B' },
+              error: {
+                message: '',
+              },
+            });
+          },
+        ),
     },
   });
   state = InscriptionReducer(

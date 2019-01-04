@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "babel-plugin-add-react-displayname": "0.0.5",
+    "classnames": "^2.2.6",
     "date-fns": "^2.0.0-alpha.25",
     "flux-standard-action": "^2.0.3",
+    "lodash.get": "^4.4.2",
     "logrocket": "^0.6.17",
     "logrocket-react": "^3.0.0",
     "prop-types": "^15.6.2",
@@ -52,7 +55,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run windows-test && lint-staged"
+      "pre-commit": "npm run test && lint-staged"
     }
   },
   "lint-staged": {
