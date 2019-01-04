@@ -162,7 +162,8 @@ function InscriptionView({
               name="confirmpassword"
               component={Input}
               type="password"
-              label="Confirmez votre mot de passe"
+              label={t('form.fields.confirmpassword.label')}
+              placeholder={t('form.fields.confirmpassword.placeholder')}
               validate={required}
               fluid
             />

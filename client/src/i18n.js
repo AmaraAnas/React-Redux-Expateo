@@ -28,6 +28,10 @@ const texts = {
         label: 'Mot de passe',
         placeholder: 'Ecrire votre mot de passe en respectant les conditions',
       },
+      confirmpassword: {
+        label: 'Confirmation du mot de passe',
+        placeholder: 'Confirmez votre mot de passe',
+      },
     },
   },
   pages: {
