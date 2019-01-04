@@ -21,6 +21,7 @@ import {
   withMinUpper,
 } from '../../redux-form-utils/fieldValidators';
 import Animate from '../../elements/animate/animate';
+import t from '../../i18n';
 
 import PasswordCriterias from './inscription.passwordCriterias.view';
 import styles from './inscription.module.css';
@@ -169,17 +170,7 @@ function InscriptionView({
               name="cgv"
               component={Checkbox}
               label={
-                <label>
-                  J’accepte les{' '}
-                  <a
-                    rel="noopener noreferrer"
-                    href="https://expateo.com/cgv"
-                    target="_blank"
-                  >
-                    C.G.V.
-                  </a>{' '}
-                  d’Expateo
-                </label>
+                <label dangerouslySetInnerHTML={{ __html: t('form.cgu') }} />
               }
               validate={required}
             />

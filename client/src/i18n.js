@@ -9,6 +9,8 @@ const texts = {
   access_to_home: 'Accèdez a son espace personel',
   form: {
     start_date: 'votre date de départ',
+    cgu:
+      "J'accepte les <a href='https://expateo.com/fr/conditions-generales-vente' rel='noopener noreferrer' target='_blank'>CGU</a>",
   },
   pages: {
     inscription: {
