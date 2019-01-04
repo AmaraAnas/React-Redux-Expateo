@@ -16,6 +16,10 @@ const texts = {
         label: 'date de départ de la mobilité',
         placeholder: 'date de votre départ pour cette mobilité',
       },
+      family: {
+        label: 'Votre situation familiale au départ',
+        placeholder: 'Partez vous seul.e ou accompagné.e ?',
+      },
     },
   },
   pages: {
