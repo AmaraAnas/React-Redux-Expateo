@@ -24,6 +24,10 @@ const texts = {
         label: 'Prénom de votre conjoint',
         placeholder: 'Indiquer le prénom de votre conjoint qui part avec vous',
       },
+      password: {
+        label: 'Mot de passe',
+        placeholder: 'Ecrire votre mot de passe en respectant les conditions',
+      },
     },
   },
   pages: {

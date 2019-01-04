@@ -128,7 +128,8 @@ function InscriptionView({
               name="password"
               component={Input}
               type="password"
-              label="Votre mot de passe"
+              label={t('form.fields.password.label')}
+              placeholder={t('form.fields.password.placeholder')}
               validate={passwordValidate}
               icon={
                 !passwordError && (
