@@ -1,13 +1,13 @@
 import React from 'react';
+import RDatePicker, { registerLocale } from 'react-datepicker';
+import { fr } from 'date-fns/locale';
+
 import {
   Form,
   Input as SInput,
   Select as SSelect,
   Checkbox as SCheckbox,
-} from 'semantic-ui-react';
-import RDatePicker, { registerLocale } from 'react-datepicker';
-import { fr } from 'date-fns/locale';
-
+} from '../ui-kit';
 import Label from '../elements/label/label';
 
 const withLabel = (label, disabled) => (Field) => {

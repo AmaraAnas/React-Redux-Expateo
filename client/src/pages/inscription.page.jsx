@@ -1,10 +1,10 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Container } from 'semantic-ui-react';
 import qs from 'query-string';
 
-import InscriptForm from '../pills/inscription/inscription.container';
 import t from '../i18n';
+import { Container } from '../ui-kit';
+import InscriptForm from '../pills/inscription/inscription.container';
 
 import styles from './inscription.page.module.css';
 

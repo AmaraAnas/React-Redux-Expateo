@@ -1,6 +1,6 @@
 import React from 'react';
-import { List } from 'semantic-ui-react';
 
+import { List } from '../../ui-kit';
 import Animate from '../../elements/animate/animate.jsx';
 
 export default function PasswordCriterias({ password, criterias }) {

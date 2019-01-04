@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'semantic-ui-react';
+
+import { Modal } from '../../ui-kit';
 
 function CustomModal({
   onClose,

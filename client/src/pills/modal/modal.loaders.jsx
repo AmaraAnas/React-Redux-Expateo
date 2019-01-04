@@ -1,5 +1,6 @@
 import React from 'react';
-import { Loader as SMLoader } from 'semantic-ui-react';
+
+import { Loader as SMLoader } from '../../ui-kit';
 
 // TODO: Test that functions
 const noop = () => {};

@@ -1,8 +1,8 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import { Button, Form, Icon } from 'semantic-ui-react';
 
+import { Button, Form, Icon } from '../../ui-kit';
 import { Input } from '../../redux-form-utils/fieldComponents';
 
 function AuthView({ handleSubmit }) {
