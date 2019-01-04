@@ -11,6 +11,7 @@ const texts = {
     start_date: 'votre date de départ',
     cgu:
       "J'accepte les <a href='https://expateo.com/fr/conditions-generales-vente' rel='noopener noreferrer' target='_blank'>CGU</a>",
+    ad: "J'accepte de recevoir des mails d'Expateo et de ses partenaires",
   },
   pages: {
     inscription: {

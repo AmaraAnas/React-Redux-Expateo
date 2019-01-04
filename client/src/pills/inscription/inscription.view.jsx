@@ -178,11 +178,7 @@ function InscriptionView({
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <Field
-              name="ads"
-              component={Checkbox}
-              label="J’accepte de recevoir des mails d’Expateo et de ses partenaires"
-            />
+            <Field name="ads" component={Checkbox} label={t('form.ad')} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={1}>
