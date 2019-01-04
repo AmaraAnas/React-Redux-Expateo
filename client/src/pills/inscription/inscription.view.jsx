@@ -83,7 +83,8 @@ function InscriptionView({
             <Field
               name="startDate"
               component={DatePicker}
-              label="Votre date de départ"
+              label={t('form.fields.start_date.label')}
+              placeholder={t('form.fields.start_date.placeholder')}
               validate={required}
             />
           </Grid.Column>

@@ -8,10 +8,15 @@ const texts = {
   logout: 'se deconnecter',
   access_to_home: 'Accèdez a son espace personel',
   form: {
-    start_date: 'votre date de départ',
     cgu:
       "J'accepte les <a href='https://expateo.com/fr/conditions-generales-vente' rel='noopener noreferrer' target='_blank'>CGU</a>",
     ad: "J'accepte de recevoir des mails d'Expateo et de ses partenaires",
+    fields: {
+      start_date: {
+        label: 'date de départ de la mobilité',
+        placeholder: 'date de votre départ pour cette mobilité',
+      },
+    },
   },
   pages: {
     inscription: {
