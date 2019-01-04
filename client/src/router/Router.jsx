@@ -20,7 +20,8 @@ const NoMatchPage = React.lazy(() =>
   '../pages/noMatch.page'),
 );
 
-const ErrorPage = () => <h1>:( Something went wrong. </h1>;
+const ErrorPage = () => <h1>:( Something went wrong. </h1>; // TODO: A better error page maybe ?
+const LoadingLazyPage = <div> Loading ... </div>; // TODO: A better loadign lazy page maybe ?
 
 let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
   return (
@@ -48,7 +49,7 @@ PrivateRoute = connect(({ Auth }) => ({
 
 const Router = ({ indexRedirect }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
-    <React.Suspense fallback={<div> Loading ... </div>}>
+    <React.Suspense fallback={LoadingLazyPage}>
       <Layout>
         <BrowserRouter>
           <Switch>

@@ -1,7 +1,9 @@
 import { createAction } from 'redux-actions';
-import * as InscriptionApi from './inscription.api';
-import { addPrefixToActionTypes } from '../../redux-utils/utils';
+
 import * as AuthApi from '../auth/auth.api';
+import { addPrefixToActionTypes } from '../../redux-utils/utils';
+
+import * as InscriptionApi from './inscription.api';
 
 export const ACTION_TYPES = addPrefixToActionTypes(
   {

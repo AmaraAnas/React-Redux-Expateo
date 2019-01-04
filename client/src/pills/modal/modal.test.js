@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import store from '../../redux-utils/store';
+
 import Modal from './modal.container';
 import { show, hide, destroy } from './modal.actions';
 import ModalReducer from './modal.reducer';

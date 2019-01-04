@@ -7,6 +7,7 @@ import {
 } from 'semantic-ui-react';
 import RDatePicker, { registerLocale } from 'react-datepicker';
 import { fr } from 'date-fns/locale';
+
 import Label from '../elements/label/label';
 
 const withLabel = (label, disabled) => (Field) => {

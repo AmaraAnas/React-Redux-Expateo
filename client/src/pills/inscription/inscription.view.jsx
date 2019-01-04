@@ -10,7 +10,6 @@ import {
   DatePicker,
   Checkbox,
 } from '../../redux-form-utils/fieldComponents';
-
 import {
   required,
   optional,
@@ -21,7 +20,6 @@ import {
   withMinLower,
   withMinUpper,
 } from '../../redux-form-utils/fieldValidators';
-
 import Animate from '../../elements/animate/animate';
 
 import PasswordCriterias from './inscription.passwordCriterias.view';

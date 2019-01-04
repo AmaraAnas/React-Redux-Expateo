@@ -1,24 +1,24 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react';
-
-import styles from './inscription.page.module.css';
 import { Redirect } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
+import qs from 'query-string';
+
 import InscriptForm from '../pills/inscription/inscription.container';
 import t from '../i18n';
-const queryString = require('query-string');
+
+import styles from './inscription.page.module.css';
 
 export default class InscriptionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { redirectToReferrer: false };
-    const parsed = queryString.parse(this.props.location.search);
-    this.queryIDs = parsed;
+    this.queryIDs = qs.parse(this.props.location.search);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
   handleLoginSubmit(user) {
     this.setState({
-      redirectToReferrer: user && user.isLogged && user.gSesGuid != 0,
+      redirectToReferrer: user && user.isLogged && user.gSesGuid != 0, // TODO: wath is user.gSesGuid ??
     });
   }
 
