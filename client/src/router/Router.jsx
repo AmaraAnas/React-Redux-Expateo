@@ -7,6 +7,9 @@ import Layout from '../pages/main.layout';
 
 import ErrorBound from './ErrorBound';
 
+const ErrorPage = () => <h1>:( Something went wrong. </h1>; // TODO: A better error page maybe ?
+const LoadingLazyPage = <div> Loading ... </div>; // TODO: A better loadign lazy page maybe ?
+
 const LoginPage = React.lazy(() =>
   import(/* webpackChunkName: "login.page" */
   '../pages/login.page'),
@@ -19,9 +22,6 @@ const NoMatchPage = React.lazy(() =>
   import(/* webpackChunkName: "noMatch.page" */
   '../pages/noMatch.page'),
 );
-
-const ErrorPage = () => <h1>:( Something went wrong. </h1>; // TODO: A better error page maybe ?
-const LoadingLazyPage = <div> Loading ... </div>; // TODO: A better loadign lazy page maybe ?
 
 let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
   return (
@@ -49,9 +49,9 @@ PrivateRoute = connect(({ Auth }) => ({
 
 const Router = ({ indexRedirect }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
-    <React.Suspense fallback={LoadingLazyPage}>
-      <Layout>
-        <BrowserRouter>
+    <Layout>
+      <BrowserRouter>
+        <React.Suspense fallback={LoadingLazyPage}>
           <Switch>
             <Redirect exact from="/" to={indexRedirect} />
             <Route exact path="/login" component={LoginPage} />
@@ -63,9 +63,9 @@ const Router = ({ indexRedirect }) => (
             />
             <PrivateRoute component={NoMatchPage} />
           </Switch>
-        </BrowserRouter>
-      </Layout>
-    </React.Suspense>
+        </React.Suspense>
+      </BrowserRouter>
+    </Layout>
   </ErrorBound>
 );
 
