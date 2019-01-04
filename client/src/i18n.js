@@ -8,7 +8,34 @@ const texts = {
   logout: 'se deconnecter',
   access_to_home: 'Accèdez a son espace personel',
   form: {
-    start_date: 'votre date de départ',
+    cgu:
+      "J'accepte les <a href='https://expateo.com/fr/conditions-generales-vente' rel='noopener noreferrer' target='_blank'>CGU</a>",
+    ad: "J'accepte de recevoir des mails d'Expateo et de ses partenaires",
+    fields: {
+      start_date: {
+        label: 'date de départ de la mobilité',
+        placeholder: 'date de votre départ pour cette mobilité',
+      },
+      family: {
+        label: 'Votre situation familiale au départ',
+        placeholder: 'Partez vous seul.e ou accompagné.e ?',
+      },
+      conjoint: {
+        label: 'Prénom de votre conjoint',
+        placeholder: 'Indiquer le prénom de votre conjoint qui part avec vous',
+      },
+      password: {
+        label: 'Mot de passe',
+        placeholder: 'Ecrire votre mot de passe en respectant les conditions',
+      },
+      confirmpassword: {
+        label: 'Confirmation du mot de passe',
+        placeholder: 'Confirmez votre mot de passe',
+      },
+    },
+    submit: {
+      inscription: 'Accéder à mon espace personnel',
+    },
   },
   pages: {
     inscription: {

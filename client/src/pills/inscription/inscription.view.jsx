@@ -21,6 +21,7 @@ import {
   withMinUpper,
 } from '../../redux-form-utils/fieldValidators';
 import Animate from '../../elements/animate/animate';
+import t from '../../i18n';
 
 import PasswordCriterias from './inscription.passwordCriterias.view';
 import styles from './inscription.module.css';
@@ -82,7 +83,8 @@ function InscriptionView({
             <Field
               name="startDate"
               component={DatePicker}
-              label="Votre date de départ"
+              label={t('form.fields.start_date.label')}
+              placeholder={t('form.fields.start_date.placeholder')}
               validate={required}
             />
           </Grid.Column>
@@ -94,7 +96,8 @@ function InscriptionView({
               component={Select}
               type="text"
               options={familyOptions}
-              label="Votre situation familiale"
+              label={t('form.fields.family.label')}
+              placeholder={t('form.fields.family.placeholder')}
               validate={required}
               fluid
             />
@@ -106,7 +109,8 @@ function InscriptionView({
               name="conjoint"
               component={Input}
               type="text"
-              label="Prénom de votre conjoint"
+              label={t('form.fields.conjoint.label')}
+              placeholder={t('form.fields.conjoint.placeholder')}
               disabled={family ? family === 'FAMILLE_SEUL' : true}
               validate={
                 (family && family !== 'FAMILLE_SEUL' && required) || optional
@@ -124,7 +128,8 @@ function InscriptionView({
               name="password"
               component={Input}
               type="password"
-              label="Votre mot de passe"
+              label={t('form.fields.password.label')}
+              placeholder={t('form.fields.password.placeholder')}
               validate={passwordValidate}
               icon={
                 !passwordError && (
@@ -157,7 +162,8 @@ function InscriptionView({
               name="confirmpassword"
               component={Input}
               type="password"
-              label="Confirmez votre mot de passe"
+              label={t('form.fields.confirmpassword.label')}
+              placeholder={t('form.fields.confirmpassword.placeholder')}
               validate={required}
               fluid
             />
@@ -169,17 +175,7 @@ function InscriptionView({
               name="cgv"
               component={Checkbox}
               label={
-                <label>
-                  J’accepte les{' '}
-                  <a
-                    rel="noopener noreferrer"
-                    href="https://expateo.com/cgv"
-                    target="_blank"
-                  >
-                    C.G.V.
-                  </a>{' '}
-                  d’Expateo
-                </label>
+                <label dangerouslySetInnerHTML={{ __html: t('form.cgu') }} />
               }
               validate={required}
             />
@@ -187,17 +183,13 @@ function InscriptionView({
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <Field
-              name="ads"
-              component={Checkbox}
-              label="J’accepte de recevoir des mails d’Expateo et de ses partenaires"
-            />
+            <Field name="ads" component={Checkbox} label={t('form.ad')} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
             <Button type="submit" disabled={invalid || error || pristine}>
-              Accéder à mon espace personnel
+              {t('form.submit.inscription')}
             </Button>
           </Grid.Column>
         </Grid.Row>
@@ -215,6 +207,5 @@ export default reduxForm({
   validate,
   initialValues: {
     startDate: new Date(),
-    family: familyOptions[0].value,
   },
 })(InscriptionView);

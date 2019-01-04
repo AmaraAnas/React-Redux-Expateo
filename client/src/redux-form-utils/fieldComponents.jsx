@@ -54,7 +54,7 @@ export function Select({ input: { onChange, value }, meta, label, ...rest }) {
   );
 }
 
-export function DatePicker({ input: { value, onChange }, label }) {
+export function DatePicker({ input: { value, onChange }, label, placeholder }) {
   registerLocale('fr', fr);
   return withLabel(label)(
     <Form.Field
@@ -63,6 +63,7 @@ export function DatePicker({ input: { value, onChange }, label }) {
       onChange={onChange}
       locale="fr"
       dateFormat="dd/MM/yyyy"
+      placeholderText={placeholder}
       customInput={<SInput fluid />}
     />,
   );
