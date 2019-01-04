@@ -21,9 +21,8 @@ export default function ModalReducer(state = initialState, action) {
         ...state,
         isOpen: false,
       };
-    case ModalActionTypes.FLUSH:
+    case ModalActionTypes.DESTROY:
       return {
-        ...state,
         ...initialState,
       };
     default:

@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import store from '../../redux-utils/store';
+
 import InscriptionForm from './inscription.container';
 import { inscription } from './inscription.actions';
 import InscriptionReducer from './inscription.reducer';

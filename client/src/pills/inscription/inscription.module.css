@@ -1,0 +1,7 @@
+.slow {
+  transition: width 0.3s ease-in-out;
+}
+
+.mTop {
+  margin-top: -95px !important; /* hack to correctly align password fields in the same block */
+}

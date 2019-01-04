@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { Grid, Image, Message, Segment, Responsive } from 'semantic-ui-react';
 
+import { Grid, Image, Message, Segment, Responsive } from '../ui-kit';
 import logo from '../images/logo-sans-fond_nopadding.png';
 import background from '../images/login-background.jpg';
 import AuthForm from '../pills/auth/auth.container';
@@ -15,7 +15,7 @@ export default class LoginForm extends React.Component {
 
   handleLoginSubmit(user) {
     this.setState({
-      redirectToReferrer: user && user.isLogged && user.gSesGuid != 0,
+      redirectToReferrer: user && user.isLogged && user.gSesGuid !== 0, // TODO: wath is user.gSesGuid ?? :DUPLICATE(inscription.page)
     });
   }
 
