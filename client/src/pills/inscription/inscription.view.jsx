@@ -189,7 +189,7 @@ function InscriptionView({
         <Grid.Row columns={1}>
           <Grid.Column>
             <Button type="submit" disabled={invalid || error || pristine}>
-              Accéder à mon espace personnel
+              {t('form.submit.inscription')}
             </Button>
           </Grid.Column>
         </Grid.Row>

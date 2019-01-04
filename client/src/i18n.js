@@ -33,6 +33,9 @@ const texts = {
         placeholder: 'Confirmez votre mot de passe',
       },
     },
+    submit: {
+      inscription: 'Accéder à mon espace personnel',
+    },
   },
   pages: {
     inscription: {
