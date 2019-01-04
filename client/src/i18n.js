@@ -20,6 +20,10 @@ const texts = {
         label: 'Votre situation familiale au départ',
         placeholder: 'Partez vous seul.e ou accompagné.e ?',
       },
+      conjoint: {
+        label: 'Prénom de votre conjoint',
+        placeholder: 'Indiquer le prénom de votre conjoint qui part avec vous',
+      },
     },
   },
   pages: {

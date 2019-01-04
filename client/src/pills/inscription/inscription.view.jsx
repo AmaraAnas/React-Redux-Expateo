@@ -109,7 +109,8 @@ function InscriptionView({
               name="conjoint"
               component={Input}
               type="text"
-              label="Prénom de votre conjoint"
+              label={t('form.fields.conjoint.label')}
+              placeholder={t('form.fields.conjoint.placeholder')}
               disabled={family ? family === 'FAMILLE_SEUL' : true}
               validate={
                 (family && family !== 'FAMILLE_SEUL' && required) || optional
