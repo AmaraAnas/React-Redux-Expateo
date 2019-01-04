@@ -41,7 +41,7 @@ class InscriptionContainer extends Component {
         onPending: () => dispatch(showLoaderModal()),
         onSuccess: (user) => {
           dispatch(destroy());
-          if (!user || !user.isLogged || user.gSesGuid == 0) {
+          if (!user || !user.isLogged || user.gSesGuid === 0) {
             dispatch(showErrorModal());
           }
           onInscription(user);
