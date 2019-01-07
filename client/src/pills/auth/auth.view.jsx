@@ -9,11 +9,11 @@ function AuthView({ handleSubmit }) {
   return (
     <Form size="large" onSubmit={handleSubmit}>
       <Field
-        name="username"
+        name="email"
         component={Input}
         icon="user"
         iconPosition="left"
-        placeholder="Username"
+        placeholder="Email"
         autoFocus
         fluid
       />

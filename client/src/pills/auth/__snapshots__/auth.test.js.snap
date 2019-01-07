@@ -13,13 +13,13 @@ exports[`Auth render Should render 1`] = `
     >
       <input
         autoFocus={true}
-        name="username"
+        name="email"
         onBlur={[Function]}
         onChange={[Function]}
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder="Username"
+        placeholder="Email"
         type="text"
         value=""
       />
