@@ -86,6 +86,33 @@ export async function checkAuth(token) {
   });
 }
 */
+// const _COMMON_DATA = {
+//   gNavigator: getNavigator(),
+//   gResolution: getResolution(),
+//   gDevice: isMobile() ? 'M' : 'D',
+//   gApp: 'PG',
+//   USR_LANGUAGE: navigator.language.split('-')[0],
+//   USR_APP: 'XPTO',
+//   USR_REMEMBERME: true,
+// };
+
+// function getCommonData() {
+//   return _COMMON_DATA;
+// }
+
+// function getUserData({ guid = '', family = '', username = '', password = '' }) {
+//   return {
+//     USR_REMEMBERME_ID: guid,
+//     USR_REMEMBERME_FAMILY: family,
+//     USR_EMAIL: username,
+//     USR_PASSWORD: password,
+//   };
+// }
+
+// const user = await Api('/ajax_usr.php', 'connect', getUserData(credentials));
+// setSession(user);
+// return user;
+
 export async function genericLogin(credentials, RememberMe, afterInscription) {
   let data = {
     ajaxAction: 'connect',
@@ -116,7 +143,7 @@ export async function genericLogin(credentials, RememberMe, afterInscription) {
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      Api.post('/ws/ajax/ajax_usr.php', data)
+      Api('connect')('/ajax_usr.php', data)
         .then(({ data }) => {
           let user = { ...data, isLogged: true };
           setSession(user);

@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 
 import { addPrefixToActionTypes } from '../../redux-utils/utils';
+
 import * as AuthApi from './auth.api';
 
 export const ACTION_TYPES = addPrefixToActionTypes(
