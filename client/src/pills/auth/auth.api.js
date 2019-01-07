@@ -1,4 +1,4 @@
-import Api from '../api/base.api';
+import { authApi } from '../api/base.api';
 
 import {
   getNavigator,
@@ -109,13 +109,13 @@ export async function checkAuth(token) {
 //   };
 // }
 
-// const user = await Api('/ajax_usr.php', 'connect', getUserData(credentials));
+// const user = await authApi(getUserData(credentials));
 // setSession(user);
 // return user;
 
 export async function genericLogin(credentials, RememberMe, afterInscription) {
   let data = {
-    ajaxAction: 'connect',
+    // ajaxAction: 'connect',
     gNavigator: getNavigator(),
     gResolution: getResolution(),
     gDevice: isMobile() ? 'M' : 'D',
@@ -143,7 +143,7 @@ export async function genericLogin(credentials, RememberMe, afterInscription) {
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      Api('connect')('/ajax_usr.php', data)
+      authApi(data)
         .then(({ data }) => {
           let user = { ...data, isLogged: true };
           setSession(user);
