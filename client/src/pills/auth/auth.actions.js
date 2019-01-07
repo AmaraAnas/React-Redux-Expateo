@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 
 import { addPrefixToActionTypes } from '../../redux-utils/utils';
+import User from '../../models/user.model';
 
 import * as AuthApi from './auth.api';
 
@@ -13,10 +14,10 @@ export const ACTION_TYPES = addPrefixToActionTypes(
 );
 
 export const loginSuccess = createAction(ACTION_TYPES.LOGIN_SUCCESS);
-const loginFailure = createAction(ACTION_TYPES.LOGIN_FAILURE);
+export const loginFailure = createAction(ACTION_TYPES.LOGIN_FAILURE);
 
 export function login({
-  username,
+  email,
   password,
   onPending,
   onSuccess,
@@ -26,12 +27,8 @@ export function login({
   onPending();
   return async (dispatch) => {
     try {
-      //const user = await authApi.login(username, password);
-      const user = await authApi.genericLogin(
-        { username, password },
-        false,
-        false,
-      );
+      const rawUser = await authApi.classicLogin({ email, password });
+      const user = new User(rawUser);
       dispatch(loginSuccess(user));
       onSuccess(user);
     } catch (e) {
