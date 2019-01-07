@@ -47,15 +47,3 @@ export function getNavigator() {
   if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
   return M[0];
 }
-
-export function getSession() {
-  try {
-    return JSON.parse(localStorage.getItem('session'));
-  } catch (e) {
-    return {};
-  }
-}
-
-export function setSession(user) {
-  localStorage.setItem('session', JSON.stringify(user));
-}
