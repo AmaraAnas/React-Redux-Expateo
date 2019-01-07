@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Router from './router/Router';
 import Modal from './pills/modal/modal.container';
 import { init } from './App.actions';
-import { setSession } from './utils';
+import { userSelector } from './pills/auth/auth.selectors';
 
 class App extends Component {
   componentDidMount() {
@@ -16,10 +16,6 @@ class App extends Component {
     if (document && prevProps.title !== this.props.title) {
       document.title = this.props.title;
     }
-  }
-
-  componentWillUnmount() {
-    setSession(this.props.user);
   }
 
   render() {
@@ -41,10 +37,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ App, Auth }) {
+function mapStateToProps(store) {
   return {
-    ...App,
-    user: Auth.user,
+    ...store.App,
+    user: userSelector(store),
   };
 }
 
