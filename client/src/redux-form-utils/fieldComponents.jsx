@@ -11,7 +11,7 @@ import {
 import Label from '../elements/label/label';
 
 const withLabel = (label, disabled) => (Field) => {
-  let id = Math.trunc(Math.random() * 10000); // WARN: maybe bugish
+  let id = Math.trunc(Math.random() * 10000); // NOTE: maybe bugish
   return label ? (
     <React.Fragment>
       <Label htmlFor={id} disabled={disabled}>
