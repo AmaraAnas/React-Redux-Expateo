@@ -4,8 +4,10 @@ import logger from 'redux-logger';
 import { isFSA } from 'flux-standard-action';
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
+import throttle from 'lodash.throttle';
 
 import reducers from './reducers';
+import { loadState, saveState } from './localStorage';
 
 const middlewares = [thunk];
 
@@ -41,9 +43,17 @@ if (process.env.NODE_ENV === 'production') {
   middlewares.push(LogRocket.reduxMiddleware());
 }
 // ---------------------------------------------------------------------
+const persistedState = loadState();
 const store = createStore(
   reducers,
+  persistedState,
   composeEnhancers(applyMiddleware(...middlewares)),
+);
+// store.getState() is a save all. Maybe too much ?
+store.subscribe(
+  throttle(() => {
+    saveState({ Auth: store.getState().Auth });
+  }, 1000),
 );
 
 export default store;
