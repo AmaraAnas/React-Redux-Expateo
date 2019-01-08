@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { show, destroy } from '../modal/modal.actions';
 import { BigLoaderModal } from '../modal/modal.loaders';
 
-import AuthViewForm from './auth.view';
+import AuthViewForm from './auth.loginForm.view';
 import { login } from './auth.actions';
 
 const showLoaderModal = () =>

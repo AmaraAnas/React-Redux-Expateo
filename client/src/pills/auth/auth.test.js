@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 
 import store from '../../redux-utils/store';
-import AuthForm from './auth.container';
+import AuthForm from './auth.loginForm.container';
 import { login } from './auth.actions';
 import AuthReducer from './auth.reducer';
 

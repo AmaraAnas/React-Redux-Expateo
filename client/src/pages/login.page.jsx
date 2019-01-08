@@ -4,7 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { Grid, Image, Message, Segment, Responsive } from '../ui-kit';
 import logo from '../images/logo-sans-fond_nopadding.png';
 import background from '../images/login-background.jpg';
-import AuthForm from '../pills/auth/auth.container';
+import AuthForm from '../pills/auth/auth.loginForm.container';
 
 export default class LoginForm extends React.Component {
   constructor(props) {
