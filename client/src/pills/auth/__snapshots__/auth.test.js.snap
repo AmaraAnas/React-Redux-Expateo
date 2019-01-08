@@ -55,9 +55,11 @@ exports[`Auth render Should render 1`] = `
     </div>
   </div>
   <button
-    className="ui large fluid primary button"
+    className="ui large fluid primary disabled button"
+    disabled={true}
     onClick={[Function]}
     role="button"
+    tabIndex={-1}
     type="submit"
   >
     S'identifier

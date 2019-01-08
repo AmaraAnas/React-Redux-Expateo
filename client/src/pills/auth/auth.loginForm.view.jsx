@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import { Button, Form } from '../../ui-kit';
 import { Input } from '../../redux-form-utils/fieldComponents';
 import t from '../../i18n';
+import { required } from '../../redux-form-utils/fieldValidators';
 
-function AuthView({ handleSubmit }) {
+function AuthView({ handleSubmit, invalid }) {
   return (
     <Form size="large" onSubmit={handleSubmit}>
       <Field
@@ -15,6 +16,7 @@ function AuthView({ handleSubmit }) {
         icon="user"
         iconPosition="left"
         placeholder="Email"
+        validate={required}
         autoFocus
         fluid
       />
@@ -25,9 +27,10 @@ function AuthView({ handleSubmit }) {
         icon="lock"
         iconPosition="left"
         placeholder="Password"
+        validate={required}
         fluid
       />
-      <Button primary type="submit" fluid size="large">
+      <Button primary type="submit" fluid size="large" disabled={invalid}>
         {t('form.submit.login')}
       </Button>
     </Form>
