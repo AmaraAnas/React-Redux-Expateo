@@ -18,7 +18,7 @@ export function init() {
   return async (dispatch) => {
     try {
       const user = await AuthApi.getUser(AuthApi.rememberMeLogin);
-      if (user) {
+      if (user && user.isLogged) {
         dispatch(loginSuccess(user));
       }
     } catch (e) {}
