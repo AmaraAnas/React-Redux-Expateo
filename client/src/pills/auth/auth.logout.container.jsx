@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { showBigLoaderModal, destroy } from '../modal/modal.actions';
+import { showConfirmModal, destroy } from '../modal/modal.actions';
 
 import { logout } from './auth.actions';
 
@@ -15,12 +15,16 @@ class LogoutContainer extends React.Component {
   handleLogout() {
     const { dispatch } = this.props;
     dispatch(
-      showBigLoaderModal({
-        content: 'Déconnexion en cours...',
-      }),
+      showConfirmModal(
+        {
+          title: 'Déconnexion',
+          message: 'Êtes vous sûre de vous deconnecter ?',
+          onNo: () => dispatch(destroy()),
+          onYes: () => dispatch(logout()),
+        },
+        dispatch,
+      ),
     );
-    dispatch(logout());
-    dispatch(destroy());
   }
 
   render() {
