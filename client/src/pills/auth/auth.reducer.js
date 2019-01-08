@@ -26,6 +26,14 @@ export default function AuthReducer(state = initialState, action) {
           message: action.payload && action.payload.message,
         },
       };
+    case AuthActionTypes.LOGOUT:
+      return {
+        ...state,
+        user: {},
+        error: {
+          message: '',
+        },
+      };
     default:
       return state;
   }

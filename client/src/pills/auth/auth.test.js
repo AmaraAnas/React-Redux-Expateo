@@ -3,8 +3,9 @@ import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 
 import store from '../../redux-utils/store';
-import AuthForm from './auth.loginForm.container';
-import { login } from './auth.actions';
+import LoginForm from './auth.loginForm.container';
+import Logout from './auth.logout.container';
+import { login, logout } from './auth.actions';
 import AuthReducer from './auth.reducer';
 
 describe('Auth render', () => {
@@ -13,7 +14,24 @@ describe('Auth render', () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <AuthForm onLogin={noop} />
+          <LoginForm onLogin={noop} />
+        </Provider>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Should pass a logout function', (done) => {
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <Logout
+            render={({ logout }) => {
+              expect(typeof logout).toEqual('function');
+              done();
+              return 'noop';
+            }}
+          />
         </Provider>,
       )
       .toJSON();
@@ -128,5 +146,24 @@ describe('Auth action - reducers', () => {
       },
       loginAction(store.dispatch),
     );
+  });
+
+  it('LOGOUT: Should set reset the user and the error', () => {
+    let state;
+    state = AuthReducer(
+      {
+        user: { username: 'jhon-doe', firstname: 'doe' },
+        error: {
+          message: 'WAT',
+        },
+      },
+      logout(),
+    );
+    expect(state).toEqual({
+      user: {},
+      error: {
+        message: '',
+      },
+    });
   });
 });

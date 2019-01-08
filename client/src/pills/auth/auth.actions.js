@@ -9,12 +9,14 @@ export const ACTION_TYPES = addPrefixToActionTypes(
   {
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
     LOGIN_FAILURE: 'LOGIN_FAILURE',
+    LOGOUT: 'LOGOUT',
   },
   'auth',
 );
 
 export const loginSuccess = createAction(ACTION_TYPES.LOGIN_SUCCESS);
 export const loginFailure = createAction(ACTION_TYPES.LOGIN_FAILURE);
+export const logout = createAction(ACTION_TYPES.LOGOUT);
 
 export function login({
   email,
