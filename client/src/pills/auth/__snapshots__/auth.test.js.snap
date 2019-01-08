@@ -53,24 +53,12 @@ exports[`Auth render Should render 1`] = `
     </div>
   </div>
   <button
-    className="ui blue large fluid vertical animated button"
+    className="ui large fluid primary button"
     onClick={[Function]}
     role="button"
     type="submit"
   >
-    <div
-      className="visible content"
-    >
-      S'identifier
-    </div>
-    <div
-      className="hidden content"
-    >
-      <i
-        aria-hidden="true"
-        className="sign-in icon"
-      />
-    </div>
+    S'identifier
   </button>
 </form>
 `;
