@@ -44,6 +44,12 @@ Based on Atomic Design + Duck directory
 
 Bituckets pipelines + Bitbuckets deployement -> trigger netlifly build -> deploy
 
+To skip build : add [skip ci] into the commit message as described here (https://confluence.atlassian.com/bitbucket/branch-workflows-856697482.html)
+
+To configure `bitbucket-pipelines.yml` see https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html
+
+wath's news : https://confluence.atlassian.com/bitbucket/what-s-new-in-bitbucket-pipelines-859444600.html
+
 # Environnement
 
 - Production : manual trigger
