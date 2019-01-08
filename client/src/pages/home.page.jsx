@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Button, Icon } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+// import { connect } from 'react-redux';
+// import { Redirect } from 'react-router-dom';
 import UserDetail from '../pills/user-details/user-details.container';
-import { CloseSession } from '../utils';
+// import { CloseSession } from '../utils';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -12,11 +12,11 @@ export default class Home extends React.Component {
   }
 
   handleLogout() {
-    CloseSession();
-    let { from } = this.props.location.state || {
-      from: { pathname: '/login' },
-    };
-    this.props.history.push(from);
+    // CloseSession();
+    // let { from } = this.props.location.state || {
+    //   from: { pathname: '/login' },
+    // };
+    // this.props.history.push(from);
   }
 
   render() {
