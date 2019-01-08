@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Button, Form } from '../../ui-kit';
 import { Input } from '../../redux-form-utils/fieldComponents';
+import t from '../../i18n';
 
 function AuthView({ handleSubmit }) {
   return (
@@ -27,7 +28,7 @@ function AuthView({ handleSubmit }) {
         fluid
       />
       <Button primary type="submit" fluid size="large">
-        S'identifier
+        {t('form.submit.login')}
       </Button>
     </Form>
   );
