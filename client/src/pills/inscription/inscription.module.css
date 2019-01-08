@@ -3,5 +3,5 @@
 }
 
 .mTop {
-  margin-top: -95px !important; /* hack to correctly align password fields in the same block */
+  margin-top: -88px !important; /* hack to correctly align password fields in the same block */
 }
