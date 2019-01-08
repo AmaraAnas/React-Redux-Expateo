@@ -1,7 +1,7 @@
 
 Project:
-  ☐ Trello ( + Git Trigger )
-  ☐ Users Stories
+  ✔ Trello ( + Git Trigger ) @done(19-01-09 00:40)
+  ✔ Users Stories @done(19-01-09 00:40)
   ☐ Wireframe and designes
   ☐ Tests cases
   ☐ E2E test : BrowserStack Automation or Cypress ?
@@ -21,6 +21,6 @@ App:
     ✔ Deployement : Netlifly @done(18-10-20 14:26)
     ✔ Env variables @done(18-10-20 14:26)
     ✔ Bitbucket CI/CD @done(18-10-20 15:24)
-  ☐ Initialisation of the PWA
+  ✔ Initialisation of the PWA @done(19-01-09 00:40)
 Ideas:
   ☐ Offline App ?
