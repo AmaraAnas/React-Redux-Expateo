@@ -192,7 +192,11 @@ function InscriptionView({
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <Button type="submit" disabled={invalid || error || pristine}>
+            <Button
+              type="submit"
+              disabled={invalid || error || pristine}
+              primary={!invalid && !error && !pristine}
+            >
               {t('form.submit.inscription')}
             </Button>
           </Grid.Column>
