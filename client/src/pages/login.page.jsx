@@ -15,7 +15,7 @@ export default class LoginForm extends React.Component {
 
   handleLoginSubmit(user) {
     this.setState({
-      redirectToReferrer: user && user.isLogged && user.gSesGuid !== 0, // TODO: wath is user.gSesGuid ?? :DUPLICATE(inscription.page)
+      redirectToReferrer: user && user.isLogged,
     });
   }
 
@@ -46,7 +46,7 @@ export default class LoginForm extends React.Component {
           </Responsive>
           <AuthForm onLogin={this.handleLoginSubmit} />
           <Message>
-            Nouveau ? <Link to="/sign-up">Créer un compte</Link>
+            <Link to="/recovery-password">Mot de passe oublié ?</Link>
           </Message>
         </Grid.Column>
       </Grid>

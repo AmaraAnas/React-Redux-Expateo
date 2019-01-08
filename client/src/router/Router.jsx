@@ -18,6 +18,11 @@ const InscriptionPage = React.lazy(() =>
   import(/* webpackChunkName: "inscription.page" */
   '../pages/inscription.page'),
 );
+const HomePage = React.lazy(() =>
+  import(/* webpackChunkName: "home.page" */
+
+  '../pages/home.page'),
+);
 const NoMatchPage = React.lazy(() =>
   import(/* webpackChunkName: "noMatch.page" */
   '../pages/noMatch.page'),
@@ -57,6 +62,8 @@ const Router = ({ indexRedirect }) => (
             <Route exact path="/login" component={LoginPage} />
             <Route path="/inscription" component={InscriptionPage} />
             <Route path="/sign-up" component={() => <div>Signup Page</div>} />
+
+            <PrivateRoute exact path="/dashboard" component={HomePage} />
             <PrivateRoute
               path="/private"
               component={() => <div>HELLO PRIVATE</div>}

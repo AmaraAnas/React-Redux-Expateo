@@ -12,32 +12,31 @@ export default class InscriptionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { redirectToReferrer: false };
-    this.queryIDs = qs.parse(this.props.location.search);
+    this.query = qs.parse(this.props.location.search);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
   handleLoginSubmit(user) {
     this.setState({
-      redirectToReferrer: user && user.isLogged && user.gSesGuid !== 0, // TODO: wath is user.gSesGuid ??
+      redirectToReferrer: user && user.isLogged,
     });
   }
 
   render() {
-    let { from } = this.props.location.state || {
-      from: { pathname: '/dashboard' },
-    };
     let { redirectToReferrer } = this.state;
-    if (redirectToReferrer) {
-      return <Redirect to={from} />;
+    if (redirectToReferrer || !this.query.family || !this.query.guid) {
+      return <Redirect to={{ pathname: '/dashboard' }} />;
     }
     return (
       <Container className={styles.container} text fluid>
         <h1 className={styles.title}>{t('pages.inscription.title')}</h1>
-        <p className={styles.text}>{t('pages.inscription.text_1')}</p>
-        <p className={styles.text}>{t('pages.inscription.text_2')}</p>
+        <p className={styles.text}>
+          {t('pages.inscription.text_1')} {t('pages.inscription.text_2')}
+        </p>
         <InscriptForm
           onInscription={this.handleLoginSubmit}
-          userIDs={this.queryIDs}
+          userGuid={this.query.guid}
+          familyGuid={this.query.family}
         />
       </Container>
     );

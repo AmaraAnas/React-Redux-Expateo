@@ -22,7 +22,9 @@ export default function AuthReducer(state = initialState, action) {
       return {
         ...state,
         user: {},
-        error: action.error,
+        error: {
+          message: action.payload && action.payload.message,
+        },
       };
     default:
       return state;

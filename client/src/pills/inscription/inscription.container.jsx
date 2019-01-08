@@ -27,26 +27,24 @@ class InscriptionContainer extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin({ startDate, family, conjoint, password, confirmpassword, ads }) {
-    const { dispatch, onInscription, userIDs } = this.props;
+  handleLogin({ allowEmail, ...formValues }) {
+    const { dispatch, onInscription, userGuid, familyGuid } = this.props;
+    const destroyModal = () => dispatch(destroy());
     dispatch(
       inscription({
-        userIDs,
-        startDate,
-        family,
-        conjoint,
-        password,
-        confirmpassword,
-        ads,
+        userGuid,
+        familyGuid,
+        allowEmail: allowEmail ? 1 : 0,
+        ...formValues,
         onPending: () => dispatch(showLoaderModal()),
         onSuccess: (user) => {
-          dispatch(destroy());
-          if (!user || !user.isLogged || user.gSesGuid === 0) {
+          destroyModal();
+          if (!user || !user.isLogged) {
             dispatch(showErrorModal());
           }
           onInscription(user);
         },
-        onFailure: () => dispatch(showErrorModal()),
+        onFailure: () => (destroyModal(), dispatch(showErrorModal())),
       }),
     );
   }
@@ -66,6 +64,8 @@ class InscriptionContainer extends Component {
 
 InscriptionContainer.propTypes = {
   onInscription: PropTypes.func.isRequired,
+  userGuid: PropTypes.string.isRequired,
+  familyGuid: PropTypes.string.isRequired,
 };
 
 const selector = formValueSelector('InscriptionForm');

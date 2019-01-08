@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Router from './router/Router';
 import Modal from './pills/modal/modal.container';
 import { init } from './App.actions';
-import { setSession } from './utils';
+import { userSelector } from './pills/auth/auth.selectors';
 
 class App extends Component {
   componentDidMount() {
@@ -18,14 +18,10 @@ class App extends Component {
     }
   }
 
-  componentWillUnmount() {
-    setSession(this.props.user);
-  }
-
   render() {
     const { isInitDone, user } = this.props;
     let indexRedirect = '/login';
-    if (isInitDone && user && user.isLogged) {
+    if (isInitDone && user && user.isLogged && user.gSesGuid != 0) {
       indexRedirect = '/dashboard';
     }
     return (
@@ -41,10 +37,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ App, Auth }) {
+function mapStateToProps(store) {
   return {
-    ...App,
-    user: Auth.user,
+    ...store.App,
+    user: userSelector(store),
   };
 }
 

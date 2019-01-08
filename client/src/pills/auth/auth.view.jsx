@@ -9,11 +9,11 @@ function AuthView({ handleSubmit }) {
   return (
     <Form size="large" onSubmit={handleSubmit}>
       <Field
-        name="username"
+        name="email"
         component={Input}
         icon="user"
         iconPosition="left"
-        placeholder="Username"
+        placeholder="Email"
         autoFocus
         fluid
       />
@@ -26,11 +26,8 @@ function AuthView({ handleSubmit }) {
         placeholder="Password"
         fluid
       />
-      <Button type="submit" animated="vertical" color="blue" fluid size="large">
-        <Button.Content visible>S'identifier</Button.Content>
-        <Button.Content hidden>
-          <Icon name="sign-in" />
-        </Button.Content>
+      <Button primary type="submit" fluid size="large">
+        S'identifier
       </Button>
     </Form>
   );

@@ -1,50 +1,58 @@
-import Api from '../api/base.api';
+import { authApi } from '../api/base.api';
+import User from '../../models/user.model';
+import { loadState } from '../../redux-utils/localStorage';
 
-import {
-  getNavigator,
-  getResolution,
-  isMobile,
-  setSession,
-  getSession,
-} from '../../utils';
+import { userSelector } from './auth.selectors';
 
-export async function genericLogin(credentials, RememberMe, afterInscription) {
-  let data = {
-    ajaxAction: 'connect',
-    gNavigator: getNavigator(),
-    gResolution: getResolution(),
-    gDevice: isMobile() ? 'M' : 'D',
-    gApp: 'PG',
-    USR_LANGUAGE: navigator.language.split('-')[0],
-    USR_APP: 'XPTO',
-    USR_REMEMBERME: true,
-  };
+/**
+ * classic login as explained in the section 3.1 of the api doc
+ * @param {User} - the user where to retrieve email and password field
+ * @returns {Object} - return the raw data coming from the response object
+ */
+export async function classicLogin({
+  email: USR_EMAIL,
+  password: USR_PASSWORD,
+}) {
+  return authApi({ USR_EMAIL, USR_PASSWORD });
+}
 
-  if (RememberMe) {
-    let user = getSession();
-    if (!user) {
-      return Promise.resolve();
-    } else {
-      data['USR_REMEMBERME_EMAIL'] = user.gUsrEmail || '';
-      data['USR_REMEMBERME_ID'] = user.gUsrGuid || '';
-    }
-  } else if (afterInscription) {
-    data['USR_REMEMBERME_ID'] = credentials.guid || '';
-    data['USR_REMEMBERME_FAMILY'] = credentials.family || '';
-  } else {
-    data['USR_EMAIL'] = credentials.username || '';
-    data['USR_PASSWORD'] = credentials.password || '';
+/**
+ * remember me login as explained in the section 3.2 of the api doc
+ * @param {User} - the user where to retrieve email and rememberMeId field
+ * @returns {Object} - return the raw data coming from the response
+ */
+export async function rememberMeLogin({
+  email: USR_REMEMBERME_EMAIL,
+  rememberMeId: USR_REMEMBERME_ID,
+}) {
+  return authApi({ USR_REMEMBERME_EMAIL, USR_REMEMBERME_ID });
+}
+
+/**
+ * after inscription login as explained in the section 3.3 of the api doc
+ * @param {User} - the user where to retrieve remeberMeId and familyId field
+ * @returns {Object} - return the raw data coming from the response
+ */
+export async function afterInscriptionLogin({
+  rememberMeId: USR_REMEMBERME_ID,
+  familyId: USR_REMEMBERME_FAMILY,
+}) {
+  return authApi({ USR_REMEMBERME_ID, USR_REMEMBERME_FAMILY });
+}
+
+/**
+ * retrieve the user either:
+ *  - from the current store stored in the local storage (synchronized with redux store)
+ *  - as a result of a request (that may be classic, remberMe, afterInscription Login)
+ * @param {fn} - function to use to do the login
+ * @returns {User} - the current User as a an UserModel
+ */
+export async function getUser(login = classicLogin) {
+  const rawUser = userSelector(loadState());
+  const user = new User(rawUser);
+  if (!user.isLogged) {
+    const rawUser = await login(user);
+    return new User(rawUser);
   }
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      Api.post('/ws/ajax/ajax_usr.php', data)
-        .then(({ data }) => {
-          let user = { ...data, isLogged: data.gSesGuid != 0 };
-          setSession(user);
-          resolve(user);
-        })
-        .catch(reject);
-    }, 1250);
-  });
+  return user;
 }
