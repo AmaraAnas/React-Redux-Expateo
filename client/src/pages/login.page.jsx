@@ -46,7 +46,7 @@ export default class LoginForm extends React.Component {
           </Responsive>
           <AuthForm onLogin={this.handleLoginSubmit} />
           <Message>
-            Nouveau ? <Link to="/sign-up">Créer un compte</Link>
+            <Link to="/recovery-password">Mot de passe oublié ?</Link>
           </Message>
         </Grid.Column>
       </Grid>
