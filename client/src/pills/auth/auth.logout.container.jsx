@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { showConfirmModal, destroy } from '../modal/modal.actions';
+import t from '../../i18n';
 
 import { logout } from './auth.actions';
 
@@ -17,8 +18,8 @@ class LogoutContainer extends React.Component {
     dispatch(
       showConfirmModal(
         {
-          title: 'Déconnexion',
-          message: 'Êtes vous sûre de vous deconnecter ?',
+          title: t('modals.logout_confirm_title'),
+          message: t('modals.logout_confirm_message'),
           onNo: () => dispatch(destroy()),
           onYes: () => dispatch(logout()),
         },

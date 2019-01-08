@@ -1,5 +1,6 @@
 import React from 'react';
 
+import t from '../../i18n';
 import { Loader as SMLoader, Button } from '../../ui-kit';
 
 // TODO: Test that functions
@@ -28,10 +29,10 @@ export const ConfirmModal = ({ title, message, onYes, onNo, ...rest }) => ({
   size: 'mini',
   actions: [
     <Button key="no" onClick={onNo}>
-      No
+      {t('modals.confirm.no')}
     </Button>,
     <Button key="yes" primary onClick={onYes}>
-      Yes
+      {t('modals.confirm.yes')}
     </Button>,
   ],
   ...rest,
