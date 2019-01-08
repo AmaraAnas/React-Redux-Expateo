@@ -38,6 +38,7 @@ Based on Atomic Design + Duck directory
 1.  git push
 1.  CREATE pull request <branch-> -> develop
 1.  MERGE pull request _into develop_--> trigger test runner --> tests are valid ? --> trigger a deployement
+1.  DO NOT merge manually without a -m flag `git merge XXX -m 'Merge XXX into XXX'
 
 # Deployment
 
