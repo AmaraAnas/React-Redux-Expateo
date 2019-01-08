@@ -44,7 +44,16 @@ const texts = {
         'Pour y accéder créez votre mot de passe et répondez aux questions nécessaires au bon fonctionnement de l’application',
     },
   },
+  buttons: {
+    logout: 'Se déconnecter',
+  },
   modals: {
+    logout_confirm_title: 'Déconnexion',
+    logout_confirm_message: 'Êtes vous sûre de vous déconnecter ?',
+    confirm: {
+      yes: 'Oui, je suis sûre',
+      no: 'Annuler',
+    },
     login_pending: 'Chargement en cours, veuillez patienter',
     login_error:
       "L'email et le mot de passe que vous avez entrés ne correspondent pas à ceux présents dans nos fichiers. Veuillez vérifier et réessayer.",
