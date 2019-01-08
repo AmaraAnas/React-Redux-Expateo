@@ -36,10 +36,12 @@ export const ENDPOINTS = {
  */
 const apiCreator = (ajaxAction) => (url) => async (data) => {
   const res = await api({ url, data: { ajaxAction, ...baseData, ...data } });
-  if (res.status === 200) {
+  // As marked into the doc, if gSesGuid is === 0 then an error occur (like 403 response !)
+  // So we throw an error
+  if (res.status === 200 && res.data.gSesGuid !== 0) {
     return res.data;
   } else {
-    return res;
+    throw new Error(JSON.stringify(res.data));
   }
 };
 

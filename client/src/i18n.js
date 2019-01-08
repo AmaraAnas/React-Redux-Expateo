@@ -4,9 +4,6 @@ import get from 'lodash.get';
 // IDEA: Use Proxy to get automatic check and keys ?
 // TODO: Finish the extraction of all the texts
 const texts = {
-  login: 'se connecter',
-  logout: 'se deconnecter',
-  access_to_home: 'Accèdez a son espace personel',
   form: {
     cgu:
       "J'accepte les <a href='https://expateo.com/fr/conditions-generales-vente' rel='noopener noreferrer' target='_blank'>CGU</a>",
@@ -35,6 +32,7 @@ const texts = {
     },
     submit: {
       inscription: 'Accéder à mon espace personnel',
+      login: "S'identifier",
     },
   },
   pages: {
@@ -45,6 +43,11 @@ const texts = {
       text_2:
         'Pour y accéder créez votre mot de passe et répondez aux questions nécessaires au bon fonctionnement de l’application',
     },
+  },
+  modals: {
+    login_pending: 'Chargement en cours, veuillez patienter',
+    login_error:
+      "L'email et le mot de passe que vous avez entrés ne correspondent pas à ceux présents dans nos fichiers. Veuillez vérifier et réessayer.",
   },
 };
 

@@ -3,22 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formValueSelector, getFormSyncErrors } from 'redux-form';
 
-import { show, destroy } from '../modal/modal.actions';
-import { BigLoaderModal, ErrorModal } from '../modal/modal.loaders';
+import {
+  showBigLoaderModal,
+  showErrorModal,
+  destroy,
+} from '../modal/modal.actions';
 
 import { inscription } from './inscription.actions';
 import InscriptionViewForm from './inscription.view';
-
-const showLoaderModal = () =>
-  show(BigLoaderModal({ content: 'Inscription en cours...' }));
-
-const showErrorModal = () =>
-  show(
-    ErrorModal({
-      title: 'Oupss... Une erreur est survenue :(',
-      message: "Si l'erreur persiste contactez un adminstrateur. Merci.",
-    }),
-  );
 
 class InscriptionContainer extends Component {
   constructor(props) {
@@ -30,21 +22,32 @@ class InscriptionContainer extends Component {
   handleLogin({ allowEmail, ...formValues }) {
     const { dispatch, onInscription, userGuid, familyGuid } = this.props;
     const destroyModal = () => dispatch(destroy());
+    const dispatchErrorModal = () =>
+      dispatch(
+        showErrorModal({
+          title: 'Oupss... Une erreur est survenue :(',
+          message: "Si l'erreur persiste contactez un adminstrateur. Merci.",
+        }),
+      );
     dispatch(
       inscription({
         userGuid,
         familyGuid,
         allowEmail: allowEmail ? 1 : 0,
         ...formValues,
-        onPending: () => dispatch(showLoaderModal()),
+        onPending: () =>
+          dispatch(showBigLoaderModal({ content: 'Inscription en cours...' })),
         onSuccess: (user) => {
           destroyModal();
           if (!user || !user.isLogged) {
-            dispatch(showErrorModal());
+            dispatchErrorModal();
           }
           onInscription(user);
         },
-        onFailure: () => (destroyModal(), dispatch(showErrorModal())),
+        onFailure: () => {
+          destroyModal();
+          dispatchErrorModal();
+        },
       }),
     );
   }

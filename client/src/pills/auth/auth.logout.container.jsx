@@ -2,17 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { show, destroy } from '../modal/modal.actions';
-import { BigLoaderModal } from '../modal/modal.loaders';
+import { showBigLoaderModal, destroy } from '../modal/modal.actions';
 
 import { logout } from './auth.actions';
-
-const showLoaderModal = () =>
-  show(
-    BigLoaderModal({
-      content: 'Déconnexion en cours...',
-    }),
-  );
 
 class LogoutContainer extends React.Component {
   constructor(props) {
@@ -22,7 +14,11 @@ class LogoutContainer extends React.Component {
 
   handleLogout() {
     const { dispatch } = this.props;
-    dispatch(showLoaderModal());
+    dispatch(
+      showBigLoaderModal({
+        content: 'Déconnexion en cours...',
+      }),
+    );
     dispatch(logout());
     dispatch(destroy());
   }

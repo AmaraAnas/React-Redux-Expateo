@@ -2,6 +2,8 @@ import { createAction } from 'redux-actions';
 
 import { addPrefixToActionTypes } from '../../redux-utils/utils';
 
+import { BigLoaderModal, ErrorModal } from './modal.loaders';
+
 export const ACTION_TYPES = addPrefixToActionTypes(
   {
     SHOW: 'SHOW',
@@ -14,3 +16,20 @@ export const ACTION_TYPES = addPrefixToActionTypes(
 export const show = createAction(ACTION_TYPES.SHOW);
 export const hide = createAction(ACTION_TYPES.HIDE);
 export const destroy = createAction(ACTION_TYPES.DESTROY);
+
+export const showBigLoaderModal = ({ content, ...rest }) =>
+  show(
+    BigLoaderModal({
+      content,
+      ...rest,
+    }),
+  );
+
+export const showErrorModal = ({ title, message, ...rest }) =>
+  show(
+    ErrorModal({
+      title,
+      message,
+      ...rest,
+    }),
+  );
