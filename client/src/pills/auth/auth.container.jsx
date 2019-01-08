@@ -21,12 +21,12 @@ class AuthContainer extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin({ username, password }) {
+  handleLogin({ email, password }) {
     const { dispatch, onLogin } = this.props;
     const destroyModal = () => dispatch(destroy());
     dispatch(
       login({
-        username,
+        email,
         password,
         onPending: () => dispatch(showLoaderModal()),
         onSuccess: (user) => {

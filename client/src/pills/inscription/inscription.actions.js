@@ -1,62 +1,32 @@
-import { createAction } from 'redux-actions';
-
-import * as AuthApi from '../auth/auth.api';
-import { addPrefixToActionTypes } from '../../redux-utils/utils';
+import { afterInscriptionLogin } from '../auth/auth.api';
+import { loginSuccess, loginFailure } from '../auth/auth.actions';
+import User from '../../models/user.model';
 
 import * as InscriptionApi from './inscription.api';
 
-export const ACTION_TYPES = addPrefixToActionTypes(
-  {
-    INSCRIPTION_SUCCESS: 'INSCRIPTION_SUCCESS',
-    INSCRIPTION_FAILURE: 'INSCRIPTION_FAILURE',
-  },
-  'inscription',
-);
-
-export const inscriptionSuccess = createAction(
-  ACTION_TYPES.INSCRIPTION_SUCCESS,
-);
-const inscriptionFailure = createAction(ACTION_TYPES.INSCRIPTION_FAILURE);
-
 export function inscription({
-  userIDs,
-  startDate,
-  family,
-  conjoint,
-  password,
-  confirmpassword,
-  ads,
   onPending,
   onSuccess,
   onFailure,
   inscriptionApi = InscriptionApi,
+  ...fields
 }) {
   onPending();
   return async (dispatch) => {
     try {
-      const userID = await inscriptionApi.inscription({
-        gUsrGuid: userIDs.guid,
-        gFamilyGuid: userIDs.family,
-        gPassword: password,
-        gAllowEmail: ads !== undefined ? 1 : 0,
-        gDepartureDate: startDate,
-        gFamille: family,
-        gPrenomConjoint: conjoint,
-        gPasswordConfirm: confirmpassword,
+      const rawSubscribtion = await inscriptionApi.subscribe(fields);
+      if (rawSubscribtion.CHECK_ERROR) {
+        throw Error(rawSubscribtion.CHECK_ERROR);
+      }
+      const rawUser = await afterInscriptionLogin({
+        rememberMeId: fields.userGuid,
+        familyId: fields.familyGuid,
       });
-      /*const user = await AuthApi.loginAfterInscription(
-        userID.gUsrGuid,
-        userIDs.family,
-      );*/
-      const user = await AuthApi.genericLogin(
-        { guid: userID.gUsrGuid, family: userIDs.family },
-        false,
-        true,
-      );
-      dispatch(inscriptionSuccess(user));
+      const user = new User(rawUser);
+      dispatch(loginSuccess(user));
       onSuccess(user);
     } catch (e) {
-      dispatch(inscriptionFailure(e));
+      dispatch(loginFailure(e));
       onFailure(e);
     }
   };

@@ -183,7 +183,11 @@ function InscriptionView({
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <Field name="ads" component={Checkbox} label={t('form.ad')} />
+            <Field
+              name="allowEmail"
+              component={Checkbox}
+              label={t('form.ad')}
+            />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={1}>

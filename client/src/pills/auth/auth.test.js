@@ -21,8 +21,7 @@ describe('Auth render', () => {
   });
 });
 
-// TODO : Fix this !
-describe.skip('Auth action - reducers', () => {
+describe('Auth action - reducers', () => {
   it('LOGIN Should call pending & success', () => {
     let isOnPendingCalledFlag = false;
     let isOnSuccessCalledFlag = false;
@@ -34,7 +33,7 @@ describe.skip('Auth action - reducers', () => {
       onSuccess: () => (isOnSuccessCalledFlag = true),
       onFailure: () => (isOnFailureCalledFlag = true),
       authApi: {
-        login: () =>
+        classicLogin: () =>
           Promise.resolve().then(() => {
             expect(isOnPendingCalledFlag).toEqual(true);
             expect(isOnSuccessCalledFlag).toEqual(true);
@@ -56,7 +55,7 @@ describe.skip('Auth action - reducers', () => {
       onSuccess: () => (isOnSuccessCalledFlag = true),
       onFailure: () => (isOnFailureCalledFlag = true),
       authApi: {
-        login: () =>
+        classicLogin: () =>
           Promise.reject().catch(() => {
             expect(isOnPendingCalledFlag).toEqual(true);
             expect(isOnSuccessCalledFlag).toEqual(false);
@@ -77,7 +76,7 @@ describe.skip('Auth action - reducers', () => {
       onSuccess: noop,
       onFailure: noop,
       authApi: {
-        login: () =>
+        classicLogin: () =>
           Promise.resolve({ username: 'jhon' }).then(() => {
             expect(state).toEqual({
               user: { username: 'jhon' },
@@ -109,7 +108,7 @@ describe.skip('Auth action - reducers', () => {
       onSuccess: noop,
       onFailure: noop,
       authApi: {
-        login: () =>
+        classicLogin: () =>
           Promise.reject(new Error('rejected')).catch(() => {
             expect(state).toEqual({
               user: {},

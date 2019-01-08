@@ -1,7 +1,51 @@
 import axios from 'axios';
 
-const API = axios.create({
-  baseURL: 'https://www.expateo.com/dev_v2/',
+import { getNavigator, getResolution, isMobile } from '../../utils';
+
+const api = axios.create({
+  baseURL: 'https://www.expateo.com/dev_v2/ws/ajax/', // TODO: envify this url
+  headers: { 'Content-Type': 'application/json' },
+  method: 'POST',
 });
 
-export default API;
+const baseData = {
+  gNavigator: getNavigator(),
+  gResolution: getResolution(),
+  gDevice: isMobile() ? 'M' : 'D',
+  gApp: 'PG',
+  USR_LANGUAGE: navigator.language.split('-')[0],
+  USR_APP: 'XPTO',
+  USR_REMEMBERME: true, //TODO: working as remberme is always checked - we should implment this
+};
+
+export const AJAX_ACTIONS = {
+  CONNECT: 'connect',
+  INSCRIPTION_B2B: 'subscribe_end_b2b',
+};
+
+export const ENDPOINTS = {
+  USR: '/ajax_usr.php',
+};
+
+/**
+ * Serves as a bottleneck of all requests.
+ * Implenting cach service or request middleware will be more easier
+ * Do not forget to return API(...args) to execute the request if no cach provided
+ * Inspired by :
+ * @see https://github.com/agraboso/redux-api-middleware#rsaafetch
+ */
+const apiCreator = (ajaxAction) => (url) => async (data) => {
+  const res = await api({ url, data: { ajaxAction, ...baseData, ...data } });
+  if (res.status === 200) {
+    return res.data;
+  } else {
+    return res;
+  }
+};
+
+export const authApi = apiCreator(AJAX_ACTIONS.CONNECT)(ENDPOINTS.USR);
+export const subscribeApi = apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B)(
+  ENDPOINTS.USR,
+);
+
+export default apiCreator;
