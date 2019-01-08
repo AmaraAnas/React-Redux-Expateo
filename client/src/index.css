@@ -33,7 +33,7 @@ code {
 .label {
   color: #0071bd;
   font-weight: 700;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 .label::first-letter {
@@ -42,7 +42,7 @@ code {
 
 .title {
   color: #0071bd;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .text {
