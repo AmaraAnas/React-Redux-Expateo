@@ -2,19 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { show, destroy } from '../modal/modal.actions';
-import { BigLoaderModal } from '../modal/modal.loaders';
+import { showBigLoaderModal, destroy } from '../modal/modal.actions';
 import t from '../../i18n';
 
 import AuthViewForm from './auth.loginForm.view';
 import { login } from './auth.actions';
-
-const showLoaderModal = () =>
-  show(
-    BigLoaderModal({
-      content: t('modals.login_pending'),
-    }),
-  );
 
 class AuthContainer extends Component {
   constructor(props) {
@@ -29,12 +21,24 @@ class AuthContainer extends Component {
       login({
         email,
         password,
-        onPending: () => dispatch(showLoaderModal()),
+        onPending: () =>
+          dispatch(showBigLoaderModal({ content: t('modals.login_pending') })),
         onSuccess: (user) => {
           destroyModal();
           onLogin(user);
         },
-        onFailure: destroyModal,
+        onFailure: () => {
+          const autoClose = setTimeout(destroyModal, 3500);
+          dispatch(
+            showBigLoaderModal({
+              content: t('modals.login_error'),
+              onClose: () => {
+                clearInterval(autoClose);
+                destroyModal();
+              },
+            }),
+          );
+        },
       }),
     );
   }
