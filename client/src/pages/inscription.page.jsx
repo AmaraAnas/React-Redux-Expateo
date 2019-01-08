@@ -30,8 +30,9 @@ export default class InscriptionForm extends React.Component {
     return (
       <Container className={styles.container} text fluid>
         <h1 className={styles.title}>{t('pages.inscription.title')}</h1>
-        <p className={styles.text}>{t('pages.inscription.text_1')}</p>
-        <p className={styles.text}>{t('pages.inscription.text_2')}</p>
+        <p className={styles.text}>
+          {t('pages.inscription.text_1')} {t('pages.inscription.text_2')}
+        </p>
         <InscriptForm
           onInscription={this.handleLoginSubmit}
           userGuid={this.query.guid}
