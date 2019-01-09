@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-export default ({ children }) => (
-  <div>
-    menu version mobile <div>{children}</div>
-  </div>
-);
+const NavMobileView = ({ children }) => <>{children}</>;
+
+export default NavMobileView;

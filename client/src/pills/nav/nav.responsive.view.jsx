@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Responsive, Segment } from '../../ui-kit';
 
@@ -12,13 +12,15 @@ const MenuDesktop = React.lazy(() =>
   './nav.desktop.view'),
 );
 
-export default (props) => (
-  <Segment.Group>
-    <Responsive as={Segment} maxWidth={Responsive.onlyMobile.maxWidth}>
+const NavResponsiveView = (props) => (
+  <>
+    <Responsive as={Fragment} maxWidth={Responsive.onlyMobile.maxWidth}>
       <MenuMobile {...props} />
     </Responsive>
-    <Responsive as={Segment} minWidth={Responsive.onlyTablet.minWidth}>
+    <Responsive as={Fragment} minWidth={Responsive.onlyTablet.minWidth}>
       <MenuDesktop {...props} />
     </Responsive>
-  </Segment.Group>
+  </>
 );
+
+export default NavResponsiveView;

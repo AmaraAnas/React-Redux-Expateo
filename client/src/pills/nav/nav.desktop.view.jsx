@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-import { Icon, Menu } from '../../ui-kit';
+import { Menu } from '../../ui-kit';
 
 const MenuExampleAttached = ({ children }) => (
-  <div>
+  <>
     <Menu attached="top">
       <Menu.Menu position="right">
         <div className="ui right aligned category search item">
@@ -20,7 +20,7 @@ const MenuExampleAttached = ({ children }) => (
       </Menu.Menu>
     </Menu>
     {children}
-  </div>
+  </>
 );
 
 export default MenuExampleAttached;

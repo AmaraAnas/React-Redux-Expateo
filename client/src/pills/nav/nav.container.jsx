@@ -2,4 +2,8 @@ import React from 'react';
 
 import NavResponsive from './nav.responsive.view';
 
-export default ({ children }) => <NavResponsive>{children}</NavResponsive>;
+const NavContainer = ({ children }) => (
+  <NavResponsive>{children}</NavResponsive>
+);
+
+export default NavContainer;
