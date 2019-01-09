@@ -2,13 +2,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import App from './App';
-import store from './redux-utils/store';
 import AppReducer from './App.reducer';
 import { setTitle, init } from './App.actions';
 
 describe('App render', () => {
   it('Should render', () => {
-    expect(shallow(<App store={store} />)).toBeDefined();
+    expect(shallow(<App />)).toBeDefined();
   });
 });
 

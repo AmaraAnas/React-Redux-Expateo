@@ -9,7 +9,7 @@ import ModalReducer from './modal.reducer';
 
 describe('Modal render', () => {
   it('Should render', () => {
-    expect(shallow(<Modal store={store} />)).toBeDefined();
+    expect(shallow(<Modal />)).toBeDefined();
   });
 });
 

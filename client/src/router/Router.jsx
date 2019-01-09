@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Layout from '../pages/main.layout';
 
@@ -55,23 +55,21 @@ PrivateRoute = connect(({ Auth }) => ({
 const Router = ({ indexRedirect }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
     <Layout>
-      <BrowserRouter>
-        <React.Suspense fallback={LoadingLazyPage}>
-          <Switch>
-            <Redirect exact from="/" to={indexRedirect} />
-            <Route exact path="/login" component={LoginPage} />
-            <Route path="/inscription" component={InscriptionPage} />
-            <Route path="/sign-up" component={() => <div>Signup Page</div>} />
+      <React.Suspense fallback={LoadingLazyPage}>
+        <Switch>
+          <Redirect exact from="/" to={indexRedirect} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route path="/inscription" component={InscriptionPage} />
+          <Route path="/sign-up" component={() => <div>Signup Page</div>} />
 
-            <PrivateRoute exact path="/dashboard" component={HomePage} />
-            <PrivateRoute
-              path="/private"
-              component={() => <div>HELLO PRIVATE</div>}
-            />
-            <PrivateRoute component={NoMatchPage} />
-          </Switch>
-        </React.Suspense>
-      </BrowserRouter>
+          <PrivateRoute exact path="/dashboard" component={HomePage} />
+          <PrivateRoute
+            path="/private"
+            component={() => <div>HELLO PRIVATE</div>}
+          />
+          <PrivateRoute component={NoMatchPage} />
+        </Switch>
+      </React.Suspense>
     </Layout>
   </ErrorBound>
 );
