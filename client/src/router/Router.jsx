@@ -54,8 +54,8 @@ PrivateRoute = connect(({ Auth }) => ({
 
 const Router = ({ indexRedirect }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
-    <Layout>
-      <React.Suspense fallback={LoadingLazyPage}>
+    <React.Suspense fallback={LoadingLazyPage}>
+      <Layout>
         <Switch>
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
@@ -69,8 +69,8 @@ const Router = ({ indexRedirect }) => (
           />
           <PrivateRoute component={NoMatchPage} />
         </Switch>
-      </React.Suspense>
-    </Layout>
+      </Layout>
+    </React.Suspense>
   </ErrorBound>
 );
 
