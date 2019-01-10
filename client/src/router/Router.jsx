@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Animate from '../elements/animate/animate';
-import Layout from '../pages/main.layout';
+import MainLayout from '../pages/main.layout';
 
 import DumbPage0 from '../pages/dumb.page.0';
 import DumbPage1 from '../pages/dumb.page.1';
@@ -71,7 +71,7 @@ const AnimatedRoute = ({ children }) => {
 const Router = ({ indexRedirect, location }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
     <React.Suspense fallback={LoadingLazyPage}>
-      <Layout isNavVisible={location.pathname !== '/login'}>
+      <MainLayout isNavVisible={location.pathname !== '/login'}>
         <Switch location={location}>
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
@@ -96,7 +96,7 @@ const Router = ({ indexRedirect, location }) => (
           </AnimatedRoute>
           <PrivateRoute component={NoMatchPage} />
         </Switch>
-      </Layout>
+      </MainLayout>
     </React.Suspense>
   </ErrorBound>
 );
