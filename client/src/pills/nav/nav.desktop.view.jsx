@@ -1,30 +1,44 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Menu, Dropdown, Image } from '../../ui-kit';
+import { Menu, Dropdown, Image, Icon, Label, Segment } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
+
+const MenuItemWithIcon = ({ disabled, iconName, label }) => (
+  <Menu.Item>
+    <Label
+      style={{ background: '#FFF', color: disabled ? 'lightgray' : 'gray' }}
+      size="large"
+    >
+      <Icon name={iconName} size="big" />
+      {label}
+    </Label>
+  </Menu.Item>
+);
 
 const NavDesktopView = ({ children }) => (
   <>
-    <Menu attached="top" size="massive">
+    <Menu attached="top" size="massive" borderless>
       <Menu.Menu position="left">
-        <Image src={logo} style={{ minWidth: '100%', height: '100px' }} />
+        <Image src={logo} style={{ minWidth: '100%', height: '70px' }} />
       </Menu.Menu>
       <Menu.Menu position="right">
-        <Menu.Item>
-          <h1>Messagerie</h1>
-        </Menu.Item>
-        <Menu.Item>
-          <h1>Notifications</h1>
-        </Menu.Item>
-        <Menu.Item>
-          <h1>Documents</h1>
-        </Menu.Item>
-        <Dropdown item text="Profil">
+        <MenuItemWithIcon
+          iconName="envelope"
+          label="Messagerie"
+          disabled={true}
+        />
+        <MenuItemWithIcon
+          iconName="bell"
+          label="Notifications"
+          disabled={true}
+        />
+        <MenuItemWithIcon iconName="folder" label="Documents" disabled={true} />
+        <Dropdown item inline icon={<Icon size="big" name="user circle" />}>
           <Dropdown.Menu>
-            <Dropdown.Item>English</Dropdown.Item>
-            <Dropdown.Item>Russian</Dropdown.Item>
-            <Dropdown.Item>Spanish</Dropdown.Item>
+            <Dropdown.Item>Personnaliser ma checklist</Dropdown.Item>
+            <Dropdown.Item>Ma situation</Dropdown.Item>
+            <Dropdown.Item>Mon compte</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Menu>
