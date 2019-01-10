@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 
 import { Responsive, Segment } from '../../ui-kit';
 
-const MenuMobile = React.lazy(() =>
+const NavMobile = React.lazy(() =>
   import(/* webpackChunkName: "nav.mobile" */
   './nav.mobile.view'),
 );
 
-const MenuDesktop = React.lazy(() =>
+const NavDesktop = React.lazy(() =>
   import(/* webpackChunkName: "nav.desktop" */
   './nav.desktop.view'),
 );
@@ -15,10 +15,10 @@ const MenuDesktop = React.lazy(() =>
 const NavResponsiveView = (props) => (
   <>
     <Responsive as={Fragment} maxWidth={Responsive.onlyMobile.maxWidth}>
-      <MenuMobile {...props} />
+      <NavMobile {...props} />
     </Responsive>
     <Responsive as={Fragment} minWidth={Responsive.onlyTablet.minWidth}>
-      <MenuDesktop {...props} />
+      <NavDesktop {...props} />
     </Responsive>
   </>
 );
