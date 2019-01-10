@@ -1,6 +1,7 @@
 import {
   Checkbox,
   Container,
+  Dropdown,
   Form,
   Grid,
   Header,
@@ -23,6 +24,7 @@ export {
   Button,
   Checkbox,
   Container,
+  Dropdown,
   Form,
   Grid,
   Header,

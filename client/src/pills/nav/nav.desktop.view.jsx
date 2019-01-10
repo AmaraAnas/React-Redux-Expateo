@@ -1,49 +1,36 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Menu } from '../../ui-kit';
+import { Menu, Dropdown, Image } from '../../ui-kit';
+import logo from '../../images/logo-sans-fond_nopadding.png';
 
-const MenuExampleAttached = ({ children }) => (
+const NavDesktopView = ({ children }) => (
   <>
-    <Menu attached="top">
-      <Menu.Item>
-        <Link to="/login">login</Link>
-      </Menu.Item>
-      <Menu.Item>
-        <Link to="/private">private</Link>
-      </Menu.Item>
-      <Menu.Item>
-        <Link to="/dashboard">Dashboard</Link>
-      </Menu.Item>
-      <Menu.Item>
-        <Link to="/dumb/0">Dumbo 0</Link>
-      </Menu.Item>
-      <Menu.Item>
-        <Link to="/dumb/1">Dumbo 1</Link>
-      </Menu.Item>
-      <Menu.Item>
-        <Link to="/dumb/2">Dumbo 2</Link>
-      </Menu.Item>
-      <Menu.Item>
-        <Link to="/dumb/3">Dumbo 3</Link>
-      </Menu.Item>
-
+    <Menu attached="top" size="massive">
+      <Menu.Menu position="left">
+        <Image src={logo} style={{ minWidth: '100%', height: '100px' }} />
+      </Menu.Menu>
       <Menu.Menu position="right">
-        <div className="ui right aligned category search item">
-          <div className="ui transparent icon input">
-            <input
-              className="prompt"
-              type="text"
-              placeholder="Search animals..."
-            />
-            <i className="search link icon" />
-          </div>
-          <div className="results" />
-        </div>
+        <Menu.Item>
+          <h1>Messagerie</h1>
+        </Menu.Item>
+        <Menu.Item>
+          <h1>Notifications</h1>
+        </Menu.Item>
+        <Menu.Item>
+          <h1>Documents</h1>
+        </Menu.Item>
+        <Dropdown item text="Profil">
+          <Dropdown.Menu>
+            <Dropdown.Item>English</Dropdown.Item>
+            <Dropdown.Item>Russian</Dropdown.Item>
+            <Dropdown.Item>Spanish</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Menu.Menu>
     </Menu>
     {children}
   </>
 );
 
-export default MenuExampleAttached;
+export default NavDesktopView;
