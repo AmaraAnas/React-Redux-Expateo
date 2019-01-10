@@ -3,7 +3,7 @@ import React from 'react';
 import Nav from '../pills/nav/nav.container';
 import { Container } from '../ui-kit';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, isNavVisible }) => {
   return (
     <Container
       fluid
@@ -14,7 +14,7 @@ const MainLayout = ({ children }) => {
         //   overflowY: 'auto',
       }}
     >
-      <Nav>{children}</Nav>
+      {(isNavVisible && <Nav>{children}</Nav>) || children}
     </Container>
   );
 };

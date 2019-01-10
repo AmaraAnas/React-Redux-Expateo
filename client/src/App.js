@@ -37,6 +37,8 @@ class App extends Component {
   }
 }
 
+// TODO : move user and redirection to the router
+// TODO : create selector for isInitDone
 function mapStateToProps(store) {
   return {
     ...store.App,

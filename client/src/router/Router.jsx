@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import Animate from '../elements/animate/animate';
 import Layout from '../pages/main.layout';
+
+import DumbPage0 from '../pages/dumb.page.0';
+import DumbPage1 from '../pages/dumb.page.1';
+import DumbPage2 from '../pages/dumb.page.2';
+import DumbPage3 from '../pages/dumb.page.3';
 
 import ErrorBound from './ErrorBound';
 
@@ -48,25 +54,46 @@ let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
   );
 };
 
+// TODO : use useslector
 PrivateRoute = connect(({ Auth }) => ({
   isLogged: Auth.user && Auth.user.isLogged,
 }))(PrivateRoute);
 
-const Router = ({ indexRedirect }) => (
+// TODO : finish this - find out why if this height : 100% is mandatory
+const AnimatedRoute = ({ children }) => {
+  return (
+    <Animate animation="fadeInRight faster">
+      <div style={{ height: '100%' }}>{children}</div>
+    </Animate>
+  );
+};
+
+const Router = ({ indexRedirect, location }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
     <React.Suspense fallback={LoadingLazyPage}>
-      <Layout>
-        <Switch>
+      <Layout isNavVisible={location.pathname !== '/login'}>
+        <Switch location={location}>
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
-          <Route path="/inscription" component={InscriptionPage} />
-          <Route path="/sign-up" component={() => <div>Signup Page</div>} />
-
-          <PrivateRoute exact path="/dashboard" component={HomePage} />
           <PrivateRoute
             path="/private"
             component={() => <div>HELLO PRIVATE</div>}
           />
+          <AnimatedRoute key={location.pathname}>
+            <Switch>
+              <Route
+                exact
+                path="/sign-up"
+                component={() => <div>Signup Page</div>}
+              />
+              <Route exact path="/inscription" component={InscriptionPage} />
+              <PrivateRoute exact path="/dashboard" component={HomePage} />
+              <PrivateRoute exact path="/dumb/0" component={DumbPage0} />
+              <PrivateRoute exact path="/dumb/1" component={DumbPage1} />
+              <PrivateRoute exact path="/dumb/2" component={DumbPage2} />
+              <PrivateRoute exact path="/dumb/3" component={DumbPage3} />
+            </Switch>
+          </AnimatedRoute>
           <PrivateRoute component={NoMatchPage} />
         </Switch>
       </Layout>
@@ -82,4 +109,4 @@ Router.defaultProps = {
   indexRedirect: '/login',
 };
 
-export default Router;
+export default connect(({ router }) => ({ location: router.location }))(Router);
