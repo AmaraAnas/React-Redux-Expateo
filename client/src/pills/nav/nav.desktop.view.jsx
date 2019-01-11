@@ -4,6 +4,7 @@ import t from '../../i18n';
 import { Menu, Dropdown, Image, Icon, Label } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
 import styles from './nav.module.css';
+import SubNavDesktopView from './subNav.desktop.view';
 
 const MenuItemWithIcon = ({ disabled, iconName, label, badge }) => (
   <Menu.Item disabled={disabled}>
@@ -19,7 +20,7 @@ const MenuItemWithIcon = ({ disabled, iconName, label, badge }) => (
 
 const NavDesktopView = ({ children }) => (
   <>
-    <Menu attached="top" size="large" borderless>
+    <Menu secondary>
       <Menu.Menu position="left" style={{ minWidth: '190px' }}>
         <Image src={logo} style={{ width: 'auto', height: '70px' }} />
       </Menu.Menu>
@@ -49,6 +50,7 @@ const NavDesktopView = ({ children }) => (
         </Dropdown>
       </Menu.Menu>
     </Menu>
+    <SubNavDesktopView />
     {children}
   </>
 );
