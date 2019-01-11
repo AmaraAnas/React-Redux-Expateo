@@ -58,6 +58,11 @@ const texts = {
     login_error:
       "L'email et le mot de passe que vous avez entrés ne correspondent pas à ceux présents dans nos fichiers. Veuillez vérifier et réessayer.",
   },
+  menu: {
+    documents: 'Documents',
+    messages: 'Messages',
+    notifications: 'Notifications',
+  },
 };
 
 const TError = ({ text }) => (
