@@ -1,12 +1,18 @@
 import React, { Fragment } from 'react';
 
 import t from '../../i18n';
-import { Menu, Dropdown, Image, Icon } from '../../ui-kit';
+import { Menu, Dropdown, Image, Icon, Label } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
+import styles from './nav.module.css';
 
-const MenuItemWithIcon = ({ disabled, iconName, label }) => (
+const MenuItemWithIcon = ({ disabled, iconName, label, badge }) => (
   <Menu.Item disabled={disabled}>
-    <Icon name={iconName} size="big" />
+    <Icon
+      name={iconName}
+      className={styles.badge1}
+      data-badge={badge}
+      size="big"
+    />
     {label}
   </Menu.Item>
 );
@@ -26,6 +32,7 @@ const NavDesktopView = ({ children }) => (
         <MenuItemWithIcon
           iconName="comments"
           label={t('menu.messages').concat(' (0)')}
+          badge=""
           disabled={true}
         />
         <MenuItemWithIcon
