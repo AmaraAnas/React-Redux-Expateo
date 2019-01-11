@@ -19,12 +19,13 @@ export default () => (
         <Dropdown.Item>Mon compte</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-    <Dropdown item text="Devies & Factures">
-      <Dropdown.Menu>
-        <Dropdown.Item>Personnaliser ma checklist</Dropdown.Item>
-        <Dropdown.Item>Ma situation</Dropdown.Item>
-        <Dropdown.Item>Mon compte</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    <Menu.Item
+      name="DeviesFactures"
+      onClick={() => {
+        console.log('hello');
+      }}
+    >
+      Devies & Factures
+    </Menu.Item>
   </Menu>
 );
