@@ -1,26 +1,17 @@
 import React, { Fragment } from 'react';
 
-import t from '../../i18n';
+import t from '../../../i18n';
 import {
   Button,
   Icon,
   Image,
   Menu,
-  Segment,
   Sidebar,
-  List,
   Dropdown,
   Label,
-} from '../../ui-kit';
-import logo from '../../logo.svg';
-
-const Mobilite = () => (
-  <List.Item>
-    <Segment style={{ maxWidth: '85px' }} size="mini">
-      Titre mobilité Titre mobilité Titre mobilité
-    </Segment>
-  </List.Item>
-);
+} from '../../../ui-kit';
+import logo from './nav.mobile.header.logo.svg';
+import Mobilities from './nav.mobile.mobilities.view';
 
 const MenuStyle = {
   border: 0,
@@ -36,14 +27,6 @@ const CloseIconStyle = {
 const HeaderContainerStyle = {
   display: 'flex',
   justifyContent: 'space-between',
-};
-
-const MobilitiesContainerStyle = {
-  display: 'flex',
-  width: '100%',
-  overflowX: 'visible',
-  overflowY: 'hidden',
-  paddingBottom: '5px',
 };
 
 const BodyContainerStyle = {
@@ -131,12 +114,14 @@ class NavMobileView extends React.Component {
             </div>
             {/* THE MOBILITIES */}
             <Menu.Item>
-              <List horizontal style={MobilitiesContainerStyle}>
-                <Mobilite />
-                <Mobilite />
-                <Mobilite />
-                <Mobilite />
-              </List>
+              <Mobilities
+                mobilities={[
+                  { id: 1, title: 'Titre mobilité' },
+                  { id: 2, title: 'Titre mobilité' },
+                  { id: 3, title: 'Titre mobilité' },
+                  { id: 4, title: 'Titre mobilité' },
+                ]}
+              />
             </Menu.Item>
             {/* THE BODY */}
             <Menu.Item style={BodyContainerStyle} className="borderless">

@@ -59,6 +59,10 @@ code {
   font-size: 1.1rem;
 }
 
+.capitalized::first-letter {
+  text-transform: capitalize;
+}
+
 /* ------------------------------------ */
 /*      HACK: SEMANTIC-UI HACK
   We should use the theme system of 
