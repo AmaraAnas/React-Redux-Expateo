@@ -5,8 +5,7 @@ import { Container } from '../ui-kit';
 
 const MainLayout = ({ children, isNavVisible }) => {
   return (
-    <Container
-      fluid
+    <div
       style={{
         backgroundColor: 'white',
         height: '100vh',
@@ -15,7 +14,7 @@ const MainLayout = ({ children, isNavVisible }) => {
       }}
     >
       {(isNavVisible && <Nav>{children}</Nav>) || children}
-    </Container>
+    </div>
   );
 };
 
