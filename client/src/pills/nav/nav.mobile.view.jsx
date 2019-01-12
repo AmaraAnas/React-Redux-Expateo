@@ -3,7 +3,6 @@ import React, { Fragment } from 'react';
 import t from '../../i18n';
 import {
   Button,
-  Header,
   Icon,
   Image,
   Menu,
@@ -15,9 +14,6 @@ import {
 } from '../../ui-kit';
 import logo from '../../logo.svg';
 
-import SubNavMobileView from './subNav.mobile.view';
-import { Divider } from 'semantic-ui-react';
-
 const Mobilite = () => (
   <List.Item>
     <Segment style={{ maxWidth: '85px' }} size="mini">
@@ -26,15 +22,84 @@ const Mobilite = () => (
   </List.Item>
 );
 
-class NavMobileView extends React.Component {
-  state = { visible: false, wide: false };
+const MenuStyle = {
+  border: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+};
 
-  handleHideClick = () => this.setState({ visible: false });
-  handleShowClick = () => this.setState({ visible: true });
-  handleSidebarHide = () => this.setState({ visible: false });
+const CloseIconStyle = {
+  margin: '4px',
+};
+
+const HeaderContainerStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+};
+
+const MobilitiesContainerStyle = {
+  display: 'flex',
+  width: '100%',
+  overflowX: 'visible',
+  overflowY: 'hidden',
+  paddingBottom: '5px',
+};
+
+const BodyContainerStyle = {
+  flexGrow: '1',
+  flexShrink: '1',
+  overflowY: 'auto',
+};
+
+const FooterContainerStyle = { border: 0 };
+
+const FooterButtonGroupStyle = {
+  borderRadius: 0,
+  borderLeft: 0,
+  borderRight: 0,
+};
+
+const FooterProfileButtonStyle = {
+  textAlign: 'left',
+  width: '80%',
+  borderRadius: 0,
+  borderLeft: 0,
+  borderRight: 0,
+};
+
+const FooterLogoutButtonStyle = {
+  width: '20%',
+  borderRadius: 0,
+  borderRight: 0,
+};
+
+const MenuOpenerButtonStyle = { position: 'fixed', bottom: '0', width: '100%' };
+
+class NavMobileView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { visible: false };
+
+    this.handleHideClick = this.handleHideClick.bind(this);
+    this.handleShowClick = this.handleShowClick.bind(this);
+    this.handleSidebarHide = this.handleSidebarHide.bind(this);
+  }
+
+  handleHideClick() {
+    this.setState({ visible: false });
+  }
+
+  handleSidebarHide() {
+    this.handleHideClick();
+  }
+
+  handleShowClick() {
+    this.setState({ visible: true });
+  }
 
   render() {
-    const { visible, wide } = this.state;
+    const { visible } = this.state;
     const { children } = this.props;
 
     return (
@@ -45,54 +110,28 @@ class NavMobileView extends React.Component {
             animation="push"
             onHide={this.handleSidebarHide}
             visible={visible}
-            style={{
-              border: 0,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}
+            style={MenuStyle}
             vertical
           >
             {/* THE HEADER */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div style={HeaderContainerStyle}>
                 <div>
                   <Image src={logo} size="tiny" />
                 </div>
 
-                {visible ? (
-                  <Icon
-                    name="triangle left"
-                    disabled={!visible}
-                    onClick={this.handleHideClick}
-                    size="large"
-                    style={{ margin: '4px' }}
-                    color="grey"
-                  />
-                ) : (
-                  <Icon
-                    name="triangle right"
-                    disabled={!visible}
-                    onClick={this.handleHideClick}
-                    size="large"
-                    style={{ margin: '4px' }}
-                    color="grey"
-                  />
-                )}
+                <Icon
+                  name={`triangle ${visible ? 'left' : 'right'}`}
+                  onClick={this.handleHideClick}
+                  size="large"
+                  style={CloseIconStyle}
+                  color="grey"
+                />
               </div>
             </div>
             {/* THE MOBILITIES */}
             <Menu.Item>
-              <List
-                horizontal
-                style={{
-                  display: 'flex',
-                  width: '100%',
-                  overflowX: 'visible',
-                  overflowY: 'hidden',
-                  paddingBottom: '5px',
-                }}
-              >
+              <List horizontal style={MobilitiesContainerStyle}>
                 <Mobilite />
                 <Mobilite />
                 <Mobilite />
@@ -100,10 +139,7 @@ class NavMobileView extends React.Component {
               </List>
             </Menu.Item>
             {/* THE BODY */}
-            <Menu.Item
-              style={{ flexGrow: '1', flexShrink: '1', overflowY: 'auto' }}
-              className="borderless"
-            >
+            <Menu.Item style={BodyContainerStyle} className="borderless">
               <Menu.Item>
                 {/* <SubNavMobileView /> */}
                 <Menu.Item className="text">Dashboard</Menu.Item>
@@ -158,31 +194,14 @@ class NavMobileView extends React.Component {
               </Menu.Item>
             </Menu.Item>
             {/* THE FOOTER */}
-            <Menu style={{ border: 0 }} borderless fluid>
-              <Button.Group
-                basic
-                fluid
-                style={{ borderRadius: 0, borderLeft: 0, borderRight: 0 }}
-              >
+            <Menu style={FooterContainerStyle} borderless fluid>
+              <Button.Group basic fluid style={FooterButtonGroupStyle}>
                 <Button
                   icon="user"
                   content="Profile"
-                  style={{
-                    textAlign: 'left',
-                    width: '80%',
-                    borderRadius: 0,
-                    borderLeft: 0,
-                    borderRight: 0,
-                  }}
+                  style={FooterProfileButtonStyle}
                 />
-                <Button
-                  icon="power"
-                  style={{
-                    width: '20%',
-                    borderRadius: 0,
-                    borderRight: 0,
-                  }}
-                />
+                <Button icon="power" style={FooterLogoutButtonStyle} />
               </Button.Group>
             </Menu>
           </Sidebar>
@@ -194,7 +213,7 @@ class NavMobileView extends React.Component {
               disabled={visible}
               onClick={this.handleShowClick}
               attached="bottom"
-              style={{ position: 'fixed', bottom: '0', width: '100%' }}
+              style={MenuOpenerButtonStyle}
               primary
             />
           </Sidebar.Pusher>
