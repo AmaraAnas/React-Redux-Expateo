@@ -1,3 +1,12 @@
+html,
+body,
+#root,
+.App,
+.main-layout {
+  height: 100%;
+  background-color: #fff;
+}
+
 html {
   font-size: 12px;
 }
