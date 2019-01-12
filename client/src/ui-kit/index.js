@@ -17,6 +17,7 @@ import {
   Responsive,
   Segment,
   Select,
+  Sidebar,
   Accordion,
 } from 'semantic-ui-react';
 
@@ -42,5 +43,6 @@ export {
   Responsive,
   Segment,
   Select,
+  Sidebar,
   Accordion,
 };
