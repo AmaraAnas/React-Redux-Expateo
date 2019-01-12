@@ -17,6 +17,7 @@ import {
   Responsive,
   Segment,
   Select,
+  Accordion,
 } from 'semantic-ui-react';
 
 import Button from './Button';
@@ -41,4 +42,5 @@ export {
   Responsive,
   Segment,
   Select,
+  Accordion,
 };
