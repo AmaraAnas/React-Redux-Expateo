@@ -1,22 +1,18 @@
 import React, { Fragment } from 'react';
 
 import t from '../../../i18n';
-import { Button, Menu, Sidebar, Dropdown, Label } from '../../../ui-kit';
+import { Button, Menu, Sidebar } from '../../../ui-kit';
 
 import Mobilities from './nav.mobile.mobilities.view';
 import NavMobileHeaderView from './nav.mobile.header.view';
+import styles from './nav.mobile.module.css';
+import NavMobileBodyView from './nav.mobile.body.view';
 
 const MenuStyle = {
   border: 0,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-};
-
-const BodyContainerStyle = {
-  flexGrow: '1',
-  flexShrink: '1',
-  overflowY: 'auto',
 };
 
 const FooterContainerStyle = { border: 0 };
@@ -80,78 +76,27 @@ class NavMobileView extends React.Component {
             style={MenuStyle}
             vertical
           >
-            {/* THE HEADER */}
+            {/* HEADER */}
             <Menu.Item>
               <NavMobileHeaderView
                 visible={visible}
                 onClose={this.handleCloseClick}
               />
             </Menu.Item>
-            {/* THE MOBILITIES */}
+            {/* MOBILITIES */}
             <Menu.Item>
               <Mobilities
                 mobilities={[
-                  { id: 1, title: 'Titre mobilité' },
-                  { id: 2, title: 'Titre mobilité' },
-                  { id: 3, title: 'Titre mobilité' },
-                  { id: 4, title: 'Titre mobilité' },
+                  { id: '1', title: 'Titre mobilité' },
+                  { id: '2', title: 'Titre mobilité' },
+                  { id: '3', title: 'Titre mobilité' },
+                  { id: '4', title: 'Titre mobilité' },
                 ]}
               />
             </Menu.Item>
-            {/* THE BODY */}
-            <Menu.Item style={BodyContainerStyle} className="borderless">
-              <Menu.Item>
-                {/* <SubNavMobileView /> */}
-                <Menu.Item className="text">Dashboard</Menu.Item>
-                <Menu.Item>
-                  <Dropdown text="Thèmes">
-                    <Dropdown.Menu>
-                      <Dropdown.Item text="Chômage et retraite" />
-                      <Dropdown.Item text="Santé" />
-                      <Dropdown.Item text="Famille & Animaux" />
-                      <Dropdown.Item text="Argent & Patrimoine" />
-                      <Dropdown.Item text="Logement & Déménagement" />
-                      <Dropdown.Item text="S'installer sur place" />
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </Menu.Item>
-                <Menu.Item>
-                  <Dropdown text="Services">
-                    <Dropdown.Menu>
-                      <Dropdown.Item
-                        text="Service 1"
-                        description="obligatoire"
-                      />
-                      <Dropdown.Item
-                        text="Service 2"
-                        description="obligatoire"
-                      />
-                      <Dropdown.Item
-                        text="Service 3"
-                        description="obligatoire"
-                      />
-                      <Dropdown.Item
-                        text="Service 4"
-                        description="obligatoire"
-                      />
-                      <Dropdown.Item text="Service 1" />
-                      <Dropdown.Item text="Service 1" />
-                      <Dropdown.Item text="Service 1" />
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </Menu.Item>
-              </Menu.Item>
-              <Menu.Item>
-                <Menu.Item disabled name="inbox">
-                  <Label color="red">1</Label>
-                  Messagerie
-                </Menu.Item>
-
-                <Menu.Item disabled name="Documents">
-                  <Label color="red">1</Label>
-                  Documents
-                </Menu.Item>
-              </Menu.Item>
+            {/* BODY */}
+            <Menu.Item className={styles.bodyContainerStyle}>
+              <NavMobileBodyView />
             </Menu.Item>
             {/* THE FOOTER */}
             <Menu style={FooterContainerStyle} borderless fluid>

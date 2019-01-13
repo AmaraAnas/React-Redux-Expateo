@@ -24,3 +24,15 @@
   composes: text capitalized from global;
   display: block;
 }
+
+/* BODY */
+.bodyContainerStyle {
+  composes: borderless from global; /* remove ugly border on tablet landscape mode */
+  flex-grow: 1 !important; /* the body should be scrollable if the height is too low (table landscape mode) */
+  flex-shrink: 1 !important; /* let the body shrink until the footer */
+  overflow-y: auto;
+}
+
+.bodySectionEntry {
+  composes: text capitalized from global;
+}
