@@ -9,8 +9,6 @@ import NavMobileBodyView from './nav.mobile.body.view';
 import NavMobileFooterView from './nav.mobile.footer.view';
 import styles from './nav.mobile.module.css';
 
-const MenuOpenerButtonStyle = { position: 'fixed', bottom: '0', width: '100%' };
-
 class NavMobileView extends React.Component {
   constructor(props) {
     super(props);
@@ -70,22 +68,25 @@ class NavMobileView extends React.Component {
             <Menu.Item className={styles.bodyContainer}>
               <NavMobileBodyView />
             </Menu.Item>
-            {/* THE FOOTER */}
+            {/* FOOTER */}
             <div>
               <NavMobileFooterView />
             </div>
           </Sidebar>
           <Sidebar.Pusher dimmed={visible}>
+            {/* CONTENT PAGE */}
             {children}
-            <Button
-              circular
-              icon="bars"
-              disabled={visible}
-              onClick={this.handleShowClick}
-              attached="bottom"
-              style={MenuOpenerButtonStyle}
-              primary
-            />
+            {/* MENU OPENER */}
+            <div className={styles.menuOpenerButtonContainer}>
+              <Button
+                onClick={this.handleShowClick}
+                disabled={visible}
+                icon="bars"
+                size="big"
+                circular
+                primary
+              />
+            </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </>

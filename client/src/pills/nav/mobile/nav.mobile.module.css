@@ -66,3 +66,13 @@
   border-radius: 0 !important; /* remove extra border coming from Button */
   border-right: 0 !important;
 }
+
+/* MENU OPENER */
+.menuOpenerButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  bottom: 5px;
+}
