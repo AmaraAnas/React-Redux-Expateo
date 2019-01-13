@@ -1,31 +1,15 @@
 import React, { Fragment } from 'react';
 
 import t from '../../../i18n';
-import {
-  Button,
-  Icon,
-  Image,
-  Menu,
-  Sidebar,
-  Dropdown,
-  Label,
-} from '../../../ui-kit';
-import logo from './nav.mobile.header.logo.svg';
+import { Button, Menu, Sidebar, Dropdown, Label } from '../../../ui-kit';
+
 import Mobilities from './nav.mobile.mobilities.view';
+import NavMobileHeaderView from './nav.mobile.header.view';
 
 const MenuStyle = {
   border: 0,
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
-};
-
-const CloseIconStyle = {
-  margin: '4px',
-};
-
-const HeaderContainerStyle = {
-  display: 'flex',
   justifyContent: 'space-between',
 };
 
@@ -64,17 +48,17 @@ class NavMobileView extends React.Component {
     super(props);
     this.state = { visible: false };
 
-    this.handleHideClick = this.handleHideClick.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
     this.handleShowClick = this.handleShowClick.bind(this);
     this.handleSidebarHide = this.handleSidebarHide.bind(this);
   }
 
-  handleHideClick() {
+  handleCloseClick() {
     this.setState({ visible: false });
   }
 
   handleSidebarHide() {
-    this.handleHideClick();
+    this.handleCloseClick();
   }
 
   handleShowClick() {
@@ -97,21 +81,12 @@ class NavMobileView extends React.Component {
             vertical
           >
             {/* THE HEADER */}
-            <div>
-              <div style={HeaderContainerStyle}>
-                <div>
-                  <Image src={logo} size="tiny" />
-                </div>
-
-                <Icon
-                  name={`triangle ${visible ? 'left' : 'right'}`}
-                  onClick={this.handleHideClick}
-                  size="large"
-                  style={CloseIconStyle}
-                  color="grey"
-                />
-              </div>
-            </div>
+            <Menu.Item>
+              <NavMobileHeaderView
+                visible={visible}
+                onClose={this.handleCloseClick}
+              />
+            </Menu.Item>
             {/* THE MOBILITIES */}
             <Menu.Item>
               <Mobilities

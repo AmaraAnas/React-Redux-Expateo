@@ -1,3 +1,14 @@
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.headerCloseIcon {
+  margin: '4px';
+}
+
+/* MOBILITIES */
 .mobilities {
   display: flex;
   width: 100%;
@@ -9,7 +20,6 @@
   min-width: 120px;
   margin: 5px; /* Align items horizontaly as the Menu add a padding on each 'item'*/
 }
-
 .mobilityLink {
   composes: text capitalized from global;
   display: block;
