@@ -5,14 +5,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Animate from '../elements/animate/animate';
 import MainLayout from '../pages/main.layout';
-
-import DumbPage0 from '../pages/dumb.page.0';
-import DumbPage1 from '../pages/dumb.page.1';
-import DumbPage2 from '../pages/dumb.page.2';
-import DumbPage3 from '../pages/dumb.page.3';
+import { Loader } from '../ui-kit';
 
 import ErrorBound from './ErrorBound';
-import { Loader } from '../ui-kit';
 
 const ErrorPage = () => <h1>:( Something went wrong. </h1>; // TODO: A better error page maybe ?
 const LoadingLazyPage = (
@@ -37,6 +32,11 @@ const HomePage = React.lazy(() =>
 const NoMatchPage = React.lazy(() =>
   import(/* webpackChunkName: "noMatch.page" */
   '../pages/noMatch.page'),
+);
+
+const DumbPage = React.lazy(() =>
+  import(/* webpackChunkName: "dumb.page" */
+  '../pages/dumb.page'),
 );
 
 let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
@@ -80,10 +80,8 @@ const Router = ({ indexRedirect, location }) => (
         <Switch location={location}>
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
-          <PrivateRoute
-            path="/private"
-            component={() => <div>HELLO PRIVATE</div>}
-          />
+          <Route exact path="/inscription" component={InscriptionPage} />
+          <PrivateRoute component={NoMatchPage} />
           <AnimatedRoute key={location.pathname}>
             <Switch>
               <Route
@@ -91,15 +89,16 @@ const Router = ({ indexRedirect, location }) => (
                 path="/sign-up"
                 component={() => <div>Signup Page</div>}
               />
-              <Route exact path="/inscription" component={InscriptionPage} />
               <PrivateRoute exact path="/dashboard" component={HomePage} />
-              <PrivateRoute exact path="/dumb/0" component={DumbPage0} />
-              <PrivateRoute exact path="/dumb/1" component={DumbPage1} />
-              <PrivateRoute exact path="/dumb/2" component={DumbPage2} />
-              <PrivateRoute exact path="/dumb/3" component={DumbPage3} />
+              <PrivateRoute exact path="/themes/:id" component={DumbPage} />
+              <PrivateRoute exact path="/services/:id" component={DumbPage} />
+              <PrivateRoute exact path="/mobilities/:id" component={DumbPage} />
+              <PrivateRoute exact path="/bills" component={DumbPage} />
+              <PrivateRoute exact path="/notifications" component={DumbPage} />
+              <PrivateRoute exact path="/messages" component={DumbPage} />
+              <PrivateRoute exact path="/documents" component={DumbPage} />
             </Switch>
           </AnimatedRoute>
-          <PrivateRoute component={NoMatchPage} />
         </Switch>
       </MainLayout>
     </React.Suspense>
