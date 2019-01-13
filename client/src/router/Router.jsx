@@ -12,9 +12,14 @@ import DumbPage2 from '../pages/dumb.page.2';
 import DumbPage3 from '../pages/dumb.page.3';
 
 import ErrorBound from './ErrorBound';
+import { Loader } from '../ui-kit';
 
 const ErrorPage = () => <h1>:( Something went wrong. </h1>; // TODO: A better error page maybe ?
-const LoadingLazyPage = <div> Loading ... </div>; // TODO: A better loadign lazy page maybe ?
+const LoadingLazyPage = (
+  <div>
+    <Loader active={true} />
+  </div>
+);
 
 const LoginPage = React.lazy(() =>
   import(/* webpackChunkName: "login.page" */
