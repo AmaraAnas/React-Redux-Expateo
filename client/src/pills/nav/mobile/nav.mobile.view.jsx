@@ -9,13 +9,6 @@ import NavMobileBodyView from './nav.mobile.body.view';
 import NavMobileFooterView from './nav.mobile.footer.view';
 import styles from './nav.mobile.module.css';
 
-const MenuStyle = {
-  border: 0,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-};
-
 const MenuOpenerButtonStyle = { position: 'fixed', bottom: '0', width: '100%' };
 
 class NavMobileView extends React.Component {
@@ -52,7 +45,7 @@ class NavMobileView extends React.Component {
             animation="push"
             onHide={this.handleSidebarHide}
             visible={visible}
-            style={MenuStyle}
+            className={styles.menuContainer}
             vertical
           >
             {/* HEADER */}
