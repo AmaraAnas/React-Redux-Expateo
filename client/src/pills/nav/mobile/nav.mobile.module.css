@@ -26,13 +26,35 @@
 }
 
 /* BODY */
-.bodyContainerStyle {
+.bodyContainer {
   composes: borderless from global; /* remove ugly border on tablet landscape mode */
   flex-grow: 1 !important; /* the body should be scrollable if the height is too low (table landscape mode) */
   flex-shrink: 1 !important; /* let the body shrink until the footer */
   overflow-y: auto;
 }
-
 .bodySectionEntry {
   composes: text capitalized from global;
+}
+
+/* FOOTER */
+.footerContainer {
+  border: 0 !important; /* remove extra border coming from Menu */
+}
+.footerButtonGroup {
+  border-radius: 0 !important; /* remove extra border coming from ButtonGroup */
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+}
+.footerProfileButton {
+  width: 80%;
+  text-align: left !important; /* remove extra border coming from Button */
+  border-radius: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+.footerLogoutButton {
+  width: 20%;
+  border-radius: 0 !important; /* remove extra border coming from Button */
+  border-right: 0 !important;
 }
