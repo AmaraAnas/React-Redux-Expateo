@@ -81,7 +81,6 @@ const Router = ({ indexRedirect, location }) => (
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/inscription" component={InscriptionPage} />
-          <PrivateRoute component={NoMatchPage} />
           <AnimatedRoute key={location.pathname}>
             <Switch>
               <Route
@@ -97,6 +96,8 @@ const Router = ({ indexRedirect, location }) => (
               <PrivateRoute exact path="/notifications" component={DumbPage} />
               <PrivateRoute exact path="/messages" component={DumbPage} />
               <PrivateRoute exact path="/documents" component={DumbPage} />
+              <PrivateRoute exact path="/me" component={DumbPage} />
+              <PrivateRoute component={NoMatchPage} />
             </Switch>
           </AnimatedRoute>
         </Switch>
