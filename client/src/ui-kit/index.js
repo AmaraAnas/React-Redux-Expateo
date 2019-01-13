@@ -1,6 +1,7 @@
 import {
   Checkbox,
   Container,
+  Divider,
   Dropdown,
   Form,
   Grid,
@@ -18,7 +19,6 @@ import {
   Segment,
   Select,
   Sidebar,
-  Accordion,
 } from 'semantic-ui-react';
 
 import Button from './Button';
@@ -27,6 +27,7 @@ export {
   Button,
   Checkbox,
   Container,
+  Divider,
   Dropdown,
   Form,
   Grid,
@@ -44,5 +45,4 @@ export {
   Segment,
   Select,
   Sidebar,
-  Accordion,
 };
