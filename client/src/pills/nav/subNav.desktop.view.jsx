@@ -1,47 +1,46 @@
 import React, { Fragment } from 'react';
 
 import t from '../../i18n';
-import { Menu, Dropdown, Accordion } from '../../ui-kit';
+import { Menu, Dropdown, Divider } from '../../ui-kit';
 
 import { themes, services } from './nav.mocked.data';
+// TODO: i18nified
+// TODO: remove magic string
+// simple tests
+// reshake (remoe the subject prefix) mocked data
 
 export default () => (
   <Menu fluid widths={3}>
     <Dropdown item text="Thèmes">
       <Dropdown.Menu>
-        {themes.map((el) => (
-          <Dropdown.Item>{el.theme_label}</Dropdown.Item>
+        {themes.map((el, i) => (
+          <Dropdown.Item key={i} text={el.theme_label} />
         ))}
       </Dropdown.Menu>
     </Dropdown>
     <Dropdown item text="Services">
       <Dropdown.Menu>
-        <Accordion item>
-          <Accordion.Title active content="Services Obligatoires" />
-          <Accordion.Content active as="menu">
-            {services.map((el) => {
-              return el.service_type == 'obligatoire' ? (
-                <Menu.Item position="left">{el.service_label}</Menu.Item>
-              ) : (
-                <> </>
-              );
-            })}
-          </Accordion.Content>
-          <Accordion.Title active content="Services Optionnels" />
-          <Accordion.Content active as="menu">
-            {services.map((el) => {
-              return el.service_type == 'optionnel' ? (
-                <Menu.Item position="left">{el.service_label}</Menu.Item>
-              ) : (
-                <> </>
-              );
-            })}
-          </Accordion.Content>
-        </Accordion>
+        <Dropdown.Header>Obligatoires</Dropdown.Header>
+        {services
+          .filter((el) => el.service_type === 'obligatoire')
+          .map((el, i) => (
+            <Dropdown.Item
+              key={i}
+              description="obligatoire"
+              text={el.service_label}
+            />
+          ))}
+        <Divider />
+        <Dropdown.Header>Optionnels</Dropdown.Header>
+        {services
+          .filter((el) => el.service_type === 'optionnel')
+          .map((el, i) => (
+            <Dropdown.Item key={i} text={el.service_label} />
+          ))}
       </Dropdown.Menu>
     </Dropdown>
     <Menu.Item name="DeviesFactures" onClick={() => {}}>
-      Devies & Factures
+      Devis & Factures
     </Menu.Item>
   </Menu>
 );

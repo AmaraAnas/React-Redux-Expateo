@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import t from '../../i18n';
-import { Menu, Dropdown, Image, Icon, Label } from '../../ui-kit';
+import { Menu, Dropdown, Image, Icon } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
 import SubNavDesktopView from './subNav.desktop.view';
 
