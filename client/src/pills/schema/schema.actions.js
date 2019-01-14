@@ -10,4 +10,3 @@ export const ACTION_TYPES = addPrefixToActionTypes(
 );
 
 export const addEntities = createAction(ACTION_TYPES.ADD_ENTITIES);
-// TODO : test it

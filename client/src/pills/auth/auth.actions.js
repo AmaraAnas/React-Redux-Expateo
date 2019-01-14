@@ -24,7 +24,7 @@ export function login({
   onPending,
   onSuccess,
   onFailure,
-  authApi = AuthApi,
+  authApi = AuthApi, // TODO: remove that to use the thunk.withExtraArgument({api: auth})
 }) {
   onPending();
   return async (dispatch) => {

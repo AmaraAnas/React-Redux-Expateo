@@ -45,5 +45,3 @@ export default class Theme {
     };
   }
 }
-
-// TODO : test it
