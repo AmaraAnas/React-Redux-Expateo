@@ -5,6 +5,7 @@ import t from '../../i18n';
 import { Menu, Dropdown, Image, Icon } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
 import SubNavDesktopView from './subNav.desktop.view';
+import JumbotronView from '../jumbotron/jumbotron.container';
 
 const MenuItemWithIcon = ({
   disabled = true,
@@ -65,7 +66,9 @@ const NavDesktopView = ({ children }) => (
         </Dropdown>
       </Menu.Menu>
     </Menu>
+    <JumbotronView />
     <SubNavDesktopView />
+
     {children}
   </>
 );

@@ -11,7 +11,7 @@ import { themes, services } from './nav.mocked.data';
 // reshake (remoe the subject prefix) mocked data
 
 export default () => (
-  <Menu fluid widths={3}>
+  <Menu fluid widths={3} attached>
     <Dropdown item text="Thèmes">
       <Dropdown.Menu>
         {themes.map((el, i) => (
