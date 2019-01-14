@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 import t from '../../i18n';
 import { Menu, Dropdown } from '../../ui-kit';
@@ -10,7 +11,9 @@ export default () => (
     <Dropdown item text="Thèmes">
       <Dropdown.Menu>
         {themes.map((el) => (
-          <Dropdown.Item>{el.theme_label}</Dropdown.Item>
+          <Dropdown.Item as={Link} to="DumbPage0">
+            {el.theme_label}
+          </Dropdown.Item>
         ))}
       </Dropdown.Menu>
     </Dropdown>
@@ -19,7 +22,9 @@ export default () => (
         <Dropdown.Header content="Services Obligatoires" icon="chess queen" />
         {services.map((el) => {
           return el.service_type == 'obligatoire' ? (
-            <Menu.Item position="left">{el.service_label}</Menu.Item>
+            <Menu.Item as={Link} to="DumbPage1" position="left">
+              {el.service_label}
+            </Menu.Item>
           ) : (
             <> </>
           );
@@ -27,14 +32,16 @@ export default () => (
         <Dropdown.Header content="Services Optionnels" icon="chess pawn" />
         {services.map((el) => {
           return el.service_type == 'optionnel' ? (
-            <Menu.Item position="left">{el.service_label}</Menu.Item>
+            <Menu.Item as={Link} to="DumbPage2" position="left">
+              {el.service_label}
+            </Menu.Item>
           ) : (
             <> </>
           );
         })}
       </Dropdown.Menu>
     </Dropdown>
-    <Menu.Item name="DeviesFactures" onClick={() => {}}>
+    <Menu.Item name="DeviesFactures" as={Link} to="DumbPage3">
       Devies & Factures
     </Menu.Item>
   </Menu>
