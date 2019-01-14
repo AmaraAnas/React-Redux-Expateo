@@ -18,6 +18,7 @@ import {
   Segment,
   Select,
   Accordion,
+  Sidebar,
 } from 'semantic-ui-react';
 
 import Button from './Button';
@@ -43,4 +44,5 @@ export {
   Segment,
   Select,
   Accordion,
+  Sidebar,
 };
