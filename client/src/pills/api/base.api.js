@@ -21,10 +21,12 @@ const baseData = {
 export const AJAX_ACTIONS = {
   CONNECT: 'connect',
   INSCRIPTION_B2B: 'subscribe_end_b2b',
+  LIST: 'list',
 };
 
 export const ENDPOINTS = {
   USR: '/ajax_usr.php',
+  TASK: '/ajax_uta.php',
 };
 
 /**
@@ -49,5 +51,6 @@ export const authApi = apiCreator(AJAX_ACTIONS.CONNECT)(ENDPOINTS.USR);
 export const subscribeApi = apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B)(
   ENDPOINTS.USR,
 );
+export const themesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
 
 export default apiCreator;

@@ -2,24 +2,27 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import t from '../../i18n';
-import { Menu, Dropdown, Image, Icon, Label } from '../../ui-kit';
+import { Menu, Dropdown, Image, Icon } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
-import styles from './nav.module.css';
 import SubNavDesktopView from './subNav.desktop.view';
 
-const MenuItemWithIcon = ({ disabled, iconName, label, badge, link }) => (
+const MenuItemWithIcon = ({
+  disabled = true,
+  iconName,
+  label,
+  badge,
+  link,
+}) => (
   <Menu.Item
     disabled={disabled}
     as={Link}
     to={link}
     style={{ cursor: 'pointer' }}
   >
-    <Icon
-      name={iconName}
-      className={styles.badge1}
-      data-badge={badge}
-      size="big"
-    />
+    <Icon.Group size="big">
+      <Icon name={iconName} />
+      {badge && <Icon name="circle" className="top right" color="red" corner />}
+    </Icon.Group>
     {label}
   </Menu.Item>
 );
@@ -39,20 +42,18 @@ const NavDesktopView = ({ children }) => (
         <MenuItemWithIcon
           iconName="folder"
           label={t('menu.documents')}
-          disabled={true}
           link="DumbPage1"
         />
         <MenuItemWithIcon
           iconName="comments"
           label={t('menu.messages').concat(' (0)')}
-          badge=""
-          disabled={true}
+          badge={true}
           link="DumbPage2"
         />
         <MenuItemWithIcon
           iconName="bell"
           label={t('menu.notifications')}
-          disabled={true}
+          badge={true}
           link="DumbPage3"
         />
         <Dropdown item icon={<Icon fitted size="huge" name="user circle" />}>

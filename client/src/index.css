@@ -1,3 +1,12 @@
+html,
+body,
+#root,
+.App,
+.main-layout {
+  height: 100%;
+  background-color: #fff;
+}
+
 html {
   font-size: 12px;
 }
@@ -48,6 +57,10 @@ code {
 .text {
   color: #707070;
   font-size: 1.1rem;
+}
+
+.capitalized::first-letter {
+  text-transform: capitalize;
 }
 
 /* ------------------------------------ */

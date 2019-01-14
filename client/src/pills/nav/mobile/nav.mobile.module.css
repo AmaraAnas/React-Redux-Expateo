@@ -1,0 +1,78 @@
+/* MENU */
+.menuContainer {
+  /* important are basically here to overload semantic styles */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  border: 0 !important;
+}
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.headerCloseIcon {
+  margin: '4px';
+}
+
+/* MOBILITIES */
+.mobilities {
+  display: flex;
+  width: 100%;
+  padding-bottom: 5px;
+  overflow-x: visible;
+  overflow-y: hidden;
+}
+.mobility {
+  min-width: 120px;
+  margin: 5px; /* Align items horizontaly as the Menu add a padding on each 'item'*/
+}
+.mobilityLink {
+  composes: text capitalized from global;
+  display: block;
+}
+
+/* BODY */
+.bodyContainer {
+  composes: borderless from global; /* remove ugly border on tablet landscape mode */
+  flex-grow: 1 !important; /* the body should be scrollable if the height is too low (table landscape mode) */
+  flex-shrink: 1 !important; /* let the body shrink until the footer */
+  overflow-y: auto;
+}
+.bodySectionEntry {
+  composes: text capitalized from global;
+}
+
+/* FOOTER */
+.footerContainer {
+  border: 0 !important; /* remove extra border coming from Menu */
+}
+.footerButtonGroup {
+  border-radius: 0 !important; /* remove extra border coming from ButtonGroup */
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+}
+.footerProfileButton {
+  width: 80%;
+  text-align: left !important; /* remove extra border coming from Button */
+  border-radius: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+.footerLogoutButton {
+  width: 20%;
+  border-radius: 0 !important; /* remove extra border coming from Button */
+  border-right: 0 !important;
+}
+
+/* MENU OPENER */
+.menuOpenerButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  bottom: 5px;
+}

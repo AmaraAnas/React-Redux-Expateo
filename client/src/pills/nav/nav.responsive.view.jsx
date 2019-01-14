@@ -4,7 +4,7 @@ import { Responsive, Segment } from '../../ui-kit';
 
 const NavMobile = React.lazy(() =>
   import(/* webpackChunkName: "nav.mobile" */
-  './nav.mobile.view'),
+  './mobile/nav.mobile.view'),
 );
 
 const NavDesktop = React.lazy(() =>
