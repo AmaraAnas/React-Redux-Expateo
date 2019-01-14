@@ -7,7 +7,7 @@ Project:
   ☐ E2E test : BrowserStack Automation or Cypress ?
 App:
   ☐ Get designs
-  ☐ REAMDE.md
+  ✔ REAMDE.md @done(19-01-14 16:22)
   ✔ Git WorkFlow @done(18-10-20 15:24)
   Git Workflow:
     ✔ Test server : Bitbucket Pipelines @done(18-10-20 14:26)
