@@ -37,6 +37,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "CI=true react-scripts test --env=jsdom",
+    "preinstall": "node ./bootstrap.js",
     "windows-test": "set CI=true && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "test:watch": "react-scripts test --env=jsdom",
