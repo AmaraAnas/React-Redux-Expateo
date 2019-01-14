@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import t from '../../i18n';
-import { Menu, Dropdown, Accordion } from '../../ui-kit';
+import { Menu, Dropdown } from '../../ui-kit';
 
 import { themes, services } from './nav.mocked.data';
 
@@ -16,28 +16,22 @@ export default () => (
     </Dropdown>
     <Dropdown item text="Services">
       <Dropdown.Menu>
-        <Accordion item>
-          <Accordion.Title active content="Services Obligatoires" />
-          <Accordion.Content active as="menu">
-            {services.map((el) => {
-              return el.service_type == 'obligatoire' ? (
-                <Menu.Item position="left">{el.service_label}</Menu.Item>
-              ) : (
-                <> </>
-              );
-            })}
-          </Accordion.Content>
-          <Accordion.Title active content="Services Optionnels" />
-          <Accordion.Content active as="menu">
-            {services.map((el) => {
-              return el.service_type == 'optionnel' ? (
-                <Menu.Item position="left">{el.service_label}</Menu.Item>
-              ) : (
-                <> </>
-              );
-            })}
-          </Accordion.Content>
-        </Accordion>
+        <Dropdown.Header content="Services Obligatoires" icon="chess queen" />
+        {services.map((el) => {
+          return el.service_type == 'obligatoire' ? (
+            <Menu.Item position="left">{el.service_label}</Menu.Item>
+          ) : (
+            <> </>
+          );
+        })}
+        <Dropdown.Header content="Services Optionnels" icon="chess pawn" />
+        {services.map((el) => {
+          return el.service_type == 'optionnel' ? (
+            <Menu.Item position="left">{el.service_label}</Menu.Item>
+          ) : (
+            <> </>
+          );
+        })}
       </Dropdown.Menu>
     </Dropdown>
     <Menu.Item name="DeviesFactures" onClick={() => {}}>
