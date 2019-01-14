@@ -7,10 +7,19 @@ import setupLogRocketReact from 'logrocket-react';
 import throttle from 'lodash.throttle';
 import { routerMiddleware } from 'connected-react-router';
 
+import * as themesApi from '../pills/themes/themes.api';
+
 import reducers, { history } from './reducers';
 import { loadState, saveState } from './localStorage';
 
-const middlewares = [thunk, routerMiddleware(history)];
+const middlewares = [
+  thunk.withExtraArgument({
+    api: {
+      themes: themesApi,
+    },
+  }),
+  routerMiddleware(history),
+];
 
 // ---------------------------------------------------------------------
 let composeEnhancers = compose;
