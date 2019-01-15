@@ -18,6 +18,26 @@ describe('Schema actions - reducers - selector', () => {
     });
   });
 
+  it('Should add multiple entity into the store', () => {
+    let state = {
+      entities: {},
+    };
+    state = SchemaReducer(
+      state,
+      addEntities({ users: [{ id: 1, name: 'jhon' }, { id: 2, name: 'doe' }] }),
+    );
+    state = SchemaReducer(
+      state,
+      addEntities({ cars: [{ id: 1, name: 'audi' }, { id: 2, name: 'fiat' }] }),
+    );
+    expect(state).toEqual({
+      entities: {
+        users: [{ id: 1, name: 'jhon' }, { id: 2, name: 'doe' }],
+        cars: [{ id: 1, name: 'audi' }, { id: 2, name: 'fiat' }],
+      },
+    });
+  });
+
   it('Should return a selector', () => {
     const userSelector = schemaSelectorCreator('users', []);
     expect(typeof userSelector === 'function').toEqual(true);

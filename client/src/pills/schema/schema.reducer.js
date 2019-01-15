@@ -11,7 +11,7 @@ export default function schemaReducer(state = initialState, action) {
       return {
         ...state,
         entities: {
-          ...state.schema,
+          ...state.entities,
           ...action.payload,
         },
       };
