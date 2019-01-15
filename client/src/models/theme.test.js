@@ -17,10 +17,10 @@ describe('Theme model', () => {
     const t = new Theme(data);
     expect(t.id).toEqual(data.THE_ID);
     expect(t.label).toEqual(data.THE_LABEL);
-    expect(t.order).toEqual(data.THE_ORDER);
+    expect(t.guid).toEqual(data.THE_GUID);
     expect(JSON.parse(JSON.stringify(t))).toEqual({
       id: data.THE_ID,
-      order: data.THE_ORDER,
+      guid: data.THE_GUID,
       label: data.THE_LABEL,
     });
   });

@@ -29,19 +29,16 @@ export default class Theme {
     return this._rawData.THE_ID;
   }
 
+  get guid() {
+    return this._rawData.THE_GUID;
+  }
+
   get label() {
     return this._rawData.THE_LABEL;
   }
 
-  get order() {
-    return this._rawData.THE_ORDER;
-  }
-
   toJSON() {
-    return {
-      id: this.id,
-      label: this.label,
-      order: this.order,
-    };
+    const { id, guid, label } = this;
+    return { id, guid, label };
   }
 }
