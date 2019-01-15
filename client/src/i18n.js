@@ -63,6 +63,12 @@ const texts = {
     messages: 'Messages',
     notifications: 'Notifications',
   },
+  jumborton: {
+    destination_text: 'Votre départ pour',
+    date_text: 'prévu le',
+    remainingDays_text: 'J',
+    button_text: 'Personaliser ma checklist',
+  },
 };
 
 const TError = ({ text }) => (
