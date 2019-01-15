@@ -1,30 +1,27 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Theme from '../../models/theme.model';
-import { themesSelector } from '../themes/themes.selectors';
+import { themesByTasksSelector } from '../themes/themes.selectors';
 import { getThemes } from '../themes/themes.actions';
+import { getTasks } from '../tasks/tasks.actions';
 
 import NavResponsive from './nav.responsive.view';
+import { useDispatch, withHook } from '../../hooks/useDispatch.hook';
 
-const NavContainer = ({ getThemes, themes, children }) => {
-  useEffect(() => {
-    getThemes();
-  }, []);
+const NavContainer = ({ themes, children }) => {
   return <NavResponsive themes={themes}>{children}</NavResponsive>;
 };
 
 function mapStateToProps(store) {
   return {
-    themes: themesSelector(store),
+    themes: themesByTasksSelector(store),
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    getThemes: () => dispatch(getThemes()),
-  };
+  return useDispatch(dispatch)(getTasks, getThemes);
 }
 
 NavContainer.propTypes = {
@@ -34,4 +31,4 @@ NavContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(NavContainer);
+)(withHook(useDispatch)(NavContainer));
