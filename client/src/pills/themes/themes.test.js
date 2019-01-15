@@ -4,7 +4,11 @@ import { schemaSelectorCreator } from '../schema/schema.selectors';
 import * as baseApi from '../api/base.api';
 import { addEntities } from '../schema/schema.actions';
 
-import { STATE_KEY, themesSelector } from './themes.selectors';
+import {
+  STATE_KEY,
+  themesSelector,
+  themesByTasksSelector,
+} from './themes.selectors';
 import { getThemes } from './themes.api';
 import {
   getThemes as getThemesAction,
@@ -43,6 +47,18 @@ describe('Themes selector', () => {
       { id: 1, name: 'chomage' },
       { id: 2, name: 'assurance' },
     ]);
+  });
+
+  it('Should the selector return themes filered by tasks', () => {
+    let state = {
+      Schema: {
+        entities: {
+          themes: [{ guid: 1 }, { guid: 2 }, { guid: 3 }, { guid: 5 }],
+          tasks: [{ id: 1, themeGuid: 2 }, { id: 2, themeGuid: 5 }],
+        },
+      },
+    };
+    expect(themesByTasksSelector(state)).toEqual([{ guid: 2 }, { guid: 5 }]);
   });
 });
 
