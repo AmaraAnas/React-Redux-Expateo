@@ -47,3 +47,16 @@ export function getNavigator() {
   if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
   return M[0];
 }
+
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat#reduce_and_concat
+ * @param {Array} - Array to flat
+ * @returns {Array} - Flattened array
+ */
+export function flatten(arr) {
+  return arr.reduce(
+    (acc, val) =>
+      Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val),
+    [],
+  );
+}
