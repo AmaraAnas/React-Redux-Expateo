@@ -26,7 +26,7 @@ export default class Theme {
   }
 
   get id() {
-    return this._rawData.THE_GUID;
+    return this._rawData.THE_ID;
   }
 
   get label() {

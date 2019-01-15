@@ -15,11 +15,11 @@ describe('Theme model', () => {
       THE_HASHTAG: '#Chomage #Retraite',
     };
     const t = new Theme(data);
-    expect(t.id).toEqual(data.THE_GUID);
+    expect(t.id).toEqual(data.THE_ID);
     expect(t.label).toEqual(data.THE_LABEL);
     expect(t.order).toEqual(data.THE_ORDER);
     expect(JSON.parse(JSON.stringify(t))).toEqual({
-      id: data.THE_GUID,
+      id: data.THE_ID,
       order: data.THE_ORDER,
       label: data.THE_LABEL,
     });
