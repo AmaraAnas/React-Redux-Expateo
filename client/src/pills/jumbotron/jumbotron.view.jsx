@@ -1,8 +1,16 @@
 import React from 'react';
-import { Button, Header, Icon, Segment, Grid, Image } from '../../ui-kit';
+import { Button, Header, Icon, Segment, Grid } from '../../ui-kit';
+import background from '../../images/jumborton-background.png';
+import styles from './jumbotron.module.css';
 
 const SegmentJumbotronView = () => (
-  <Segment padded="very" attached secondary>
+  <Segment
+    padded="very"
+    size="massive"
+    attached
+    className={styles.backgroudImagePosition}
+    style={{ background: `url(${background}` }}
+  >
     <Grid centered columns={2} divided>
       <Grid.Row>
         <Grid.Column textAlign="right" verticalAlign="middle">

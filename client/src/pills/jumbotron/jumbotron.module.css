@@ -1,0 +1,5 @@
+.backgroudImagePosition {
+  background-size: cover !important; /* hack to resize the backgroud image */
+  background-repeat: no-repeat !important; /* hack to prevent backgroud image repeat */
+  background-position: center 45% !important; /* hack to position the backgroud image */
+}
