@@ -1,25 +1,27 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import t from '../../i18n';
 import { Menu, Dropdown, Divider } from '../../ui-kit';
+import Theme from '../../models/theme.model';
 
-import { themes, services } from './nav.mocked.data';
+import { services } from './nav.mocked.data';
 // TODO: i18nified
 // TODO: remove magic string
-// simple tests
-// reshake (remoe the subject prefix) mocked data
+// TODO: simple tests
+// TODO: reshake (remoe the subject prefix) mocked data
 
-export default () => (
+const SubNavDesktopView = ({ themes }) => (
   <Menu fluid widths={3}>
     <Dropdown item text="Thèmes">
       <Dropdown.Menu>
-        {themes.map((el, i) => (
+        {themes.map((theme, i) => (
           <Dropdown.Item
-            as={Link}
-            to="DumbPage0"
             key={i}
-            text={el.theme_label}
+            text={theme.label}
+            as={Link}
+            to={`/themes/${theme.id}`}
           />
         ))}
       </Dropdown.Menu>
@@ -57,3 +59,9 @@ export default () => (
     </Menu.Item>
   </Menu>
 );
+
+SubNavDesktopView.propTypes = {
+  themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
+};
+
+export default SubNavDesktopView;

@@ -1,3 +1,5 @@
+import Theme from '../../models/theme.model';
+
 import { themesApi } from '../api/base.api';
 
 // themesApi({
@@ -27,33 +29,33 @@ export async function getThemes({ sessionId: gSesGuid, id: gUsrId }) {
     gUsrId,
     gAdmUsrId: null,
     gAdmSesGuid: null,
-  }).then((rawThemes) => rawThemes.map((theme) => new Theme(theme))); // TODO: Do the theme model
+  }).then((rawThemes) => rawThemes.map((theme) => new Theme(theme)));
 }
 
-/**
- * get list of sub-themes for the given user and the given theme
- * @param {User} - the user where to retrieve sessionId and id field
- * @param {Theme} - the theme where to retrieve id field
- * @returns {Array<Subtheme>} - return list of Theme
- */
-export async function getSubThemes(
-  { sessionId: gSesGuid, id: gUsrId },
-  { id: STH_THEME_GUID },
-) {
-  return themesApi({
-    gSesGuid,
-    gUsrId,
-    gAdmUsrId: null,
-    gAdmSesGuid: null,
-    STH_THEME_GUID,
-  }).then((rawSubThemes) => rawSubThemes.map((theme) => new Subtheme(theme))); // TODO: Do the Subtheme model
-}
+// /**
+//   // TODO : do we need it ?
+//  * get list of sub-themes for the given user and the given theme
+//  * @param {User} - the user where to retrieve sessionId and id field
+//  * @param {Theme} - the theme where to retrieve id field
+//  * @returns {Array<Subtheme>} - return list of Theme
+//  */
+// export async function getSubThemes(
+//   { sessionId: gSesGuid, id: gUsrId },
+//   { id: STH_THEME_GUID },
+// ) {
+//   return themesApi({
+//     gSesGuid,
+//     gUsrId,
+//     gAdmUsrId: null,
+//     gAdmSesGuid: null,
+//     STH_THEME_GUID,
+//   }).then((rawSubThemes) => rawSubThemes.map((theme) => new Subtheme(theme))); // TODO: Do the Subtheme model
+// }
 
-/**
- * get list of themes populated with sub themes for the given user
- * @param {User} - the user where to retrieve sessionId and id field
- * @returns {Array<Theme>} - return list of Theme
- */
-export async function getThemesWithSubThemes(user) {
-  // TODO : do we need it ?
-}
+// /**
+//  * get list of themes populated with sub themes for the given user
+//  * @param {User} - the user where to retrieve sessionId and id field
+//  * @returns {Array<Theme>} - return list of Theme
+//  */
+// export async function getThemesWithSubThemes(user) {
+// }

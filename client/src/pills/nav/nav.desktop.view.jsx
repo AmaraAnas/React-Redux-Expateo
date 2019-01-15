@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import t from '../../i18n';
 import { Menu, Dropdown, Image, Icon } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
+import Theme from '../../models/theme.model';
+
 import SubNavDesktopView from './subNav.desktop.view';
 
 const MenuItemWithIcon = ({
@@ -27,7 +30,7 @@ const MenuItemWithIcon = ({
   </Menu.Item>
 );
 
-const NavDesktopView = ({ children }) => (
+const NavDesktopView = ({ themes, children }) => (
   <>
     <Menu secondary>
       <Menu.Menu
@@ -65,9 +68,13 @@ const NavDesktopView = ({ children }) => (
         </Dropdown>
       </Menu.Menu>
     </Menu>
-    <SubNavDesktopView />
+    <SubNavDesktopView themes={themes} />
     {children}
   </>
 );
+
+NavDesktopView.propTypes = {
+  themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
+};
 
 export default NavDesktopView;
