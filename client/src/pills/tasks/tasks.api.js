@@ -41,10 +41,3 @@ export async function getTasks({ sessionId: gSesGuid, id: gUsrId }) {
   );
   return flatten(tasks);
 }
-
-getTasks({
-  sessionId: '8B1A7A0DE8549EE8A28E195573A2FD91',
-  id: '9058',
-}).then((res) => {
-  debugger;
-});
