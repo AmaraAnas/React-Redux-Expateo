@@ -2,21 +2,23 @@ import Theme from '../../models/theme.model';
 
 import { themesApi } from '../api/base.api';
 
-// themesApi({
-//   ajaxAction: 'list',
-//   gApp: 'XPTO',
-//   gUsrEmail: 'miyuki.etan20180928@expateotest.com',
-//   gUsrGuid: '9570E5E3C4A0859CF18220E7E21CC4A4',
-//   gUsrId: '9058',
-//   gSesGuid: '70787DCE2C4D8F8737B9C3DFC22D05E3',
-//   gAdmUsrId: null,
-//   gAdmSesGuid: null,
-//   gDevice: 'D',
-//   gNavigator: 'Chrome',
-//   gResolution: '789x657',
-// }).then((res) => {
-//   debugger;
-// });
+/**
+ * Example of working request
+ * @example
+ * themesApi({
+ *   ajaxAction: 'list',
+ *   gApp: 'XPTO',
+ *   gUsrEmail: 'miyuki.etan20180928@expateotest.com',
+ *   gUsrGuid: '9570E5E3C4A0859CF18220E7E21CC4A4',
+ *   gUsrId: '9058',
+ *   gSesGuid: '70787DCE2C4D8F8737B9C3DFC22D05E3',
+ *   gAdmUsrId: null,
+ *   gAdmSesGuid: null,
+ *   gDevice: 'D',
+ *   gNavigator: 'Chrome',
+ *   gResolution: '789x657',
+ * });
+ */
 
 /**
  * get list of themes for the given user
