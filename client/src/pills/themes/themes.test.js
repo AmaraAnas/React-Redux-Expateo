@@ -2,6 +2,7 @@ import Theme from '../../models/theme.model';
 
 import { schemaSelectorCreator } from '../schema/schema.selectors';
 import * as baseApi from '../api/base.api';
+import { addEntities } from '../schema/schema.actions';
 
 import { STATE_KEY, themesSelector } from './themes.selectors';
 import { getThemes } from './themes.api';
@@ -11,7 +12,6 @@ import {
   getAllSuccess,
   getAllFailure,
 } from './themes.actions';
-import { addEntities } from '../schema/schema.actions';
 
 jest.mock('../api/base.api');
 
