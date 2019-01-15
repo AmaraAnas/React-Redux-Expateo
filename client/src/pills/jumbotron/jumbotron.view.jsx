@@ -4,7 +4,7 @@ import background from '../../images/jumborton-background.png';
 import styles from './jumbotron.module.css';
 import t from '../../i18n';
 
-var userInfos = {
+let userInfos = {
   destination: 'Tunisie',
   date: 'mardi 25 Mars 2021',
   remainingDays: '-81',

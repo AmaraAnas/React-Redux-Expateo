@@ -63,11 +63,11 @@ const texts = {
     messages: 'Messages',
     notifications: 'Notifications',
     subNav: {
-      themes_text: 'Thèmes',
-      services_text: 'Services',
-      obligation_text: 'Obligatoires',
-      optionnel_text: 'Optionnels',
-      factures_text: 'Devis & Factures',
+      themes: 'Thèmes',
+      services: 'Services',
+      obligation: 'Obligatoires',
+      optionnel: 'Optionnels',
+      factures: 'Devis & Factures',
     },
   },
   jumborton: {

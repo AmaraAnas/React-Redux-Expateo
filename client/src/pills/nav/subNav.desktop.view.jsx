@@ -10,7 +10,7 @@ import { themes, services } from './nav.mocked.data';
 
 export default () => (
   <Menu fluid widths={3} attached>
-    <Dropdown item text={t('menu.subNav.themes_text')}>
+    <Dropdown item text={t('menu.subNav.themes')}>
       <Dropdown.Menu>
         {themes.map((el, i) => (
           <Dropdown.Item
@@ -22,9 +22,9 @@ export default () => (
         ))}
       </Dropdown.Menu>
     </Dropdown>
-    <Dropdown item text={t('menu.subNav.services_text')}>
+    <Dropdown item text={t('menu.subNav.services')}>
       <Dropdown.Menu>
-        <Dropdown.Header>{t('menu.subNav.obligation_text')}</Dropdown.Header>
+        <Dropdown.Header>{t('menu.subNav.obligation')}</Dropdown.Header>
         {services
           .filter((el) => el.service_type === 'obligatoire')
           .map((el, i) => (
@@ -37,7 +37,7 @@ export default () => (
             />
           ))}
         <Divider />
-        <Dropdown.Header>{t('menu.subNav.optionnel_text')}</Dropdown.Header>
+        <Dropdown.Header>{t('menu.subNav.optionnel')}</Dropdown.Header>
         {services
           .filter((el) => el.service_type === 'optionnel')
           .map((el, i) => (
@@ -51,7 +51,7 @@ export default () => (
       </Dropdown.Menu>
     </Dropdown>
     <Menu.Item name="DeviesFactures" as={Link} to="DumbPage3">
-      {t('menu.subNav.factures_text')}
+      {t('menu.subNav.factures')}
     </Menu.Item>
   </Menu>
 );
