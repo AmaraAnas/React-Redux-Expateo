@@ -28,6 +28,7 @@ export const ENDPOINTS = {
   USR: '/ajax_usr.php',
   TASK: '/ajax_uta.php',
   SERVICE: '/ajax_usc.php',
+  THEME: '/ajax_the.php',
 };
 
 /**
@@ -52,7 +53,8 @@ export const authApi = apiCreator(AJAX_ACTIONS.CONNECT)(ENDPOINTS.USR);
 export const subscribeApi = apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B)(
   ENDPOINTS.USR,
 );
-export const themesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
+export const themesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.THEME);
 export const servicesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.SERVICE);
+export const tasksApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
 
 export default apiCreator;
