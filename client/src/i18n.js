@@ -62,6 +62,13 @@ const texts = {
     documents: 'Documents',
     messages: 'Messages',
     notifications: 'Notifications',
+    subNav: {
+      themes_text: 'Thèmes',
+      services_text: 'Services',
+      obligation_text: 'Obligatoires',
+      optionnel_text: 'Optionnels',
+      factures_text: 'Devis & Factures',
+    },
   },
   jumborton: {
     destination_text: 'Votre départ pour',

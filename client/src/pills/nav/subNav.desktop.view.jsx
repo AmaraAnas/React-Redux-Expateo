@@ -5,14 +5,12 @@ import t from '../../i18n';
 import { Menu, Dropdown, Divider } from '../../ui-kit';
 
 import { themes, services } from './nav.mocked.data';
-// TODO: i18nified
-// TODO: remove magic string
 // simple tests
 // reshake (remoe the subject prefix) mocked data
 
 export default () => (
   <Menu fluid widths={3} attached>
-    <Dropdown item text="Thèmes">
+    <Dropdown item text={t('menu.subNav.themes_text')}>
       <Dropdown.Menu>
         {themes.map((el, i) => (
           <Dropdown.Item
@@ -24,9 +22,9 @@ export default () => (
         ))}
       </Dropdown.Menu>
     </Dropdown>
-    <Dropdown item text="Services">
+    <Dropdown item text={t('menu.subNav.services_text')}>
       <Dropdown.Menu>
-        <Dropdown.Header>Obligatoires</Dropdown.Header>
+        <Dropdown.Header>{t('menu.subNav.obligation_text')}</Dropdown.Header>
         {services
           .filter((el) => el.service_type === 'obligatoire')
           .map((el, i) => (
@@ -39,7 +37,7 @@ export default () => (
             />
           ))}
         <Divider />
-        <Dropdown.Header>Optionnels</Dropdown.Header>
+        <Dropdown.Header>{t('menu.subNav.optionnel_text')}</Dropdown.Header>
         {services
           .filter((el) => el.service_type === 'optionnel')
           .map((el, i) => (
@@ -53,7 +51,7 @@ export default () => (
       </Dropdown.Menu>
     </Dropdown>
     <Menu.Item name="DeviesFactures" as={Link} to="DumbPage3">
-      Devis & Factures
+      {t('menu.subNav.factures_text')}
     </Menu.Item>
   </Menu>
 );
