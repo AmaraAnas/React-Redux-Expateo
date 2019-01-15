@@ -21,19 +21,31 @@ const SegmentJumbotronView = () => {
     >
       <Grid centered columns={2} divided>
         <Grid.Row>
-          <Grid.Column textAlign="right" verticalAlign="middle">
+          <Grid.Column
+            textAlign="right"
+            verticalAlign="middle"
+            className={styles.remaining}
+          >
             {t('jumborton.remainingDays_text')} {userInfos.remainingDays}
           </Grid.Column>
-          <Grid.Column textAlign="left" verticalAlign="middle">
-            {t('jumborton.destination_text')} {userInfos.destination} <br />
-            {t('jumborton.date_text')} {userInfos.date}
+          <Grid.Column
+            textAlign="left"
+            className={styles.text}
+            verticalAlign="middle"
+          >
+            {t('jumborton.destination_text')}{' '}
+            <span className={styles.destination}>{userInfos.destination}</span>{' '}
+            <br />
+            {t('jumborton.date_text')}{' '}
+            <span className={styles.destination}>{userInfos.date}</span>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Button
             content={t('jumborton.button_text')}
-            icon="signup"
+            icon="pencil alternate"
             size="big"
+            primary
           />
         </Grid.Row>
       </Grid>

@@ -3,3 +3,20 @@
   background-repeat: no-repeat !important; /* hack to prevent backgroud image repeat */
   background-position: center 45% !important; /* hack to position the backgroud image */
 }
+
+.remaining {
+  composes: title from global;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.destination {
+  composes: important_text from global;
+  font-size: 1.4rem;
+  text-decoration: underline;
+}
+
+.text {
+  composes: text from global;
+  font-size: 1.4rem;
+}
