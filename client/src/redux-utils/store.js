@@ -8,6 +8,7 @@ import throttle from 'lodash.throttle';
 import { routerMiddleware } from 'connected-react-router';
 
 import * as themesApi from '../pills/themes/themes.api';
+import * as servicesApi from '../pills/services/services.api';
 
 import reducers, { history } from './reducers';
 import { loadState, saveState } from './localStorage';
@@ -16,6 +17,7 @@ const middlewares = [
   thunk.withExtraArgument({
     api: {
       themes: themesApi,
+      services: servicesApi,
     },
   }),
   routerMiddleware(history),
