@@ -56,5 +56,6 @@ export const subscribeApi = apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B)(
 export const themesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.THEME);
 export const servicesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.SERVICE);
 export const tasksApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
+export const mobilityApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.USR);
 
 export default apiCreator;
