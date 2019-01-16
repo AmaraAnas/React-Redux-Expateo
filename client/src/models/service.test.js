@@ -31,12 +31,14 @@ describe('Service model', () => {
     expect(s.name).toEqual(data.SMI_NAME);
     expect(s.isRequired).toEqual(Boolean(parseInt(data.PSM_REQUIRED)));
     expect(s.description).toEqual(data.SMI_DESCRIPTION);
+    expect(s.hasTasks).toEqual(true);
     expect(JSON.parse(JSON.stringify(s))).toEqual({
       id: data.SMI_GUID,
       title: data.SMI_TITLE,
       name: data.SMI_NAME,
       description: data.SMI_DESCRIPTION,
       isRequired: Boolean(parseInt(data.PSM_REQUIRED)),
+      hasTasks: data.service_taskaction.length > 0,
     });
   });
 });
