@@ -4,7 +4,11 @@ import { schemaSelectorCreator } from '../schema/schema.selectors';
 import { addEntities } from '../schema/schema.actions';
 import * as baseApi from '../api/base.api';
 
-import { STATE_KEY, servicesSelector } from './services.selectors';
+import {
+  STATE_KEY,
+  servicesSelector,
+  servicesWithTaskSelector,
+} from './services.selectors';
 import { getServices } from './services.api';
 import {
   getServices as getServicesAction,
@@ -43,6 +47,25 @@ describe('Services selector', () => {
     expect(servicesSelector(state)).toEqual([
       { id: 1, name: 'chomage' },
       { id: 2, name: 'assurance' },
+    ]);
+  });
+
+  it('Should the selector return services filered by hasTasks', () => {
+    let state = {
+      Schema: {
+        entities: {
+          services: [
+            { hasTasks: false, id: 1 },
+            { hasTasks: true, id: 2 },
+            { hasTasks: false, id: 3 },
+            { hasTasks: true, id: 5 },
+          ],
+        },
+      },
+    };
+    expect(servicesWithTaskSelector(state)).toEqual([
+      { hasTasks: true, id: 2 },
+      { hasTasks: true, id: 5 },
     ]);
   });
 });
