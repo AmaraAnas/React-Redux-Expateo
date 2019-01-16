@@ -45,9 +45,9 @@ const NavDesktopView = ({ themes, services, children }) => (
         />
         <Dropdown item icon={<Icon fitted size="huge" name="user circle" />}>
           <Dropdown.Menu>
-            <Dropdown.Item>Personnaliser ma checklist</Dropdown.Item>
-            <Dropdown.Item>Ma situation</Dropdown.Item>
-            <Dropdown.Item>Mon compte</Dropdown.Item>
+            <Dropdown.Item disabled>Personnaliser ma checklist</Dropdown.Item>
+            <Dropdown.Item disabled>Ma situation</Dropdown.Item>
+            <Dropdown.Item disabled>Mon compte</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Menu>

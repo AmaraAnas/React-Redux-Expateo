@@ -54,7 +54,7 @@ const SubNavDesktopView = ({ themes, services }) => (
           ))}
       </Dropdown.Menu>
     </Dropdown>
-    <Menu.Item name="DeviesFactures" as={Link} to="DumbPage3">
+    <Menu.Item as={Link} to="/bills">
       Devis & Factures
     </Menu.Item>
   </Menu>
