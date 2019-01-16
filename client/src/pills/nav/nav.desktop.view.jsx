@@ -10,19 +10,8 @@ import Service from '../../models/service.model';
 
 import SubNavDesktopView from './subNav.desktop.view';
 
-const MenuItemWithIcon = ({
-  disabled = true,
-  iconName,
-  label,
-  badge,
-  link,
-}) => (
-  <Menu.Item
-    disabled={disabled}
-    as={Link}
-    to={link}
-    style={{ cursor: 'pointer' }}
-  >
+const MenuItemWithIcon = ({ disabled = true, iconName, label, badge }) => (
+  <Menu.Item disabled={disabled}>
     <Icon.Group size="big">
       <Icon name={iconName} />
       {badge && <Icon name="circle" className="top right" color="red" corner />}
@@ -43,22 +32,16 @@ const NavDesktopView = ({ themes, services, children }) => (
         />
       </Menu.Menu>
       <Menu.Menu position="right">
-        <MenuItemWithIcon
-          iconName="folder"
-          label={t('menu.documents')}
-          link="DumbPage1"
-        />
+        <MenuItemWithIcon iconName="folder" label={t('menu.documents')} />
         <MenuItemWithIcon
           iconName="comments"
           label={t('menu.messages').concat(' (0)')}
           badge={true}
-          link="DumbPage2"
         />
         <MenuItemWithIcon
           iconName="bell"
           label={t('menu.notifications')}
           badge={true}
-          link="DumbPage3"
         />
         <Dropdown item icon={<Icon fitted size="huge" name="user circle" />}>
           <Dropdown.Menu>
