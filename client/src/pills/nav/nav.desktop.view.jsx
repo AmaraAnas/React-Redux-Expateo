@@ -34,13 +34,13 @@ const MenuItemWithIcon = ({
 const NavDesktopView = ({ themes, services, children }) => (
   <>
     <Menu secondary>
-      <Menu.Menu
-        as={Link}
-        to="dashbord"
-        position="left"
-        style={{ minWidth: '190px' }}
-      >
-        <Image src={logo} style={{ width: 'auto', height: '70px' }} />
+      <Menu.Menu to="dashbord" position="left">
+        <Image
+          src={logo}
+          as={Link}
+          to="/dashboard"
+          style={{ width: '190px' }}
+        />
       </Menu.Menu>
       <Menu.Menu position="right">
         <MenuItemWithIcon
