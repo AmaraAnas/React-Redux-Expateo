@@ -10,6 +10,7 @@ import { routerMiddleware } from 'connected-react-router';
 import * as themesApi from '../pills/themes/themes.api';
 import * as servicesApi from '../pills/services/services.api';
 import * as tasksApi from '../pills/tasks/tasks.api';
+import * as mobilityApi from '../pills/mobility/mobility.api';
 
 import reducers, { history } from './reducers';
 import { loadState, saveState } from './localStorage';
@@ -20,6 +21,7 @@ const middlewares = [
       themes: themesApi,
       services: servicesApi,
       tasks: tasksApi,
+      mobility: mobilityApi,
     },
   }),
   routerMiddleware(history),

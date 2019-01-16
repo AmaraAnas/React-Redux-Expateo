@@ -11,6 +11,7 @@ import { getThemes } from '../themes/themes.actions';
 import { getTasks } from '../tasks/tasks.actions';
 import { servicesWithTaskSelector } from '../services/services.selectors';
 import { getServices } from '../services/services.actions';
+import { getMobility } from '../mobility/mobility.actions';
 
 import NavResponsive from './nav.responsive.view';
 
@@ -28,7 +29,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return useDispatch(dispatch)(getTasks, getThemes, getServices);
+  return useDispatch(dispatch)(getMobility, getTasks, getThemes, getServices);
 }
 
 NavContainer.propTypes = {
