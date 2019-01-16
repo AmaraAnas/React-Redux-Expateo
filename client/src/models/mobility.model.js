@@ -11,15 +11,15 @@ export default class Mobility {
     return this._rawData.id;
   }
 
-  get startDate() {
-    return this._rawData.startDate;
+  get date() {
+    return new Date(this._rawData.startDate).getTime();
   }
   get destination() {
     return this._rawData.destination;
   }
 
   toJSON() {
-    const { id, startDate, destination } = this;
-    return { id, startDate, destination };
+    const { id, date, destination } = this;
+    return { id, date, destination };
   }
 }
