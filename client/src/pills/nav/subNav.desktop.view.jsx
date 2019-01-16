@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import t from '../../i18n';
 import { Menu, Dropdown, Divider } from '../../ui-kit';
 import Theme from '../../models/theme.model';
+import Service from '../../models/service.model';
 
-import { services } from './nav.mocked.data';
 // TODO: i18nified
 // TODO: remove magic string
 // TODO: simple tests
 // TODO: reshake (remoe the subject prefix) mocked data
 
-const SubNavDesktopView = ({ themes }) => (
+const SubNavDesktopView = ({ themes, services }) => (
   <Menu fluid widths={3}>
     <Dropdown item text="Thèmes">
       <Dropdown.Menu>
@@ -30,26 +30,26 @@ const SubNavDesktopView = ({ themes }) => (
       <Dropdown.Menu>
         <Dropdown.Header>Obligatoires</Dropdown.Header>
         {services
-          .filter((el) => el.service_type === 'obligatoire')
-          .map((el, i) => (
+          .filter((service) => service.isRequired)
+          .map((service, i) => (
             <Dropdown.Item
               key={i}
-              as={Link}
-              to="DumbPage1"
               description="obligatoire"
-              text={el.service_label}
+              text={service.title}
+              as={Link}
+              to={`/services/${service.id}`}
             />
           ))}
         <Divider />
         <Dropdown.Header>Optionnels</Dropdown.Header>
         {services
-          .filter((el) => el.service_type === 'optionnel')
-          .map((el, i) => (
+          .filter((service) => !service.isRequired)
+          .map((service, i) => (
             <Dropdown.Item
               key={i}
+              text={service.title}
               as={Link}
-              to="DumbPage2"
-              text={el.service_label}
+              to={`/services/${service.id}`}
             />
           ))}
       </Dropdown.Menu>
@@ -62,6 +62,7 @@ const SubNavDesktopView = ({ themes }) => (
 
 SubNavDesktopView.propTypes = {
   themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
+  services: PropTypes.arrayOf(PropTypes.instanceOf(Service)).isRequired,
 };
 
 export default SubNavDesktopView;

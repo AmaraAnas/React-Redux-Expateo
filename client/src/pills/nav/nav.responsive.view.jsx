@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Responsive, Segment } from '../../ui-kit';
+import { Responsive } from '../../ui-kit';
 import Theme from '../../models/theme.model';
+import Service from '../../models/service.model';
 
 const NavMobile = React.lazy(() =>
   import(/* webpackChunkName: "nav.mobile" */
@@ -27,6 +28,7 @@ const NavResponsiveView = (props) => (
 
 NavResponsiveView.propTypes = {
   themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
+  services: PropTypes.arrayOf(PropTypes.instanceOf(Service)).isRequired,
 };
 
 export default NavResponsiveView;

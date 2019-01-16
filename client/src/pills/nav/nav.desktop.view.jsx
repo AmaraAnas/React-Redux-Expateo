@@ -6,6 +6,7 @@ import t from '../../i18n';
 import { Menu, Dropdown, Image, Icon } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
 import Theme from '../../models/theme.model';
+import Service from '../../models/service.model';
 
 import SubNavDesktopView from './subNav.desktop.view';
 
@@ -30,7 +31,7 @@ const MenuItemWithIcon = ({
   </Menu.Item>
 );
 
-const NavDesktopView = ({ themes, children }) => (
+const NavDesktopView = ({ themes, services, children }) => (
   <>
     <Menu secondary>
       <Menu.Menu
@@ -68,13 +69,14 @@ const NavDesktopView = ({ themes, children }) => (
         </Dropdown>
       </Menu.Menu>
     </Menu>
-    <SubNavDesktopView themes={themes} />
+    <SubNavDesktopView themes={themes} services={services} />
     {children}
   </>
 );
 
 NavDesktopView.propTypes = {
   themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
+  services: PropTypes.arrayOf(PropTypes.instanceOf(Service)).isRequired,
 };
 
 export default NavDesktopView;
