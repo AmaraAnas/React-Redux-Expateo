@@ -27,12 +27,12 @@ export const useDispatch = (dispatch, inputs = []) => (...actions) => ({
 
 /**
  *
- * @param {Function} hook - the hook to be called
+ * @param  {...Function} hooks - hooks to be reached from props
+ * (cause they come from mapDispatchToProps and they use dispatch react-redx function)
+ * before the render of C
+ * @param {Component} C - the component to be rendered
  */
-export const withHook = (hook) => (C) => ({
-  [hook.name]: dispatch,
-  ...props
-}) => {
-  dispatch();
+export const withHook = (...hooks) => (C) => (props) => {
+  hooks.forEach((hook) => props[hook.name]());
   return <C {...props} />;
 };
