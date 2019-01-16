@@ -15,6 +15,7 @@ import { getMobility } from '../mobility/mobility.actions';
 
 import NavResponsive from './nav.responsive.view';
 
+//TODO : move getMobilty to Jumbtron Component after merge
 const NavContainer = ({ themes, services, children }) => (
   <NavResponsive services={services} themes={themes}>
     {children}

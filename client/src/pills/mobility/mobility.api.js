@@ -2,6 +2,7 @@ import Mobility from '../../models/mobility.model';
 
 import { mobilityApi } from '../api/base.api';
 
+//TODO : Refacto to remove magic strings
 export async function getMobility({ sessionId: gSesGuid, id: gUsrId }) {
   return await mobilityApi({
     gSesGuid,
