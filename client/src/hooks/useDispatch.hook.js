@@ -16,12 +16,14 @@ import React, { useEffect } from 'react';
  * @description This hook will automatically useEffet with dispatch method given by the container
  * @param {Function} dispatch - Basically the dispatch react-redux function given by 'connect'
  * @param {Array} inputs - @see react.hooks.useEffect
+ * @param {...Function} actionCreators - List of actionCreators.
+ * They will be call inside the dispatch. actionCreators.forEach((actionCreator) => dispatch(actionCreator()));
  * @returns {Object} - Object to be used in mapDispatchToProps (combined with autoUseDispatch) @see autoUseDispatch
  */
-export const useDispatch = (dispatch, inputs = []) => (...actions) => ({
+export const useDispatch = (dispatch, inputs = []) => (...actionCreators) => ({
   [useDispatch.name]: () =>
     useEffect(() => {
-      actions.forEach(dispatch);
+      actionCreators.forEach((actionCreator) => dispatch(actionCreator()));
     }, inputs),
 });
 
