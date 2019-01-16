@@ -4,7 +4,7 @@ import { addPrefixToActionTypes } from '../../redux-utils/utils';
 import { userSelector } from '../auth/auth.selectors';
 import { addEntities } from '../schema/schema.actions';
 
-import { STATE_KEY } from './mobilty.selectors';
+import { STATE_KEY } from './mobility.selectors';
 
 export const ACTION_TYPES = addPrefixToActionTypes(
   {
@@ -19,14 +19,14 @@ export const getAllSuccess = createAction(ACTION_TYPES.GET_ALL_SUCCESS);
 export const getAllFailure = createAction(ACTION_TYPES.GET_ALL_FAILURE);
 export const getAllPending = createAction(ACTION_TYPES.GET_ALL_PENDING);
 
-export function getMobilty() {
+export function getMobility() {
   return async (dispatch, getState, { api }) => {
     dispatch(getAllPending());
     let user = userSelector(getState());
     try {
-      const moblity = await api.moblity.getMobility(user);
+      const mobility = await api.mobility.getMobility(user);
       dispatch(getAllSuccess());
-      dispatch(addEntities({ [STATE_KEY]: mobilty }));
+      dispatch(addEntities({ [STATE_KEY]: mobility }));
     } catch (e) {
       dispatch(getAllFailure(e));
     }
