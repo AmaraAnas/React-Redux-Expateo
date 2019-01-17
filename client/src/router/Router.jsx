@@ -76,7 +76,11 @@ const AnimatedRoute = ({ children }) => {
 const Router = ({ indexRedirect, location }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
     <React.Suspense fallback={LoadingLazyPage}>
-      <MainLayout isNavVisible={location.pathname !== '/login'}>
+      <MainLayout
+        isNavVisible={
+          location.pathname !== '/login' && location.pathname !== '/inscription'
+        }
+      >
         <Switch location={location}>
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
