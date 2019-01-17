@@ -10,7 +10,7 @@ let userInfos = {
   date: '30/02/2019',
 };
 
-const SegmentJumbotronView = () => {
+export default function SegmentJumbotronView({ mobilitiyInfo }) {
   return (
     <Segment size="large" attached placeholder>
       <Grid columns={2}>
@@ -47,6 +47,4 @@ const SegmentJumbotronView = () => {
       </Grid>
     </Segment>
   );
-};
-
-export default SegmentJumbotronView;
+}
