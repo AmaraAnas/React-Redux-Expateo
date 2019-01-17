@@ -22,6 +22,7 @@ export const AJAX_ACTIONS = {
   CONNECT: 'connect',
   INSCRIPTION_B2B: 'subscribe_end_b2b',
   LIST: 'list',
+  LISTALL: 'listall',
 };
 
 export const ENDPOINTS = {
@@ -29,6 +30,7 @@ export const ENDPOINTS = {
   TASK: '/ajax_uta.php',
   SERVICE: '/ajax_usc.php',
   THEME: '/ajax_the.php',
+  QUESTION: '/ajax_qtt.php',
 };
 
 /**
@@ -56,5 +58,8 @@ export const subscribeApi = apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B)(
 export const themesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.THEME);
 export const servicesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.SERVICE);
 export const tasksApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
+export const mobilitiesApi = apiCreator(AJAX_ACTIONS.LISTALL)(
+  ENDPOINTS.QUESTION,
+);
 
 export default apiCreator;
