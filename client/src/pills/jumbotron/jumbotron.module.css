@@ -1,0 +1,11 @@
+.title {
+  composes: title from global;
+  font-size: 3rem;
+  font-weight: bold;
+  background: 'transparent';
+}
+
+.text {
+  composes: text from global;
+  font-size: 1.4rem;
+}

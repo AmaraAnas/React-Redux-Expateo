@@ -59,6 +59,11 @@ code {
   font-size: 1.1rem;
 }
 
+.important_text {
+  color: #00aaa1;
+  font-size: 1.1rem;
+}
+
 .capitalized::first-letter {
   text-transform: capitalize;
 }

@@ -9,6 +9,7 @@ import Theme from '../../models/theme.model';
 import Service from '../../models/service.model';
 
 import SubNavDesktopView from './subNav.desktop.view';
+import JumbotronView from '../jumbotron/jumbotron.container';
 
 const MenuItemWithIcon = ({ disabled = true, iconName, label, badge }) => (
   <Menu.Item disabled={disabled}>
@@ -45,13 +46,14 @@ const NavDesktopView = ({ themes, services, children }) => (
         />
         <Dropdown item icon={<Icon fitted size="huge" name="user circle" />}>
           <Dropdown.Menu>
-            <Dropdown.Item>Personnaliser ma checklist</Dropdown.Item>
-            <Dropdown.Item>Ma situation</Dropdown.Item>
-            <Dropdown.Item>Mon compte</Dropdown.Item>
+            <Dropdown.Item disabled>Personnaliser ma checklist</Dropdown.Item>
+            <Dropdown.Item disabled>Ma situation</Dropdown.Item>
+            <Dropdown.Item disabled>Mon compte</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Menu>
     </Menu>
+    <JumbotronView />
     <SubNavDesktopView themes={themes} services={services} />
     {children}
   </>
