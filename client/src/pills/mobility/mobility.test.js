@@ -3,6 +3,7 @@ import Mobility from '../../models/mobility.model';
 import { schemaSelectorCreator } from '../schema/schema.selectors';
 import * as baseApi from '../api/base.api';
 import { addEntities } from '../schema/schema.actions';
+import { getMobilityFromQuestionArray } from './mobility.questionMapping';
 
 import { STATE_KEY, mobilitySelector } from './mobility.selectors';
 
@@ -110,20 +111,7 @@ describe('Mobility API', () => {
       sessionId: 'FE213467BD8B2EB84A34F9D6F47DF52C',
       id: '9193',
     });
-    let mob = {
-      id: 1,
-      startDate: '',
-      destination: '',
-    };
-    rawQuestion.map((question) => {
-      if (question.QUE_GUID == 'QUE_20') {
-        mob.startDate = question.user_answer_done[0].USA_DATE;
-      } else if (question.QUE_GUID == 'QUE_88') {
-        mob.destination = question.user_answer_done[0].USA_TEXT;
-      }
-    });
-
-    expect(mobilty).toEqual(new Mobility(mob));
+    expect(mobilty).toEqual(getMobilityFromQuestionArray(rawQuestion));
   });
 });
 
@@ -204,25 +192,12 @@ describe('Mobility action', () => {
     const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
     await thunk(dispatch, getState, { api: { mobility: { getMobility } } });
 
-    let mob = {
-      id: 1,
-      startDate: '',
-      destination: '',
-    };
-    rawQuestion.map((question) => {
-      if (question.QUE_GUID == 'QUE_20') {
-        mob.startDate = question.user_answer_done[0].USA_DATE;
-      } else if (question.QUE_GUID == 'QUE_88') {
-        mob.destination = question.user_answer_done[0].USA_TEXT;
-      }
-    });
-
     expect(dispatch).toHaveBeenCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, getAllPending());
     expect(dispatch).toHaveBeenNthCalledWith(2, getAllSuccess());
     expect(dispatch).toHaveBeenNthCalledWith(
       3,
-      addEntities({ [STATE_KEY]: new Mobility(mob) }),
+      addEntities({ [STATE_KEY]: getMobilityFromQuestionArray(rawQuestion) }),
     );
   });
 });
