@@ -13,8 +13,8 @@ import Service from '../../models/service.model';
 // TODO: reshake (remoe the subject prefix) mocked data
 
 const SubNavDesktopView = ({ themes, services }) => (
-  <Menu fluid widths={3}>
-    <Dropdown item text="Thèmes">
+  <Menu fluid widths={3} attached>
+    <Dropdown item text={t('menu.subNav.themes')}>
       <Dropdown.Menu>
         {themes.map((theme, i) => (
           <Dropdown.Item
@@ -26,9 +26,9 @@ const SubNavDesktopView = ({ themes, services }) => (
         ))}
       </Dropdown.Menu>
     </Dropdown>
-    <Dropdown item text="Services">
+    <Dropdown item text={t('menu.subNav.services')}>
       <Dropdown.Menu>
-        <Dropdown.Header>Obligatoires</Dropdown.Header>
+        <Dropdown.Header>{t('menu.subNav.obligation')}</Dropdown.Header>
         {services
           .filter((service) => service.isRequired)
           .map((service, i) => (
@@ -41,7 +41,7 @@ const SubNavDesktopView = ({ themes, services }) => (
             />
           ))}
         <Divider />
-        <Dropdown.Header>Optionnels</Dropdown.Header>
+        <Dropdown.Header>{t('menu.subNav.optionnel')}</Dropdown.Header>
         {services
           .filter((service) => !service.isRequired)
           .map((service, i) => (
@@ -55,7 +55,7 @@ const SubNavDesktopView = ({ themes, services }) => (
       </Dropdown.Menu>
     </Dropdown>
     <Menu.Item as={Link} to="/bills">
-      Devis & Factures
+      {t('menu.subNav.factures')}
     </Menu.Item>
   </Menu>
 );
