@@ -9,6 +9,7 @@ import Theme from '../../models/theme.model';
 import Service from '../../models/service.model';
 
 import SubNavDesktopView from './subNav.desktop.view';
+import JumbotronView from '../jumbotron/jumbotron.container';
 
 const MenuItemWithIcon = ({ disabled = true, iconName, label, badge }) => (
   <Menu.Item disabled={disabled}>
@@ -52,6 +53,7 @@ const NavDesktopView = ({ themes, services, children }) => (
         </Dropdown>
       </Menu.Menu>
     </Menu>
+    <JumbotronView />
     <SubNavDesktopView themes={themes} services={services} />
     {children}
   </>
