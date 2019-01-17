@@ -126,3 +126,103 @@ describe('Mobility API', () => {
     expect(mobilty).toEqual(new Mobility(mob));
   });
 });
+
+describe('Mobility action', () => {
+  it('Should dispatch pending & success', async () => {
+    const thunk = getMobilityAction();
+    const dispatch = jest.fn();
+    const rawQuestion = [
+      {
+        QUE_GUID: 'QUE_64',
+        QUE_LABEL: 'Partez-vous avec des enfants ?',
+        QUE_TYPE: 'list',
+        QUE_LOCATION: 'INFO_USER',
+        QUE_TRANSLATION_CODE: 'CHILD_COUNT',
+        QUE_LEVEL: null,
+        user_theme: [],
+        user_answer: [
+          {
+            ANS_GUID: 'ANS_988',
+            ANS_CONDITION: null,
+            ANS_LABEL: '0',
+          },
+          {
+            ANS_GUID: 'ANS_990',
+            ANS_CONDITION: null,
+            ANS_LABEL: '1',
+          },
+          {
+            ANS_GUID: 'ANS_992',
+            ANS_CONDITION: null,
+            ANS_LABEL: '2',
+          },
+        ],
+        user_answer_done: [
+          {
+            USA_ANSWER_GUID: 'ANS_992',
+            USA_TEXT: null,
+            USA_DATE: null,
+          },
+        ],
+      },
+      {
+        QUE_GUID: 'QUE_20',
+        QUE_LABEL: 'Quelle est votre date de départ de France prévisionnelle ?',
+        QUE_TYPE: 'date',
+        QUE_LOCATION: 'MENU_USER',
+        QUE_TRANSLATION_CODE: 'DEPART',
+        QUE_LEVEL: null,
+        user_theme: [],
+        user_answer: [],
+        user_answer_done: [
+          {
+            USA_ANSWER_GUID: null,
+            USA_TEXT: null,
+            USA_DATE: '2019-07-20 00:00:00',
+          },
+        ],
+      },
+      {
+        QUE_GUID: 'QUE_88',
+        QUE_LABEL: 'Quelle est votre destination ?',
+        QUE_TYPE: 'place',
+        QUE_LOCATION: 'MENU_USER',
+        QUE_TRANSLATION_CODE: 'PAYS_ETAT_VILLE',
+        QUE_LEVEL: null,
+        user_theme: [],
+        user_answer: [],
+        user_answer_done: [
+          {
+            USA_ANSWER_GUID: null,
+            USA_TEXT: 'Nigeria',
+            USA_DATE: null,
+          },
+        ],
+      },
+    ];
+    baseApi.mobilityApi.mockResolvedValueOnce(rawQuestion);
+    const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
+    await thunk(dispatch, getState, { api: { mobility: { getMobility } } });
+
+    let mob = {
+      id: 1,
+      startDate: '',
+      destination: '',
+    };
+    rawQuestion.map((question) => {
+      if (question.QUE_GUID == 'QUE_20') {
+        mob.startDate = question.user_answer_done[0].USA_DATE;
+      } else if (question.QUE_GUID == 'QUE_88') {
+        mob.destination = question.user_answer_done[0].USA_TEXT;
+      }
+    });
+
+    expect(dispatch).toHaveBeenCalledTimes(3);
+    expect(dispatch).toHaveBeenNthCalledWith(1, getAllPending());
+    expect(dispatch).toHaveBeenNthCalledWith(2, getAllSuccess());
+    expect(dispatch).toHaveBeenNthCalledWith(
+      3,
+      addEntities({ [STATE_KEY]: new Mobility(mob) }),
+    );
+  });
+});
