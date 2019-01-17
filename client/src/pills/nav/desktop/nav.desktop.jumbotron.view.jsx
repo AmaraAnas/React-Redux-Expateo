@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Icon, Segment, Grid } from '../../ui-kit';
-import Animate from '../../elements/animate/animate';
-import Mobility from '../../models/mobility.model';
+import { Icon, Segment, Grid } from '../../../ui-kit';
+import Animate from '../../../elements/animate/animate';
+import Mobility from '../../../models/mobility.model';
 
-import styles from './jumbotron.module.css';
+import styles from './nav.desktop.module.css';
 
 export default function SegmentJumbotronView({ mobility }) {
   return (

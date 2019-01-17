@@ -1,12 +1,11 @@
 import React, { Fragment } from 'react';
 
-import t from '../../../i18n';
 import { Button, Menu, Sidebar } from '../../../ui-kit';
 
-import Mobilities from './nav.mobile.mobilities.view';
-import NavMobileHeaderView from './nav.mobile.header.view';
-import NavMobileBodyView from './nav.mobile.body.view';
-import NavMobileFooterView from './nav.mobile.footer.view';
+import NavMobileMobilities from './nav.mobile.mobilities.view';
+import NavMobileHeader from './nav.mobile.header.view';
+import NavMobileBody from './nav.mobile.body.view';
+import NavMobileFooter from './nav.mobile.footer.view';
 import styles from './nav.mobile.module.css';
 
 class NavMobileView extends React.Component {
@@ -48,14 +47,14 @@ class NavMobileView extends React.Component {
           >
             {/* HEADER */}
             <Menu.Item>
-              <NavMobileHeaderView
+              <NavMobileHeader
                 visible={visible}
                 onClose={this.handleCloseClick}
               />
             </Menu.Item>
             {/* MOBILITIES */}
             <Menu.Item>
-              <Mobilities
+              <NavMobileMobilities
                 mobilities={[
                   { id: '1', title: 'Titre mobilité' },
                   { id: '2', title: 'Titre mobilité' },
@@ -66,11 +65,11 @@ class NavMobileView extends React.Component {
             </Menu.Item>
             {/* BODY */}
             <Menu.Item className={styles.bodyContainer}>
-              <NavMobileBodyView />
+              <NavMobileBody />
             </Menu.Item>
             {/* FOOTER */}
             <div>
-              <NavMobileFooterView />
+              <NavMobileFooter />
             </div>
           </Sidebar>
           <Sidebar.Pusher dimmed={visible}>

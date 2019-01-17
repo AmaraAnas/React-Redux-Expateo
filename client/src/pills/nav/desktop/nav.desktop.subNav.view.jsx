@@ -2,15 +2,12 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import t from '../../i18n';
-import { Menu, Dropdown, Divider } from '../../ui-kit';
-import Theme from '../../models/theme.model';
-import Service from '../../models/service.model';
+import t from '../../../i18n';
+import { Menu, Dropdown, Divider } from '../../../ui-kit';
+import Theme from '../../../models/theme.model';
+import Service from '../../../models/service.model';
 
-// TODO: i18nified
-// TODO: remove magic string
 // TODO: simple tests
-// TODO: reshake (remoe the subject prefix) mocked data
 
 const SubNavDesktopView = ({ themes, services }) => (
   <Menu fluid widths={3} attached>

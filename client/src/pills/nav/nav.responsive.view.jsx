@@ -13,7 +13,7 @@ const NavMobile = React.lazy(() =>
 
 const NavDesktop = React.lazy(() =>
   import(/* webpackChunkName: "nav.desktop" */
-  './nav.desktop.view'),
+  './desktop/nav.desktop.view'),
 );
 
 const NavResponsiveView = (props) => (
