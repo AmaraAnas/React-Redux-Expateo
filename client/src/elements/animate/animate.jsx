@@ -13,6 +13,11 @@ Animate.propTypes = {
   /**
    * @see https://github.com/daneden/animate.css#animations
    */
-  animation: PropTypes.oneOf(['fadeOutRight', 'fadeInRight', 'bounce'])
-    .isRequired,
+  animation: PropTypes.oneOf([
+    'fadeOutRight',
+    'fadeInRight',
+    'fadeInRight faster',
+    'fadeInDown',
+    'bounce',
+  ]).isRequired,
 };
