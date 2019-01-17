@@ -12,55 +12,94 @@ import Mobility from '../../../models/mobility.model';
 import NavDesktopSubNav from './nav.desktop.subNav.view';
 import NavDesktopJumbotron from './nav.desktop.jumbotron.view';
 
-const MenuItemWithIcon = ({ disabled = true, iconName, label, badge }) => (
-  <Menu.Item disabled={disabled}>
+const IconWithRedBadge = ({ icon }) => (
+  <>
+    <Icon name={icon} />
+    <Icon name="circle" className="top right" color="red" corner />
+  </>
+);
+
+const MenuItemWithIcon = ({ iconName, label, badge }) => (
+  <Menu.Item disabled>
     <Icon.Group size="big">
-      <Icon name={iconName} />
-      {badge && <Icon name="circle" className="top right" color="red" corner />}
+      {badge ? <IconWithRedBadge icon={iconName} /> : <Icon name={iconName} />}
     </Icon.Group>
     {label}
   </Menu.Item>
 );
 
-const NavDesktopView = ({ themes, services, mobility, children }) => (
+const CollpasedMenuIcons = () => (
+  <>
+    <MenuItemWithIcon iconName="folder" />
+    <MenuItemWithIcon iconName="comments" badge={true} />
+    <MenuItemWithIcon iconName="bell" />
+  </>
+);
+
+const ExpandedMenuIcons = () => (
+  <>
+    <MenuItemWithIcon iconName="folder" label={t('menu.documents')} />
+    <MenuItemWithIcon
+      iconName="comments"
+      label={t('menu.messages').concat(' (0)')}
+      badge={true}
+    />
+    <MenuItemWithIcon
+      iconName="bell"
+      label={t('menu.notifications')}
+      badge={true}
+    />
+  </>
+);
+
+const NavDesktopView = ({
+  themes,
+  services,
+  mobility,
+  collapsed,
+  children,
+}) => (
   <>
     <Menu secondary>
       <Menu.Menu to="dashbord" position="left">
-        <Image
-          src={logo}
-          as={Link}
-          to="/dashboard"
-          style={{ width: '190px' }}
-        />
+        <Menu.Item>
+          <Image
+            src={logo}
+            as={Link}
+            to="/dashboard"
+            style={{ width: '14.1rem' }}
+          />
+        </Menu.Item>
+
+        {collapsed && (
+          <NavDesktopSubNav
+            themes={themes}
+            services={services}
+            collapsed={true}
+          />
+        )}
       </Menu.Menu>
       <Menu.Menu position="right">
-        <MenuItemWithIcon iconName="folder" label={t('menu.documents')} />
-        <MenuItemWithIcon
-          iconName="comments"
-          label={t('menu.messages').concat(' (0)')}
-          badge={true}
-        />
-        <MenuItemWithIcon
-          iconName="bell"
-          label={t('menu.notifications')}
-          badge={true}
-        />
+        {collapsed ? <CollpasedMenuIcons /> : <ExpandedMenuIcons />}
         <Dropdown item icon={<Icon fitted size="huge" name="user circle" />}>
           <Dropdown.Menu>
-            <Dropdown.Item disabled>Personnaliser ma checklist</Dropdown.Item>
-            <Dropdown.Item disabled>Ma situation</Dropdown.Item>
-            <Dropdown.Item disabled>Mon compte</Dropdown.Item>
+            <Dropdown.Item disabled text="Personnaliser ma checklist" />
+            <Dropdown.Item disabled text="Ma situation" />
+            <Dropdown.Item disabled text="Mon compte" />
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Menu>
     </Menu>
-    <NavDesktopJumbotron mobility={mobility} />
-    <NavDesktopSubNav themes={themes} services={services} />
+    {!collapsed && <NavDesktopJumbotron mobility={mobility} />}
+    {!collapsed && (
+      <NavDesktopSubNav themes={themes} services={services} collapsed={false} />
+    )}
     {children}
   </>
 );
 
 NavDesktopView.propTypes = {
+  collapsed: PropTypes.bool.isRequired,
   themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
   services: PropTypes.arrayOf(PropTypes.instanceOf(Service)).isRequired,
   mobility: PropTypes.instanceOf(Mobility),

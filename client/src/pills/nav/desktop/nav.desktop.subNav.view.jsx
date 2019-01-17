@@ -9,8 +9,8 @@ import Service from '../../../models/service.model';
 
 // TODO: simple tests
 
-const SubNavDesktopView = ({ themes, services }) => (
-  <Menu fluid widths={3} attached>
+const SubNavDesktopView = ({ themes, services, collapsed }) => (
+  <Menu fluid widths={3} attached={!collapsed}>
     <Dropdown item text={t('menu.subNav.themes')}>
       <Dropdown.Menu>
         {themes.map((theme, i) => (
@@ -51,7 +51,7 @@ const SubNavDesktopView = ({ themes, services }) => (
           ))}
       </Dropdown.Menu>
     </Dropdown>
-    <Menu.Item as={Link} to="/bills">
+    <Menu.Item as={Link} to="/bills" className="text">
       {t('menu.subNav.factures')}
     </Menu.Item>
   </Menu>
@@ -60,6 +60,7 @@ const SubNavDesktopView = ({ themes, services }) => (
 SubNavDesktopView.propTypes = {
   themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
   services: PropTypes.arrayOf(PropTypes.instanceOf(Service)).isRequired,
+  collapsed: PropTypes.bool.isRequired,
 };
 
 export default SubNavDesktopView;

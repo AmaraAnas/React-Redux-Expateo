@@ -28,6 +28,7 @@ const NavResponsiveView = (props) => (
 );
 
 NavResponsiveView.propTypes = {
+  collapsed: PropTypes.bool.isRequired,
   themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
   services: PropTypes.arrayOf(PropTypes.instanceOf(Service)).isRequired,
   mobility: PropTypes.instanceOf(Mobility),
