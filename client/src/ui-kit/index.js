@@ -19,6 +19,7 @@ import {
   Segment,
   Select,
   Sidebar,
+  Visibility,
 } from 'semantic-ui-react';
 
 import Button from './Button';
@@ -45,4 +46,5 @@ export {
   Segment,
   Select,
   Sidebar,
+  Visibility,
 };

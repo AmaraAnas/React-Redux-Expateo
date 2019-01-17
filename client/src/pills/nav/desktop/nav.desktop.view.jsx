@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import t from '../../../i18n';
-import { Menu, Dropdown, Image, Icon } from '../../../ui-kit';
+import { Menu, Dropdown, Image, Icon, Visibility } from '../../../ui-kit';
 import logo from '../../../images/logo-sans-fond_nopadding.png';
 import Theme from '../../../models/theme.model';
 import Service from '../../../models/service.model';
@@ -52,51 +52,83 @@ const ExpandedMenuIcons = () => (
   </>
 );
 
+const menuStyle = {
+  transition: 'box-shadow 0.5s ease, padding 0.5s ease',
+};
+
+const fixedMenuStyle = {
+  backgroundColor: '#fff',
+  boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)',
+  padding: '5px',
+};
+
 const NavDesktopView = ({
   themes,
   services,
   mobility,
   collapsed,
   children,
-}) => (
-  <>
-    <Menu secondary>
-      <Menu.Menu to="dashbord" position="left">
-        <Menu.Item>
-          <Image
-            src={logo}
-            as={Link}
-            to="/dashboard"
-            style={{ width: '14.1rem' }}
-          />
-        </Menu.Item>
+}) => {
+  const [isMenuFixed, setIsMenuFixed] = useState(false);
+  const isCollapsed = isMenuFixed || collapsed;
+  return (
+    <>
+      <div>
+        <Visibility
+          onBottomPassed={() => setIsMenuFixed(true)}
+          onBottomVisible={() => setIsMenuFixed(false)}
+          once={false}
+        />
+        <Menu
+          secondary
+          fixed={isMenuFixed ? 'top' : undefined}
+          style={isMenuFixed ? fixedMenuStyle : menuStyle}
+        >
+          <Menu.Menu to="dashbord" position="left">
+            <Menu.Item>
+              <Image
+                src={logo}
+                as={Link}
+                to="/dashboard"
+                style={{ width: '14.1rem' }}
+              />
+            </Menu.Item>
 
-        {collapsed && (
+            {isCollapsed && (
+              <NavDesktopSubNav
+                themes={themes}
+                services={services}
+                collapsed={true}
+              />
+            )}
+          </Menu.Menu>
+          <Menu.Menu position="right">
+            {isCollapsed ? <CollpasedMenuIcons /> : <ExpandedMenuIcons />}
+            <Dropdown
+              item
+              icon={<Icon fitted size="huge" name="user circle" />}
+            >
+              <Dropdown.Menu>
+                <Dropdown.Item disabled text="Personnaliser ma checklist" />
+                <Dropdown.Item disabled text="Ma situation" />
+                <Dropdown.Item disabled text="Mon compte" />
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
+        </Menu>
+        <NavDesktopJumbotron mobility={mobility} />
+        {!isCollapsed && (
           <NavDesktopSubNav
             themes={themes}
             services={services}
-            collapsed={true}
+            collapsed={false}
           />
         )}
-      </Menu.Menu>
-      <Menu.Menu position="right">
-        {collapsed ? <CollpasedMenuIcons /> : <ExpandedMenuIcons />}
-        <Dropdown item icon={<Icon fitted size="huge" name="user circle" />}>
-          <Dropdown.Menu>
-            <Dropdown.Item disabled text="Personnaliser ma checklist" />
-            <Dropdown.Item disabled text="Ma situation" />
-            <Dropdown.Item disabled text="Mon compte" />
-          </Dropdown.Menu>
-        </Dropdown>
-      </Menu.Menu>
-    </Menu>
-    {!collapsed && <NavDesktopJumbotron mobility={mobility} />}
-    {!collapsed && (
-      <NavDesktopSubNav themes={themes} services={services} collapsed={false} />
-    )}
-    {children}
-  </>
-);
+      </div>
+      {children}
+    </>
+  );
+};
 
 NavDesktopView.propTypes = {
   collapsed: PropTypes.bool.isRequired,
