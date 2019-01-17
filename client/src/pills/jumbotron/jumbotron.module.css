@@ -1,19 +1,8 @@
-.backgroudImagePosition {
-  background-size: cover !important; /* hack to resize the backgroud image */
-  background-repeat: no-repeat !important; /* hack to prevent backgroud image repeat */
-  background-position: center 45% !important; /* hack to position the backgroud image */
-}
-
-.remaining {
+.title {
   composes: title from global;
   font-size: 3rem;
   font-weight: bold;
-}
-
-.destination {
-  composes: important_text from global;
-  font-size: 1.4rem;
-  text-decoration: underline;
+  background: 'transparent';
 }
 
 .text {

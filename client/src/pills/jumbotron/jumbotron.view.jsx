@@ -1,52 +1,48 @@
 import React from 'react';
-import { Button, Header, Icon, Segment, Grid } from '../../ui-kit';
+import { Button, Header, Icon, Segment, Grid, Label } from '../../ui-kit';
 import background from '../../images/jumborton-background.png';
 import styles from './jumbotron.module.css';
 import t from '../../i18n';
 
 let userInfos = {
+  mobilityTitle: 'Titre de la mobilité',
   destination: 'Tunisie',
-  date: 'mardi 25 Mars 2021',
-  remainingDays: '-81',
+  date: '30/02/2019',
 };
 
 const SegmentJumbotronView = () => {
   return (
-    <Segment
-      padded="very"
-      size="massive"
-      attached
-      className={styles.backgroudImagePosition}
-      style={{ background: `url(${background}` }}
-    >
-      <Grid centered columns={2} divided>
+    <Segment size="large" attached placeholder>
+      <Grid columns={2}>
+        {/*
         <Grid.Row>
+          <Label as="a" size="big" style={{ background: "transparent"}}>
+            <Icon name='angle left' /> {t('jumborton.all_mobs')}
+          </Label> 
+        </Grid.Row> 
+      */}
+
+        <Grid.Row centered className={styles.title}>
+          {userInfos.mobilityTitle}
+        </Grid.Row>
+
+        <Grid.Row centered>
           <Grid.Column
             textAlign="right"
             verticalAlign="middle"
-            className={styles.remaining}
+            className={styles.text}
           >
-            {t('jumborton.remainingDays_text')} {userInfos.remainingDays}
+            <Icon name="calendar alternate outline" />
+            {userInfos.date}
           </Grid.Column>
           <Grid.Column
             textAlign="left"
             className={styles.text}
             verticalAlign="middle"
           >
-            {t('jumborton.destination_text')}{' '}
-            <span className={styles.destination}>{userInfos.destination}</span>{' '}
-            <br />
-            {t('jumborton.date_text')}{' '}
-            <span className={styles.destination}>{userInfos.date}</span>
+            <Icon name="map marker alternate" />
+            {userInfos.destination}
           </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Button
-            content={t('jumborton.button_text')}
-            icon="pencil alternate"
-            size="big"
-            primary
-          />
         </Grid.Row>
       </Grid>
     </Segment>
