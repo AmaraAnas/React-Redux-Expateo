@@ -3,24 +3,25 @@ import Mobility from '../../models/mobility.model';
 import { schemaSelectorCreator } from '../schema/schema.selectors';
 import * as baseApi from '../api/base.api';
 import { addEntities } from '../schema/schema.actions';
-import { getMobilityFromQuestionArray } from './mobility.questionMapping';
-
-import { STATE_KEY, mobilitySelector } from './mobility.selectors';
-
-import { getMobility } from './mobility.api';
 
 import {
-  getMobility as getMobilityAction,
+  STATE_KEY,
+  mobilitiesSelector,
+  currentMobilitySelector,
+} from './mobilities.selectors';
+import { getMobilities } from './mobilities.api';
+import {
+  getMobilities as getMobilitiesAction,
   getAllPending,
   getAllSuccess,
   getAllFailure,
-} from './mobility.actions';
+} from './mobilities.actions';
 
 jest.mock('../api/base.api');
 
-describe('Mobility selector', () => {
+describe('Mobilities selector', () => {
   it('Should created selector use the good STATE_KEY', () => {
-    expect(mobilitySelector.toString()).toEqual(
+    expect(mobilitiesSelector.toString()).toEqual(
       schemaSelectorCreator(STATE_KEY, []).toString(),
     );
   });
@@ -31,13 +32,13 @@ describe('Mobility selector', () => {
         entities: {},
       },
     };
-    expect(mobilitySelector(state)).toEqual([]);
+    expect(mobilitiesSelector(state)).toEqual([]);
   });
 });
 
-describe('Mobility API', () => {
-  it('Should return a Mobilty object', async () => {
-    const rawQuestion = [
+describe('Mobilities API', () => {
+  it('Should return an array with only one Mobilty object', async () => {
+    const rawQuestions = [
       {
         QUE_GUID: 'QUE_64',
         QUE_LABEL: 'Partez-vous avec des enfants ?',
@@ -106,20 +107,27 @@ describe('Mobility API', () => {
         ],
       },
     ];
-    baseApi.mobilityApi.mockResolvedValueOnce(rawQuestion);
-    const mobilty = await getMobility({
+    baseApi.mobilitiesApi.mockResolvedValueOnce(rawQuestions);
+    const mobilities = await getMobilities({
       sessionId: 'FE213467BD8B2EB84A34F9D6F47DF52C',
       id: '9193',
     });
-    expect(mobilty).toEqual(getMobilityFromQuestionArray(rawQuestion));
+    expect(mobilities.length).toEqual(1);
+    expect(mobilities[0].toJSON()).toEqual({
+      id: undefined,
+      startDate: new Date(
+        rawQuestions[1].user_answer_done[0].USA_DATE,
+      ).getTime(),
+      destination: rawQuestions[2].user_answer_done[0].USA_TEXT,
+    });
   });
 });
 
-describe('Mobility action', () => {
+describe('Mobilities action', () => {
   it('Should dispatch pending & success', async () => {
-    const thunk = getMobilityAction();
+    const thunk = getMobilitiesAction();
     const dispatch = jest.fn();
-    const rawQuestion = [
+    const rawQuestions = [
       {
         QUE_GUID: 'QUE_64',
         QUE_LABEL: 'Partez-vous avec des enfants ?',
@@ -188,16 +196,36 @@ describe('Mobility action', () => {
         ],
       },
     ];
-    baseApi.mobilityApi.mockResolvedValueOnce(rawQuestion);
+    baseApi.mobilitiesApi.mockResolvedValueOnce(rawQuestions);
     const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
-    await thunk(dispatch, getState, { api: { mobility: { getMobility } } });
+    await thunk(dispatch, getState, {
+      api: { mobilities: { getMobilities } },
+    });
 
     expect(dispatch).toHaveBeenCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, getAllPending());
     expect(dispatch).toHaveBeenNthCalledWith(2, getAllSuccess());
     expect(dispatch).toHaveBeenNthCalledWith(
       3,
-      addEntities({ [STATE_KEY]: getMobilityFromQuestionArray(rawQuestion) }),
+      addEntities({
+        [STATE_KEY]: [
+          new Mobility({ QUE_20: rawQuestions[1], QUE_88: rawQuestions[2] }),
+        ],
+      }),
     );
+  });
+
+  it('Should dispatch pending & failure', async () => {
+    const thunk = getMobilitiesAction();
+    const dispatch = jest.fn();
+    const e = new Error('failed');
+    baseApi.mobilitiesApi.mockRejectedValueOnce(e);
+    const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
+    await thunk(dispatch, getState, {
+      api: { mobilities: { getMobilities } },
+    });
+    expect(dispatch).toHaveBeenCalledTimes(2);
+    expect(dispatch).toHaveBeenNthCalledWith(1, getAllPending());
+    expect(dispatch).toHaveBeenNthCalledWith(2, getAllFailure(e));
   });
 });

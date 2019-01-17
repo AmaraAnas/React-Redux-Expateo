@@ -7,9 +7,10 @@ import { Menu, Dropdown, Image, Icon } from '../../ui-kit';
 import logo from '../../images/logo-sans-fond_nopadding.png';
 import Theme from '../../models/theme.model';
 import Service from '../../models/service.model';
+import Mobility from '../../models/mobility.model';
 
 import SubNavDesktopView from './subNav.desktop.view';
-import JumbotronView from '../jumbotron/jumbotron.container';
+import JumbotronView from '../jumbotron/jumbotron.view';
 
 const MenuItemWithIcon = ({ disabled = true, iconName, label, badge }) => (
   <Menu.Item disabled={disabled}>
@@ -21,7 +22,7 @@ const MenuItemWithIcon = ({ disabled = true, iconName, label, badge }) => (
   </Menu.Item>
 );
 
-const NavDesktopView = ({ themes, services, children }) => (
+const NavDesktopView = ({ themes, services, mobility, children }) => (
   <>
     <Menu secondary>
       <Menu.Menu to="dashbord" position="left">
@@ -53,7 +54,7 @@ const NavDesktopView = ({ themes, services, children }) => (
         </Dropdown>
       </Menu.Menu>
     </Menu>
-    <JumbotronView />
+    <JumbotronView mobility={mobility} />
     <SubNavDesktopView themes={themes} services={services} />
     {children}
   </>
@@ -62,6 +63,7 @@ const NavDesktopView = ({ themes, services, children }) => (
 NavDesktopView.propTypes = {
   themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
   services: PropTypes.arrayOf(PropTypes.instanceOf(Service)).isRequired,
+  mobility: PropTypes.instanceOf(Mobility),
 };
 
 export default NavDesktopView;
