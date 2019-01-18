@@ -6,6 +6,7 @@ import t from '../../../i18n';
 import { Menu, Dropdown, Divider } from '../../../ui-kit';
 import Theme from '../../../models/theme.model';
 import Service from '../../../models/service.model';
+import styles from './nav.desktop.module.css';
 
 // TODO: simple tests
 
@@ -23,7 +24,7 @@ const SubNavDesktopView = ({ themes, services, collapsed }) => (
         ))}
       </Dropdown.Menu>
     </Dropdown>
-    <Dropdown item text={t('menu.subNav.services')}>
+    <Dropdown item scrolling text={t('menu.subNav.services')}>
       <Dropdown.Menu>
         <Dropdown.Header>{t('menu.subNav.obligation')}</Dropdown.Header>
         {services
