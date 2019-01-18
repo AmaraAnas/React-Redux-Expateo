@@ -46,7 +46,7 @@ const SubNavDesktopView = ({ themes, services, collapsed }) => {
           ))}
         </Dropdown.Menu>
       </Dropdown>
-      <Dropdown item text={t('menu.subNav.services')}>
+      <Dropdown scrolling item text={t('menu.subNav.services')}>
         <Dropdown.Menu>
           <Dropdown.Header>{t('menu.subNav.obligation')}</Dropdown.Header>
           {services
