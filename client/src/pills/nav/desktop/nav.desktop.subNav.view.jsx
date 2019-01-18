@@ -7,7 +7,10 @@ import { Menu, Dropdown, Divider } from '../../../ui-kit';
 import Theme from '../../../models/theme.model';
 import Service from '../../../models/service.model';
 
+import styles from './nav.desktop.module.css';
+
 // TODO: simple tests
+// TODO: Refacto Dropdown text color
 
 const CollapsedSubNav = ({ children }) => {
   return (
@@ -34,7 +37,13 @@ const SubNavDesktopView = ({ themes, services, collapsed }) => {
   const Nav = collapsed ? CollapsedSubNav : SubNav;
   return (
     <Nav>
-      <Dropdown item text={t('menu.subNav.themes')}>
+      <Dropdown
+        item
+        className={styles.navtitle}
+        text={
+          <span className={styles.navtitle}>{t('menu.subNav.themes')}</span>
+        }
+      >
         <Dropdown.Menu>
           {themes.map((theme, i) => (
             <Dropdown.Item
@@ -46,7 +55,14 @@ const SubNavDesktopView = ({ themes, services, collapsed }) => {
           ))}
         </Dropdown.Menu>
       </Dropdown>
-      <Dropdown scrolling item text={t('menu.subNav.services')}>
+      <Dropdown
+        scrolling
+        className={styles.navtitle}
+        item
+        text={
+          <span className={styles.navtitle}>{t('menu.subNav.services')}</span>
+        }
+      >
         <Dropdown.Menu>
           <Dropdown.Header>{t('menu.subNav.obligation')}</Dropdown.Header>
           {services

@@ -5,6 +5,11 @@
   background: 'transparent';
 }
 
+.navtitle {
+  composes: title from global;
+  font-size: 1.4rem;
+}
+
 .text {
   composes: text from global;
   font-size: 1.4rem;

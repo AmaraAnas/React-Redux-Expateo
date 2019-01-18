@@ -50,7 +50,7 @@ code {
 }
 
 .title {
-  color: #0071bd;
+  color: #0071bd !important;
   font-size: 1.8rem;
 }
 
