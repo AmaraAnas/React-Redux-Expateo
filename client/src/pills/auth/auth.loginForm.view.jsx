@@ -26,7 +26,7 @@ function AuthView({ handleSubmit, invalid }) {
         component={Input}
         icon="lock"
         iconPosition="left"
-        placeholder="Password"
+        placeholder={t('form.fields.password.label')}
         validate={required}
         fluid
       />

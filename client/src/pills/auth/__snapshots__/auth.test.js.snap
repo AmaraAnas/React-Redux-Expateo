@@ -44,7 +44,7 @@ exports[`Auth render Should render 1`] = `
         onDragStart={[Function]}
         onDrop={[Function]}
         onFocus={[Function]}
-        placeholder="Password"
+        placeholder="Mot de passe"
         type="password"
         value=""
       />
