@@ -53,9 +53,12 @@ const texts = {
     confirm: {
       yes: 'Oui, je suis sûr',
       no: 'Annuler',
+      ok: 'OK',
     },
     login_pending: 'Chargement en cours, veuillez patienter',
-    login_error:
+
+    login_error_title: 'Authentification échouée',
+    login_error_message:
       "L'email et le mot de passe que vous avez entrés ne correspondent pas à ceux présents dans nos fichiers. Veuillez vérifier et réessayer.",
   },
   menu: {

@@ -14,6 +14,19 @@ export const ErrorModal = ({ title, message, ...rest }) => ({
   ...rest,
 });
 
+export const ErrorConfirmModal = ({ title, message, onOK, ...rest }) => ({
+  header: <span>{title}</span>,
+  content: <p>{message}</p>,
+  isBasic: true,
+  size: 'mini',
+  actions: [
+    <Button key="ok" primary onClick={onOK}>
+      {t('modals.confirm.ok')}
+    </Button>,
+  ],
+  ...rest,
+});
+
 export const BigLoaderModal = ({ content, ...rest }) => ({
   content: <SMLoader size="big">{content}</SMLoader>,
   isBasic: true,

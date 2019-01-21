@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { showBigLoaderModal, destroy } from '../modal/modal.actions';
+import {
+  showConfirmErrorModal,
+  showBigLoaderModal,
+  destroy,
+} from '../modal/modal.actions';
 import t from '../../i18n';
 
 import AuthViewForm from './auth.loginForm.view';
@@ -28,15 +32,15 @@ class AuthContainer extends Component {
           onLogin(user);
         },
         onFailure: () => {
-          const autoClose = setTimeout(destroyModal, 3500);
           dispatch(
-            showBigLoaderModal({
-              content: t('modals.login_error'),
-              onClose: () => {
-                clearInterval(autoClose);
-                destroyModal();
+            showConfirmErrorModal(
+              {
+                title: t('modals.login_error_title'),
+                message: t('modals.login_error_message'),
+                onOK: () => dispatch(destroy()),
               },
-            }),
+              dispatch,
+            ),
           );
         },
       }),

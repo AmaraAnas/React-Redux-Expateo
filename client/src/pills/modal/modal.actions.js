@@ -2,7 +2,12 @@ import { createAction } from 'redux-actions';
 
 import { addPrefixToActionTypes } from '../../redux-utils/utils';
 
-import { BigLoaderModal, ErrorModal, ConfirmModal } from './modal.loaders';
+import {
+  BigLoaderModal,
+  ErrorModal,
+  ConfirmModal,
+  ErrorConfirmModal,
+} from './modal.loaders';
 
 export const ACTION_TYPES = addPrefixToActionTypes(
   {
@@ -30,6 +35,22 @@ export const showErrorModal = ({ title, message, ...rest }) =>
     ErrorModal({
       title,
       message,
+      ...rest,
+    }),
+  );
+
+export const showConfirmErrorModal = (
+  { title, message, onOK, ...rest },
+  dispatch,
+) =>
+  show(
+    ErrorConfirmModal({
+      title,
+      message,
+      onOK: async () => {
+        await onOK();
+        dispatch(destroy());
+      },
       ...rest,
     }),
   );
