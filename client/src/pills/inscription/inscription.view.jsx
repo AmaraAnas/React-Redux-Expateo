@@ -167,9 +167,13 @@ function InscriptionView({
               placeholder={t('form.fields.confirmpassword.placeholder')}
               validate={required}
               icon={
-                !confirmPasswordError && (
+                !confirmPasswordError ? (
                   <Animate animation="fadeInRight">
                     <Icon color="green" name="check circle" />
+                  </Animate>
+                ) : (
+                  <Animate animation="fadeInRight">
+                    <Icon color="red" name="times circle" />
                   </Animate>
                 )
               }
