@@ -49,9 +49,9 @@ const texts = {
   },
   modals: {
     logout_confirm_title: 'Déconnexion',
-    logout_confirm_message: 'Êtes vous sûre de vous déconnecter ?',
+    logout_confirm_message: 'Êtes vous sûr de vous déconnecter ?',
     confirm: {
-      yes: 'Oui, je suis sûre',
+      yes: 'Oui, je suis sûr',
       no: 'Annuler',
     },
     login_pending: 'Chargement en cours, veuillez patienter',
