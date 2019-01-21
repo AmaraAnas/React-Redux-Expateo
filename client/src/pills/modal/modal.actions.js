@@ -6,8 +6,10 @@ import {
   BigLoaderModal,
   ErrorModal,
   ConfirmModal,
-  ErrorConfirmModal,
+  ErrorAlertModal,
 } from './modal.loaders';
+
+// TODO: test that functions
 
 export const ACTION_TYPES = addPrefixToActionTypes(
   {
@@ -39,16 +41,16 @@ export const showErrorModal = ({ title, message, ...rest }) =>
     }),
   );
 
-export const showConfirmErrorModal = (
-  { title, message, onOK, ...rest },
+export const showErrorAlertModal = (
+  { title, message, onClose, ...rest },
   dispatch,
 ) =>
   show(
-    ErrorConfirmModal({
+    ErrorAlertModal({
       title,
       message,
-      onOK: async () => {
-        await onOK();
+      onClose: async () => {
+        await onClose();
         dispatch(destroy());
       },
       ...rest,

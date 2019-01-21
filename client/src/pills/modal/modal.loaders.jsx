@@ -14,14 +14,14 @@ export const ErrorModal = ({ title, message, ...rest }) => ({
   ...rest,
 });
 
-export const ErrorConfirmModal = ({ title, message, onOK, ...rest }) => ({
+export const ErrorAlertModal = ({ title, message, onClose, ...rest }) => ({
   header: <span>{title}</span>,
   content: <p>{message}</p>,
   isBasic: true,
   size: 'mini',
   actions: [
-    <Button key="ok" primary onClick={onOK}>
-      {t('modals.confirm.ok')}
+    <Button key="ok" primary onClick={onClose}>
+      {t('modals.alert.ok')}
     </Button>,
   ],
   ...rest,

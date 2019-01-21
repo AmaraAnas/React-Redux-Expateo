@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
-  showConfirmErrorModal,
+  showErrorAlertModal,
   showBigLoaderModal,
   destroy,
 } from '../modal/modal.actions';
@@ -33,11 +33,11 @@ class AuthContainer extends Component {
         },
         onFailure: () => {
           dispatch(
-            showConfirmErrorModal(
+            showErrorAlertModal(
               {
                 title: t('modals.login_error_title'),
                 message: t('modals.login_error_message'),
-                onOK: () => dispatch(destroy()),
+                onClose: () => dispatch(destroy()),
               },
               dispatch,
             ),
