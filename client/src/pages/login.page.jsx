@@ -41,7 +41,7 @@ export default class LoginForm extends React.Component {
             borderRadius: '25px',
           }}
         >
-          <Responsive as={Segment} minWidth={Responsive.onlyTablet.minWidth}>
+          <Responsive as={Segment}>
             <Image src={logo} style={{ padding: '48px' }} />
           </Responsive>
           <AuthForm onLogin={this.handleLoginSubmit} />
