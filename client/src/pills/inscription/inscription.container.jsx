@@ -60,6 +60,7 @@ class InscriptionContainer extends Component {
         family={family}
         password={password}
         passwordError={syncErrors.password}
+        confirmPasswordError={syncErrors.confirmpassword}
       />
     );
   }
@@ -77,5 +78,6 @@ const syncErrorsSelector = getFormSyncErrors('InscriptionForm');
 export default connect((state) => ({
   family: selector(state, 'family'),
   password: selector(state, 'password'),
+  confirmpassword: selector(state, 'confirmpassword'),
   syncErrors: syncErrorsSelector(state),
 }))(InscriptionContainer);

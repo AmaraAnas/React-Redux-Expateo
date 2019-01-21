@@ -74,6 +74,7 @@ function InscriptionView({
   pristine,
   error,
   passwordError,
+  confirmPasswordError,
 }) {
   return (
     <Form onSubmit={handleSubmit}>
@@ -165,6 +166,13 @@ function InscriptionView({
               label={t('form.fields.confirmpassword.label')}
               placeholder={t('form.fields.confirmpassword.placeholder')}
               validate={required}
+              icon={
+                !confirmPasswordError && (
+                  <Animate animation="fadeInRight">
+                    <Icon color="green" name="check circle" />
+                  </Animate>
+                )
+              }
               fluid
             />
           </Grid.Column>
