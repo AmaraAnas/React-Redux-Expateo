@@ -4,6 +4,30 @@ import User from '../../models/user.model';
 
 import * as InscriptionApi from './inscription.api';
 
+export function getInitialValues({
+  onSuccess,
+  onPending,
+  onFailure,
+  userGuid,
+  familyGuid,
+  clGuid,
+  inscriptionApi = InscriptionApi,
+}) {
+  onPending();
+  return async (dispatch) => {
+    try {
+      const data = await inscriptionApi.load({
+        userGuid,
+        familyGuid,
+        clGuid,
+      });
+      onSuccess(data);
+    } catch (e) {
+      onFailure();
+    }
+  };
+}
+
 export function inscription({
   onPending,
   onSuccess,

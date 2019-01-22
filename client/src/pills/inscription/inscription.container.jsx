@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formValueSelector, getFormSyncErrors } from 'redux-form';
+import { Redirect } from 'react-router-dom';
 
 import {
   showBigLoaderModal,
@@ -9,18 +10,47 @@ import {
   destroy,
 } from '../modal/modal.actions';
 
-import { inscription } from './inscription.actions';
+import { inscription, getInitialValues } from './inscription.actions';
 import InscriptionViewForm from './inscription.view';
 
 class InscriptionContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isMobilityAlreadyInitialized: false,
+      isPasswordAlreadyInitialized: false,
+      familyFieldOptions: [],
+    };
 
     this.handleLogin = this.handleLogin.bind(this);
   }
 
+  componentDidMount() {
+    const { dispatch, userGuid, familyGuid, clGuid } = this.props;
+    const destroyModal = () => dispatch(destroy());
+    dispatch(
+      getInitialValues({
+        userGuid,
+        familyGuid,
+        clGuid,
+        onPending: () => dispatch(showBigLoaderModal({ content: '' })),
+        onSuccess: (res) => {
+          destroyModal();
+          this.setState(res);
+        },
+        onFailure: () => destroyModal(),
+      }),
+    );
+  }
+
   handleLogin({ allowEmail, ...formValues }) {
-    const { dispatch, onInscription, userGuid, familyGuid } = this.props;
+    const {
+      dispatch,
+      onInscription,
+      userGuid,
+      familyGuid,
+      clGuid,
+    } = this.props;
     const destroyModal = () => dispatch(destroy());
     const dispatchErrorModal = () =>
       dispatch(
@@ -33,6 +63,7 @@ class InscriptionContainer extends Component {
       inscription({
         userGuid,
         familyGuid,
+        clGuid,
         allowEmail: allowEmail ? 1 : 0,
         ...formValues,
         onPending: () =>
@@ -54,10 +85,19 @@ class InscriptionContainer extends Component {
 
   render() {
     const { family, password, syncErrors } = this.props;
+    const {
+      isMobilityAlreadyInitialized,
+      isPasswordAlreadyInitialized,
+      familyFieldOptions,
+    } = this.state;
+    if (isMobilityAlreadyInitialized || isPasswordAlreadyInitialized) {
+      return <Redirect to="/" />;
+    }
     return (
       <InscriptionViewForm
         onSubmit={this.handleLogin}
         family={family}
+        familyFieldOptions={familyFieldOptions}
         password={password}
         passwordError={syncErrors.password}
         confirmPasswordError={syncErrors.confirmpassword}
@@ -70,6 +110,7 @@ InscriptionContainer.propTypes = {
   onInscription: PropTypes.func.isRequired,
   userGuid: PropTypes.string.isRequired,
   familyGuid: PropTypes.string.isRequired,
+  clGuid: PropTypes.string.isRequired,
 };
 
 const selector = formValueSelector('InscriptionForm');

@@ -24,8 +24,13 @@ export default class InscriptionForm extends React.Component {
 
   render() {
     let { redirectToReferrer } = this.state;
-    if (redirectToReferrer || !this.query.family || !this.query.guid) {
-      return <Redirect to={{ pathname: '/dashboard' }} />;
+    if (
+      redirectToReferrer ||
+      !this.query.family ||
+      !this.query.guid ||
+      !this.query.cl
+    ) {
+      return <Redirect to="/" />;
     }
     return (
       <Container className={styles.container} text fluid>
@@ -37,6 +42,7 @@ export default class InscriptionForm extends React.Component {
           onInscription={this.handleLoginSubmit}
           userGuid={this.query.guid}
           familyGuid={this.query.family}
+          clGuid={this.query.cl}
         />
       </Container>
     );

@@ -16,6 +16,7 @@ describe('Inscription render', () => {
           onInscription={noop}
           userGuid="0871303E98DE4C75F959A07807A8051B"
           familyGuid="D919A6C9F9985C4C70AE8BC055981B4F"
+          clGuid="D919A6C9F9985C4C70AE8BC055981B5F"
         />,
       ),
     ).toBeDefined();

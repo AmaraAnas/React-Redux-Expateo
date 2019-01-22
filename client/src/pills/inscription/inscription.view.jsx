@@ -59,13 +59,6 @@ const validate = (values) => {
   return errors;
 };
 
-const familyOptions = [
-  { text: 'Seule', value: 'FAMILLE_SEUL' },
-  { text: 'En concubinage', value: 'FAMILLE_CONCUBINAGE' },
-  { text: 'Pacsé', value: 'FAMILLE_PACSE' },
-  { text: 'Marié', value: 'FAMILLE_MARIE' },
-];
-
 function InscriptionView({
   family,
   password,
@@ -75,6 +68,7 @@ function InscriptionView({
   error,
   passwordError,
   confirmPasswordError,
+  familyFieldOptions,
 }) {
   return (
     <Form onSubmit={handleSubmit}>
@@ -96,7 +90,7 @@ function InscriptionView({
               name="family"
               component={Select}
               type="text"
-              options={familyOptions}
+              options={familyFieldOptions}
               label={t('form.fields.family.label')}
               placeholder={t('form.fields.family.placeholder')}
               validate={required}
@@ -220,6 +214,16 @@ function InscriptionView({
 
 InscriptionView.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  family: PropTypes.string,
+  familyFieldOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  password: PropTypes.string,
+  passwordError: PropTypes.string,
+  confirmPasswordError: PropTypes.string,
 };
 
 export default reduxForm({
