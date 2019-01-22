@@ -3,29 +3,126 @@
  *
  */
 export default class Mobility {
-  constructor({ id, QUE_88, QUE_20 }) {
+  constructor({
+    UCK_AMOUNT_MAX,
+    UCK_ARRIVAL_CITY,
+    UCK_ARRIVAL_COUNTRY_CODE,
+    UCK_ARRIVAL_COUNTRY_FLAG_URL,
+    UCK_ARRIVAL_COUNTRY_LABEL,
+    UCK_ARRIVAL_DATETIME,
+    UCK_ARRIVAL_MOBILITY_STATUS,
+    UCK_ARRIVAL_MOBILITY_STATUS_LABEL,
+    UCK_ARRIVAL_PLACE,
+    UCK_ARRIVAL_STATE_CODE,
+    UCK_ARRIVAL_STATE_LABEL,
+    UCK_BEGIN_DATETIME,
+    UCK_CHILD_COUNT,
+    UCK_CHILD_COUNT_LABEL,
+    UCK_CKM_GUID,
+    UCK_CLOSURE_DATETIME,
+    UCK_CSU_ARRIVAL_GUID,
+    UCK_CSU_ARRIVAL_NAME,
+    UCK_CSU_DEPARTURE_GUID,
+    UCK_CSU_DEPARTURE_NAME,
+    UCK_CURRENCY,
+    UCK_CURRENT,
+    UCK_DEPARTURE_CITY,
+    UCK_DEPARTURE_COUNTRY_CODE,
+    UCK_DEPARTURE_COUNTRY_FLAG_URL,
+    UCK_DEPARTURE_COUNTRY_LABEL,
+    UCK_DEPARTURE_DATETIME,
+    UCK_DEPARTURE_PLACE,
+    UCK_DEPARTURE_STATE_CODE,
+    UCK_DEPARTURE_STATE_LABEL,
+    UCK_END_DATETIME,
+    UCK_FAMILY_GUID,
+    UCK_FAMILY_STATUS,
+    UCK_FAMILY_STATUS_LABEL,
+    UCK_GUID,
+    UCK_ID,
+    UCK_INSERT_DATETIME,
+    UCK_JOB_TITLE_ARRIVAL,
+    UCK_LABEL,
+    UCK_MOVING_DATETIME,
+    UCK_PMI_GUID,
+    UCK_SPOUSE_GUID,
+    UCK_STATUS,
+    UCK_UPDATE_DATETIME,
+  }) {
     this._rawData = {
-      QUE_88,
-      QUE_20,
-      id,
+      UCK_AMOUNT_MAX,
+      UCK_ARRIVAL_CITY,
+      UCK_ARRIVAL_COUNTRY_CODE,
+      UCK_ARRIVAL_COUNTRY_FLAG_URL,
+      UCK_ARRIVAL_COUNTRY_LABEL,
+      UCK_ARRIVAL_DATETIME,
+      UCK_ARRIVAL_MOBILITY_STATUS,
+      UCK_ARRIVAL_MOBILITY_STATUS_LABEL,
+      UCK_ARRIVAL_PLACE,
+      UCK_ARRIVAL_STATE_CODE,
+      UCK_ARRIVAL_STATE_LABEL,
+      UCK_BEGIN_DATETIME,
+      UCK_CHILD_COUNT,
+      UCK_CHILD_COUNT_LABEL,
+      UCK_CKM_GUID,
+      UCK_CLOSURE_DATETIME,
+      UCK_CSU_ARRIVAL_GUID,
+      UCK_CSU_ARRIVAL_NAME,
+      UCK_CSU_DEPARTURE_GUID,
+      UCK_CSU_DEPARTURE_NAME,
+      UCK_CURRENCY,
+      UCK_CURRENT,
+      UCK_DEPARTURE_CITY,
+      UCK_DEPARTURE_COUNTRY_CODE,
+      UCK_DEPARTURE_COUNTRY_FLAG_URL,
+      UCK_DEPARTURE_COUNTRY_LABEL,
+      UCK_DEPARTURE_DATETIME,
+      UCK_DEPARTURE_PLACE,
+      UCK_DEPARTURE_STATE_CODE,
+      UCK_DEPARTURE_STATE_LABEL,
+      UCK_END_DATETIME,
+      UCK_FAMILY_GUID,
+      UCK_FAMILY_STATUS,
+      UCK_FAMILY_STATUS_LABEL,
+      UCK_GUID,
+      UCK_ID,
+      UCK_INSERT_DATETIME,
+      UCK_JOB_TITLE_ARRIVAL,
+      UCK_LABEL,
+      UCK_MOVING_DATETIME,
+      UCK_PMI_GUID,
+      UCK_SPOUSE_GUID,
+      UCK_STATUS,
+      UCK_UPDATE_DATETIME,
     };
   }
 
   get id() {
-    return this._rawData.id;
+    return this._rawData.UCK_ID;
+  }
+
+  get guid() {
+    return this._rawData.UCK_GUID;
   }
 
   get startDate() {
-    return new Date(
-      this._rawData.QUE_20.user_answer_done[0].USA_DATE,
-    ).getTime();
+    return new Date(this._rawData.UCK_DEPARTURE_DATETIME).getTime();
   }
+
   get destination() {
-    return this._rawData.QUE_88.user_answer_done[0].USA_TEXT;
+    return this._rawData.UCK_ARRIVAL_PLACE;
+  }
+
+  get isCurrent() {
+    return this._rawData.UCK_CURRENT === '1';
+  }
+
+  get title() {
+    return this._rawData.UCK_LABEL;
   }
 
   toJSON() {
-    const { id, startDate, destination } = this;
-    return { id, startDate, destination };
+    const { id, startDate, destination, isCurrent, title, guid } = this;
+    return { id, startDate, destination, isCurrent, title, guid };
   }
 }
