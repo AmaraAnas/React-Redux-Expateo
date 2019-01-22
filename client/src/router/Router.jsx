@@ -29,6 +29,11 @@ const HomePage = React.lazy(() =>
 
   '../pages/home.page'),
 );
+const MobilitiesPage = React.lazy(() =>
+  import(/* webpackChunkName: "mobilities.page" */
+
+  '../pages/mobilities.page'),
+);
 const NoMatchPage = React.lazy(() =>
   import(/* webpackChunkName: "noMatch.page" */
   '../pages/noMatch.page'),
@@ -78,7 +83,9 @@ const Router = ({ indexRedirect, location }) => (
     <React.Suspense fallback={LoadingLazyPage}>
       <MainLayout
         isNavVisible={
-          location.pathname !== '/login' && location.pathname !== '/inscription'
+          location.pathname !== '/login' &&
+          location.pathname !== '/inscription' &&
+          location.pathname !== '/mobilities'
         }
       >
         <Switch location={location}>
@@ -95,7 +102,11 @@ const Router = ({ indexRedirect, location }) => (
               <PrivateRoute exact path="/dashboard" component={HomePage} />
               <PrivateRoute exact path="/themes/:id" component={DumbPage} />
               <PrivateRoute exact path="/services/:id" component={DumbPage} />
-              <PrivateRoute exact path="/mobilities/:id" component={DumbPage} />
+              <PrivateRoute
+                exact
+                path="/mobilities"
+                component={MobilitiesPage}
+              />
               <PrivateRoute exact path="/bills" component={DumbPage} />
               <PrivateRoute exact path="/notifications" component={DumbPage} />
               <PrivateRoute exact path="/messages" component={DumbPage} />
