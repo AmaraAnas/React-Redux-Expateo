@@ -41,6 +41,8 @@ export default function({ match, location }) {
                   meta="en attente"
                   description={mobility.destination}
                   extra={new Date(mobility.startDate).toLocaleDateString()}
+                  as={Link}
+                  to="/dashboard"
                 />
               ))}
               {mobilities.map((mobility) => (
@@ -51,6 +53,8 @@ export default function({ match, location }) {
                   meta="en attente"
                   description={mobility.destination}
                   extra={new Date(mobility.startDate).toLocaleDateString()}
+                  as={Link}
+                  to="/dashboard"
                 />
               ))}
               {mobilities.map((mobility) => (
@@ -61,26 +65,8 @@ export default function({ match, location }) {
                   meta="en attente"
                   description={mobility.destination}
                   extra={new Date(mobility.startDate).toLocaleDateString()}
-                />
-              ))}
-              {mobilities.map((mobility) => (
-                <Card
-                  key={mobility.id}
-                  raised
-                  header={mobility.title}
-                  meta="en attente"
-                  description={mobility.destination}
-                  extra={new Date(mobility.startDate).toLocaleDateString()}
-                />
-              ))}
-              {mobilities.map((mobility) => (
-                <Card
-                  key={mobility.id}
-                  raised
-                  header={mobility.title}
-                  meta="en attente"
-                  description={mobility.destination}
-                  extra={new Date(mobility.startDate).toLocaleDateString()}
+                  as={Link}
+                  to="/dashboard"
                 />
               ))}
             </Card.Group>

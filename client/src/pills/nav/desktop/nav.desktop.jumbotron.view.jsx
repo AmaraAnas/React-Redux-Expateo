@@ -1,23 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import { Icon, Segment, Grid } from '../../../ui-kit';
+import t from '../../../i18n';
+import { Icon, Segment, Grid, Label } from '../../../ui-kit';
 import Animate from '../../../elements/animate/animate';
 import Mobility from '../../../models/mobility.model';
 
 import styles from './nav.desktop.module.css';
 
+// TODO: label to navigate
 export default function SegmentJumbotronView({ mobility }) {
   return (
     <Segment size="large" attached placeholder>
       {mobility ? (
         <Animate animation="fadeInDown">
           <Grid columns={2}>
-            {/* <Grid.Row>
-              <Label as="a" size="big" style={{ background: 'transparent' }}>
-                <Icon name="angle left" /> {t('jumborton.all_mobs')}
+            <Grid.Row>
+              <Label
+                as={Link}
+                to="/mobilities"
+                style={{
+                  background: 'transparent',
+                  color: '#707070',
+                  fontSize: '18px',
+                  fontWeight: '300',
+                }}
+              >
+                <Icon name="chevron left" /> {t('jumborton.all_mobs')}
               </Label>
-            </Grid.Row> */}
+            </Grid.Row>
 
             <Grid.Row centered className={styles.title}>
               {mobility.title}
