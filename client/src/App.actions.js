@@ -3,6 +3,7 @@ import { createAction } from 'redux-actions';
 import { addPrefixToActionTypes } from './redux-utils/utils';
 import * as AuthApi from './pills/auth/auth.api';
 import { loginSuccess } from './pills/auth/auth.actions';
+import { getMobilities } from './pills/mobilities/mobilities.actions';
 
 export const ACTION_TYPES = addPrefixToActionTypes(
   {
@@ -21,6 +22,7 @@ export function init() {
       if (user && user.isLogged) {
         dispatch(loginSuccess(user));
       }
+      await dispatch(getMobilities());
     } catch (e) {}
     dispatch(initDone());
   };

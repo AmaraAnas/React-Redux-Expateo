@@ -13,7 +13,6 @@ import { getTasks } from '../tasks/tasks.actions';
 import { servicesWithTaskSelector } from '../services/services.selectors';
 import { getServices } from '../services/services.actions';
 import { currentMobilitySelector } from '../mobilities/mobilities.selectors';
-import { getMobilities } from '../mobilities/mobilities.actions';
 import { shouldCollapseSelector } from './nav.selectors';
 
 import NavResponsive from './nav.responsive.view';
@@ -39,7 +38,7 @@ function mapStateToProps(store) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return useDispatch(dispatch)(getMobilities, getTasks, getThemes, getServices);
+  return useDispatch(dispatch)(getTasks, getThemes, getServices);
 }
 
 NavContainer.propTypes = {
