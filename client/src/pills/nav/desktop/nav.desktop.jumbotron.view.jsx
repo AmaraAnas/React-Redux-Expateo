@@ -20,7 +20,7 @@ export default function SegmentJumbotronView({ mobility }) {
             </Grid.Row> */}
 
             <Grid.Row centered className={styles.title}>
-              {mobility.destination}
+              {mobility.title}
             </Grid.Row>
             <Grid.Row centered>
               <Grid.Column
