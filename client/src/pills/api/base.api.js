@@ -14,7 +14,7 @@ const baseData = {
   gNavigator: getNavigator(),
   gResolution: getResolution(),
   gDevice: isMobile() ? 'M' : 'D',
-  gApp: 'PG',
+  gApp: 'XPTO',
   USR_LANGUAGE: navigator.language.split('-')[0],
   USR_APP: 'XPTO',
   USR_REMEMBERME: true, //TODO: working as remberme is always checked - we should implment this
@@ -22,7 +22,8 @@ const baseData = {
 
 export const AJAX_ACTIONS = {
   CONNECT: 'connect',
-  INSCRIPTION_B2B: 'subscribe_end_b2b',
+  INSCRIPTION_B2B_LOAD: 'subscribe_end_b2b_load',
+  INSCRIPTION_B2B_COMMIT: 'subscribe_end_b2b_commit',
   LIST: 'list',
   LISTALL: 'listall',
 };
@@ -54,9 +55,10 @@ const apiCreator = (ajaxAction) => (url) => async (data) => {
 };
 
 export const authApi = apiCreator(AJAX_ACTIONS.CONNECT)(ENDPOINTS.USR);
-export const subscribeApi = apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B)(
-  ENDPOINTS.USR,
-);
+export const subscribeApi = {
+  load: apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B_LOAD)(ENDPOINTS.USR),
+  commit: apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B_COMMIT)(ENDPOINTS.USR),
+};
 export const themesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.THEME);
 export const servicesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.SERVICE);
 export const tasksApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
