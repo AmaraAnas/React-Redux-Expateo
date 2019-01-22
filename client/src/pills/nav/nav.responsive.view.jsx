@@ -18,10 +18,10 @@ const NavDesktop = React.lazy(() =>
 
 const NavResponsiveView = (props) => (
   <>
-    <Responsive as={Fragment} maxWidth={Responsive.onlyMobile.maxWidth}>
-      <NavMobile {...props} />
+    <Responsive as={Fragment}>
+      {/* <NavMobile {...props} />
     </Responsive>
-    <Responsive as={Fragment} minWidth={Responsive.onlyTablet.minWidth}>
+    <Responsive as={Fragment} minWidth={Responsive.onlyTablet.minWidth}> */}
       <NavDesktop {...props} />
     </Responsive>
   </>
