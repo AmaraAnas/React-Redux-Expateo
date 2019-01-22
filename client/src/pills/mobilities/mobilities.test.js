@@ -131,6 +131,30 @@ describe('Mobilities selector', () => {
     };
     expect(mobilitiesSelector(state)).toEqual([]);
   });
+
+  it('Should return all mobilities', () => {
+    let state = {
+      Schema: {
+        entities: {
+          mobilities: [1, 2, 3],
+        },
+      },
+    };
+    expect(mobilitiesSelector(state)).toEqual([1, 2, 3]);
+  });
+
+  it('Should return the current mobility', () => {
+    let state = {
+      Schema: {
+        entities: {
+          mobilities: rawMobilities.map((mobility) => new Mobility(mobility)),
+        },
+      },
+    };
+    expect(currentMobilitySelector(state)).toEqual(
+      new Mobility(rawMobilities[0]),
+    );
+  });
 });
 
 describe('Mobilities API', () => {
