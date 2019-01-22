@@ -22,17 +22,11 @@ const QUESTION_GUIDS = new Set([
  */
 
 export async function getMobilities({ sessionId: gSesGuid, id: gUsrId }) {
-  const rawQuestions = await mobilitiesApi({
+  const rawMobilities = await mobilitiesApi({
     gSesGuid,
     gUsrId,
     gAdmUsrId: null,
     gAdmSesGuid: null,
   });
-
-  return rawQuestions
-    .filter((question) => QUESTION_GUIDS.has(question.QUE_GUID))
-    .reduce((acc, question) => [{ ...acc[0], [question.QUE_GUID]: question }], [
-      {},
-    ]) // transform to array to emulates multiples mobilities
-    .map((rawMobility) => new Mobility(rawMobility));
+  return rawMobilities.map((rawMobility) => new Mobility(rawMobility));
 }
