@@ -34,6 +34,7 @@ export const ENDPOINTS = {
   SERVICE: '/ajax_usc.php',
   THEME: '/ajax_the.php',
   QUESTION: '/ajax_qtt.php',
+  MOBILITY: '/ajax_uck.php',
 };
 
 /**
@@ -62,8 +63,6 @@ export const subscribeApi = {
 export const themesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.THEME);
 export const servicesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.SERVICE);
 export const tasksApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
-export const mobilitiesApi = apiCreator(AJAX_ACTIONS.LISTALL)(
-  ENDPOINTS.QUESTION,
-);
+export const mobilitiesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.MOBILITY);
 
 export default apiCreator;
