@@ -73,7 +73,10 @@ describe('Services selector', () => {
 describe('Services API', () => {
   it('Should return an array of Service', async () => {
     baseApi.servicesApi.mockResolvedValueOnce(rawServices);
-    const services = await getServices({ sessionId: '0128d', id: '123' });
+    const services = await getServices(
+      { sessionId: '0128d', id: '123' },
+      { guid: '1234' },
+    );
     expect(services).toEqual(
       rawServices.map((service) => new Service(service)),
     );
@@ -85,9 +88,19 @@ describe('Services action', () => {
     const thunk = getServicesAction();
     const dispatch = jest.fn();
     baseApi.servicesApi.mockResolvedValueOnce(rawServices);
-    const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
+    const getState = jest.fn().mockReturnValueOnce({
+      Auth: { user: {} },
+      Schema: {
+        entities: {
+          mobilities: [
+            { guid: '1234', isCurrent: true },
+            { guid: '4567', isCurrent: false },
+          ],
+        },
+      },
+    });
     await thunk(dispatch, getState, {
-      api: { services: { getServices: getServices } },
+      api: { services: { getServices } },
     });
     expect(dispatch).toHaveBeenCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, getAllPending());
@@ -105,7 +118,17 @@ describe('Services action', () => {
     const dispatch = jest.fn();
     const e = new Error('failed');
     baseApi.servicesApi.mockRejectedValueOnce(e);
-    const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
+    const getState = jest.fn().mockReturnValueOnce({
+      Auth: { user: {} },
+      Schema: {
+        entities: {
+          mobilities: [
+            { guid: '1234', isCurrent: true },
+            { guid: '4567', isCurrent: false },
+          ],
+        },
+      },
+    });
     await thunk(dispatch, getState, {
       api: { services: { getServices } },
     });

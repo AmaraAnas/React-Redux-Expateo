@@ -21,12 +21,17 @@ import { servicesApi } from '../api/base.api';
 /**
  * get list of services for the given user
  * @param {User} - the user where to retrieve sessionId and id field
+ * @param {Mobility} - the associated mobility where to retrieve guid
  * @returns {Array<Service>} - return list of Service
  */
-export async function getServices({ sessionId: gSesGuid, id: gUsrId }) {
+export async function getServices(
+  { sessionId: gSesGuid, id: gUsrId },
+  { guid: UCK_GUID },
+) {
   return servicesApi({
     gSesGuid,
     gUsrId,
+    UCK_GUID,
     gAdmUsrId: null,
     gAdmSesGuid: null,
   }).then((rawServices) => rawServices.map((service) => new Service(service)));

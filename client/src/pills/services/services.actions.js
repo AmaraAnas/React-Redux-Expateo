@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions';
 
 import { addPrefixToActionTypes } from '../../redux-utils/utils';
 import { userSelector } from '../auth/auth.selectors';
+import { currentMobilitySelector } from '../mobilities/mobilities.selectors';
 import { addEntities } from '../schema/schema.actions';
 
 import { STATE_KEY } from './services.selectors';
@@ -22,9 +23,11 @@ export const getAllPending = createAction(ACTION_TYPES.GET_ALL_PENDING);
 export function getServices() {
   return async (dispatch, getState, { api }) => {
     dispatch(getAllPending());
-    let user = userSelector(getState());
+    const state = getState();
+    let user = userSelector(state);
+    let currentMobility = currentMobilitySelector(state);
     try {
-      const services = await api.services.getServices(user);
+      const services = await api.services.getServices(user, currentMobility);
       dispatch(getAllSuccess());
       dispatch(addEntities({ [STATE_KEY]: services }));
     } catch (e) {
