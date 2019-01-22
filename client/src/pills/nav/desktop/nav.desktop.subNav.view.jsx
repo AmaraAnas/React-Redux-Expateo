@@ -71,7 +71,7 @@ const SubNavDesktopView = ({ themes, services, collapsed }) => {
               <Dropdown.Item
                 key={i}
                 description="obligatoire"
-                text={service.title}
+                text={service.name}
                 as={Link}
                 to={`/services/${service.id}`}
               />
@@ -83,7 +83,7 @@ const SubNavDesktopView = ({ themes, services, collapsed }) => {
             .map((service, i) => (
               <Dropdown.Item
                 key={i}
-                text={service.title}
+                text={service.name}
                 as={Link}
                 to={`/services/${service.id}`}
               />
