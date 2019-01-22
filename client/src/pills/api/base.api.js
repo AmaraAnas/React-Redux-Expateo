@@ -2,8 +2,10 @@ import axios from 'axios';
 
 import { getNavigator, getResolution, isMobile } from '../../utils';
 
+import config from './base.api.config';
+
 const api = axios.create({
-  baseURL: 'https://www.expateo.com/dev_v2/ws/ajax/', // TODO: envify this url
+  baseURL: config.apiEndpoint,
   headers: { 'Content-Type': 'application/json' },
   method: 'POST',
 });
