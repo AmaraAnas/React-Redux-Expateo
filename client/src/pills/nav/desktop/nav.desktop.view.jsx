@@ -76,6 +76,13 @@ const NavDesktopView = ({
   return (
     <>
       <div>
+        {isCollapsed && (
+          <Visibility
+            onBottomPassed={() => setIsMenuFixed(true)}
+            onBottomVisible={() => setIsMenuFixed(false)}
+            once={false}
+          />
+        )}
         <Menu
           secondary
           fixed={isMenuFixed ? 'top' : undefined}
