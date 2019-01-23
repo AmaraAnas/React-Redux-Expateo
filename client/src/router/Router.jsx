@@ -93,7 +93,7 @@ const Router = ({ indexRedirect, location }) => (
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/inscription" component={InscriptionPage} />
           <AnimatedRoute key={location.pathname}>
-            <Switch>
+            <Switch location={location}>
               <Route
                 exact
                 path="/sign-up"
