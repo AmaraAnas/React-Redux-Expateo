@@ -74,11 +74,6 @@ const NavDesktopView = ({
   return (
     <>
       <div>
-        <Visibility
-          onBottomPassed={() => setIsMenuFixed(true)}
-          onBottomVisible={() => setIsMenuFixed(false)}
-          once={false}
-        />
         <Menu
           secondary
           fixed={isMenuFixed ? 'top' : undefined}
@@ -116,14 +111,22 @@ const NavDesktopView = ({
             </Dropdown>
           </Menu.Menu>
         </Menu>
+
         <NavDesktopJumbotron mobility={mobility} />
-        {!isCollapsed && (
-          <NavDesktopSubNav
-            themes={themes}
-            services={services}
-            collapsed={false}
-          />
-        )}
+        <Visibility
+          offset={1}
+          onBottomPassed={() => setIsMenuFixed(true)}
+          onBottomVisible={() => setIsMenuFixed(false)}
+          once={false}
+        >
+          {!isCollapsed && (
+            <NavDesktopSubNav
+              themes={themes}
+              services={services}
+              collapsed={false}
+            />
+          )}
+        </Visibility>
       </div>
       {children}
     </>
