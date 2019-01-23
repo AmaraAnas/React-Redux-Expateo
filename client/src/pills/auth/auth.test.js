@@ -7,6 +7,26 @@ import LoginForm from './auth.loginForm.container';
 import Logout from './auth.logout.container';
 import { login, logout } from './auth.actions';
 import AuthReducer from './auth.reducer';
+import User from '../../models/user.model';
+
+const rawUser = {
+  gSesGuid: '1C318AB4B890F07F3B4D574375DD2B3C',
+  gUsrId: '1166',
+  gUsrGuid: 'FFA6F5223A9955085D0A8E34EF3C9D15',
+  gUsrLanguage: 'fr',
+  gUsrDateFormat: 'dd/MM/yyyy',
+  gUsrCompanyGuid: 'TOTAL',
+  gServiceEnabled: '1',
+  gCompanyMode: 'GLOBAL',
+  gUsrEmail: 'test7@expateotest.com',
+  gMixPanelToken: '124355cd44c781292f9f9f5bce580456',
+  gTypeFormRpMain_FR: 'https://expateo.typeform.com/to/kkKgJU',
+  gTypeFormRpMain_EN: 'https://expateo.typeform.com/to/XADq3N',
+  gUsrDepartureCountryCode: 'MX',
+  gRedirectPage: 'indexin.html#/Start',
+  gRememberMeEmail: 'test7@expateotest.com',
+  gRememberMeId: 'FFA6F5223A9955085D0A8E34EF3C9D15',
+};
 
 describe('Auth render', () => {
   const noop = () => {};
@@ -40,7 +60,7 @@ describe('Auth render', () => {
 });
 
 describe('Auth action - reducers', () => {
-  it('LOGIN Should call pending & success', () => {
+  it('LOGIN Should call pending & success', (done) => {
     let isOnPendingCalledFlag = false;
     let isOnSuccessCalledFlag = false;
     let isOnFailureCalledFlag = false;
@@ -50,19 +70,24 @@ describe('Auth action - reducers', () => {
       onPending: () => (isOnPendingCalledFlag = true),
       onSuccess: () => (isOnSuccessCalledFlag = true),
       onFailure: () => (isOnFailureCalledFlag = true),
-      authApi: {
-        classicLogin: () =>
-          Promise.resolve().then(() => {
-            expect(isOnPendingCalledFlag).toEqual(true);
-            expect(isOnSuccessCalledFlag).toEqual(true);
-            expect(isOnFailureCalledFlag).toEqual(false);
-          }),
-      },
     });
-    loginAction(store.dispatch);
+    loginAction(store.dispatch, store.getState, {
+      api: {
+        auth: {
+          classicLogin: () => Promise.resolve(rawUser),
+        },
+      },
+    })
+      .then(() => {
+        expect(isOnPendingCalledFlag).toEqual(true);
+        expect(isOnSuccessCalledFlag).toEqual(true);
+        expect(isOnFailureCalledFlag).toEqual(false);
+        done();
+      })
+      .catch(done);
   });
 
-  it('LOGIN Should call pending & failure', () => {
+  it('LOGIN Should call pending & failure', (done) => {
     let isOnPendingCalledFlag = false;
     let isOnSuccessCalledFlag = false;
     let isOnFailureCalledFlag = false;
@@ -72,79 +97,82 @@ describe('Auth action - reducers', () => {
       onPending: () => (isOnPendingCalledFlag = true),
       onSuccess: () => (isOnSuccessCalledFlag = true),
       onFailure: () => (isOnFailureCalledFlag = true),
-      authApi: {
-        classicLogin: () =>
-          Promise.reject().catch(() => {
-            expect(isOnPendingCalledFlag).toEqual(true);
-            expect(isOnSuccessCalledFlag).toEqual(false);
-            expect(isOnFailureCalledFlag).toEqual(true);
-          }),
-      },
     });
-    loginAction(store.dispatch);
+    loginAction(store.dispatch, store.getState, {
+      api: {
+        auth: {
+          classicLogin: () => Promise.reject(new Error()),
+        },
+      },
+    })
+      .then(() => {
+        expect(isOnPendingCalledFlag).toEqual(true);
+        expect(isOnSuccessCalledFlag).toEqual(false);
+        expect(isOnFailureCalledFlag).toEqual(true);
+        done();
+      })
+      .catch(done);
   });
 
-  it('LOGIN:SUCCESS Should set the user', () => {
+  it('LOGIN:SUCCESS Should set the user', (done) => {
     const noop = () => {};
-    let state;
     const loginAction = login({
       username: 'jhon',
       password: 'doe',
       onPending: noop,
       onSuccess: noop,
       onFailure: noop,
-      authApi: {
-        classicLogin: () =>
-          Promise.resolve({ username: 'jhon' }).then(() => {
-            expect(state).toEqual({
-              user: { username: 'jhon' },
-              error: {
-                message: '',
-              },
-            });
-          }),
-      },
     });
-    state = AuthReducer(
-      {
-        user: {},
-        error: {
-          message: '',
+    AuthReducer(
+      store.getState().Auth,
+      loginAction(store.dispatch, store.getState, {
+        api: {
+          auth: {
+            classicLogin: () => Promise.resolve(rawUser),
+          },
         },
-      },
-      loginAction(store.dispatch),
+      })
+        .then(() => {
+          expect(store.getState().Auth).toEqual({
+            user: new User(rawUser),
+            error: {
+              message: '',
+            },
+          });
+          done();
+        })
+        .catch(done),
     );
   });
 
-  it('LOGIN:FAILURE Should set the error', () => {
+  it('LOGIN:FAILURE Should set the error', (done) => {
     const noop = () => {};
-    let state;
     const loginAction = login({
       username: 'jhon',
       password: 'doe',
       onPending: noop,
       onSuccess: noop,
       onFailure: noop,
-      authApi: {
-        classicLogin: () =>
-          Promise.reject(new Error('rejected')).catch(() => {
-            expect(state).toEqual({
-              user: {},
-              error: {
-                message: 'rejected',
-              },
-            });
-          }),
-      },
     });
-    state = AuthReducer(
-      {
-        user: {},
-        error: {
-          message: '',
+    AuthReducer(
+      store.getState().Auth,
+      loginAction(store.dispatch, store.getState, {
+        api: {
+          auth: {
+            classicLogin: () => Promise.reject(new Error('no way')),
+          },
         },
-      },
-      loginAction(store.dispatch),
+      })
+        .then(() => {
+          expect(store.getState().Auth).toEqual({
+            user: {},
+            error: {
+              message: 'no way',
+            },
+          });
+          done();
+        })
+        .catch(done),
     );
   });
 

@@ -21,8 +21,8 @@ export function init() {
       const user = await AuthApi.getUser(AuthApi.rememberMeLogin);
       if (user && user.isLogged) {
         dispatch(loginSuccess(user));
+        await dispatch(getMobilities()); // when the user login, we should fetch the mobilities as it is a part of the login process
       }
-      await dispatch(getMobilities());
     } catch (e) {}
     dispatch(initDone());
   };

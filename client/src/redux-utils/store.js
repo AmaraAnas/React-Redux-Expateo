@@ -7,6 +7,7 @@ import setupLogRocketReact from 'logrocket-react';
 import throttle from 'lodash.throttle';
 import { routerMiddleware } from 'connected-react-router';
 
+import * as authApi from '../pills/auth/auth.api';
 import * as themesApi from '../pills/themes/themes.api';
 import * as servicesApi from '../pills/services/services.api';
 import * as tasksApi from '../pills/tasks/tasks.api';
@@ -22,6 +23,7 @@ const middlewares = [
       services: servicesApi,
       tasks: tasksApi,
       mobilities: mobilitiesApi,
+      auth: authApi,
     },
   }),
   routerMiddleware(history),
