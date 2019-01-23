@@ -91,7 +91,10 @@ describe('Themes API', () => {
       },
     ];
     baseApi.themesApi.mockResolvedValueOnce(rawThemes);
-    const themes = await getThemes({ sessionId: '0128d', id: '123' });
+    const themes = await getThemes(
+      { sessionId: '0128d', id: '123' },
+      { guid: '1234' },
+    );
     expect(themes).toEqual(rawThemes.map((theme) => new Theme(theme)));
   });
 });
@@ -127,7 +130,10 @@ describe('Themes action', () => {
       },
     ];
     baseApi.themesApi.mockResolvedValueOnce(rawThemes);
-    const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
+    const getState = jest.fn().mockReturnValueOnce({
+      Auth: { user: {} },
+      Schema: { entities: { mobilities: [{ isCurrent: true }] } },
+    });
     await thunk(dispatch, getState, { api: { themes: { getThemes } } });
     expect(dispatch).toHaveBeenCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(1, getAllPending());
@@ -143,7 +149,10 @@ describe('Themes action', () => {
     const dispatch = jest.fn();
     const e = new Error('failed');
     baseApi.themesApi.mockRejectedValueOnce(e);
-    const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
+    const getState = jest.fn().mockReturnValueOnce({
+      Auth: { user: {} },
+      Schema: { entities: { mobilities: [{ isCurrent: true }] } },
+    });
     await thunk(dispatch, getState, { api: { themes: { getThemes } } });
     expect(dispatch).toHaveBeenCalledTimes(2);
     expect(dispatch).toHaveBeenNthCalledWith(1, getAllPending());

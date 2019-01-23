@@ -17,18 +17,24 @@ import { themesApi } from '../api/base.api';
  *   gDevice: 'D',
  *   gNavigator: 'Chrome',
  *   gResolution: '789x657',
+ *   UCK_GUID: '....'
  * });
  */
 
 /**
  * get list of themes for the given user
  * @param {User} - the user where to retrieve sessionId and id field
+ * @param {Mobility} - the associated mobility where to retrieve guid
  * @returns {Array<Theme>} - return list of Theme
  */
-export async function getThemes({ sessionId: gSesGuid, id: gUsrId }) {
+export async function getThemes(
+  { sessionId: gSesGuid, id: gUsrId },
+  { guid: UCK_GUID },
+) {
   return themesApi({
     gSesGuid,
     gUsrId,
+    UCK_GUID,
     gAdmUsrId: null,
     gAdmSesGuid: null,
   }).then((rawThemes) => rawThemes.map((theme) => new Theme(theme)));
