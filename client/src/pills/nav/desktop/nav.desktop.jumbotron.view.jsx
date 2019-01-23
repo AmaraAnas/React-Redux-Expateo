@@ -13,24 +13,25 @@ import styles from './nav.desktop.module.css';
 export default function SegmentJumbotronView({ mobility }) {
   return (
     <Segment size="large" attached placeholder>
+      <Label
+        as={Link}
+        to="/mobilities"
+        style={{
+          background: 'transparent',
+          color: '#707070',
+          fontSize: '18px',
+          fontWeight: '300',
+          position: 'absolute',
+          top: '30px',
+          left: '30px',
+          padding: '0',
+        }}
+      >
+        <Icon name="chevron left" /> {t('jumborton.all_mobs')}
+      </Label>
       {mobility ? (
         <Animate animation="fadeInDown">
           <Grid columns={2}>
-            <Grid.Row>
-              <Label
-                as={Link}
-                to="/mobilities"
-                style={{
-                  background: 'transparent',
-                  color: '#707070',
-                  fontSize: '18px',
-                  fontWeight: '300',
-                }}
-              >
-                <Icon name="chevron left" /> {t('jumborton.all_mobs')}
-              </Label>
-            </Grid.Row>
-
             <Grid.Row centered className={styles.title}>
               {mobility.title}
             </Grid.Row>
