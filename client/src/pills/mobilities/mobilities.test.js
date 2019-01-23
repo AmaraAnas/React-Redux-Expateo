@@ -159,7 +159,7 @@ describe('Mobilities selector', () => {
 
 describe('Mobilities API', () => {
   it('Should return an array with only one Mobilty object', async () => {
-    baseApi.mobilitiesApi.mockResolvedValueOnce(rawMobilities);
+    baseApi.mobilitiesApi.list.mockResolvedValueOnce(rawMobilities);
     const mobilities = await getMobilities({
       sessionId: 'FE213467BD8B2EB84A34F9D6F47DF52C',
       id: '9193',
@@ -174,7 +174,7 @@ describe('Mobilities action', () => {
   it('Should dispatch pending & success', async () => {
     const thunk = getMobilitiesAction();
     const dispatch = jest.fn();
-    baseApi.mobilitiesApi.mockResolvedValueOnce(rawMobilities);
+    baseApi.mobilitiesApi.list.mockResolvedValueOnce(rawMobilities);
     const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
     await thunk(dispatch, getState, {
       api: { mobilities: { getMobilities } },
@@ -195,7 +195,7 @@ describe('Mobilities action', () => {
     const thunk = getMobilitiesAction();
     const dispatch = jest.fn();
     const e = new Error('failed');
-    baseApi.mobilitiesApi.mockRejectedValueOnce(e);
+    baseApi.mobilitiesApi.list.mockRejectedValueOnce(e);
     const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
     await thunk(dispatch, getState, {
       api: { mobilities: { getMobilities } },

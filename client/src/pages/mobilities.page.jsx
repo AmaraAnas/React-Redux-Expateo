@@ -32,11 +32,12 @@ export default function({ match, location }) {
       <div style={{ margin: '95px' }}>
         <h1>Séléction de la mobitlité: </h1>
         <MobilitiesContainer
-          render={({ mobilities }) => (
+          render={({ mobilities, setCurrentMobility }) => (
             <Card.Group>
               {mobilities.map((mobility) => (
                 <Card
                   key={mobility.id}
+                  onClick={() => setCurrentMobility(mobility)}
                   raised
                   header={mobility.title}
                   meta="en attente"

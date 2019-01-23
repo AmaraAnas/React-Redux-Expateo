@@ -5,12 +5,20 @@ import { connect } from 'react-redux';
 import Mobility from '../../models/mobility.model';
 
 import { mobilitiesSelector } from '../mobilities/mobilities.selectors';
+import { setCurrentMobility } from './mobilities.actions';
 
-const MobilitiesContainer = ({ mobilities, render }) => render({ mobilities });
+const MobilitiesContainer = ({ setCurrentMobility, mobilities, render }) =>
+  render({ mobilities, setCurrentMobility });
 
 function mapStateToProps(store) {
   return {
     mobilities: mobilitiesSelector(store),
+  };
+}
+
+function mapDisaptchToProps(dispatch) {
+  return {
+    setCurrentMobility: (mobility) => dispatch(setCurrentMobility(mobility)),
   };
 }
 
@@ -19,4 +27,7 @@ MobilitiesContainer.propTypes = {
   render: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(MobilitiesContainer);
+export default connect(
+  mapStateToProps,
+  mapDisaptchToProps,
+)(MobilitiesContainer);

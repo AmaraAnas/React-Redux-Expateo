@@ -26,6 +26,7 @@ export const AJAX_ACTIONS = {
   INSCRIPTION_B2B_COMMIT: 'subscribe_end_b2b_commit',
   LIST: 'list',
   LISTALL: 'listall',
+  DEFINE_CURRENT: 'definecurrent',
 };
 
 export const ENDPOINTS = {
@@ -63,6 +64,9 @@ export const subscribeApi = {
 export const themesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.THEME);
 export const servicesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.SERVICE);
 export const tasksApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
-export const mobilitiesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.MOBILITY);
+export const mobilitiesApi = {
+  list: apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.MOBILITY),
+  defineCurrent: apiCreator(AJAX_ACTIONS.DEFINE_CURRENT)(ENDPOINTS.MOBILITY),
+};
 
 export default apiCreator;
