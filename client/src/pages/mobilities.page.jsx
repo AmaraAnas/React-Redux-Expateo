@@ -16,6 +16,7 @@ export default function({ match, location }) {
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
+        background: '#f3f3f3',
       }}
     >
       <div

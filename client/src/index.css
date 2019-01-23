@@ -4,7 +4,7 @@ body,
 .App,
 .main-layout {
   height: 100%;
-  background-color: #f3f3f3;
+  background-color: #fff;
 }
 
 html {
@@ -103,5 +103,13 @@ code {
   background-color: #00aaa1;
   color: #fff;
   text-shadow: none;
+}
+
+.ui.segment.placeholder {
+  background-color: #f3f3f3;
+}
+
+.ui.segment.attached {
+  border-top: 0;
 }
 /* ----------------------------------- */
