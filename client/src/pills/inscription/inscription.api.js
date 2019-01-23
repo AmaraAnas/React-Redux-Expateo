@@ -17,7 +17,7 @@ export async function load({
       value: option.TRN_CODE,
     })),
     isMobilityAlreadyInitialized: rawData.checklisttodo === '0',
-    isPasswordAlreadyInitialized: rawData.passwordtodo === '1',
+    isPasswordAlreadyInitialized: rawData.passwordtodo === '0',
   };
 }
 
