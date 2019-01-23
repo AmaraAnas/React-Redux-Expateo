@@ -21,12 +21,17 @@ const tasksSelector = (yearMonth) => yearMonth.user_taskaction;
 /**
  * get list of tasks for the given user
  * @param {User} - the user where to retrieve sessionId and id field
+ * @param {Mobility} - the associated mobility where to retrieve guid
  * @returns {Array<Task>} - return list of Task
  */
-export async function getTasks({ sessionId: gSesGuid, id: gUsrId }) {
+export async function getTasks(
+  { sessionId: gSesGuid, id: gUsrId },
+  { guid: UCK_GUID },
+) {
   const res = await tasksApi({
     gSesGuid,
     gUsrId,
+    UCK_GUID,
     gAdmUsrId: null,
     gAdmSesGuid: null,
   });

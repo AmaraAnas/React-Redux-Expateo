@@ -228,7 +228,10 @@ const expectedTasks = [
 describe('Tasks API', () => {
   it('Should return an array of Task', async () => {
     baseApi.tasksApi.mockResolvedValueOnce(rawTasks);
-    const tasks = await getTasks({ sessionId: '0128d', id: '123' });
+    const tasks = await getTasks(
+      { sessionId: '0128d', id: '123' },
+      { guid: '1234' },
+    );
     expect(tasks).toEqual(expectedTasks);
   });
 });
@@ -238,7 +241,10 @@ describe('Tasks action', () => {
     const thunk = getTasksAction();
     const dispatch = jest.fn();
     baseApi.tasksApi.mockResolvedValueOnce(rawTasks);
-    const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
+    const getState = jest.fn().mockReturnValueOnce({
+      Auth: { user: {} },
+      Schema: { entities: { mobilities: [{ isCurrent: true }] } },
+    });
     await thunk(dispatch, getState, {
       api: { tasks: { getTasks } },
     });
@@ -258,7 +264,10 @@ describe('Tasks action', () => {
     const dispatch = jest.fn();
     const e = new Error('failed');
     baseApi.tasksApi.mockRejectedValueOnce(e);
-    const getState = jest.fn().mockReturnValueOnce({ Auth: { user: {} } });
+    const getState = jest.fn().mockReturnValueOnce({
+      Auth: { user: {} },
+      Schema: { entities: { mobilities: [{ isCurrent: true }] } },
+    });
     await thunk(dispatch, getState, {
       api: { tasks: { getTasks } },
     });
