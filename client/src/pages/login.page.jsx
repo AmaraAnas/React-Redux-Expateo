@@ -37,8 +37,6 @@ export default class LoginForm extends React.Component {
           style={{
             maxWidth: '90%',
             width: '550px',
-            background: 'rgba(255,255,255,0.5)',
-            borderRadius: '25px',
           }}
         >
           <Responsive as={Segment}>
