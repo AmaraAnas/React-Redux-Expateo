@@ -8,6 +8,7 @@ import logo from '../../../images/logo-sans-fond_nopadding.png';
 import Theme from '../../../models/theme.model';
 import Service from '../../../models/service.model';
 import Mobility from '../../../models/mobility.model';
+import Circle from '../../../elements/circle/circle.element';
 
 import NavDesktopSubNav from './nav.desktop.subNav.view';
 import NavDesktopJumbotron from './nav.desktop.jumbotron.view';
@@ -63,6 +64,7 @@ const fixedMenuStyle = {
 };
 
 const NavDesktopView = ({
+  userFirstLetters,
   themes,
   services,
   mobility,
@@ -99,10 +101,7 @@ const NavDesktopView = ({
           </Menu.Menu>
           <Menu.Menu position="right">
             {isCollapsed ? <CollpasedMenuIcons /> : <ExpandedMenuIcons />}
-            <Dropdown
-              item
-              icon={<Icon fitted size="huge" name="user circle" />}
-            >
+            <Dropdown item icon={<Circle>{userFirstLetters}</Circle>}>
               <Dropdown.Menu>
                 <Dropdown.Item disabled text="Personnaliser ma checklist" />
                 <Dropdown.Item disabled text="Ma situation" />
@@ -138,6 +137,7 @@ NavDesktopView.propTypes = {
   themes: PropTypes.arrayOf(PropTypes.instanceOf(Theme)).isRequired,
   services: PropTypes.arrayOf(PropTypes.instanceOf(Service)).isRequired,
   mobility: PropTypes.instanceOf(Mobility),
+  userFirstLetters: PropTypes.string.isRequired,
 };
 
 export default NavDesktopView;

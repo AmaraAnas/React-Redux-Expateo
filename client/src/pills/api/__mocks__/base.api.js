@@ -5,3 +5,4 @@ export const mobilitiesApi = {
   list: jest.fn(),
   definCurrent: jest.fn(),
 };
+export const profilesApi = jest.fn();

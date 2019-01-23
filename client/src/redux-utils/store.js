@@ -12,6 +12,7 @@ import * as themesApi from '../pills/themes/themes.api';
 import * as servicesApi from '../pills/services/services.api';
 import * as tasksApi from '../pills/tasks/tasks.api';
 import * as mobilitiesApi from '../pills/mobilities/mobilities.api';
+import * as profilesApi from '../pills/profiles/profiles.api';
 
 import reducers, { history } from './reducers';
 import { loadState, saveState } from './localStorage';
@@ -24,6 +25,7 @@ const middlewares = [
       tasks: tasksApi,
       mobilities: mobilitiesApi,
       auth: authApi,
+      profiles: profilesApi,
     },
   }),
   routerMiddleware(history),

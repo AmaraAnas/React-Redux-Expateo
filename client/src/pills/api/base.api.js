@@ -57,6 +57,7 @@ const apiCreator = (ajaxAction) => (url) => async (data) => {
 };
 
 export const authApi = apiCreator(AJAX_ACTIONS.CONNECT)(ENDPOINTS.USR);
+export const profilesApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.USR);
 export const subscribeApi = {
   load: apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B_LOAD)(ENDPOINTS.USR),
   commit: apiCreator(AJAX_ACTIONS.INSCRIPTION_B2B_COMMIT)(ENDPOINTS.USR),
