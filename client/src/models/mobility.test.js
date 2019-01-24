@@ -66,6 +66,7 @@ describe('Mobility model', () => {
       title: rawData.UCK_LABEL,
       isCurrent: true,
       startDate: new Date(rawData.UCK_DEPARTURE_DATETIME).getTime(),
+      isInitialized: true,
     });
   });
 });

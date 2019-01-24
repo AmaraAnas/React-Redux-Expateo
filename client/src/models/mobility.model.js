@@ -121,8 +121,28 @@ export default class Mobility {
     return this._rawData.UCK_LABEL;
   }
 
+  get isInitialized() {
+    return Boolean(this._rawData.UCK_DEPARTURE_DATETIME);
+  }
+
   toJSON() {
-    const { id, startDate, destination, isCurrent, title, guid } = this;
-    return { id, startDate, destination, isCurrent, title, guid };
+    const {
+      id,
+      startDate,
+      destination,
+      isCurrent,
+      title,
+      guid,
+      isInitialized,
+    } = this;
+    return {
+      id,
+      startDate,
+      destination,
+      isCurrent,
+      title,
+      guid,
+      isInitialized,
+    };
   }
 }
