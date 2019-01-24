@@ -1,4 +1,5 @@
 import {
+  Card,
   Checkbox,
   Container,
   Divider,
@@ -26,6 +27,7 @@ import Button from './Button';
 
 export {
   Button,
+  Card,
   Checkbox,
   Container,
   Divider,
