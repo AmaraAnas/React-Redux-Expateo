@@ -90,7 +90,7 @@ class InscriptionContainer extends Component {
       isPasswordAlreadyInitialized,
       familyFieldOptions,
     } = this.state;
-    if (isMobilityAlreadyInitialized || isPasswordAlreadyInitialized) {
+    if (isMobilityAlreadyInitialized) {
       return <Redirect to="/" />;
     }
     return (
@@ -101,6 +101,7 @@ class InscriptionContainer extends Component {
         password={password}
         passwordError={syncErrors.password}
         confirmPasswordError={syncErrors.confirmpassword}
+        isPasswordAlreadyInitialized={isPasswordAlreadyInitialized}
       />
     );
   }

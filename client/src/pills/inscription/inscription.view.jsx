@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import cs from 'classnames';
@@ -69,6 +69,7 @@ function InscriptionView({
   passwordError,
   confirmPasswordError,
   familyFieldOptions,
+  isPasswordAlreadyInitialized,
 }) {
   return (
     <Form onSubmit={handleSubmit}>
@@ -114,67 +115,71 @@ function InscriptionView({
             />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row columns={2}>
-          <Grid.Column
-            width={passwordError ? 12 : 16}
-            className={cs({ [styles.slow]: !passwordError })}
-          >
-            <Field
-              name="password"
-              component={Input}
-              type="password"
-              label={t('form.fields.password.label')}
-              placeholder={t('form.fields.password.placeholder')}
-              validate={passwordValidate}
-              icon={
-                !passwordError && (
-                  <Animate animation="fadeInRight">
-                    <Icon color="green" name="check circle" />
-                  </Animate>
-                )
-              }
-              fluid
-            />
-          </Grid.Column>
-          {passwordError && (
-            <Grid.Column width={4}>
-              <PasswordCriterias
-                password={password}
-                criterias={passwordCriterias}
-              />
-            </Grid.Column>
-          )}
-        </Grid.Row>
-        <Grid.Row columns={2}>
-          <Grid.Column
-            width={passwordError ? 12 : 16}
-            className={cs({
-              [styles.slow]: !passwordError,
-              [styles.mTop]: passwordError,
-            })}
-          >
-            <Field
-              name="confirmpassword"
-              component={Input}
-              type="password"
-              label={t('form.fields.confirmpassword.label')}
-              placeholder={t('form.fields.confirmpassword.placeholder')}
-              validate={required}
-              icon={
-                !confirmPasswordError ? (
-                  <Animate animation="fadeInRight">
-                    <Icon color="green" name="check circle" />
-                  </Animate>
-                ) : (
-                  <Animate animation="fadeInRight">
-                    <Icon color="red" name="times circle" />
-                  </Animate>
-                )
-              }
-              fluid
-            />
-          </Grid.Column>
-        </Grid.Row>
+        {!isPasswordAlreadyInitialized && (
+          <>
+            <Grid.Row columns={2}>
+              <Grid.Column
+                width={passwordError ? 12 : 16}
+                className={cs({ [styles.slow]: !passwordError })}
+              >
+                <Field
+                  name="password"
+                  component={Input}
+                  type="password"
+                  label={t('form.fields.password.label')}
+                  placeholder={t('form.fields.password.placeholder')}
+                  validate={passwordValidate}
+                  icon={
+                    !passwordError && (
+                      <Animate animation="fadeInRight">
+                        <Icon color="green" name="check circle" />
+                      </Animate>
+                    )
+                  }
+                  fluid
+                />
+              </Grid.Column>
+              {passwordError && (
+                <Grid.Column width={4}>
+                  <PasswordCriterias
+                    password={password}
+                    criterias={passwordCriterias}
+                  />
+                </Grid.Column>
+              )}
+            </Grid.Row>
+            <Grid.Row columns={2}>
+              <Grid.Column
+                width={passwordError ? 12 : 16}
+                className={cs({
+                  [styles.slow]: !passwordError,
+                  [styles.mTop]: passwordError,
+                })}
+              >
+                <Field
+                  name="confirmpassword"
+                  component={Input}
+                  type="password"
+                  label={t('form.fields.confirmpassword.label')}
+                  placeholder={t('form.fields.confirmpassword.placeholder')}
+                  validate={required}
+                  icon={
+                    !confirmPasswordError ? (
+                      <Animate animation="fadeInRight">
+                        <Icon color="green" name="check circle" />
+                      </Animate>
+                    ) : (
+                      <Animate animation="fadeInRight">
+                        <Icon color="red" name="times circle" />
+                      </Animate>
+                    )
+                  }
+                  fluid
+                />
+              </Grid.Column>
+            </Grid.Row>
+          </>
+        )}
         <Grid.Row columns={1}>
           <Grid.Column>
             <Field
@@ -214,6 +219,7 @@ function InscriptionView({
 
 InscriptionView.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  isPasswordAlreadyInitialized: PropTypes.bool.isRequired,
   family: PropTypes.string,
   familyFieldOptions: PropTypes.arrayOf(
     PropTypes.shape({
