@@ -6,7 +6,13 @@ import Mobility from '../../models/mobility.model';
 
 import { mobilitiesSelector } from '../mobilities/mobilities.selectors';
 import { setCurrentMobility } from './mobilities.actions';
+import {
+  showBigLoaderModal,
+  destroy,
+  showErrorAlertModal,
+} from '../modal/modal.actions';
 
+// TODO: i18n
 const MobilitiesContainer = ({ setCurrentMobility, mobilities, render }) =>
   render({ mobilities, setCurrentMobility });
 
@@ -18,7 +24,24 @@ function mapStateToProps(store) {
 
 function mapDisaptchToProps(dispatch) {
   return {
-    setCurrentMobility: (mobility) => dispatch(setCurrentMobility(mobility)),
+    setCurrentMobility: (mobility) => {
+      return new Promise((resolve, reject) => {
+        dispatch(showBigLoaderModal({ content: 'Chargement de la mobilité' }));
+        dispatch(
+          setCurrentMobility({
+            mobility,
+            onSuccess: resolve,
+            onFailure: reject,
+          }),
+        );
+      })
+        .then(() => dispatch(destroy()))
+        .catch(() =>
+          dispatch(
+            showErrorAlertModal({ title: 'Une erreur est survenue :(' }),
+          ),
+        );
+    },
   };
 }
 

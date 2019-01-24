@@ -42,7 +42,7 @@ export function getMobilities() {
 }
 
 // TODO: test it
-export function setCurrentMobility(mobility) {
+export function setCurrentMobility({ mobility, onSuccess, onFailure }) {
   return async (dispatch, getState, { api }) => {
     dispatch(setCurrentPending());
     let user = userSelector(getState());
@@ -53,8 +53,10 @@ export function setCurrentMobility(mobility) {
       );
       dispatch(setCurrentSuccess());
       dispatch(addEntities({ [STATE_KEY]: mobilities }));
+      onSuccess();
     } catch (e) {
       dispatch(setCurrentFailure());
+      onFailure(e);
     }
   };
 }
