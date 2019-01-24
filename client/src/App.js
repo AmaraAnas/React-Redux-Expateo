@@ -22,7 +22,7 @@ class App extends Component {
     const { isInitDone, user } = this.props;
     let indexRedirect = '/login';
     if (isInitDone && user && user.isLogged) {
-      indexRedirect = '/dashboard';
+      indexRedirect = '/mobilities';
     }
     return (
       <div className="App">
