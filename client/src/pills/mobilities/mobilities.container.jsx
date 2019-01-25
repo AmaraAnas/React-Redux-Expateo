@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Mobility from '../../models/mobility.model';
+import { useDispatch, withHook } from '../../hooks/useDispatch.hook';
 
 import { mobilitiesSelector } from '../mobilities/mobilities.selectors';
-import { setCurrentMobility } from './mobilities.actions';
+import { setCurrentMobility, getMobilities } from './mobilities.actions';
 import {
   showBigLoaderModal,
   destroy,
@@ -24,6 +25,7 @@ function mapStateToProps(store) {
 
 function mapDisaptchToProps(dispatch) {
   return {
+    ...useDispatch(dispatch)(getMobilities),
     setCurrentMobility: (mobility) => {
       return new Promise((resolve, reject) => {
         dispatch(showBigLoaderModal({ content: 'Chargement de la mobilité' }));
@@ -53,4 +55,4 @@ MobilitiesContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDisaptchToProps,
-)(MobilitiesContainer);
+)(withHook(useDispatch)(MobilitiesContainer));
