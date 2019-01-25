@@ -21,7 +21,7 @@ export default class LoginForm extends React.Component {
 
   render() {
     let { from } = this.props.location.state || {
-      from: { pathname: '/dashboard' },
+      from: '/mobilities',
     };
     let { redirectToReferrer } = this.state;
     if (redirectToReferrer) {
