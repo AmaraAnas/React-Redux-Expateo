@@ -53,7 +53,7 @@ export function setCurrentMobility({ mobility, onSuccess, onFailure }) {
       );
       dispatch(setCurrentSuccess());
       dispatch(addEntities({ [STATE_KEY]: mobilities }));
-      onSuccess();
+      onSuccess(mobilities.find((m) => m.id === mobility.id));
     } catch (e) {
       dispatch(setCurrentFailure());
       onFailure(e);

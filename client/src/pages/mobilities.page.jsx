@@ -2,20 +2,41 @@ import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 import MobilitiesContainer from '../pills/mobilities/mobilities.container';
-import { Card, Image, Segment } from '../ui-kit';
+import AuthContainer from '../pills/auth/auth.container';
+import { Card, Image } from '../ui-kit';
 import logo from '../images/logo-sans-fond_nopadding.png';
 
 // TODO: extract style
 // TODO: i18n
-// TODO: handle then mobility status
-// TODO: Maybe redisgn cards ??
+// TODO: handle the mobility status
+// TODO: Maybe redesign cards ??
 export default function MobilitiesPage() {
-  const [
-    isSetCurrentMobilitySuccess,
-    setIsSetCurrentMobilitySuccess,
-  ] = useState(false);
-  if (isSetCurrentMobilitySuccess) {
+  const [currentMobility, setStateCurrentMobility] = useState(null);
+  if (
+    currentMobility &&
+    currentMobility.isInitialized &&
+    currentMobility.isCurrent
+  ) {
     return <Redirect from="/mobilities" push={true} to="/dashboard" />;
+  }
+  if (
+    currentMobility &&
+    currentMobility.isCurrent &&
+    !currentMobility.isInitialized
+  ) {
+    return (
+      <AuthContainer
+        render={({ user }) => (
+          <Redirect
+            from="/mobilities"
+            push={true}
+            to={`/mobilities/new?family=${currentMobility.familyGuid}&cl=${
+              currentMobility.guid
+            }&guid=${user.guid}`}
+          />
+        )}
+      />
+    );
   }
   return (
     <div
@@ -48,24 +69,29 @@ export default function MobilitiesPage() {
                   <Card
                     key={mobility.id}
                     onClick={() =>
-                      setCurrentMobility(mobility).then(() =>
-                        setIsSetCurrentMobilitySuccess(true),
+                      setCurrentMobility(mobility).then((currentMobility) =>
+                        setStateCurrentMobility(currentMobility),
                       )
                     }
                     header={mobility.title}
                     meta="en attente"
                     description={mobility.destination}
                     extra={new Date(mobility.startDate).toLocaleDateString()}
-                    color={mobility.isCurrent ? 'green' : 'red'}
+                    color={mobility.isCurrent ? 'teal' : 'red'}
                   />
                 ) : (
-                  <Segment
+                  <Card
                     key={mobility.id}
+                    onClick={() =>
+                      setCurrentMobility(mobility).then((currentMobility) =>
+                        setStateCurrentMobility(currentMobility),
+                      )
+                    }
                     header={mobility.title}
-                    meta="inactive"
+                    meta="NEW"
                     description={mobility.destination}
-                    disabled
-                    as={Card}
+                    extra={new Date(mobility.startDate).toLocaleDateString()}
+                    color="yellow"
                   />
                 ),
               )}
@@ -76,4 +102,4 @@ export default function MobilitiesPage() {
     </div>
   );
 }
-// TODO: we have to wait the end o the request before navigate as the nav bar do no re-request after a dispatch as the hooks do not rerender because they are not listening the currentMobility change ! see useEffect(() =>{}, inputs= ????Maybe it should be bind to currentMobilities to reftch, but it's a double request as we do not avoid the first requests started too earlier OR BLOCK THIS DAMN NAVIGATION WITH A LOADER YOU LAZYY FUCKER ! )
+// INFO: we have to wait the end o the request before navigate as the nav bar do no re-request after a dispatch as the hooks do not rerender because they are not listening the currentMobility change ! see useEffect(() =>{}, inputs= ????Maybe it should be bind to currentMobilities to reftch, but it's a double request as we do not avoid the first requests started too earlier OR BLOCK THIS DAMN NAVIGATION WITH A LOADER YOU LAZYY FUCKER ! )
