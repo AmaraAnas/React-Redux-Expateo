@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { formValueSelector, getFormSyncErrors } from 'redux-form';
+import { formValueSelector } from 'redux-form';
 import { Redirect } from 'react-router-dom';
 
 import {
@@ -10,19 +10,18 @@ import {
   destroy,
 } from '../modal/modal.actions';
 
-import { inscription, getInitialValues } from './inscription.actions';
-import InscriptionViewForm from './inscription.view';
+import { mobilityActivation, getInitialValues } from './subscription.actions';
+import SubscriptionMobilityActivationFormView from './subscription.mobilityActivationForm.view';
 
-class InscriptionContainer extends Component {
+class SubscriptionMobilityActivationFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isMobilityAlreadyInitialized: false,
-      isPasswordAlreadyInitialized: false,
       familyFieldOptions: [],
     };
 
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -34,19 +33,19 @@ class InscriptionContainer extends Component {
         familyGuid,
         clGuid,
         onPending: () => dispatch(showBigLoaderModal({ content: '' })),
-        onSuccess: (res) => {
+        onSuccess: ({ isMobilityAlreadyInitialized, familyFieldOptions }) => {
           destroyModal();
-          this.setState(res);
+          this.setState({ isMobilityAlreadyInitialized, familyFieldOptions });
         },
         onFailure: () => destroyModal(),
       }),
     );
   }
 
-  handleLogin({ allowEmail, ...formValues }) {
+  handleSubmit(formValues) {
     const {
       dispatch,
-      onInscription,
+      onMobilityActivation,
       userGuid,
       familyGuid,
       clGuid,
@@ -60,20 +59,20 @@ class InscriptionContainer extends Component {
         }),
       );
     dispatch(
-      inscription({
+      mobilityActivation({
         userGuid,
         familyGuid,
         clGuid,
-        allowEmail: allowEmail ? 1 : 0,
         ...formValues,
         onPending: () =>
-          dispatch(showBigLoaderModal({ content: 'Inscription en cours...' })),
-        onSuccess: (user) => {
+          dispatch(
+            showBigLoaderModal({
+              content: 'Activation de la mobilité en cours...',
+            }),
+          ),
+        onSuccess: (mobility) => {
           destroyModal();
-          if (!user || !user.isLogged) {
-            dispatchErrorModal();
-          }
-          onInscription(user);
+          onMobilityActivation(mobility);
         },
         onFailure: () => {
           destroyModal();
@@ -84,42 +83,30 @@ class InscriptionContainer extends Component {
   }
 
   render() {
-    const { family, password, syncErrors } = this.props;
-    const {
-      isMobilityAlreadyInitialized,
-      isPasswordAlreadyInitialized,
-      familyFieldOptions,
-    } = this.state;
+    const { family } = this.props;
+    const { isMobilityAlreadyInitialized, familyFieldOptions } = this.state;
     if (isMobilityAlreadyInitialized) {
-      return <Redirect to="/" />;
+      return <Redirect to="/mobilities" />;
     }
     return (
-      <InscriptionViewForm
-        onSubmit={this.handleLogin}
+      <SubscriptionMobilityActivationFormView
+        onSubmit={this.handleSubmit}
         family={family}
         familyFieldOptions={familyFieldOptions}
-        password={password}
-        passwordError={syncErrors.password}
-        confirmPasswordError={syncErrors.confirmpassword}
-        isPasswordAlreadyInitialized={isPasswordAlreadyInitialized}
       />
     );
   }
 }
 
-InscriptionContainer.propTypes = {
-  onInscription: PropTypes.func.isRequired,
+SubscriptionMobilityActivationFormContainer.propTypes = {
+  onMobilityActivation: PropTypes.func.isRequired,
   userGuid: PropTypes.string.isRequired,
   familyGuid: PropTypes.string.isRequired,
   clGuid: PropTypes.string.isRequired,
 };
 
-const selector = formValueSelector('InscriptionForm');
-const syncErrorsSelector = getFormSyncErrors('InscriptionForm');
+const selector = formValueSelector('SubscriptionMobilityActivationForm');
 
 export default connect((state) => ({
   family: selector(state, 'family'),
-  password: selector(state, 'password'),
-  confirmpassword: selector(state, 'confirmpassword'),
-  syncErrors: syncErrorsSelector(state),
-}))(InscriptionContainer);
+}))(SubscriptionMobilityActivationFormContainer);

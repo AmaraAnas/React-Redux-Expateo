@@ -20,19 +20,22 @@ const LoginPage = React.lazy(() =>
   import(/* webpackChunkName: "login.page" */
   '../pages/login.page'),
 );
-const InscriptionPage = React.lazy(() =>
-  import(/* webpackChunkName: "inscription.page" */
-  '../pages/inscription.page'),
+const FirstConnectPage = React.lazy(() =>
+  import(/* webpackChunkName: "firstConnect.page" */
+  '../pages/firstConnect.page'),
 );
-const HomePage = React.lazy(() =>
-  import(/* webpackChunkName: "home.page" */
-
-  '../pages/home.page'),
+const HomePage = React.lazy(
+  () =>
+    import(/* webpackChunkName: "home.page" */
+    '../pages/home.page'), // TODO : redirect when the curren mobiltiy is not yet activated
 );
 const MobilitiesPage = React.lazy(() =>
   import(/* webpackChunkName: "mobilities.page" */
-
   '../pages/mobilities.page'),
+);
+const MobilityActivationPage = React.lazy(() =>
+  import(/* webpackChunkName: "mobilityActivation.page" */
+  '../pages/mobiltyActivation.page'),
 );
 const NoMatchPage = React.lazy(() =>
   import(/* webpackChunkName: "noMatch.page" */
@@ -78,7 +81,7 @@ const AnimatedRoute = ({ children }) => {
   );
 };
 
-const Router = ({ indexRedirect, location }) => (
+const Router = ({ indexRedirect, location, currentMobility }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
     <React.Suspense fallback={LoadingLazyPage}>
       <MainLayout
@@ -91,7 +94,7 @@ const Router = ({ indexRedirect, location }) => (
         <Switch location={location}>
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/inscription" component={InscriptionPage} />
+          <Route exact path="/inscription" component={FirstConnectPage} />
           <AnimatedRoute key={location.pathname}>
             <Switch location={location}>
               <Route
@@ -102,6 +105,11 @@ const Router = ({ indexRedirect, location }) => (
               <PrivateRoute exact path="/dashboard" component={HomePage} />
               <PrivateRoute exact path="/themes/:id" component={DumbPage} />
               <PrivateRoute exact path="/services/:id" component={DumbPage} />
+              <PrivateRoute
+                exact
+                path="/mobilities/new"
+                component={MobilityActivationPage}
+              />
               <PrivateRoute
                 exact
                 path="/mobilities"

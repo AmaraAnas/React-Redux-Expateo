@@ -13,6 +13,7 @@ import * as servicesApi from '../pills/services/services.api';
 import * as tasksApi from '../pills/tasks/tasks.api';
 import * as mobilitiesApi from '../pills/mobilities/mobilities.api';
 import * as profilesApi from '../pills/profiles/profiles.api';
+import * as subscribeApi from '../pills/subscription/subscription.api';
 
 import reducers, { history } from './reducers';
 import { loadState, saveState } from './localStorage';
@@ -26,6 +27,7 @@ const middlewares = [
       mobilities: mobilitiesApi,
       auth: authApi,
       profiles: profilesApi,
+      subscription: subscribeApi,
     },
   }),
   routerMiddleware(history),
