@@ -105,8 +105,14 @@ export default class Mobility {
     return this._rawData.UCK_GUID;
   }
 
+  get familyGuid() {
+    return this._rawData.UCK_FAMILY_GUID;
+  }
+
   get startDate() {
-    return new Date(this._rawData.UCK_DEPARTURE_DATETIME).getTime();
+    return new Date(
+      this._rawData.UCK_DEPARTURE_DATETIME || this._rawData.UCK_BEGIN_DATETIME,
+    ).getTime();
   }
 
   get destination() {
