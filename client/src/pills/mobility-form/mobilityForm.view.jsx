@@ -15,6 +15,7 @@ import { required, optional } from '../../redux-form-utils/fieldValidators';
 import t from '../../i18n';
 
 //TODO : remove magic strings + create load api as B2B inscription
+//TOO : i18n
 const familyFieldOptions = [
   {
     value: 'FAMILLE_MARIE',
