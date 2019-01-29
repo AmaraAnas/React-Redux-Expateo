@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import 'ui-kit/semantic/dist/semantic.min.css';
+import 'ui-xpto-kit/semantic/dist/semantic.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import store from './redux-utils/store';
