@@ -30,8 +30,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.83.0"
+    "semantic-ui-react": "^0.83.0",
+    "ui-kit": "git+https://anasexpateo@bitbucket.org/expateoteampa/ui-kit-prod.git"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -59,7 +59,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test && lint-staged"
+      "pre-commit": "npm run windows-test && lint-staged"
     }
   },
   "lint-staged": {
