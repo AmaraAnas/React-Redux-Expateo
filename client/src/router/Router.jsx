@@ -34,6 +34,11 @@ const MobilitiesPage = React.lazy(() =>
 
   '../pages/mobilities.page'),
 );
+const MobilityFormPage = React.lazy(() =>
+  import(/* webpackChunkName: "mobilities.page" */
+
+  '../pages/mobility-info.page'),
+);
 const NoMatchPage = React.lazy(() =>
   import(/* webpackChunkName: "noMatch.page" */
   '../pages/noMatch.page'),
@@ -106,6 +111,11 @@ const Router = ({ indexRedirect, location }) => (
                 exact
                 path="/mobilities"
                 component={MobilitiesPage}
+              />
+              <PrivateRoute
+                exact
+                path="/mobility-form"
+                component={MobilityFormPage}
               />
               <PrivateRoute exact path="/bills" component={DumbPage} />
               <PrivateRoute exact path="/notifications" component={DumbPage} />
