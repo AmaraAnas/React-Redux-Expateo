@@ -6,7 +6,7 @@ import t from '../i18n';
 import { Container } from '../ui-kit';
 import InscriptForm from '../pills/inscription/inscription.container';
 
-import styles from './inscription.page.module.css';
+import styles from './base.module.css';
 
 export default class InscriptionForm extends React.Component {
   constructor(props) {
