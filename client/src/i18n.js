@@ -29,10 +29,15 @@ const texts = {
         label: 'Confirmation du mot de passe',
         placeholder: 'Confirmez votre mot de passe',
       },
+      childcount: {
+        label: 'Partez vous avec des enfants ?',
+        placeholder: 'Indiquer le nombre des enfants qui partent avec vous',
+      },
     },
     submit: {
       inscription: 'Accéder à mon espace personnel',
       login: "S'identifier",
+      save_mobility: 'VALIDER CES INFORMATIONS',
     },
   },
   pages: {

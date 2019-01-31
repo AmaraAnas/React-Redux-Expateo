@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
-import cs from 'classnames';
 
-import { Grid, Form, Button, Icon } from '../../ui-kit';
+import { Grid, Form, Button } from '../../ui-kit';
 import {
   Input,
   Select,
@@ -106,8 +105,8 @@ function MobilityFormView({ family, handleSubmit, invalid, pristine, error }) {
               component={Select}
               type="text"
               options={childrenFieldOptions}
-              label="Partez vous avec des enfants ?"
-              placeholder="Partez vous avec des enfants ?"
+              label={t('form.fields.childcount.label')}
+              placeholder={t('form.fields.childcount.placeholder')}
               validate={required}
               fluid
             />
@@ -119,7 +118,7 @@ function MobilityFormView({ family, handleSubmit, invalid, pristine, error }) {
             disabled={invalid || error || pristine}
             primary={!invalid && !error && !pristine}
           >
-            VALIDER CES INFORMATIONS
+            {t('form.submit.save_mobility')}
           </Button>
         </Grid.Row>
       </Grid>
