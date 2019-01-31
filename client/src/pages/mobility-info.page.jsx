@@ -1,7 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import qs from 'query-string';
-import t from '../i18n';
 import { Container } from '../ui-kit';
 import MobilityForm from '../pills/mobility-form/mobilityForm.container';
 import styles from './base.module.css';
@@ -12,6 +9,7 @@ export default class MobilityInfoForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  //TODO: Add Handle Submit function content
   handleSubmit() {}
 
   render() {
