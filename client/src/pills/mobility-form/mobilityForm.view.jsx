@@ -13,46 +13,15 @@ import { required, optional } from '../../redux-form-utils/fieldValidators';
 
 import t from '../../i18n';
 
-//TODO : remove magic strings + create load api as B2B inscription
-const familyFieldOptions = [
-  {
-    value: 'FAMILLE_MARIE',
-    text: 'Couple marié',
-  },
-  {
-    value: 'FAMILLE_PACSE',
-    text: 'Couple Pacsé',
-  },
-  {
-    value: 'FAMILLE_CONCUBINAGE',
-    text: 'En concubinage',
-  },
-  {
-    value: 'FAMILLE_SEUL',
-    text: 'Seul',
-  },
-];
-
-const childrenFieldOptions = [
-  {
-    value: 0,
-    text: '0',
-  },
-  {
-    value: 1,
-    text: '1',
-  },
-  {
-    value: 2,
-    text: '2',
-  },
-  {
-    value: 3,
-    text: '3',
-  },
-];
-
-function MobilityFormView({ family, handleSubmit, invalid, pristine, error }) {
+function MobilityFormView({
+  family,
+  familyFieldOptions,
+  childFieldOptions,
+  handleSubmit,
+  invalid,
+  pristine,
+  error,
+}) {
   return (
     <Form onSubmit={handleSubmit}>
       <Grid stackable>
@@ -103,7 +72,7 @@ function MobilityFormView({ family, handleSubmit, invalid, pristine, error }) {
               name="children"
               component={Select}
               type="text"
-              options={childrenFieldOptions}
+              options={childFieldOptions}
               label={t('form.fields.childcount.label')}
               placeholder={t('form.fields.childcount.placeholder')}
               validate={required}
