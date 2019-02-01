@@ -48,6 +48,9 @@ const texts = {
       text_2:
         'Pour y accéder créez votre mot de passe et répondez aux questions nécessaires au bon fonctionnement de l’application',
     },
+    mobilites: {
+      title: 'Séléction de la mobilité:',
+    },
   },
   buttons: {
     logout: 'Se déconnecter',

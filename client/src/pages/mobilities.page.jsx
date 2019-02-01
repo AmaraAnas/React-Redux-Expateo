@@ -4,6 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 import MobilitiesContainer from '../pills/mobilities/mobilities.container';
 import { Card, Image, Segment } from '../ui-kit';
 import logo from '../images/logo-sans-fond_nopadding.png';
+import t from '../i18n';
 
 // TODO: extract style
 // TODO: i18n
@@ -39,7 +40,7 @@ export default function MobilitiesPage() {
         <Image as={Link} src={logo} to="/dashboard" />
       </div>
       <div style={{ margin: '95px' }}>
-        <h1>Séléction de la mobilité: </h1>
+        <h1>{t('pages.mobilites.title')} </h1>
         <MobilitiesContainer
           render={({ mobilities, setCurrentMobility }) => (
             <Card.Group>
