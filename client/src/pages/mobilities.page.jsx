@@ -6,8 +6,8 @@ import { Card, Image, Segment } from '../ui-kit';
 import logo from '../images/logo-sans-fond_nopadding.png';
 import t from '../i18n';
 
-// TODO: extract style
-// TODO: i18n
+import styles from './mobilities.page.module.css';
+
 // TODO: handle then mobility status
 // TODO: Maybe redisgn cards ??
 export default function MobilitiesPage() {
@@ -19,27 +19,11 @@ export default function MobilitiesPage() {
     return <Redirect from="/mobilities" push={true} to="/dashboard" />;
   }
   return (
-    <div
-      style={{
-        position: 'relative',
-        display: 'flex',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        background: '#f3f3f3',
-      }}
-    >
-      <div
-        style={{
-          position: 'absolute',
-          top: '18px',
-          left: '20px',
-          width: '170px',
-        }}
-      >
+    <div className={styles.mobilities_page}>
+      <div className={styles.logo}>
         <Image as={Link} src={logo} to="/dashboard" />
       </div>
-      <div style={{ margin: '95px' }}>
+      <div className={styles.mobilities_block}>
         <h1>{t('pages.mobilites.title')} </h1>
         <MobilitiesContainer
           render={({ mobilities, setCurrentMobility }) => (
@@ -54,7 +38,7 @@ export default function MobilitiesPage() {
                       )
                     }
                     header={mobility.title}
-                    meta="en attente"
+                    meta={t('pages.mobilites.status.wait')}
                     description={mobility.destination}
                     extra={new Date(mobility.startDate).toLocaleDateString()}
                     color={mobility.isCurrent ? 'green' : 'red'}
@@ -63,7 +47,7 @@ export default function MobilitiesPage() {
                   <Segment
                     key={mobility.id}
                     header={mobility.title}
-                    meta="inactive"
+                    meta={t('pages.mobilites.status.inactive')}
                     description={mobility.destination}
                     disabled
                     as={Card}

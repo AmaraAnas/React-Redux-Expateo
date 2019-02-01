@@ -50,6 +50,10 @@ const texts = {
     },
     mobilites: {
       title: 'Séléction de la mobilité:',
+      status: {
+        wait: 'en attente',
+        inactive: 'inactive',
+      },
     },
   },
   buttons: {
