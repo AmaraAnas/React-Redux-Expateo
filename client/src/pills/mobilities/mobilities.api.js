@@ -43,3 +43,27 @@ export async function setCurrentMobility(
   });
   return rawMobilities.map((rawMobility) => new Mobility(rawMobility));
 }
+
+// TODO: test it
+export async function updateMobility(
+  { sessionId: gSesGuid, id: gUsrId },
+  { guid: UCK_GUID },
+  {
+    startDate: UCK_DEPARTURE_DATETIME,
+    family: UCK_FAMILY_STATUS,
+    children: UCK_CHILD_COUNT,
+    conjoint: UCK_SPOUSE_FIRSTNAME,
+  },
+) {
+  console.log('Hello');
+  const rawMobilities = await mobilitiesApi.update({
+    gSesGuid,
+    gUsrId,
+    UCK_GUID,
+    UCK_DEPARTURE_DATETIME,
+    UCK_FAMILY_STATUS,
+    UCK_CHILD_COUNT,
+    UCK_SPOUSE_FIRSTNAME,
+  });
+  return rawMobilities.map((rawMobility) => new Mobility(rawMobility));
+}
