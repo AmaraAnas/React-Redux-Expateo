@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '../ui-kit';
-import MobilityForm from '../pills/mobility-form/mobilityForm.container';
+import MobilityForm from '../pills/mobilities/mobility-form/mobilityForm.container';
 import styles from './base.module.css';
 
 export default class MobilityInfoForm extends React.Component {

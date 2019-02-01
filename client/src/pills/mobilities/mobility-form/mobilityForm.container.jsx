@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import MobilityFormView from './mobilityForm.view';
 import { formValueSelector, getFormSyncErrors } from 'redux-form';
 import { getInitialValues } from './mobilityForm.action';
+import { updateMobility } from '../mobilities.actions';
+
+import {
+  showBigLoaderModal,
+  showErrorModal,
+  destroy,
+} from '../../modal/modal.actions';
 
 //TODO : handleValidation Action
 class MobilityInfoContainer extends Component {
@@ -30,7 +37,33 @@ class MobilityInfoContainer extends Component {
     );
   }
 
-  handleValidation() {}
+  handleValidation({ ...formValues }) {
+    const { dispatch, getState } = this.props;
+    const destroyModal = () => dispatch(destroy());
+    const dispatchErrorModal = () =>
+      dispatch(
+        showErrorModal({
+          title: 'Oupss... Une erreur est survenue :(',
+          message: "Si l'erreur persiste contactez un adminstrateur. Merci.",
+        }),
+      );
+    dispatch(
+      updateMobility({
+        ...formValues,
+        onPending: () =>
+          dispatch(
+            showBigLoaderModal({ content: 'Enregistrement en cours...' }),
+          ),
+        onSuccess: (mobility) => {
+          destroyModal();
+        },
+        onFailure: () => {
+          destroyModal();
+          dispatchErrorModal();
+        },
+      }),
+    );
+  }
 
   render() {
     const { family, syncErrors } = this.props;

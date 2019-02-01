@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 
-import { Grid, Form, Button } from '../../ui-kit';
+import { Grid, Form, Button } from '../../../ui-kit';
 import {
   Input,
   Select,
   DatePicker,
-} from '../../redux-form-utils/fieldComponents';
+} from '../../../redux-form-utils/fieldComponents';
 
-import { required, optional } from '../../redux-form-utils/fieldValidators';
+import { required, optional } from '../../../redux-form-utils/fieldValidators';
 
-import t from '../../i18n';
+import t from '../../../i18n';
 
 function MobilityFormView({
   family,
