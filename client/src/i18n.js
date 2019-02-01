@@ -66,6 +66,9 @@ const texts = {
     login_error_title: 'Authentification échouée',
     login_error_message:
       "L'email et le mot de passe que vous avez entrés ne correspondent pas à ceux présents dans nos fichiers. Veuillez vérifier et réessayer.",
+    mobility_pending: 'Chargement de la mobilité',
+    mobility_error: "Une erreur est survenue :('",
+    mobility_loading: 'Enregistrement en cours...',
   },
   menu: {
     documents: 'Documents',

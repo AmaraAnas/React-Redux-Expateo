@@ -55,7 +55,6 @@ export async function updateMobility(
     conjoint: UCK_SPOUSE_FIRSTNAME,
   },
 ) {
-  console.log('Hello');
   const rawMobilities = await mobilitiesApi.update({
     gSesGuid,
     gUsrId,

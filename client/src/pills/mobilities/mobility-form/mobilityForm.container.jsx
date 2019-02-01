@@ -5,14 +5,13 @@ import MobilityFormView from './mobilityForm.view';
 import { formValueSelector, getFormSyncErrors } from 'redux-form';
 import { getInitialValues } from './mobilityForm.action';
 import { updateMobility } from '../mobilities.actions';
-
+import t from '../../../i18n';
 import {
   showBigLoaderModal,
-  showErrorModal,
+  showErrorAlertModal,
   destroy,
 } from '../../modal/modal.actions';
 
-//TODO : handleValidation Action
 class MobilityInfoContainer extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,6 @@ class MobilityInfoContainer extends Component {
         onPending: () => {},
         onSuccess: (res) => {
           this.setState(res);
-          console.log(res);
         },
         onFailure: () => {},
       }),
@@ -40,26 +38,27 @@ class MobilityInfoContainer extends Component {
   handleValidation({ ...formValues }) {
     const { dispatch, getState } = this.props;
     const destroyModal = () => dispatch(destroy());
-    const dispatchErrorModal = () =>
-      dispatch(
-        showErrorModal({
-          title: 'Oupss... Une erreur est survenue :(',
-          message: "Si l'erreur persiste contactez un adminstrateur. Merci.",
-        }),
-      );
+
     dispatch(
       updateMobility({
         ...formValues,
         onPending: () =>
           dispatch(
-            showBigLoaderModal({ content: 'Enregistrement en cours...' }),
+            showBigLoaderModal({ content: t('modals.mobility_loading') }),
           ),
         onSuccess: (mobility) => {
           destroyModal();
         },
         onFailure: () => {
-          destroyModal();
-          dispatchErrorModal();
+          dispatch(
+            showErrorAlertModal(
+              {
+                title: t('modals.mobility_error'),
+                onClose: () => dispatch(destroy()),
+              },
+              dispatch,
+            ),
+          );
         },
       }),
     );
