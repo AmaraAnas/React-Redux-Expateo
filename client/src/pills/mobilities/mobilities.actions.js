@@ -2,7 +2,10 @@ import { createAction } from 'redux-actions';
 
 import { addPrefixToActionTypes } from '../../redux-utils/utils';
 import { userSelector } from '../auth/auth.selectors';
-import { currentMobilitySelector } from './mobilities.selectors';
+import {
+  currentMobilitySelector,
+  mobilitiesSelector,
+} from './mobilities.selectors';
 
 import { addEntities } from '../schema/schema.actions';
 
@@ -78,14 +81,17 @@ export function updateMobility({ onPending, onSuccess, onFailure, ...fields }) {
     dispatch(updateMobilityPending());
     let user = userSelector(getState());
     let mobility = currentMobilitySelector(getState());
+    let mobilities = mobilitiesSelector(getState());
     try {
-      const mobilities = await api.mobilities.updateMobility(
+      const updatedmobility = await api.mobilities.updateMobility(
         user,
         mobility,
         fields,
       );
-      dispatch(updateMobilitySuccess());
+      let mobilityIndex = mobilities.findIndex((mob) => mob.id == mobility.id);
+      mobilities[mobilityIndex] = updatedmobility;
       dispatch(addEntities({ [STATE_KEY]: mobilities }));
+      dispatch(updateMobilitySuccess());
       onSuccess();
     } catch (e) {
       dispatch(updateMobilityFailure());

@@ -55,7 +55,7 @@ export async function updateMobility(
     conjoint: UCK_SPOUSE_FIRSTNAME,
   },
 ) {
-  const rawMobilities = await mobilitiesApi.update({
+  const mobility = await mobilitiesApi.update({
     gSesGuid,
     gUsrId,
     UCK_GUID,
@@ -64,5 +64,5 @@ export async function updateMobility(
     UCK_CHILD_COUNT,
     UCK_SPOUSE_FIRSTNAME,
   });
-  return rawMobilities.map((rawMobility) => new Mobility(rawMobility));
+  return new Mobility(mobility);
 }

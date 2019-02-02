@@ -36,9 +36,8 @@ class MobilityInfoContainer extends Component {
   }
 
   handleValidation({ ...formValues }) {
-    const { dispatch, getState } = this.props;
+    const { dispatch, getState, onSave } = this.props;
     const destroyModal = () => dispatch(destroy());
-
     dispatch(
       updateMobility({
         ...formValues,
@@ -48,6 +47,7 @@ class MobilityInfoContainer extends Component {
           ),
         onSuccess: (mobility) => {
           destroyModal();
+          onSave();
         },
         onFailure: () => {
           dispatch(
