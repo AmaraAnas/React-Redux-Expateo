@@ -1,3 +1,16 @@
+html,
+body,
+#root,
+.App,
+.main-layout {
+  height: 100%;
+  background-color: #fff;
+}
+
+html {
+  font-size: 12px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -12,3 +25,91 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.react-datepicker-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.react-datepicker-wrapper > div {
+  width: 100%;
+}
+
+/* ------------------------------------ */
+/*  TODO:Start to think about themes    */
+/* ------------------------------------ */
+
+.label {
+  color: #707070;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.label::first-letter {
+  text-transform: capitalize;
+}
+
+.title {
+  color: #0071bd !important;
+  font-size: 1.8rem;
+}
+
+.text {
+  color: #707070;
+  font-size: 1.4rem;
+}
+
+.important_text {
+  color: #00aaa1;
+  font-size: 1.1rem;
+}
+
+.capitalized::first-letter {
+  text-transform: capitalize;
+}
+
+/* ------------------------------------ */
+/*      HACK: SEMANTIC-UI HACK
+  We should use the theme system of 
+  semantic-ui in place
+
+  DO NOT OVERUSE THIS
+/* ------------------------------------ */
+/* Button primary customisation <Button primary /> */
+.ui.primary.button,
+.ui.primary.buttons .button {
+  background-color: #00aaa1;
+  text-shadow: none;
+  background-image: none;
+  color: white;
+}
+
+.ui.primary.button:hover,
+.ui.primary.buttons .button:hover {
+  background-color: #00aaa1;
+  color: #fff;
+  text-shadow: none;
+}
+
+.ui.primary.button:focus,
+.ui.primary.buttons .button:focus {
+  background-color: #00aaa1;
+  color: #fff;
+  text-shadow: none;
+}
+
+.ui.primary.button:active,
+.ui.primary.buttons .button:active {
+  background-color: #00aaa1;
+  color: #fff;
+  text-shadow: none;
+}
+
+.ui.segment.placeholder {
+  background-color: #f3f3f3;
+}
+
+.ui.segment.attached {
+  border: 0;
+}
+/* ----------------------------------- */

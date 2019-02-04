@@ -1,28 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+
+import Router from './router/Router';
+import Modal from './pills/modal/modal.container';
+import { init } from './App.actions';
+import { userSelector } from './pills/auth/auth.selectors';
 
 class App extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(init());
+  }
+
+  componentDidUpdate(prevProps) {
+    if (document && prevProps.title !== this.props.title) {
+      document.title = this.props.title;
+    }
+  }
+
   render() {
+    const { isInitDone, user } = this.props;
+    let indexRedirect = '/login';
+    if (isInitDone && user && user.isLogged) {
+      indexRedirect = '/mobilities';
+    }
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {isInitDone && (
+          <React.Fragment>
+            <Router indexRedirect={indexRedirect} />
+            <Modal />
+          </React.Fragment>
+        )}
       </div>
     );
   }
 }
 
-export default App;
+// TODO : move user and redirection to the router
+// TODO : create selector for isInitDone
+function mapStateToProps(store) {
+  return {
+    ...store.App,
+    user: userSelector(store),
+  };
+}
+
+export default connect(mapStateToProps)(App);

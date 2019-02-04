@@ -3,18 +3,52 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.5"
+    "animate.css": "^3.7.0",
+    "axios": "^0.18.0",
+    "babel-plugin-add-react-displayname": "0.0.5",
+    "classnames": "^2.2.6",
+    "connected-react-router": "^6.2.0-beta.3",
+    "date-fns": "^2.0.0-alpha.26",
+    "flux-standard-action": "^2.0.3",
+    "lodash.get": "^4.4.2",
+    "lodash.throttle": "^4.1.1",
+    "logrocket": "^0.6.19",
+    "logrocket-react": "^3.0.0",
+    "prop-types": "^15.6.2",
+    "query-string": "^6.2.0",
+    "react": "^16.8.0-alpha.0",
+    "react-datepicker": "^2.0.0",
+    "react-dom": "^16.8.0-alpha.0",
+    "react-kawaii": "^0.6.0",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.5",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.4",
+    "redux-form": "^8.1.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.83.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "CI=true react-scripts test --env=node",
+    "test": "CI=true react-scripts test --env=jsdom",
+    "preinstall": "node ./bootstrap.js",
+    "windows-test": "set CI=true && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "test:watch": "react-scripts test --env=node",
+    "test:watch": "react-scripts test --env=jsdom",
     "test:coverage": "npm run test -- --coverage",
+    "share": "lt --port 3000 --subdomain xpto",
     "bs": "npm run build && cd ./build && python -m SimpleHTTPServer 8000"
+  },
+  "babel": {
+    "plugins": [
+      "add-react-displayname"
+    ]
   },
   "prettier": {
     "trailingComma": "all",
@@ -44,11 +78,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
-    "husky": "^1.1.2",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "husky": "^1.3.1",
     "lint-staged": "^7.3.0",
-    "prettier": "^1.14.3",
-    "react-test-renderer": "^16.5.2"
+    "localtunnel": "^1.9.1",
+    "prettier": "^1.15.3",
+    "react-test-renderer": "^16.7.0"
   }
 }
