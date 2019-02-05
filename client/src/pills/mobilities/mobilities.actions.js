@@ -74,14 +74,15 @@ export function setCurrentMobility({ mobility, onSuccess, onFailure }) {
   };
 }
 
-// TODO: test it
 export function updateMobility({ onPending, onSuccess, onFailure, ...fields }) {
   onPending();
   return async (dispatch, getState, { api }) => {
     dispatch(updateMobilityPending());
-    let user = userSelector(getState());
-    let mobility = currentMobilitySelector(getState());
-    let mobilities = mobilitiesSelector(getState());
+    const store = getState();
+    let user = userSelector(store);
+    let mobilities = mobilitiesSelector(store);
+    let mobility = currentMobilitySelector(store);
+
     try {
       const updatedmobility = await api.mobilities.updateMobility(
         user,
@@ -90,11 +91,11 @@ export function updateMobility({ onPending, onSuccess, onFailure, ...fields }) {
       );
       let mobilityIndex = mobilities.findIndex((mob) => mob.id == mobility.id);
       mobilities[mobilityIndex] = updatedmobility;
-      dispatch(addEntities({ [STATE_KEY]: mobilities }));
       dispatch(updateMobilitySuccess());
+      dispatch(addEntities({ [STATE_KEY]: mobilities }));
       onSuccess();
     } catch (e) {
-      dispatch(updateMobilityFailure());
+      dispatch(updateMobilityFailure(e));
       onFailure(e);
     }
   };
