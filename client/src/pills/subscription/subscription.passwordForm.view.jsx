@@ -65,7 +65,6 @@ function SubscriptionPasswordFormView({
   return (
     <Form onSubmit={handleSubmit}>
       <Grid stackable>
-        (
         <Grid.Row columns={2}>
           <Grid.Column
             width={passwordError ? 12 : 16}
