@@ -87,14 +87,14 @@ const Router = ({ indexRedirect, location, currentMobility }) => (
       <MainLayout
         isNavVisible={
           location.pathname !== '/login' &&
-          location.pathname !== '/inscription' &&
+          location.pathname !== '/subscription' &&
           location.pathname !== '/mobilities'
         }
       >
         <Switch location={location}>
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/inscription" component={FirstConnectPage} />
+          <Route exact path="/subscription" component={FirstConnectPage} />
           <AnimatedRoute key={location.pathname}>
             <Switch location={location}>
               <Route
