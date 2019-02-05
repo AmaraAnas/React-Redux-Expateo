@@ -10,7 +10,10 @@ import {
   destroy,
 } from '../modal/modal.actions';
 
-import { mobilityActivation, getInitialValues } from './subscription.actions';
+import {
+  mobilityActivation,
+  checkIsPasswordAlreadyInitialized, // TODO : how to know if a mobility is already activated ?
+} from './subscription.actions';
 import SubscriptionMobilityActivationFormView from './subscription.mobilityActivationForm.view';
 
 class SubscriptionMobilityActivationFormContainer extends Component {
@@ -18,17 +21,18 @@ class SubscriptionMobilityActivationFormContainer extends Component {
     super(props);
     this.state = {
       isMobilityAlreadyInitialized: false,
-      familyFieldOptions: [],
+      familyFieldOptions: [], // TODO: redo the client side field options
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
+    // TODO: Update this accordingly to api v3.2
     const { dispatch, userGuid, familyGuid, clGuid } = this.props;
     const destroyModal = () => dispatch(destroy());
     dispatch(
-      getInitialValues({
+      checkIsPasswordAlreadyInitialized({
         userGuid,
         familyGuid,
         clGuid,

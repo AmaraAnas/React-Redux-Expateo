@@ -10,7 +10,10 @@ import {
   destroy,
 } from '../modal/modal.actions';
 
-import { setPassword, getInitialValues } from './subscription.actions';
+import {
+  setPassword,
+  checkIsPasswordAlreadyInitialized,
+} from './subscription.actions';
 import SubscriptionPasswordFormView from './subscription.passwordForm.view';
 
 class SubscriptionPasswordFormContainer extends Component {
@@ -24,15 +27,14 @@ class SubscriptionPasswordFormContainer extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, userGuid, familyGuid, clGuid } = this.props;
+    const { dispatch, userGuid, familyGuid } = this.props;
     const destroyModal = () => dispatch(destroy());
     dispatch(
-      getInitialValues({
+      checkIsPasswordAlreadyInitialized({
         userGuid,
         familyGuid,
-        clGuid,
         onPending: () => dispatch(showBigLoaderModal({ content: '' })),
-        onSuccess: ({ isPasswordAlreadyInitialized }) => {
+        onSuccess: (isPasswordAlreadyInitialized) => {
           destroyModal();
           this.setState({ isPasswordAlreadyInitialized });
         },
@@ -42,13 +44,7 @@ class SubscriptionPasswordFormContainer extends Component {
   }
 
   handleSubmit({ allowEmail, ...formValues }) {
-    const {
-      dispatch,
-      onSubscription,
-      userGuid,
-      familyGuid,
-      clGuid,
-    } = this.props;
+    const { dispatch, onSubscription, userGuid, familyGuid } = this.props;
     const destroyModal = () => dispatch(destroy());
     const dispatchErrorModal = () =>
       dispatch(
@@ -61,7 +57,6 @@ class SubscriptionPasswordFormContainer extends Component {
       setPassword({
         userGuid,
         familyGuid,
-        clGuid,
         allowEmail: allowEmail ? 1 : 0,
         ...formValues,
         onPending: () =>
@@ -102,7 +97,6 @@ SubscriptionPasswordFormContainer.propTypes = {
   onSubscription: PropTypes.func.isRequired,
   userGuid: PropTypes.string.isRequired,
   familyGuid: PropTypes.string.isRequired,
-  clGuid: PropTypes.string.isRequired,
 };
 
 const selector = formValueSelector('SubscriptionPasswordForm');

@@ -81,21 +81,19 @@ export function setPassword({
   };
 }
 // TODO: test it
-export function getInitialValues({
+export function checkIsPasswordAlreadyInitialized({
   onSuccess,
   onPending,
   onFailure,
   userGuid,
   familyGuid,
-  clGuid,
 }) {
   onPending();
   return async (dispatch, getState, { api }) => {
     try {
-      const data = await api.subscription.load({
+      const data = await api.subscription.isPasswordAlreadyInitialized({
         userGuid,
         familyGuid,
-        clGuid,
       });
       onSuccess(data);
     } catch (e) {

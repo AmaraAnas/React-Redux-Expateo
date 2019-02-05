@@ -7,7 +7,7 @@ import * as baseApi from '../api/base.api';
 
 import SubscriptionPasswordForm from './subscription.passwordForm.container';
 import { setPassword } from './subscription.actions';
-import { load, subscribe } from './subscription.api';
+import { isPasswordAlreadyInitialized, subscribe } from './subscription.api';
 
 jest.mock('../api/base.api');
 
@@ -28,39 +28,25 @@ describe('Subscription render', () => {
 });
 
 describe('Subscription API', () => {
-  it('Load: Should return an json with is familyFieldOptions, isMobilityAlreadyInitialized, isPasswordAlreadyInitialized', async () => {
+  it('isPasswordAlreadyInitialized: Should return isPasswordAlreadyInitialized true', async () => {
     baseApi.subscribeApi.load.mockResolvedValueOnce({
-      passwordtodo: '0',
-      checklisttodo: '1',
-      list: {
-        familystatus: {
-          value: [
-            { TRN_CODE: 'FAMILLE_MARIE', TRN_LABEL: 'Couple mari\u00e9' },
-            { TRN_CODE: 'FAMILLE_PACSE', TRN_LABEL: 'Couple Pacs\u00e9' },
-            { TRN_CODE: 'FAMILLE_CONCUBINAGE', TRN_LABEL: 'En concubinage' },
-            { TRN_CODE: 'FAMILLE_SEUL', TRN_LABEL: 'Seul' },
-          ],
-          default: null,
-        },
-      },
+      status: 'done',
     });
-    const loadedValues = await load({
-      sessionId: '0128d',
-      id: '123',
-      clGuid: '123456789',
+    const loadedValues = await isPasswordAlreadyInitialized({
+      familyGuid: '1324',
+      userGuid: ' 1324',
     });
-    expect(loadedValues).toEqual({
-      isMobilityAlreadyInitialized: false,
-      isPasswordAlreadyInitialized: true,
-      familyFieldOptions: [
-        { TRN_CODE: 'FAMILLE_MARIE', TRN_LABEL: 'Couple mari\u00e9' },
-        { TRN_CODE: 'FAMILLE_PACSE', TRN_LABEL: 'Couple Pacs\u00e9' },
-        { TRN_CODE: 'FAMILLE_CONCUBINAGE', TRN_LABEL: 'En concubinage' },
-        { TRN_CODE: 'FAMILLE_SEUL', TRN_LABEL: 'Seul' },
-      ].map((option) => ({
-        text: option.TRN_LABEL,
-        value: option.TRN_CODE,
-      })),
+    expect(loadedValues).toEqual(true);
+  });
+
+  it('isPasswordAlreadyInitialized: Should return isPasswordAlreadyInitialized false', async () => {
+    baseApi.subscribeApi.load.mockResolvedValueOnce({
+      status: 'todo',
     });
+    const loadedValues = await isPasswordAlreadyInitialized({
+      familyGuid: '1324',
+      userGuid: ' 1324',
+    });
+    expect(loadedValues).toEqual(false);
   });
 });
