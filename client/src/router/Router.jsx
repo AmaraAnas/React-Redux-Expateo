@@ -8,6 +8,7 @@ import MainLayout from '../pages/main.layout';
 import { Loader } from '../ui-kit';
 
 import ErrorBound from './ErrorBound';
+import { currentMobilitySelector } from '../pills/mobilities/mobilities.selectors';
 
 const ErrorPage = () => <h1>:( Something went wrong. </h1>; // TODO: A better error page maybe ?
 const LoadingLazyPage = (
@@ -24,10 +25,9 @@ const SubscriptionPage = React.lazy(() =>
   import(/* webpackChunkName: "subscription.page" */
   '../pages/subscription.page'),
 );
-const HomePage = React.lazy(
-  () =>
-    import(/* webpackChunkName: "home.page" */
-    '../pages/home.page'), // TODO : redirect when the curren mobiltiy is not yet activated
+const HomePage = React.lazy(() =>
+  import(/* webpackChunkName: "home.page" */
+  '../pages/home.page'),
 );
 const MobilitiesPage = React.lazy(() =>
   import(/* webpackChunkName: "mobilities.page" */
@@ -47,30 +47,52 @@ const DumbPage = React.lazy(() =>
   '../pages/dumb.page'),
 );
 
-let PrivateRoute = ({ isLogged, component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isLogged ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: props.location },
-            }}
-          />
-        )
-      }
-    />
-  );
+let PrivateRoute = ({
+  isLogged,
+  component: Component,
+  activatedMobilityRequired,
+  currentMobility,
+  ...rest
+}) => {
+  let routeRender = (props) => <Component {...props} />;
+  if (!isLogged) {
+    routeRender = (props) => (
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: props.location },
+        }}
+      />
+    );
+  }
+  if (activatedMobilityRequired) {
+    if (currentMobility && !currentMobility.isInitialized) {
+      routeRender = (props) => (
+        <Redirect
+          to={{
+            pathname: '/mobilities/new',
+            state: { from: props.location },
+          }}
+        />
+      );
+    }
+  }
+  return <Route {...rest} render={routeRender} />;
 };
 
 // TODO : use useslector
-PrivateRoute = connect(({ Auth }) => ({
-  isLogged: Auth.user && Auth.user.isLogged,
+PrivateRoute = connect((store) => ({
+  isLogged: store.Auth.user && store.Auth.user.isLogged,
+  currentMobility: currentMobilitySelector(store),
 }))(PrivateRoute);
+
+PrivateRoute.propTypes = {
+  activatedMobilityRequired: PropTypes.bool,
+};
+
+PrivateRoute.defaultProps = {
+  activatedMobilityRequired: false,
+};
 
 // TODO : finish this - find out why if this height : 100% is mandatory
 const AnimatedRoute = ({ children }) => {
@@ -81,7 +103,7 @@ const AnimatedRoute = ({ children }) => {
   );
 };
 
-const Router = ({ indexRedirect, location, currentMobility }) => (
+const Router = ({ indexRedirect, location }) => (
   <ErrorBound renderError={() => <ErrorPage />}>
     <React.Suspense fallback={LoadingLazyPage}>
       <MainLayout
@@ -102,9 +124,24 @@ const Router = ({ indexRedirect, location, currentMobility }) => (
                 path="/sign-up"
                 component={() => <div>Signup Page</div>}
               />
-              <PrivateRoute exact path="/dashboard" component={HomePage} />
-              <PrivateRoute exact path="/themes/:id" component={DumbPage} />
-              <PrivateRoute exact path="/services/:id" component={DumbPage} />
+              <PrivateRoute
+                exact
+                path="/dashboard"
+                component={HomePage}
+                activatedMobilityRequired={true}
+              />
+              <PrivateRoute
+                exact
+                path="/themes/:id"
+                component={DumbPage}
+                activatedMobilityRequired={true}
+              />
+              <PrivateRoute
+                exact
+                path="/services/:id"
+                component={DumbPage}
+                activatedMobilityRequired={true}
+              />
               <PrivateRoute
                 exact
                 path="/mobilities/new"
