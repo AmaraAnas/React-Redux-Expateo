@@ -14,7 +14,6 @@ export async function isPasswordAlreadyInitialized({
 export async function subscribe({
   userGuid: gUsrGuid,
   familyGuid: gFamilyGuid,
-  clGuid: gClGuid,
   password: gPassword,
   family: gFamille,
   conjoint: gPrenomConjoint,
@@ -25,7 +24,6 @@ export async function subscribe({
   return await subscribeApi.commit({
     gUsrGuid,
     gFamilyGuid,
-    gClGuid,
     gPassword,
     gPasswordConfirm,
     gDepartureDate,

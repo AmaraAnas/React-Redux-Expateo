@@ -24,12 +24,7 @@ export default class SubscriptionPage extends React.Component {
 
   render() {
     let { isSubscriptionSuccess } = this.state;
-    if (
-      isSubscriptionSuccess ||
-      !this.query.family ||
-      !this.query.guid ||
-      !this.query.cl
-    ) {
+    if (isSubscriptionSuccess || !this.query.family || !this.query.guid) {
       return <Redirect to="/mobilities" />;
     }
     return (
@@ -42,7 +37,6 @@ export default class SubscriptionPage extends React.Component {
           onSubscription={this.handleSubscription}
           userGuid={this.query.guid}
           familyGuid={this.query.family}
-          clGuid={this.query.cl}
         />
       </Container>
     );

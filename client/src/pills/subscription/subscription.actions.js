@@ -8,7 +8,6 @@ export function setPassword({
   onFailure,
   userGuid,
   familyGuid,
-  clGuid,
   ...fields
 }) {
   onPending();
@@ -17,15 +16,14 @@ export function setPassword({
       const rawSubscribtion = await api.subscription.subscribe({
         familyGuid,
         userGuid,
-        clGuid,
         ...fields,
       });
       if (rawSubscribtion.CHECK_ERROR) {
         throw Error(rawSubscribtion.CHECK_ERROR);
       }
       const rawUser = await api.auth.afterInscriptionLogin({
-        rememberMeId: fields.userGuid,
-        familyId: fields.familyGuid,
+        rememberMeId: userGuid,
+        familyId: familyGuid,
       });
       const user = new User(rawUser);
       dispatch(loginSuccess(user));
