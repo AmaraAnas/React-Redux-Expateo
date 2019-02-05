@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import { Redirect } from 'react-router-dom';
 
 import {
   showBigLoaderModal,
@@ -10,50 +9,24 @@ import {
   destroy,
 } from '../modal/modal.actions';
 
-import {
-  mobilityActivation,
-  checkIsPasswordAlreadyInitialized, // TODO : how to know if a mobility is already activated ?
-} from './subscription.actions';
-import SubscriptionMobilityActivationFormView from './subscription.mobilityActivationForm.view';
+import { activateCurrentMobility } from './mobilities.actions';
+import SubscriptionMobilityActivationFormView from './mobilities.activationForm.view';
+
+const familyFieldOptions = [
+  { text: 'Seule', value: 'FAMILLE_SEUL' },
+  { text: 'En concubinage', value: 'FAMILLE_CONCUBINAGE' },
+  { text: 'Pacsé', value: 'FAMILLE_PACSE' },
+  { text: 'Marié', value: 'FAMILLE_MARIE' },
+];
 
 class SubscriptionMobilityActivationFormContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isMobilityAlreadyInitialized: false,
-      familyFieldOptions: [], // TODO: redo the client side field options
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    // TODO: Update this accordingly to api v3.2
-    const { dispatch, userGuid, familyGuid, clGuid } = this.props;
-    const destroyModal = () => dispatch(destroy());
-    dispatch(
-      checkIsPasswordAlreadyInitialized({
-        userGuid,
-        familyGuid,
-        clGuid,
-        onPending: () => dispatch(showBigLoaderModal({ content: '' })),
-        onSuccess: ({ isMobilityAlreadyInitialized, familyFieldOptions }) => {
-          destroyModal();
-          this.setState({ isMobilityAlreadyInitialized, familyFieldOptions });
-        },
-        onFailure: () => destroyModal(),
-      }),
-    );
-  }
-
   handleSubmit(formValues) {
-    const {
-      dispatch,
-      onMobilityActivation,
-      userGuid,
-      familyGuid,
-      clGuid,
-    } = this.props;
+    const { dispatch, onMobilityActivation } = this.props;
     const destroyModal = () => dispatch(destroy());
     const dispatchErrorModal = () =>
       dispatch(
@@ -63,10 +36,7 @@ class SubscriptionMobilityActivationFormContainer extends Component {
         }),
       );
     dispatch(
-      mobilityActivation({
-        userGuid,
-        familyGuid,
-        clGuid,
+      activateCurrentMobility({
         ...formValues,
         onPending: () =>
           dispatch(
@@ -88,10 +58,6 @@ class SubscriptionMobilityActivationFormContainer extends Component {
 
   render() {
     const { family } = this.props;
-    const { isMobilityAlreadyInitialized, familyFieldOptions } = this.state;
-    if (isMobilityAlreadyInitialized) {
-      return <Redirect to="/mobilities" />;
-    }
     return (
       <SubscriptionMobilityActivationFormView
         onSubmit={this.handleSubmit}
@@ -104,9 +70,6 @@ class SubscriptionMobilityActivationFormContainer extends Component {
 
 SubscriptionMobilityActivationFormContainer.propTypes = {
   onMobilityActivation: PropTypes.func.isRequired,
-  userGuid: PropTypes.string.isRequired,
-  familyGuid: PropTypes.string.isRequired,
-  clGuid: PropTypes.string.isRequired,
 };
 
 const selector = formValueSelector('SubscriptionMobilityActivationForm');

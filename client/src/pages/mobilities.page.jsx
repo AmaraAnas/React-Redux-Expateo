@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 import MobilitiesContainer from '../pills/mobilities/mobilities.container';
-import AuthContainer from '../pills/auth/auth.container';
 import { Card, Image } from '../ui-kit';
 import logo from '../images/logo-sans-fond_nopadding.png';
 
@@ -10,34 +9,19 @@ import logo from '../images/logo-sans-fond_nopadding.png';
 // TODO: i18n
 // TODO: handle the mobility status
 // TODO: Maybe redesign cards ??
+// TODO: mobilities/new -> mobilities/activation
 export default function MobilitiesPage() {
   const [currentMobility, setStateCurrentMobility] = useState(null);
-  if (
-    currentMobility &&
-    currentMobility.isInitialized &&
-    currentMobility.isCurrent
-  ) {
-    return <Redirect from="/mobilities" push={true} to="/dashboard" />;
-  }
-  if (
-    currentMobility &&
-    currentMobility.isCurrent &&
-    !currentMobility.isInitialized
-  ) {
+  if (currentMobility && currentMobility.isCurrent) {
     return (
-      <AuthContainer
-        render={({ user }) => (
-          <Redirect
-            from="/mobilities"
-            push={true}
-            to={`/mobilities/new?family=${currentMobility.familyGuid}&cl=${
-              currentMobility.guid
-            }&guid=${user.guid}`}
-          />
-        )}
+      <Redirect
+        from="/mobilities"
+        push={true}
+        to={currentMobility.isInitialized ? '/dashboard' : '/mobilities/new'}
       />
     );
   }
+
   return (
     <div
       style={{

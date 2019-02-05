@@ -4,6 +4,7 @@ export const tasksApi = jest.fn();
 export const mobilitiesApi = {
   list: jest.fn(),
   definCurrent: jest.fn(),
+  update: jest.fn(),
 };
 export const subscribeApi = {
   load: jest.fn(),

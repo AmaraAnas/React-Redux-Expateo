@@ -4,7 +4,7 @@ import { addPrefixToActionTypes } from '../../redux-utils/utils';
 import { userSelector } from '../auth/auth.selectors';
 import { addEntities } from '../schema/schema.actions';
 
-import { STATE_KEY } from './mobilities.selectors';
+import { STATE_KEY, currentMobilitySelector } from './mobilities.selectors';
 
 export const ACTION_TYPES = addPrefixToActionTypes(
   {
@@ -56,6 +56,37 @@ export function setCurrentMobility({ mobility, onSuccess, onFailure }) {
       onSuccess(mobilities.find((m) => m.id === mobility.id));
     } catch (e) {
       dispatch(setCurrentFailure());
+      onFailure(e);
+    }
+  };
+}
+
+// TODO: test it
+export function activateCurrentMobility({
+  onSuccess,
+  onPending,
+  onFailure,
+  ...fields
+}) {
+  onPending();
+  return async (dispatch, getState, { api }) => {
+    const store = getState();
+    const user = userSelector(store);
+    const currentMobility = currentMobilitySelector(store);
+    try {
+      const updatedMobility = await api.mobilities.updateMobility(
+        user,
+        currentMobility,
+        fields,
+      );
+      // Fetch mobilities and update the store with fresh data
+      const mobilities = await api.mobilities.setCurrentMobility(
+        user,
+        updatedMobility,
+      );
+      dispatch(addEntities({ [STATE_KEY]: mobilities }));
+      onSuccess(updatedMobility);
+    } catch (e) {
       onFailure(e);
     }
   };
