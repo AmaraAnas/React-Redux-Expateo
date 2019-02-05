@@ -31,12 +31,13 @@ const texts = {
       },
     },
     submit: {
-      inscription: 'Accéder à mon espace personnel',
+      mobility_activation: 'Valider ces informations',
+      password: 'Accéder à mon espace',
       login: "S'identifier",
     },
   },
   pages: {
-    inscription: {
+    subscription: {
       title: 'Bienvenue sur votre espace personnel Expateo',
       text_1:
         'Grâce à votre entreprise vous allez bénéficier d’un accompagnement pour vous aider étape par étape dans votre mobilité.',

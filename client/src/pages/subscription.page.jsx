@@ -7,7 +7,7 @@ import { Container } from '../ui-kit';
 import SubscriptionPasswordForm from '../pills/subscription/subscription.passwordForm.container';
 
 import styles from './page.module.css';
-// TODO: i18n rename inscription to subscription
+
 export default class SubscriptionPage extends React.Component {
   constructor(props) {
     super(props);
@@ -34,9 +34,9 @@ export default class SubscriptionPage extends React.Component {
     }
     return (
       <Container className={styles.container} text fluid>
-        <h1 className={styles.title}>{t('pages.inscription.title')}</h1>
+        <h1 className={styles.title}>{t('pages.subscription.title')}</h1>
         <p className={styles.text}>
-          {t('pages.inscription.text_1')} {t('pages.inscription.text_2')}
+          {t('pages.subscription.text_1')} {t('pages.subscription.text_2')}
         </p>
         <SubscriptionPasswordForm
           onSubscription={this.handleSubscription}

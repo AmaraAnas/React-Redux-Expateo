@@ -154,7 +154,7 @@ function SubscriptionPasswordFormView({
               disabled={invalid || error || pristine}
               primary={!invalid && !error && !pristine}
             >
-              {t('form.submit.inscription')}
+              {t('form.submit.password')}
             </Button>
           </Grid.Column>
         </Grid.Row>

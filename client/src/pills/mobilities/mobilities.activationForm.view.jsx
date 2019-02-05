@@ -70,7 +70,7 @@ function SubscriptionMobilityActivationFormView({
               disabled={invalid || error || pristine}
               primary={!invalid && !error && !pristine}
             >
-              {t('form.submit.inscription')}
+              {t('form.submit.mobility_activation')}
             </Button>
           </Grid.Column>
         </Grid.Row>
