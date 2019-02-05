@@ -9,7 +9,6 @@ import logo from '../images/logo-sans-fond_nopadding.png';
 // TODO: i18n
 // TODO: handle the mobility status
 // TODO: Maybe redesign cards ??
-// TODO: mobilities/new -> mobilities/activation
 export default function MobilitiesPage() {
   const [currentMobility, setStateCurrentMobility] = useState(null);
   if (currentMobility && currentMobility.isCurrent) {
@@ -17,7 +16,11 @@ export default function MobilitiesPage() {
       <Redirect
         from="/mobilities"
         push={true}
-        to={currentMobility.isInitialized ? '/dashboard' : '/mobilities/new'}
+        to={
+          currentMobility.isInitialized
+            ? '/dashboard'
+            : '/mobilities/activation'
+        }
       />
     );
   }

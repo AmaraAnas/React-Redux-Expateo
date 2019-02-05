@@ -70,7 +70,7 @@ let PrivateRoute = ({
       routeRender = (props) => (
         <Redirect
           to={{
-            pathname: '/mobilities/new',
+            pathname: '/mobilities/activation',
             state: { from: props.location },
           }}
         />
@@ -144,7 +144,7 @@ const Router = ({ indexRedirect, location }) => (
               />
               <PrivateRoute
                 exact
-                path="/mobilities/new"
+                path="/mobilities/activation"
                 component={MobilityActivationPage}
               />
               <PrivateRoute
