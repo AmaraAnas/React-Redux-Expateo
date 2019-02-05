@@ -1,6 +1,6 @@
-import User from '../../../models/user.model';
-import { userSelector } from '../../auth/auth.selectors';
-import * as traductionApi from '../../api/traduction.api';
+import User from '../../models/user.model';
+import { userSelector } from '../auth/auth.selectors';
+import * as traductionApi from '../api/traduction.api';
 
 async function load(language) {
   const childrawData = await traductionApi.loadField({

@@ -2,18 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 
-import { Grid, Form, Button } from '../../../ui-kit';
+import { Grid, Form, Button } from '../../ui-kit';
 import {
   Input,
   Select,
   DatePicker,
-} from '../../../redux-form-utils/fieldComponents';
+} from '../../redux-form-utils/fieldComponents';
+import { required, optional } from '../../redux-form-utils/fieldValidators';
+import t from '../../i18n';
 
-import { required, optional } from '../../../redux-form-utils/fieldValidators';
-
-import t from '../../../i18n';
-
-function MobilityFormView({
+function SubscriptionMobilityActivationFormView({
   family,
   familyFieldOptions,
   childFieldOptions,
@@ -80,21 +78,23 @@ function MobilityFormView({
             />
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row centered columns={1}>
-          <Button
-            type="submit"
-            disabled={invalid || error || pristine}
-            primary={!invalid && !error && !pristine}
-          >
-            {t('form.submit.save_mobility')}
-          </Button>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Button
+              type="submit"
+              disabled={invalid || error || pristine}
+              primary={!invalid && !error && !pristine}
+            >
+              {t('form.submit.mobility_activation')}
+            </Button>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     </Form>
   );
 }
 
-MobilityFormView.propTypes = {
+SubscriptionMobilityActivationFormView.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   family: PropTypes.string,
   familyFieldOptions: PropTypes.arrayOf(
@@ -106,8 +106,8 @@ MobilityFormView.propTypes = {
 };
 
 export default reduxForm({
-  form: 'MobilityForm',
+  form: 'SubscriptionMobilityActivationForm',
   initialValues: {
     startDate: new Date(),
   },
-})(MobilityFormView);
+})(SubscriptionMobilityActivationFormView);

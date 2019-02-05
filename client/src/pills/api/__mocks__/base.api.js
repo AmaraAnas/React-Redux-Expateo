@@ -6,4 +6,8 @@ export const mobilitiesApi = {
   definCurrent: jest.fn(),
   update: jest.fn(),
 };
+export const subscribeApi = {
+  load: jest.fn(),
+  commit: jest.fn(),
+};
 export const profilesApi = jest.fn();

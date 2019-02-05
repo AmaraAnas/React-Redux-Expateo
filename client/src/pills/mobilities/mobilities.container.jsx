@@ -26,7 +26,7 @@ function mapStateToProps(store) {
 function mapDisaptchToProps(dispatch) {
   return {
     ...useDispatch(dispatch)(getMobilities),
-    setCurrentMobility: (mobility) => {
+    setCurrentMobility: async (mobility) => {
       return new Promise((resolve, reject) => {
         dispatch(showBigLoaderModal({ content: t('modals.mobility_pending') }));
         dispatch(
@@ -37,7 +37,10 @@ function mapDisaptchToProps(dispatch) {
           }),
         );
       })
-        .then(() => dispatch(destroy()))
+        .then((currentMobility) => {
+          dispatch(destroy());
+          return currentMobility;
+        })
         .catch(() =>
           dispatch(showErrorAlertModal({ title: t('modals.mobility_error') })),
         );
