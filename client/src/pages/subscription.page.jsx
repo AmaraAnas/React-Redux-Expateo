@@ -8,7 +8,7 @@ import SubscriptionPasswordForm from '../pills/subscription/subscription.passwor
 
 import styles from './page.module.css';
 // TODO: i18n rename inscription to subscription
-export default class FirstConnectPage extends React.Component {
+export default class SubscriptionPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isSubscriptionSuccess: false };

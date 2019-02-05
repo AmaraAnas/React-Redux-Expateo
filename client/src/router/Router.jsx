@@ -20,9 +20,9 @@ const LoginPage = React.lazy(() =>
   import(/* webpackChunkName: "login.page" */
   '../pages/login.page'),
 );
-const FirstConnectPage = React.lazy(() =>
-  import(/* webpackChunkName: "firstConnect.page" */
-  '../pages/firstConnect.page'),
+const SubscriptionPage = React.lazy(() =>
+  import(/* webpackChunkName: "subscription.page" */
+  '../pages/subscription.page'),
 );
 const HomePage = React.lazy(
   () =>
@@ -94,7 +94,7 @@ const Router = ({ indexRedirect, location, currentMobility }) => (
         <Switch location={location}>
           <Redirect exact from="/" to={indexRedirect} />
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/subscription" component={FirstConnectPage} />
+          <Route exact path="/subscription" component={SubscriptionPage} />
           <AnimatedRoute key={location.pathname}>
             <Switch location={location}>
               <Route
