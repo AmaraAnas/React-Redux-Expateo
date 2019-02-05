@@ -44,7 +44,6 @@ export async function setCurrentMobility(
   return rawMobilities.map((rawMobility) => new Mobility(rawMobility));
 }
 
-// TODO: test it
 export async function updateMobility(
   { sessionId: gSesGuid, id: gUsrId },
   { guid: UCK_GUID },
