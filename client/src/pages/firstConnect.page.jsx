@@ -6,8 +6,7 @@ import t from '../i18n';
 import { Container } from '../ui-kit';
 import SubscriptionPasswordForm from '../pills/subscription/subscription.passwordForm.container';
 
-import styles from './inscription.page.module.css';
-// TODO: rename module.css
+import styles from './page.module.css';
 // TODO: i18n rename inscription to subscription
 export default class FirstConnectPage extends React.Component {
   constructor(props) {

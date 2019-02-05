@@ -5,7 +5,7 @@ import qs from 'query-string';
 import { Container } from '../ui-kit';
 import MobilityActivationForm from '../pills/subscription/subscription.mobilityActivationForm.container';
 
-import styles from './inscription.page.module.css';
+import styles from './page.module.css';
 
 export default class MobilityActivationPage extends React.Component {
   constructor(props) {
