@@ -27,6 +27,7 @@ export const AJAX_ACTIONS = {
   LIST: 'list',
   LISTALL: 'listall',
   DEFINE_CURRENT: 'definecurrent',
+  UPDATE: 'update',
 };
 
 export const ENDPOINTS = {
@@ -68,6 +69,7 @@ export const tasksApi = apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.TASK);
 export const mobilitiesApi = {
   list: apiCreator(AJAX_ACTIONS.LIST)(ENDPOINTS.MOBILITY),
   defineCurrent: apiCreator(AJAX_ACTIONS.DEFINE_CURRENT)(ENDPOINTS.MOBILITY),
+  update: apiCreator(AJAX_ACTIONS.UPDATE)(ENDPOINTS.MOBILITY),
 };
 
 export default apiCreator;

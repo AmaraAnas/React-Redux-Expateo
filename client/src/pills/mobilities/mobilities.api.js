@@ -26,6 +26,39 @@ export async function getMobilities({ sessionId: gSesGuid, id: gUsrId }) {
 }
 
 /**
+ * update the given mobility
+ * @param {User} user - the user where to retrieve sessionId and id field
+ * @param {Mobility} mobility  - the mobiliy where to retrieve guid to fetch it
+ * @param {Object} fieldsForm - fields used to updated the mobility
+ * @param {String} fieldsForm.startDate - "2019-02-21"
+ * @param {String} fieldsForm.family  - "FAMILLE_PACS"
+ * @param {String} fieldsForm.conjoint  - "Dominique"
+ * @returns {Mobility} - return updated mobility
+ */
+// TODO: test it
+export async function updateMobility(
+  { sessionId: gSesGuid, id: gUsrId },
+  { guid: UCK_GUID },
+  {
+    startDate: UCK_DEPARTURE_DATETIME,
+    family: UCK_FAMILY_STATUS,
+    conjoint: UCK_SPOUSE_FIRSTNAME,
+    // TODO: childCount:UCK_CHILD_COUNT":"CHILD_COUNT_2",
+  },
+) {
+  const rawUpdatedMobility = await mobilitiesApi.update({
+    gSesGuid,
+    gUsrId,
+    UCK_GUID,
+    UCK_DEPARTURE_DATETIME,
+    UCK_FAMILY_STATUS,
+    UCK_SPOUSE_FIRSTNAME,
+    // UCK_CHILD_COUNT
+  });
+  return new Mobility(rawUpdatedMobility);
+}
+
+/**
  * set the current mobility at the given mobility list of mobilities for the given user
  * @param {User} - the user where to retrieve sessionId and id field
  * @param {Mobility} - the mobiliy where to retrieve guid to set it as current
@@ -43,3 +76,22 @@ export async function setCurrentMobility(
   });
   return rawMobilities.map((rawMobility) => new Mobility(rawMobility));
 }
+
+// /**
+// TODO: Do we need this ?
+//  * get mobility with the given guid
+//  * @param {User} - the user where to retrieve sessionId and id field
+//  * @param {Mobility} - the mobiliy where to retrieve guid to fetch it
+//  * @returns {Mobility} - return a mobility
+//  */
+// export async function getMobility(
+//   { sessionId: gSesGuid, id: gUsrId },
+//   { guid: UCK_GUID },
+// ) {
+//   const rawMobility = await mobilitiesApi.load({
+//     gSesGuid,
+//     gUsrId,
+//     UCK_GUID,
+//   });
+//   return new Mobility(rawMobility);
+// }
