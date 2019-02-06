@@ -19,6 +19,10 @@ export const ACTION_TYPES = addPrefixToActionTypes(
     SET_CURRENT_PENDING: 'SET_CURRENT_PENDING',
     SET_CURRENT_SUCCESS: 'SET_CURRENT_SUCCESS',
     SET_CURRENT_FAILURE: 'SET_CURRENT_FAILURE',
+
+    ACTIVATE_CURRENT_PENDING: 'ACTIVATE_CURRENT_PENDING',
+    ACTIVATE_CURRENT_SUCCESS: 'ACTIVATE_CURRENT_SUCCESS',
+    ACTIVATE_CURRENT_FAILURE: 'ACTIVATE_CURRENT_FAILURE',
   },
   'moblities',
 );
@@ -30,6 +34,16 @@ export const getAllPending = createAction(ACTION_TYPES.GET_ALL_PENDING);
 export const setCurrentPending = createAction(ACTION_TYPES.SET_CURRENT_PENDING);
 export const setCurrentSuccess = createAction(ACTION_TYPES.SET_CURRENT_SUCCESS);
 export const setCurrentFailure = createAction(ACTION_TYPES.SET_CURRENT_FAILURE);
+
+export const activateCurrentMobilityPending = createAction(
+  ACTION_TYPES.ACTIVATE_CURRENT_PENDING,
+);
+export const activateCurrentMobilitySuccess = createAction(
+  ACTION_TYPES.ACTIVATE_CURRENT_SUCCESS,
+);
+export const activateCurrentMobilityFailure = createAction(
+  ACTION_TYPES.ACTIVATE_CURRENT_FAILURE,
+);
 
 export function getMobilities() {
   return async (dispatch, getState, { api }) => {
@@ -74,6 +88,7 @@ export function activateCurrentMobility({
 }) {
   onPending();
   return async (dispatch, getState, { api }) => {
+    dispatch(activateCurrentMobilityPending());
     const store = getState();
     const user = userSelector(store);
     const currentMobility = currentMobilitySelector(store);
@@ -88,9 +103,11 @@ export function activateCurrentMobility({
         user,
         updatedMobility,
       );
+      dispatch(activateCurrentMobilitySuccess());
       dispatch(addEntities({ [STATE_KEY]: mobilities }));
       onSuccess(updatedMobility);
     } catch (e) {
+      dispatch(activateCurrentMobilityFailure(e));
       onFailure(e);
     }
   };
