@@ -9,18 +9,25 @@ import {
   mobilitiesSelector,
   currentMobilitySelector,
 } from './mobilities.selectors';
-import { getMobilities, updateMobility } from './mobilities.api';
+import {
+  getMobilities,
+  updateMobility,
+  setCurrentMobility,
+} from './mobilities.api';
 import {
   getMobilities as getMobilitiesAction,
   activateCurrentMobility as activateCurrentMobilityAction,
   getAllPending,
   getAllSuccess,
   getAllFailure,
+  activateCurrentMobilityPending,
+  activateCurrentMobilitySuccess,
+  activateCurrentMobilityFailure,
 } from './mobilities.actions';
 
 jest.mock('../api/base.api');
 
-const updatedObject = [
+const RawUpdatedMobilities = [
   {
     UCK_AMOUNT_MAX: '25000.000',
     UCK_ARRIVAL_CITY: '',
@@ -262,7 +269,7 @@ describe('Mobilities action', () => {
 
 describe('Update Mobility API', () => {
   it('Should return a Mobilty object', async () => {
-    baseApi.mobilitiesApi.update.mockResolvedValueOnce(updatedObject[0]);
+    baseApi.mobilitiesApi.update.mockResolvedValueOnce(RawUpdatedMobilities[0]);
     const mobility = await updateMobility(
       {
         sessionId: 'EDDE28E9F4BA3D319B0E756CBBF3C813',
@@ -278,11 +285,10 @@ describe('Update Mobility API', () => {
         conjoint: 'Perla',
       },
     );
-    expect(mobility).toEqual(new Mobility(updatedObject[0]));
+    expect(mobility).toEqual(new Mobility(RawUpdatedMobilities[0]));
   });
 });
 
-/*
 describe('Update Mobility action', () => {
   it('Should dispatch pending & success', async () => {
     const noop = () => {};
@@ -296,30 +302,46 @@ describe('Update Mobility action', () => {
       conjoint: 'Perla',
     });
     const dispatch = jest.fn();
-    baseApi.mobilitiesApi.update.mockResolvedValueOnce(updatedObject[0]);
+    baseApi.mobilitiesApi.update.mockResolvedValueOnce(RawUpdatedMobilities);
+    baseApi.mobilitiesApi.defineCurrent.mockResolvedValueOnce(
+      RawUpdatedMobilities,
+    );
+
     const getState = jest.fn().mockReturnValueOnce({
       Auth: { user: {} },
       Schema: {
         entities: {
-          mobilities: updatedObject.map((mobility) => new Mobility(mobility)),
+          mobilities: RawUpdatedMobilities.map(
+            (mobility) => new Mobility(mobility),
+          ),
         },
       },
     });
     await thunk(dispatch, getState, {
-      api: { mobilities: { updateMobility } },
+      api: { mobilities: { updateMobility, setCurrentMobility } },
     });
-    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledTimes(3);
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
+      activateCurrentMobilityPending(),
+    );
+    expect(dispatch).toHaveBeenNthCalledWith(
+      2,
+      activateCurrentMobilitySuccess(),
+    );
+    expect(dispatch).toHaveBeenNthCalledWith(
+      3,
       addEntities({
-        [STATE_KEY]: updatedObject.map((mobility) => new Mobility(mobility)),
+        [STATE_KEY]: RawUpdatedMobilities.map(
+          (mobility) => new Mobility(mobility),
+        ),
       }),
     );
   });
 
- /* it('Should dispatch pending & failure', async () => {
+  it('Should dispatch pending & failure', async () => {
     const noop = () => {};
-    const thunk = updateMobilityAction({
+    const thunk = activateCurrentMobilityAction({
       onPending: noop,
       onSuccess: noop,
       onFailure: noop,
@@ -331,21 +353,28 @@ describe('Update Mobility action', () => {
     const dispatch = jest.fn();
     const e = new Error('failed');
     baseApi.mobilitiesApi.update.mockRejectedValueOnce(e);
+    baseApi.mobilitiesApi.defineCurrent.mockResolvedValueOnce(e);
     const getState = jest.fn().mockReturnValueOnce({
       Auth: { user: {} },
       Schema: {
         entities: {
-          mobilities: updatedObject.map((mobility) => new Mobility(mobility)),
+          mobilities: RawUpdatedMobilities.map(
+            (mobility) => new Mobility(mobility),
+          ),
         },
       },
     });
     await thunk(dispatch, getState, {
-      api: { mobilities: { updateMobility } },
+      api: { mobilities: { updateMobility, setCurrentMobility } },
     });
     expect(dispatch).toHaveBeenCalledTimes(2);
-    expect(dispatch).toHaveBeenNthCalledWith(1, updateMobilityPending());
-    expect(dispatch).toHaveBeenNthCalledWith(2, updateMobilityFailure(e));
+    expect(dispatch).toHaveBeenNthCalledWith(
+      1,
+      activateCurrentMobilityPending(),
+    );
+    expect(dispatch).toHaveBeenNthCalledWith(
+      2,
+      activateCurrentMobilityFailure(e),
+    );
   });
 });
-
-*/
