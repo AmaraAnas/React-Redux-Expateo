@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 import MobilitiesContainer from '../pills/mobilities/mobilities.container';
-import { Card, Image } from '../ui-kit';
+import { CardGroup, Image, Header } from '../ui-kit';
 import logo from '../images/logo-sans-fond_nopadding.png';
 import t from '../i18n';
+import MobilityCardView from '../pills/mobilities/mobilityCard.view';
 
 import styles from './mobilities.page.module.css';
 
-// TODO: handle then mobility status
-// TODO: Maybe redisgn cards ??
+// TODO: handle the mobility status
+// TODO: Maybe redesign cards ??
 export default function MobilitiesPage() {
   const [currentMobility, setStateCurrentMobility] = useState(null);
   if (currentMobility && currentMobility.isCurrent) {
@@ -32,42 +33,24 @@ export default function MobilitiesPage() {
         <Image as={Link} src={logo} to="/dashboard" />
       </div>
       <div className={styles.mobilities_block}>
-        <h1>{t('pages.mobilites.title')} </h1>
+        <Header as="h1" textAlign="center">
+          {t('pages.mobilites.title')}
+        </Header>
         <MobilitiesContainer
           render={({ mobilities, setCurrentMobility }) => (
-            <Card.Group>
-              {mobilities.map((mobility) =>
-                mobility.isInitialized ? (
-                  <Card
-                    key={mobility.id}
-                    onClick={() =>
-                      setCurrentMobility(mobility).then((currentMobility) =>
-                        setStateCurrentMobility(currentMobility),
-                      )
-                    }
-                    header={mobility.title}
-                    meta={t('pages.mobilites.status.wait')}
-                    description={mobility.destination}
-                    extra={new Date(mobility.startDate).toLocaleDateString()}
-                    color={mobility.isCurrent ? 'teal' : 'red'}
-                  />
-                ) : (
-                  <Card
-                    key={mobility.id}
-                    onClick={() =>
-                      setCurrentMobility(mobility).then((currentMobility) =>
-                        setStateCurrentMobility(currentMobility),
-                      )
-                    }
-                    header={mobility.title}
-                    meta={t('pages.mobilites.status.inactive')}
-                    description={mobility.destination}
-                    extra={new Date(mobility.startDate).toLocaleDateString()}
-                    color="yellow"
-                  />
-                ),
-              )}
-            </Card.Group>
+            <CardGroup>
+              {mobilities.map((mobility) => (
+                <MobilityCardView
+                  key={mobility.id}
+                  onClick={() =>
+                    setCurrentMobility(mobility).then((currentMobility) =>
+                      setStateCurrentMobility(currentMobility),
+                    )
+                  }
+                  mobility={mobility}
+                />
+              ))}
+            </CardGroup>
           )}
         />
       </div>
