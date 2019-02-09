@@ -92,6 +92,7 @@ const texts = {
   },
   jumborton: {
     all_mobs: 'voir toutes mes mobilités',
+    return_to_dashboard: 'retour au Dashboard',
   },
 };
 

@@ -10,12 +10,12 @@ import Mobility from '../../../models/mobility.model';
 import styles from './nav.desktop.module.css';
 
 // TODO: label to navigate
-export default function SegmentJumbotronView({ mobility }) {
+export default function SegmentJumbotronView({ mobility, isInDashboard }) {
   return (
     <Segment size="large" attached placeholder>
       <Label
         as={Link}
-        to="/mobilities"
+        to={isInDashboard ? '/mobilities' : '/dashboard'}
         style={{
           background: 'transparent',
           color: '#707070',
@@ -27,7 +27,10 @@ export default function SegmentJumbotronView({ mobility }) {
           padding: '0',
         }}
       >
-        <Icon name="chevron left" /> {t('jumborton.all_mobs')}
+        <Icon name="chevron left" />{' '}
+        {isInDashboard
+          ? t('jumborton.all_mobs')
+          : t('jumborton.return_to_dashboard')}
       </Label>
       {mobility ? (
         <Animate animation="fadeInDown">
