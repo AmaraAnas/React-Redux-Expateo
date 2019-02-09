@@ -19,6 +19,13 @@ const familyFieldOptions = [
   { text: 'Marié', value: 'FAMILLE_MARIE' },
 ];
 
+const childFieldOptions = [
+  { text: 'Aucun', value: 'CHILD_COUNT_0' },
+  { text: '1', value: 'CHILD_COUNT_1' },
+  { text: '2', value: 'CHILD_COUNT_2' },
+  { text: '+', value: 'CHILD_COUNT_X' },
+];
+
 class SubscriptionMobilityActivationFormContainer extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +70,7 @@ class SubscriptionMobilityActivationFormContainer extends Component {
         onSubmit={this.handleSubmit}
         family={family}
         familyFieldOptions={familyFieldOptions}
+        childFieldOptions={childFieldOptions}
       />
     );
   }

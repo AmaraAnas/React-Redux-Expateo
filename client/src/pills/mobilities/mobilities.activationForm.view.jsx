@@ -12,12 +12,13 @@ import { required, optional } from '../../redux-form-utils/fieldValidators';
 import t from '../../i18n';
 
 function SubscriptionMobilityActivationFormView({
+  family,
+  familyFieldOptions,
+  childFieldOptions,
   handleSubmit,
   invalid,
   pristine,
   error,
-  family,
-  familyFieldOptions,
 }) {
   return (
     <Form onSubmit={handleSubmit}>
@@ -65,6 +66,20 @@ function SubscriptionMobilityActivationFormView({
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
+            <Field
+              name="children"
+              component={Select}
+              type="text"
+              options={childFieldOptions}
+              label={t('form.fields.childcount.label')}
+              placeholder={t('form.fields.childcount.placeholder')}
+              validate={required}
+              fluid
+            />
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
             <Button
               type="submit"
               disabled={invalid || error || pristine}
@@ -83,6 +98,12 @@ SubscriptionMobilityActivationFormView.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   family: PropTypes.string,
   familyFieldOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  childFieldOptions: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,

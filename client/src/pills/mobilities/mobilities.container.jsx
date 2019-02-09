@@ -4,16 +4,17 @@ import { connect } from 'react-redux';
 
 import Mobility from '../../models/mobility.model';
 import { useDispatch, withHook } from '../../hooks/useDispatch.hook';
+import t from '../../i18n';
 
 import { mobilitiesSelector } from '../mobilities/mobilities.selectors';
-import { setCurrentMobility, getMobilities } from './mobilities.actions';
 import {
   showBigLoaderModal,
   destroy,
   showErrorAlertModal,
 } from '../modal/modal.actions';
 
-// TODO: i18n
+import { setCurrentMobility, getMobilities } from './mobilities.actions';
+
 const MobilitiesContainer = ({ setCurrentMobility, mobilities, render }) =>
   render({ mobilities, setCurrentMobility });
 
@@ -28,7 +29,7 @@ function mapDisaptchToProps(dispatch) {
     ...useDispatch(dispatch)(getMobilities),
     setCurrentMobility: async (mobility) => {
       return new Promise((resolve, reject) => {
-        dispatch(showBigLoaderModal({ content: 'Chargement de la mobilité' }));
+        dispatch(showBigLoaderModal({ content: t('modals.mobility_pending') }));
         dispatch(
           setCurrentMobility({
             mobility,
@@ -42,9 +43,7 @@ function mapDisaptchToProps(dispatch) {
           return currentMobility;
         })
         .catch(() =>
-          dispatch(
-            showErrorAlertModal({ title: 'Une erreur est survenue :(' }),
-          ),
+          dispatch(showErrorAlertModal({ title: t('modals.mobility_error') })),
         );
     },
   };

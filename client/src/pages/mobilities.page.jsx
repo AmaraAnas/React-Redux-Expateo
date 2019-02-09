@@ -4,10 +4,11 @@ import { Redirect, Link } from 'react-router-dom';
 import MobilitiesContainer from '../pills/mobilities/mobilities.container';
 import { CardGroup, Image, Header } from '../ui-kit';
 import logo from '../images/logo-sans-fond_nopadding.png';
+import t from '../i18n';
 import MobilityCardView from '../pills/mobilities/mobilityCard.view';
 
-// TODO: extract style
-// TODO: i18n
+import styles from './mobilities.page.module.css';
+
 // TODO: handle the mobility status
 // TODO: Maybe redesign cards ??
 export default function MobilitiesPage() {
@@ -27,27 +28,13 @@ export default function MobilitiesPage() {
   }
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        height: '100%',
-        background: '#f3f3f3',
-        overflow: 'auto',
-      }}
-    >
-      <div
-        style={{
-          position: 'relative',
-          top: '18px',
-          left: '20px',
-          width: '170px',
-        }}
-      >
+    <div className={styles.mobilities_page}>
+      <div className={styles.logo}>
         <Image as={Link} src={logo} to="/dashboard" />
       </div>
-      <div style={{ margin: '95px' }}>
+      <div className={styles.mobilities_block}>
         <Header as="h1" textAlign="center">
-          Séléction de la mobilité:
+          {t('pages.mobilites.title')}
         </Header>
         <MobilitiesContainer
           render={({ mobilities, setCurrentMobility }) => (

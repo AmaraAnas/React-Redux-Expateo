@@ -33,6 +33,7 @@ export async function getMobilities({ sessionId: gSesGuid, id: gUsrId }) {
  * @param {String} fieldsForm.startDate - "2019-02-21"
  * @param {String} fieldsForm.family  - "FAMILLE_PACS"
  * @param {String} fieldsForm.conjoint  - "Dominique"
+ * @param {String} fieldsForm.children  - "CHILD_COUNT_<0|1|2|X>"
  * @returns {Mobility} - return updated mobility
  */
 // TODO: test it
@@ -43,7 +44,7 @@ export async function updateMobility(
     startDate: UCK_DEPARTURE_DATETIME,
     family: UCK_FAMILY_STATUS,
     conjoint: UCK_SPOUSE_FIRSTNAME,
-    // TODO: childCount:UCK_CHILD_COUNT":"CHILD_COUNT_2",
+    children: UCK_CHILD_COUNT,
   },
 ) {
   const rawUpdatedMobility = await mobilitiesApi.update({
@@ -53,7 +54,7 @@ export async function updateMobility(
     UCK_DEPARTURE_DATETIME,
     UCK_FAMILY_STATUS,
     UCK_SPOUSE_FIRSTNAME,
-    // UCK_CHILD_COUNT
+    UCK_CHILD_COUNT,
   });
   return new Mobility(rawUpdatedMobility);
 }
@@ -76,22 +77,3 @@ export async function setCurrentMobility(
   });
   return rawMobilities.map((rawMobility) => new Mobility(rawMobility));
 }
-
-// /**
-// TODO: Do we need this ?
-//  * get mobility with the given guid
-//  * @param {User} - the user where to retrieve sessionId and id field
-//  * @param {Mobility} - the mobiliy where to retrieve guid to fetch it
-//  * @returns {Mobility} - return a mobility
-//  */
-// export async function getMobility(
-//   { sessionId: gSesGuid, id: gUsrId },
-//   { guid: UCK_GUID },
-// ) {
-//   const rawMobility = await mobilitiesApi.load({
-//     gSesGuid,
-//     gUsrId,
-//     UCK_GUID,
-//   });
-//   return new Mobility(rawMobility);
-// }

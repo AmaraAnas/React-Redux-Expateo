@@ -29,11 +29,16 @@ const texts = {
         label: 'Confirmation du mot de passe',
         placeholder: 'Confirmez votre mot de passe',
       },
+      childcount: {
+        label: 'Partez vous avec des enfants ?',
+        placeholder: 'Indiquer le nombre des enfants qui partent avec vous',
+      },
     },
     submit: {
       mobility_activation: 'Valider ces informations',
       password: 'Accéder à mon espace',
       login: "S'identifier",
+      save_mobility: 'VALIDER CES INFORMATIONS',
     },
   },
   pages: {
@@ -43,6 +48,13 @@ const texts = {
         'Grâce à votre entreprise vous allez bénéficier d’un accompagnement pour vous aider étape par étape dans votre mobilité.',
       text_2:
         'Pour y accéder créez votre mot de passe et répondez aux questions nécessaires au bon fonctionnement de l’application',
+    },
+    mobilites: {
+      title: 'Séléction de la mobilité:',
+      status: {
+        wait: 'en attente',
+        inactive: 'inactive',
+      },
     },
   },
   buttons: {
@@ -62,6 +74,9 @@ const texts = {
     login_error_title: 'Authentification échouée',
     login_error_message:
       "L'email et le mot de passe que vous avez entrés ne correspondent pas à ceux présents dans nos fichiers. Veuillez vérifier et réessayer.",
+    mobility_pending: 'Chargement de la mobilité',
+    mobility_error: "Une erreur est survenue :('",
+    mobility_loading: 'Enregistrement en cours...',
   },
   menu: {
     documents: 'Documents',
