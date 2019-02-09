@@ -3,15 +3,31 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import t from '../../../i18n';
-import { Menu, Dropdown, Image, Icon, Visibility } from '../../../ui-kit';
+import {
+  Menu,
+  Dropdown,
+  Image,
+  Icon,
+  Visibility,
+  Button,
+} from '../../../ui-kit';
 import logo from '../../../images/logo-sans-fond_nopadding.png';
 import Theme from '../../../models/theme.model';
 import Service from '../../../models/service.model';
 import Mobility from '../../../models/mobility.model';
 import Circle from '../../../elements/circle/circle.element';
+import styles from './nav.desktop.module.css';
+import Logout from '../../auth/auth.logout.container';
 
 import NavDesktopSubNav from './nav.desktop.subNav.view';
 import NavDesktopJumbotron from './nav.desktop.jumbotron.view';
+import DropdownItem from 'semantic-ui-react';
+
+const LogoutButton = ({ logout }) => (
+  <Button onClick={logout} primary>
+    {t('buttons.logout')}
+  </Button>
+);
 
 const IconWithRedBadge = ({ icon }) => (
   <>
@@ -55,6 +71,7 @@ const ExpandedMenuIcons = () => (
 
 const menuStyle = {
   transition: 'box-shadow 0.5s ease, padding 0.5s ease',
+  padding: '5px',
 };
 
 const fixedMenuStyle = {
@@ -73,6 +90,7 @@ const NavDesktopView = ({
 }) => {
   const [isMenuFixed, setIsMenuFixed] = useState(false);
   const isCollapsed = isMenuFixed || collapsed;
+  const isInDashboard = !collapsed;
   return (
     <>
       <div>
@@ -113,12 +131,18 @@ const NavDesktopView = ({
                 <Dropdown.Item disabled text="Personnaliser ma checklist" />
                 <Dropdown.Item disabled text="Ma situation" />
                 <Dropdown.Item disabled text="Mon compte" />
+                <Dropdown.Item>
+                  <Logout render={LogoutButton} />
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Menu.Menu>
         </Menu>
 
-        <NavDesktopJumbotron mobility={mobility} />
+        <NavDesktopJumbotron
+          mobility={mobility}
+          isInDashboard={isInDashboard}
+        />
         <Visibility
           offset={1}
           onBottomPassed={() => setIsMenuFixed(true)}
