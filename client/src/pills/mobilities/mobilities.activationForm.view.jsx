@@ -103,6 +103,12 @@ SubscriptionMobilityActivationFormView.propTypes = {
       value: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  childFieldOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default reduxForm({

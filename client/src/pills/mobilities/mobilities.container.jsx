@@ -7,12 +7,13 @@ import { useDispatch, withHook } from '../../hooks/useDispatch.hook';
 import t from '../../i18n';
 
 import { mobilitiesSelector } from '../mobilities/mobilities.selectors';
-import { setCurrentMobility, getMobilities } from './mobilities.actions';
 import {
   showBigLoaderModal,
   destroy,
   showErrorAlertModal,
 } from '../modal/modal.actions';
+
+import { setCurrentMobility, getMobilities } from './mobilities.actions';
 
 const MobilitiesContainer = ({ setCurrentMobility, mobilities, render }) =>
   render({ mobilities, setCurrentMobility });

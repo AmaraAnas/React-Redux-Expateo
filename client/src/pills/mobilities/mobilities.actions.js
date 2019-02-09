@@ -2,11 +2,7 @@ import { createAction } from 'redux-actions';
 
 import { addPrefixToActionTypes } from '../../redux-utils/utils';
 import { userSelector } from '../auth/auth.selectors';
-import {
-  STATE_KEY,
-  currentMobilitySelector,
-  mobilitiesSelector,
-} from './mobilities.selectors';
+import { STATE_KEY, currentMobilitySelector } from './mobilities.selectors';
 
 import { addEntities } from '../schema/schema.actions';
 

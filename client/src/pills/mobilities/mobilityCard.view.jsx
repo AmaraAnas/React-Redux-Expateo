@@ -4,40 +4,6 @@ import PropTypes from 'prop-types';
 import { Card, Label, List } from '../../ui-kit';
 import Mobility from '../../models/mobility.model';
 
-/* <Card.Group>
-              {mobilities.map((mobility) =>
-                mobility.isInitialized ? (
-                  <Card
-                    key={mobility.id}
-                    onClick={() =>
-                      setCurrentMobility(mobility).then((currentMobility) =>
-                        setStateCurrentMobility(currentMobility),
-                      )
-                    }
-                    header={mobility.title}
-                    meta="en attente"
-                    description={mobility.destination}
-                    extra={new Date(mobility.startDate).toLocaleDateString()}
-                    color={mobility.isCurrent ? 'teal' : 'red'}
-                  />
-                ) : (
-                  <Card
-                    key={mobility.id}
-                    onClick={() =>
-                      setCurrentMobility(mobility).then((currentMobility) =>
-                        setStateCurrentMobility(currentMobility),
-                      )
-                    }
-                    header={mobility.title}
-                    meta="NEW"
-                    description={mobility.destination}
-                    extra={new Date(mobility.startDate).toLocaleDateString()}
-                    color="yellow"
-                  />
-                ),
-              )}
-            </Card.Group> */
-
 function MobilityCardView({
   mobility: {
     title,

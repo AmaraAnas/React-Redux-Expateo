@@ -33,6 +33,7 @@ export async function getMobilities({ sessionId: gSesGuid, id: gUsrId }) {
  * @param {String} fieldsForm.startDate - "2019-02-21"
  * @param {String} fieldsForm.family  - "FAMILLE_PACS"
  * @param {String} fieldsForm.conjoint  - "Dominique"
+ * @param {String} fieldsForm.children  - "CHILD_COUNT_<0|1|2|X>"
  * @returns {Mobility} - return updated mobility
  */
 // TODO: test it
