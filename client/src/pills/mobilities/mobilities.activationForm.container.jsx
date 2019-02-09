@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import { getInitialValues } from './mobilities.activationForm.utils';
 
 import {
   showBigLoaderModal,
@@ -10,32 +9,27 @@ import {
   destroy,
 } from '../modal/modal.actions';
 
-import {
-  setCurrentMobility,
-  activateCurrentMobility,
-} from './mobilities.actions';
+import { activateCurrentMobility } from './mobilities.actions';
 import SubscriptionMobilityActivationFormView from './mobilities.activationForm.view';
+
+const familyFieldOptions = [
+  { text: 'Seule', value: 'FAMILLE_SEUL' },
+  { text: 'En concubinage', value: 'FAMILLE_CONCUBINAGE' },
+  { text: 'Pacsé', value: 'FAMILLE_PACSE' },
+  { text: 'Marié', value: 'FAMILLE_MARIE' },
+];
+
+const childFieldOptions = [
+  { text: 'Aucun', value: 'CHILD_COUNT_0' },
+  { text: '1', value: 'CHILD_COUNT_1' },
+  { text: '2', value: 'CHILD_COUNT_2' },
+  { text: '+', value: 'CHILD_COUNT_X' },
+];
 
 class SubscriptionMobilityActivationFormContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      childFieldOptions: [],
-      familyFieldOptions: [],
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(
-      getInitialValues({
-        onPending: () => {},
-        onSuccess: (res) => {
-          this.setState(res);
-        },
-        onFailure: () => {},
-      }),
-    );
   }
 
   handleSubmit(formValues) {
@@ -71,7 +65,6 @@ class SubscriptionMobilityActivationFormContainer extends Component {
 
   render() {
     const { family } = this.props;
-    const { familyFieldOptions, childFieldOptions } = this.state;
     return (
       <SubscriptionMobilityActivationFormView
         onSubmit={this.handleSubmit}

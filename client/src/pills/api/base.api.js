@@ -37,7 +37,7 @@ export const ENDPOINTS = {
   THEME: '/ajax_the.php',
   QUESTION: '/ajax_qtt.php',
   MOBILITY: '/ajax_uck.php',
-  TRADUCTION: '/ajax_trn.php',
+  // TRADUCTION: '/ajax_trn.php',
 };
 
 /**
@@ -72,8 +72,8 @@ export const mobilitiesApi = {
   defineCurrent: apiCreator(AJAX_ACTIONS.DEFINE_CURRENT)(ENDPOINTS.MOBILITY),
   update: apiCreator(AJAX_ACTIONS.UPDATE)(ENDPOINTS.MOBILITY),
 };
-export const traductionApi = apiCreator(AJAX_ACTIONS.LIST)(
-  ENDPOINTS.TRADUCTION,
-);
+// export const traductionApi = apiCreator(AJAX_ACTIONS.LIST)(
+//   ENDPOINTS.TRADUCTION,
+// );
 
 export default apiCreator;
