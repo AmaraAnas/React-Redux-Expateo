@@ -1,21 +1,8 @@
 import React from 'react';
 
 import t from '../i18n';
-import { Container, Button } from '../ui-kit';
-import Logout from '../pills/auth/auth.logout.container';
+import { Container } from '../ui-kit';
 
-function LogoutButton({ logout }) {
-  return (
-    <Button onClick={logout} primary>
-      {t('buttons.logout')}
-    </Button>
-  );
-}
-
-const HomePage = () => (
-  <Container text fluid>
-    <Logout render={LogoutButton} />
-  </Container>
-);
+const HomePage = () => <Container text fluid />;
 
 export default HomePage;
